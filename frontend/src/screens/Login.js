@@ -12,8 +12,8 @@ const Login = ({ location, history }) => {
   //   };
 
   return (
-    <FormContainer>
-      <h1>Sign In</h1>
+    <FormContainer >
+      <h3>SIGN IN</h3>
       {/* onSubmit={submitHandler} */}
       <Form>
         <Form.Group controlId='email'>
