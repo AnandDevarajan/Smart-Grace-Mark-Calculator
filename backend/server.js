@@ -1,9 +1,20 @@
 const express = require('express');
-const config = require('./config/db');
-const app = express();
-const con = config.con;
+const cors = require('cors');
+const studentRoutes = require('./routes/student');
 
-const PORT = process.env.PORT || 8000;
+const app = express();
+
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json({ extended: false }));
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  })
+);
+
+app.use('/student', studentRoutes);
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
