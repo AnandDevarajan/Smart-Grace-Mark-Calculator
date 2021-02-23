@@ -1,0 +1,20 @@
+.home {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 200px;
+}
+.home__student {
+  display: flex;
+  flex-direction: column;
+}
+
+.home__faculty {
+  display: flex;
+  flex-direction: column;
+}
+
+.home__admin {
+  display: flex;
+  flex-direction: column;
+}

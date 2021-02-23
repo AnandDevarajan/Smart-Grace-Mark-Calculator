@@ -4,6 +4,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export const SidebarData = [
   {
@@ -13,9 +14,15 @@ export const SidebarData = [
     cName: 'nav-text',
   },
   {
-    title: 'Profile',
+    title: 'Home',
     path: '/',
     icon: <HomeIcon />,
+    cName: 'nav-text',
+  },
+  {
+    title: 'Profile',
+    path: '/',
+    icon: <AccountCircleIcon />,
     cName: 'nav-text',
   },
   {
