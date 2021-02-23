@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Button, Image } from 'react-bootstrap';
 
 const Home = () => {
@@ -10,6 +9,7 @@ const Home = () => {
       <div className='home__student'>
         <Image
           src='https://static.thenounproject.com/png/35785-200.png'
+          style={{ objectFit: 'contain' }}
           thumbnail
         />
         <Link
@@ -20,7 +20,7 @@ const Home = () => {
           <Button
             variant='success'
             className='mt-3 text-white'
-            style={{ width: '206px' }}
+            style={{ width: '210px' }}
           >
             {' '}
             Sign in as student
@@ -31,22 +31,24 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='primary' className='mt-3' >
+          <Button variant='primary' className='mt-3' style={{ width: '210px' }}>
             create student account
           </Button>
         </Link>
       </div>
+
       <div className='home__faculty'>
         <Image
           src='https://static.thenounproject.com/png/2011000-200.png'
           thumbnail
+          style={{ objectFit: 'coverF' }}
         />
         <Link
           to='/faculty/login'
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='success' className='mt-3'  style={{ width: '203px' }}>
+          <Button variant='success' className='mt-3' style={{ width: '210px' }}>
             Sign in as Faculty
           </Button>
         </Link>
@@ -55,7 +57,7 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='primary' className='mt-3'>
+          <Button variant='primary' className='mt-3' style={{ width: '210px' }}>
             create Faculty account
           </Button>
         </Link>
@@ -64,6 +66,7 @@ const Home = () => {
       <div className='home__admin'>
         <Image
           src='https://static.thenounproject.com/png/371299-200.png'
+          style={{ objectFit: 'contain' }}
           thumbnail
         />
         <Link
@@ -71,7 +74,7 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='success' className='mt-3'  style={{ width: '194px' }}>
+          <Button variant='success' className='mt-3' style={{ width: '210px' }}>
             {' '}
             Sign in as Admin
           </Button>
@@ -81,7 +84,7 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='primary' className='mt-3'>
+          <Button variant='primary' className='mt-3' style={{ width: '210px' }}>
             {' '}
             create Admin account
           </Button>
