@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 
-const Login = ({ location, history }) => {
+const AdminLogin = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,7 +13,7 @@ const Login = ({ location, history }) => {
 
   return (
     <FormContainer >
-      <h3>SIGN IN</h3>
+      <h3>Administration Login</h3>
       {/* onSubmit={submitHandler} */}
       <Form>
         <Form.Group controlId='email'>
@@ -43,4 +43,4 @@ const Login = ({ location, history }) => {
   );
 };
 
-export default Login;
+export default AdminLogin;

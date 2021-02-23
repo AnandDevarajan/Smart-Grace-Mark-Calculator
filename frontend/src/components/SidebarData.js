@@ -8,12 +8,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export const SidebarData = [
   {
-    title: 'Login',
-    path: '/login',
-    icon: <PersonAddIcon/>,
-    cName: 'nav-text',
-  },
-  {
     title: 'Home',
     path: '/',
     icon: <HomeIcon />,
