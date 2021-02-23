@@ -25,6 +25,7 @@ exports.authStudent = (req, res) => {
         }
         return res.json({
           id: result[0].RollNum,
+          role: result[0].role,
           token: generateToken(result[0].RollNum),
         });
       });
