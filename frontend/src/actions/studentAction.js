@@ -5,6 +5,7 @@ import {
   STUDENT_LOGIN_REQUEST,
   STUDENT_LOGIN_SUCCESS,
   STUDENT_LOGIN_FAIL,
+  STUDENT_LOGOUT,
 } from '../constants/studentConstant';
 
 import axios from 'axios';
@@ -94,4 +95,12 @@ export const studentRegister = (
       payload: 'Not Authorized',
     });
   }
+};
+
+export const studentLogout = () => (dispatch) => {
+  localStorage.removeItem('studentInfo');
+  dispatch({
+    type: STUDENT_LOGOUT,
+  });
+  document.location.href = '/';
 };

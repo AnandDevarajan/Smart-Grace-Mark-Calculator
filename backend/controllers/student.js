@@ -58,10 +58,22 @@ exports.registerStudent = (req, res) => {
             message: 'Unable to create user',
           });
         }
-        res.json({
-          result,
-          token: generateToken(rollno),
-        });
+        if (result) {
+          con.query(
+            `SELECT * FROM STUDENT WHERE RollNum='${rollno}'`,
+            (err, result) => {
+              if (err) {
+                return res.status(400).json({
+                  message: 'No user found',
+                });
+              }
+              res.json({
+                id: result[0].RollNum,
+                token: generateToken(result[0].RollNum),
+              });
+            }
+          );
+        }
       }
     );
   });
