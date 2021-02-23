@@ -3,8 +3,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export const SidebarData = [
   {
@@ -35,6 +35,12 @@ export const SidebarData = [
     title: 'Grades',
     path: '/',
     icon: <MenuBookIcon />,
+    cName: 'nav-text',
+  },
+  {
+    title: 'Signout',
+    path: '/',
+    icon: <ExitToAppIcon />,
     cName: 'nav-text',
   },
 ];
