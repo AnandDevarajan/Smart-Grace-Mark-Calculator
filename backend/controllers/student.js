@@ -24,8 +24,7 @@ exports.authStudent = (req, res) => {
           });
         }
         return res.json({
-          id: result[0].RollNum,
-          role: result[0].role,
+          result: result[0],
           token: generateToken(result[0].RollNum),
         });
       });
@@ -69,7 +68,7 @@ exports.registerStudent = (req, res) => {
                 });
               }
               res.json({
-                id: result[0].RollNum,
+                result: result[0],
                 token: generateToken(result[0].RollNum),
               });
             }

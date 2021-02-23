@@ -6,6 +6,7 @@ import AdminLogin from './screens/AdminLogin';
 import StudentSignup from './screens/StudentSignup';
 import StudentLogin from './screens/StudentLogin';
 import Home from './screens/Home';
+import StudentProfile from './screens/StudentProfile';
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
         <Route path='/admin/login' component={AdminLogin} />
         <Route path='/student/login' component={StudentLogin} />
         <Route path='/student/signup' component={StudentSignup} />
+        <Route path='/student/profile' component={StudentProfile} />
       </Container>
     </Router>
   );

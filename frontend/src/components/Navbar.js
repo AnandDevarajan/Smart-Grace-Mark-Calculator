@@ -7,13 +7,20 @@ import './Navbar.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { studentLogout } from '../actions/studentAction';
 import { IconContext } from 'react-icons';
+import HomeIcon from '@material-ui/icons/Home';
+import PeopleIcon from '@material-ui/icons/People';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
 
   const dispatch = useDispatch();
-
+  const studentSignin = useSelector((state) => state.studentSignin);
+  const { studentInfo } = studentSignin;
   const logOutHandler = () => {
     dispatch(studentLogout());
   };
@@ -30,27 +37,77 @@ function Navbar() {
           </h3>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
-            <li className='navbar-toggle'>
-              <Link to='#' className='menu-bars'>
-                <CloseIcon />
-              </Link>
-            </li>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link onClick={logOutHandler}>
-                    {item.icon}
-                    {item.title === 'Signout' ? (
-                      <span>{item.title}</span>
-                    ) : (
-                      <span>{item.title}</span>
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          {studentInfo ? (
+            <ul className='nav-menu-items' onClick={showSidebar}>
+              <li className='navbar-toggle'>
+                <Link to='#' className='menu-bars'>
+                  <CloseIcon />
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link to='/student/profile'>
+                  <AccountCircleIcon />
+                  <span>Profile</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link to='/student/grade'>
+                  <MenuBookIcon />
+                  <span>Grades</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link onClick={logOutHandler}>
+                  <ExitToAppIcon />
+                  <span>Sign out</span>
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className='nav-menu-items' onClick={showSidebar}>
+              <li className='navbar-toggle'>
+                <Link to='#' className='menu-bars'>
+                  <CloseIcon />
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link>
+                  <HomeIcon />
+                  <span>Home</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link>
+                  <AccountCircleIcon />
+                  <span>Profile</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link>
+                  <PeopleIcon />
+                  <span>Students</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link>
+                  <PeopleOutlineIcon />
+                  <span>Faculty</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link>
+                  <MenuBookIcon />
+                  <span>Grades</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link>
+                  <ExitToAppIcon />
+                  <span>Sign out</span>
+                </Link>
+              </li>
+            </ul>
+          )}
         </nav>
       </IconContext.Provider>
     </>
