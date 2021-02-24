@@ -8,17 +8,22 @@ import AdminSignup from './screens/AdminSignup';
 import StudentLogin from './screens/StudentLogin';
 import Home from './screens/Home';
 import StudentProfile from './screens/StudentProfile';
+import AdminProfile from './screens/AdminProfile';
+import { useSelector } from 'react-redux';
 
-import { useDispatch, useSelector } from 'react-redux';
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
+  const adminSignin = useSelector((state) => state.adminSignin);
+  const { adminInfo } = adminSignin;
   return (
     <Router>
       <Navbar />
       <Container>
         {studentInfo ? (
           <Route exact path='/' component={StudentProfile} />
+        ) : adminInfo ? (
+          <Route exact path='/' component={AdminProfile} />
         ) : (
           <Route exact path='/' component={Home} />
         )}
@@ -27,6 +32,7 @@ function App() {
         <Route path='/student/login' component={StudentLogin} />
         <Route path='/student/signup' component={StudentSignup} />
         <Route path='/student/profile' component={StudentProfile} />
+        <Route exact path='/admin/profile' component={AdminProfile} />
       </Container>
     </Router>
   );
