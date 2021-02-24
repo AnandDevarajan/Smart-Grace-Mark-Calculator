@@ -7,12 +7,20 @@ import StudentSignup from './screens/StudentSignup';
 import StudentLogin from './screens/StudentLogin';
 import Home from './screens/Home';
 import StudentProfile from './screens/StudentProfile';
+
+import { useDispatch, useSelector } from 'react-redux';
 function App() {
+  const studentSignin = useSelector((state) => state.studentSignin);
+  const { studentInfo } = studentSignin;
   return (
     <Router>
       <Navbar />
       <Container>
-        <Route exact path='/' component={Home} />
+        {studentInfo ? (
+          <Route exact path='/' component={StudentProfile} />
+        ) : (
+          <Route exact path='/' component={Home} />
+        )}
         <Route path='/admin/login' component={AdminLogin} />
         <Route path='/student/login' component={StudentLogin} />
         <Route path='/student/signup' component={StudentSignup} />
