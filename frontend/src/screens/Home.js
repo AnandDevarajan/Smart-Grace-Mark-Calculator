@@ -10,7 +10,7 @@ const Home = () => {
         <Image
           src='https://static.thenounproject.com/png/35785-200.png'
           style={{ objectFit: 'contain' }}
-          thumbnail
+         
         />
         <Link
           to='/student/login'
@@ -40,7 +40,7 @@ const Home = () => {
       <div className='home__faculty'>
         <Image
           src='https://static.thenounproject.com/png/2011000-200.png'
-          thumbnail
+       
           style={{ objectFit: 'coverF' }}
         />
         <Link
@@ -67,7 +67,7 @@ const Home = () => {
         <Image
           src='https://static.thenounproject.com/png/371299-200.png'
           style={{ objectFit: 'contain' }}
-          thumbnail
+
         />
         <Link
           to='/admin/login'
