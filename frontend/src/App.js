@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import AdminLogin from './screens/AdminLogin';
 import StudentSignup from './screens/StudentSignup';
+import AdminSignup from './screens/AdminSignup';
 import StudentLogin from './screens/StudentLogin';
 import Home from './screens/Home';
 import StudentProfile from './screens/StudentProfile';
@@ -22,6 +23,7 @@ function App() {
           <Route exact path='/' component={Home} />
         )}
         <Route path='/admin/login' component={AdminLogin} />
+        <Route path='/admin/signup' component={AdminSignup} />
         <Route path='/student/login' component={StudentLogin} />
         <Route path='/student/signup' component={StudentSignup} />
         <Route path='/student/profile' component={StudentProfile} />

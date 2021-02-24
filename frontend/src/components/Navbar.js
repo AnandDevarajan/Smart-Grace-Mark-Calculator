@@ -6,6 +6,7 @@ import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { studentLogout } from '../actions/studentAction';
+import { adminLogout } from '../actions/adminAction';
 import { IconContext } from 'react-icons';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
@@ -21,8 +22,11 @@ function Navbar() {
   const dispatch = useDispatch();
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
-  const logOutHandler = () => {
+  const studentlogOutHandler = () => {
     dispatch(studentLogout());
+  };
+  const adminlogOutHandler = () => {
+    dispatch(adminLogout());
   };
 
   return (
@@ -57,7 +61,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link onClick={logOutHandler}>
+                <Link onClick={studentlogOutHandler}>
                   <ExitToAppIcon />
                   <span>Sign out</span>
                 </Link>
@@ -71,7 +75,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link>
+                <Link to='/'>
                   <HomeIcon />
                   <span>Home</span>
                 </Link>
@@ -101,7 +105,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link>
+                <Link onClick={adminlogOutHandler}>
                   <ExitToAppIcon />
                   <span>Sign out</span>
                 </Link>
