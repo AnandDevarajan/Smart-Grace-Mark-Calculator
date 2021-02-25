@@ -42,6 +42,7 @@ exports.registerStudent = (req, res) => {
     dob,
     gender,
     branch,
+    batch,
     degree,
     password,
   } = req.body;
@@ -50,8 +51,20 @@ exports.registerStudent = (req, res) => {
       console.log(err);
     }
     con.query(
-      `INSERT INTO STUDENT (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?)`,
-      [rollno, name, email, phone, address, dob, gender, branch, degree, hash],
+      `INSERT INTO STUDENT (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Batch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+      [
+        rollno,
+        name,
+        email,
+        phone,
+        address,
+        dob,
+        gender,
+        branch,
+        batch,
+        degree,
+        hash,
+      ],
       (err, result) => {
         if (err) {
           return res.status(400).json({

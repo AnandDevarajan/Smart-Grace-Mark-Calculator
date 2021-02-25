@@ -15,6 +15,7 @@ const StudentSignup = ({ location, history }) => {
   const [dob, setDob] = useState('');
   const [gender, setGender] = useState('');
   const [branch, setBranch] = useState('CSE');
+  const [batch, setBatch] = useState('[choose batch]');
   const [degree, setDegree] = useState('BTech');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -43,6 +44,7 @@ const StudentSignup = ({ location, history }) => {
       phone === '' ||
       address === '' ||
       dob === '' ||
+      batch === '[choose batch]' ||
       email === '' ||
       password === '' ||
       confirmPassword === ''
@@ -61,6 +63,7 @@ const StudentSignup = ({ location, history }) => {
           rollno,
           dob,
           branch,
+          batch,
           degree,
           gender,
           phone,
@@ -102,6 +105,17 @@ const StudentSignup = ({ location, history }) => {
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>
+          <Form.Group controlId='rollno'>
+            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+              Roll Number
+            </Form.Label>
+            <Form.Control
+              type='name'
+              placeholder='Enter  Roll Number'
+              value={rollno}
+              onChange={(e) => setRollNo(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
           <Form.Group controlId='password'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
               password
@@ -122,18 +136,6 @@ const StudentSignup = ({ location, history }) => {
               placeholder='Confirm password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId='rollno'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Roll Number
-            </Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter  Roll Number'
-              value={rollno}
-              onChange={(e) => setRollNo(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId='degree'>
@@ -158,6 +160,23 @@ const StudentSignup = ({ location, history }) => {
               onChange={(e) => setBranch(e.target.value)}
             >
               <option>CSE</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId='batch'>
+            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+              Select batch
+            </Form.Label>
+            <Form.Control
+              as='select'
+              value={batch}
+              onChange={(e) => setBatch(e.target.value)}
+            >
+              <option>[choose batch]</option>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+              <option>E</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId='dob'>

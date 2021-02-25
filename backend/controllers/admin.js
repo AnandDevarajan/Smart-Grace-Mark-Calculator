@@ -62,7 +62,7 @@ exports.registerAdmin = (req, res) => {
               }
               res.json({
                 result: result[0],
-                token: generateToken(result[0].RollNum),
+                token: generateToken(result[0].adminID),
               });
             }
           );
