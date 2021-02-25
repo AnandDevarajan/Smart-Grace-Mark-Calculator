@@ -13,7 +13,7 @@ import {
   facultyRegisterReducer,
   facultyLoginReducer,
 } from './reducers/facultyReducer';
-
+import { courseListReducer } from './reducers/courseReducer';
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,
@@ -21,6 +21,7 @@ const reducer = combineReducers({
   adminSignin: adminLoginReducer,
   facultySignup: facultyRegisterReducer,
   facultySignin: facultyLoginReducer,
+  courseList: courseListReducer,
 });
 
 const middleware = [thunk];
