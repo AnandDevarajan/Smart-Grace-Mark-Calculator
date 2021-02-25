@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import { facultyRegister } from '../actions/facultyAction';
-
+import { listCourses } from '../actions/courseAction';
 const FacultySignup = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,6 +26,8 @@ const FacultySignup = ({ location, history }) => {
   const facultySignup = useSelector((state) => state.facultySignup);
   const { error, facultyInfo } = facultySignup;
 
+  const courseList = useSelector((state) => state.courseList);
+  const { courses } = courseList;
   const redirect = location.search
     ? location.search.split('=')[1]
     : '/faculty/profile';
@@ -33,6 +35,8 @@ const FacultySignup = ({ location, history }) => {
   useEffect(() => {
     if (facultyInfo) {
       history.push(redirect);
+    } else {
+      dispatch(listCourses());
     }
   }, [history, facultyInfo, redirect]);
 
@@ -141,6 +145,21 @@ const FacultySignup = ({ location, history }) => {
               onChange={(e) => setDepartment(e.target.value)}
             >
               <option>CSE</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId='courseId'>
+            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+              Course
+            </Form.Label>
+            <Form.Control
+              as='select'
+              value={courseId}
+              onChange={(e) => setCourseId(e.target.value)}
+            >
+              {/* <option>[choose]</option>
+              {courses.map((course) => (
+                <option>{course}</option>
+              ))} */}
             </Form.Control>
           </Form.Group>
           <Form.Group controlId='advisor'>
