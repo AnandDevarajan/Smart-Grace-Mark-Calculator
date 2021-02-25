@@ -10,6 +10,9 @@ import Home from './screens/Home';
 import StudentProfile from './screens/StudentProfile';
 import AdminProfile from './screens/AdminProfile';
 import { useSelector } from 'react-redux';
+import FacultyLogin from './screens/FacultyLogin';
+import FacultySignup from './screens/FacultySignup';
+import FacultyProfile from './screens/FacultyProfile';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -29,10 +32,13 @@ function App() {
         )}
         <Route path='/admin/login' component={AdminLogin} />
         <Route path='/admin/signup' component={AdminSignup} />
+        <Route path='/admin/profile' component={AdminProfile} />
         <Route path='/student/login' component={StudentLogin} />
         <Route path='/student/signup' component={StudentSignup} />
         <Route path='/student/profile' component={StudentProfile} />
-        <Route exact path='/admin/profile' component={AdminProfile} />
+        <Route path='/faculty/login' component={FacultyLogin} />
+        <Route path='/faculty/signup' component={FacultySignup} />
+        <Route path='/faculty/profile' component={FacultyProfile} />
       </Container>
     </Router>
   );

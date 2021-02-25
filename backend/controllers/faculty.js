@@ -33,14 +33,38 @@ exports.authFaculty = (req, res) => {
 };
 
 exports.registerFaculty = (req, res) => {
-  const { name, email, phone, address, dob, gender, password } = req.body;
+  const {
+    name,
+    email,
+    phone,
+    address,
+    dob,
+    gender,
+    courseid,
+    department,
+    advisor,
+    batch,
+    password,
+  } = req.body;
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log(err);
     }
     con.query(
-      `INSERT INTO FACULTY (Name,EmailID,PhoneNum,Address,DOB,Gender,Password) VALUES (?,?,?,?,?,?,?)`,
-      [name, email, phone, address, dob, gender, hash],
+      `INSERT INTO FACULTY (Name,EmailID,PhoneNum,Address,DOB,Gender,Department,CourseID,ClassAdvisor,Batch,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+      [
+        name,
+        email,
+        phone,
+        address,
+        dob,
+        gender,
+        courseid,
+        department,
+        advisor,
+        batch,
+        hash,
+      ],
       (err, result) => {
         if (err) {
           return res.status(400).json({
