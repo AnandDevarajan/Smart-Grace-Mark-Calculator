@@ -12,7 +12,7 @@ const FacultySignup = ({ location, history }) => {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [dob, setDob] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('select');
   const [department, setDepartment] = useState('CSE');
   const [courseId, setCourseId] = useState('');
   const [advisor, setAdvisor] = useState('[choose]');
@@ -46,6 +46,7 @@ const FacultySignup = ({ location, history }) => {
       advisor === '[choose]' ||
       department === '' ||
       courseId === '' ||
+      gender === 'select' ||
       batch === '[choose batch]' ||
       email === '' ||
       password === '' ||
@@ -107,17 +108,7 @@ const FacultySignup = ({ location, history }) => {
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='rollno'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Roll Number
-            </Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter  Roll Number'
-              value={rollno}
-              onChange={(e) => setRollNo(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+
           <Form.Group controlId='password'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
               password
@@ -140,47 +131,52 @@ const FacultySignup = ({ location, history }) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='degree'>
+          <Form.Group controlId='department'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Degree
+              Department
             </Form.Label>
             <Form.Control
               as='select'
-              value={degree}
-              onChange={(e) => setDegree(e.target.value)}
-            >
-              <option>BTech</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId='branch'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Branch
-            </Form.Label>
-            <Form.Control
-              as='select'
-              value={branch}
-              onChange={(e) => setBranch(e.target.value)}
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
             >
               <option>CSE</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId='batch'>
+          <Form.Group controlId='advisor'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Select batch
+              Class Advisor
             </Form.Label>
             <Form.Control
               as='select'
-              value={batch}
-              onChange={(e) => setBatch(e.target.value)}
+              value={advisor}
+              onChange={(e) => setAdvisor(e.target.value)}
             >
-              <option>[choose batch]</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-              <option>D</option>
-              <option>E</option>
+              <option>[choose]</option>
+              <option>Yes</option>
+              <option>No</option>
             </Form.Control>
           </Form.Group>
+          {advisor === 'Yes' && (
+            <Form.Group controlId='batch'>
+              <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                Select batch
+              </Form.Label>
+              <Form.Control
+                as='select'
+                value={batch}
+                onChange={(e) => setBatch(e.target.value)}
+              >
+                <option>[choose batch]</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+                <option>E</option>
+              </Form.Control>
+            </Form.Group>
+          )}
+
           <Form.Group controlId='dob'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
               Date of Birth
@@ -201,6 +197,7 @@ const FacultySignup = ({ location, history }) => {
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
+              <option>select</option>
               <option>Male</option>
               <option>Female</option>
             </Form.Control>

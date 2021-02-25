@@ -1,6 +1,7 @@
+import './App.css';
+import { useSelector } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.css';
 import Navbar from './components/Navbar';
 import AdminLogin from './screens/AdminLogin';
 import StudentSignup from './screens/StudentSignup';
@@ -9,7 +10,6 @@ import StudentLogin from './screens/StudentLogin';
 import Home from './screens/Home';
 import StudentProfile from './screens/StudentProfile';
 import AdminProfile from './screens/AdminProfile';
-import { useSelector } from 'react-redux';
 import FacultyLogin from './screens/FacultyLogin';
 import FacultySignup from './screens/FacultySignup';
 import FacultyProfile from './screens/FacultyProfile';

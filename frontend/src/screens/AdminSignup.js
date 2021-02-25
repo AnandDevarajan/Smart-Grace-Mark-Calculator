@@ -12,7 +12,7 @@ const AdminSignup = ({ location, history }) => {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [dob, setDob] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('select');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
@@ -39,6 +39,7 @@ const AdminSignup = ({ location, history }) => {
       phone === '' ||
       address === '' ||
       dob === '' ||
+      gender === 'select' ||
       email === '' ||
       password === '' ||
       confirmPassword === ''
@@ -130,6 +131,7 @@ const AdminSignup = ({ location, history }) => {
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
+              <option>select</option>
               <option>Male</option>
               <option>Female</option>
             </Form.Control>

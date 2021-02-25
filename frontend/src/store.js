@@ -5,17 +5,22 @@ import {
   studentRegisterReducer,
   studentLoginReducer,
 } from './reducers/studentReducer';
-
 import {
   adminRegisterReducer,
   adminLoginReducer,
 } from './reducers/adminReducer';
+import {
+  facultyRegisterReducer,
+  facultyLoginReducer,
+} from './reducers/facultyReducer';
 
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,
   adminSignup: adminRegisterReducer,
   adminSignin: adminLoginReducer,
+  facultySignup: facultyRegisterReducer,
+  facultySignin: facultyLoginReducer,
 });
 
 const middleware = [thunk];
@@ -28,9 +33,14 @@ const adminInfoFromStorage = localStorage.getItem('adminInfo')
   ? JSON.parse(localStorage.getItem('adminInfo'))
   : null;
 
+const facultyInfoFromStorage = localStorage.getItem('facultyInfo')
+  ? JSON.parse(localStorage.getItem('facultyInfo'))
+  : null;
+
 const initialState = {
   studentSignin: { studentInfo: studentInfoFromStorage },
   adminSignin: { adminInfo: adminInfoFromStorage },
+  facultySignin: { facultyInfo: facultyInfoFromStorage },
 };
 
 const store = createStore(

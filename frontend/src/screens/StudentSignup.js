@@ -13,7 +13,7 @@ const StudentSignup = ({ location, history }) => {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [dob, setDob] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('select');
   const [branch, setBranch] = useState('CSE');
   const [batch, setBatch] = useState('[choose batch]');
   const [degree, setDegree] = useState('BTech');
@@ -45,6 +45,7 @@ const StudentSignup = ({ location, history }) => {
       address === '' ||
       dob === '' ||
       batch === '[choose batch]' ||
+      gender === 'select' ||
       email === '' ||
       password === '' ||
       confirmPassword === ''
@@ -199,6 +200,7 @@ const StudentSignup = ({ location, history }) => {
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
+              <option>select</option>
               <option>Male</option>
               <option>Female</option>
             </Form.Control>
