@@ -55,7 +55,7 @@ exports.registerAdmin = (req, res) => {
           con.query(
             `SELECT * FROM ADMINISTRATOR  WHERE EmailID='${email}'`,
             (err, result) => {
-              if (err) {
+              if (result.length === 0 || err) {
                 return res.status(400).json({
                   message: 'No user found',
                 });
