@@ -71,15 +71,15 @@ export const facultyRegister = (
       {
         name,
         email,
-        password,
-        dob,
-        department,
-        adviser,
-        courseId,
-        batch,
-        gender,
         phone,
         address,
+        dob,
+        gender,
+        courseId,
+        department,
+        adviser,
+        batch,
+        password,
       },
       config
     );

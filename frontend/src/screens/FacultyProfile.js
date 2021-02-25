@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const FacultyProfile = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  return (
+    <div>
+      <h3>Welcome to Faculty Profile</h3>
+    </div>
+  );
+};
 
-export default FacultyProfile
+export default FacultyProfile;
