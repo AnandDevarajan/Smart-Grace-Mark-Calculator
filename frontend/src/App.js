@@ -19,6 +19,8 @@ function App() {
   const { studentInfo } = studentSignin;
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
+  const facultySignin = useSelector((state) => state.facultySignin);
+  const { facultyInfo } = facultySignin;
   return (
     <Router>
       <Navbar />
@@ -27,6 +29,8 @@ function App() {
           <Route exact path='/' component={StudentProfile} />
         ) : adminInfo ? (
           <Route exact path='/' component={AdminProfile} />
+        ) : facultyInfo ? (
+          <Route exact path='/' component={FacultyProfile} />
         ) : (
           <Route exact path='/' component={Home} />
         )}
