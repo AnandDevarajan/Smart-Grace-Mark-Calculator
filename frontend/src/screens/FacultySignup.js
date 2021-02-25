@@ -16,7 +16,7 @@ const FacultySignup = ({ location, history }) => {
   const [department, setDepartment] = useState('CSE');
   const [courseId, setCourseId] = useState('');
   const [advisor, setAdvisor] = useState('[choose]');
-  const [batch, setBatch] = useState('[choose batch]');
+  const [batch, setBatch] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
@@ -49,7 +49,7 @@ const FacultySignup = ({ location, history }) => {
       dob === '' ||
       advisor === '[choose]' ||
       department === '' ||
-      courseId === '' ||
+      courseId === 'select' ||
       gender === 'select' ||
       batch === '[choose batch]' ||
       email === '' ||
@@ -156,10 +156,12 @@ const FacultySignup = ({ location, history }) => {
               value={courseId}
               onChange={(e) => setCourseId(e.target.value)}
             >
-              {/* <option>[choose]</option>
+              <option>select</option>
               {courses.map((course) => (
-                <option>{course}</option>
-              ))} */}
+                <option>
+                  {course.CourseID} {course.CourseName}
+                </option>
+              ))}
             </Form.Control>
           </Form.Group>
           <Form.Group controlId='advisor'>

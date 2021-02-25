@@ -46,6 +46,7 @@ exports.registerFaculty = (req, res) => {
     batch,
     password,
   } = req.body;
+  const courseCode = courseid.substring(0, 8);
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log(err);
@@ -59,8 +60,8 @@ exports.registerFaculty = (req, res) => {
         address,
         dob,
         gender,
-        courseid,
         department,
+        courseCode,
         advisor,
         batch,
         hash,

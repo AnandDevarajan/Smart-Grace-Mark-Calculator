@@ -9,7 +9,7 @@ exports.getAllCourses = (req, res) => {
       });
     }
     return res.json({
-      courses: result[0],
+      courses: result,
     });
   });
 };
