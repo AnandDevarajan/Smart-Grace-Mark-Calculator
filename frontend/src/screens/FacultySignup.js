@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { studentRegister } from '../actions/studentAction';
+import { facultyRegister } from '../actions/facultyAction';
 
 const FacultySignup = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -23,18 +23,18 @@ const FacultySignup = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const studentSignup = useSelector((state) => state.studentSignup);
-  const { error, studentInfo } = studentSignup;
+  const facultySignup = useSelector((state) => state.facultySignup);
+  const { error, facultyInfo } = facultySignup;
 
   const redirect = location.search
     ? location.search.split('=')[1]
-    : '/student/profile';
+    : '/faculty/profile';
 
   useEffect(() => {
-    if (studentInfo) {
+    if (facultyInfo) {
       history.push(redirect);
     }
-  }, [history, studentInfo, redirect]);
+  }, [history, facultyInfo, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ const FacultySignup = ({ location, history }) => {
     } else {
       setMessage('');
       dispatch(
-        studentRegister(
+        facultyRegister(
           name,
           email,
           password,
