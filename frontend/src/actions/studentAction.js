@@ -34,7 +34,10 @@ export const studentLogin = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: STUDENT_LOGIN_FAIL,
-      payload: 'Invalid Credentials',
+      payload:
+        error.response || error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -94,7 +97,10 @@ export const studentRegister = (
     console.log(error);
     dispatch({
       type: STUDENT_REGISTER_FAIL,
-      payload: 'Not Authorized',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

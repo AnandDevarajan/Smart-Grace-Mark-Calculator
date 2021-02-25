@@ -34,7 +34,10 @@ export const adminLogin = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADMIN_LOGIN_FAIL,
-      payload: 'Invalid Credentials',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -86,7 +89,10 @@ export const adminRegister = (
     console.log(error);
     dispatch({
       type: ADMIN_REGISTER_FAIL,
-      payload: 'Not Authorized',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

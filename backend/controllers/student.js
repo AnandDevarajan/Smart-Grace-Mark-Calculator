@@ -6,9 +6,9 @@ const bcrypt = require('bcrypt');
 exports.authStudent = (req, res) => {
   const { email, password } = req.body;
   con.query(`SELECT * FROM STUDENT WHERE EmailID=?`, email, (err, result) => {
-    if (err) {
+    if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'Invalid credentials',
+        message: 'Invalid Email',
       });
     }
     if (result.length > 0) {

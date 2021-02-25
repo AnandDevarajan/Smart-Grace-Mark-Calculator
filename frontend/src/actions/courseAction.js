@@ -18,7 +18,10 @@ export const listCourses = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: COURSE_LIST_FAIL,
-      payload: 'No Courses',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

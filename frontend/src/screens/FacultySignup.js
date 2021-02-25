@@ -15,7 +15,7 @@ const FacultySignup = ({ location, history }) => {
   const [gender, setGender] = useState('select');
   const [department, setDepartment] = useState('CSE');
   const [courseId, setCourseId] = useState('');
-  const [advisor, setAdvisor] = useState('[choose]');
+  const [adviser, setAdviser] = useState('[choose]');
   const [batch, setBatch] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -47,7 +47,7 @@ const FacultySignup = ({ location, history }) => {
       phone === '' ||
       address === '' ||
       dob === '' ||
-      advisor === '[choose]' ||
+      adviser === '[choose]' ||
       department === '' ||
       courseId === 'select' ||
       gender === 'select' ||
@@ -68,7 +68,7 @@ const FacultySignup = ({ location, history }) => {
           email,
           password,
           dob,
-          advisor,
+          adviser,
           department,
           courseId,
           batch,
@@ -164,21 +164,21 @@ const FacultySignup = ({ location, history }) => {
               ))}
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId='advisor'>
+          <Form.Group controlId='adviser'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Class Advisor
+              Class Adviser
             </Form.Label>
             <Form.Control
               as='select'
-              value={advisor}
-              onChange={(e) => setAdvisor(e.target.value)}
+              value={adviser}
+              onChange={(e) => setAdviser(e.target.value)}
             >
               <option>[choose]</option>
               <option>Yes</option>
               <option>No</option>
             </Form.Control>
           </Form.Group>
-          {advisor === 'Yes' && (
+          {adviser === 'Yes' && (
             <Form.Group controlId='batch'>
               <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
                 Select batch

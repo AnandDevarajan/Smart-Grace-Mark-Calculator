@@ -34,7 +34,10 @@ export const facultyLogin = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FACULTY_LOGIN_FAIL,
-      payload: 'Invalid Credentials',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -46,8 +49,8 @@ export const facultyRegister = (
   dob,
   department,
   batch,
-  advisor,
-  courseid,
+  adviser,
+  courseId,
   gender,
   phone,
   address
@@ -71,8 +74,8 @@ export const facultyRegister = (
         password,
         dob,
         department,
-        advisor,
-        courseid,
+        adviser,
+        courseId,
         batch,
         gender,
         phone,
@@ -88,13 +91,15 @@ export const facultyRegister = (
       type: FACULTY_LOGIN_SUCCESS,
       payload: data,
     });
-
     localStorage.setItem('facultyInfo', JSON.stringify(data));
   } catch (error) {
     console.log(error);
     dispatch({
       type: FACULTY_REGISTER_FAIL,
-      payload: 'Not Authorized',
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

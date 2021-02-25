@@ -6,9 +6,9 @@ const bcrypt = require('bcrypt');
 exports.authFaculty = (req, res) => {
   const { email, password } = req.body;
   con.query(`SELECT * FROM FACULTY WHERE EmailID=?`, email, (err, result) => {
-    if (err) {
+    if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'Invalid credentials',
+        message: 'Invalid Email',
       });
     }
     if (result.length > 0) {
@@ -40,19 +40,19 @@ exports.registerFaculty = (req, res) => {
     address,
     dob,
     gender,
-    courseid,
+    courseId,
     department,
-    advisor,
+    adviser,
     batch,
     password,
   } = req.body;
-  const courseCode = courseid.substring(0, 8);
+  const courseCode = courseId.substring(0, 8);
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log(err);
     }
     con.query(
-      `INSERT INTO FACULTY (Name,EmailID,PhoneNum,Address,DOB,Gender,Department,CourseID,ClassAdvisor,Batch,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO FACULTY (Name,EmailID,PhoneNum,Address,DOB,Gender,Department,CourseID,ClassAdviser,Batch,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
       [
         name,
         email,
@@ -62,14 +62,14 @@ exports.registerFaculty = (req, res) => {
         gender,
         department,
         courseCode,
-        advisor,
+        adviser,
         batch,
         hash,
       ],
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Unable to create Admin',
+            message: 'Unable to create user',
           });
         }
         if (result) {
