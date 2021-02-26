@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   studentRegisterReducer,
   studentLoginReducer,
+  studentListReducer,
 } from './reducers/studentReducer';
 import {
   adminRegisterReducer,
@@ -17,6 +18,7 @@ import { courseListReducer } from './reducers/courseReducer';
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,
+  studentList: studentListReducer,
   adminSignup: adminRegisterReducer,
   adminSignin: adminLoginReducer,
   facultySignup: facultyRegisterReducer,

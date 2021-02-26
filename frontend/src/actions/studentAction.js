@@ -6,6 +6,9 @@ import {
   STUDENT_LOGIN_SUCCESS,
   STUDENT_LOGIN_FAIL,
   STUDENT_LOGOUT,
+  STUDENT_LIST_FAIL,
+  STUDENT_LIST_SUCCESS,
+  STUDENT_LIST_REQUEST,
 } from '../constants/studentConstant';
 
 import axios from 'axios';
@@ -111,4 +114,36 @@ export const studentLogout = () => (dispatch) => {
     type: STUDENT_LOGOUT,
   });
   document.location.href = '/';
+};
+
+export const listStudents = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: STUDENT_LIST_REQUEST,
+    });
+
+    const {
+      adminLogin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+    const { data } = await axios.get('/admin/student', config);
+
+    dispatch({
+      type: STUDENT_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: STUDENT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
