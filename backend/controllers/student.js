@@ -91,3 +91,16 @@ exports.registerStudent = (req, res) => {
     );
   });
 };
+
+exports.getAllStudents = (req, res) => {
+  con.query(`SELECT * FROM STUDENT`, (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No students found',
+      });
+    }
+    return res.json({
+      students: result,
+    });
+  });
+};

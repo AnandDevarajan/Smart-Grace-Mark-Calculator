@@ -3,7 +3,7 @@ const config = require('../config/db');
 const con = config.con;
 const asyncHandler = require('express-async-handler');
 
-exports.verifyAuth = asyncHandler(async (req, res, next) => {
+exports.verifyStudent = asyncHandler(async (req, res, next) => {
   if (req.headers.authorization) {
     try {
       let token = req.headers.authorization.split(' ')[1];
@@ -11,6 +11,58 @@ exports.verifyAuth = asyncHandler(async (req, res, next) => {
       console.log(decoded);
       con.query(
         `SELECT * FROM STUDENT WHERE RollNum = '${decoded.id}'`,
+        (err, result) => {
+          if (result.length === 0 || err) {
+            return res.status(400).json({
+              message: 'ACCESS DENIED',
+            });
+          }
+          req.user = result[0];
+          next();
+        }
+      );
+    } catch (error) {
+      res.status(401).json({
+        message: 'Not Autherized',
+      });
+    }
+  }
+});
+
+exports.verifyFaculty = asyncHandler(async (req, res, next) => {
+  if (req.headers.authorization) {
+    try {
+      let token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decoded);
+      con.query(
+        `SELECT * FROM FACULTY WHERE FacultyID = '${decoded.id}'`,
+        (err, result) => {
+          if (result.length === 0 || err) {
+            return res.status(400).json({
+              message: 'ACCESS DENIED',
+            });
+          }
+          req.user = result[0];
+          next();
+        }
+      );
+    } catch (error) {
+      res.status(401).json({
+        message: 'Not Autherized',
+      });
+    }
+  }
+});
+
+exports.verifyAdmin = asyncHandler(async (req, res, next) => {
+  if (req.headers.authorization) {
+    try {
+      let token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decoded);
+      con.query(
+        `SELECT * FROM ADMINISTRATOR WHERE adminID = '${decoded.id}'`,
         (err, result) => {
           if (result.length === 0 || err) {
             return res.status(400).json({
