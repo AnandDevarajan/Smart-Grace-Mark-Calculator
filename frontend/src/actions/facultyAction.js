@@ -47,10 +47,10 @@ export const facultyRegister = (
   email,
   password,
   dob,
-  department,
-  batch,
   adviser,
+  department,
   courseId,
+  batch,
   gender,
   phone,
   address
@@ -65,21 +65,20 @@ export const facultyRegister = (
         'Content-Type': 'application/json',
       },
     };
-
     const { data } = await axios.post(
       '/faculty',
       {
         name,
         email,
+        password,
+        dob,
+        adviser,
+        department,
+        courseId,
+        batch,
+        gender,
         phone,
         address,
-        dob,
-        gender,
-        courseId,
-        department,
-        adviser,
-        batch,
-        password,
       },
       config
     );

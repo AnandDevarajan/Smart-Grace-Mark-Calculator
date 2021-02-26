@@ -17,7 +17,7 @@ const FacultySignup = ({ location, history }) => {
   const [department, setDepartment] = useState('CSE');
   const [courseId, setCourseId] = useState('');
   const [adviser, setAdviser] = useState('[choose]');
-  const [batch, setBatch] = useState('');
+  const [batch, setBatch] = useState('N/A');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
@@ -43,6 +43,19 @@ const FacultySignup = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log('-------------------------------');
+    console.log('name', name);
+    console.log('email', email);
+    console.log('phone', phone);
+    console.log('address', address);
+    console.log('dob', dob);
+    console.log('gender', gender);
+    console.log('courseId', courseId);
+    console.log('department', department);
+    console.log('adviser', adviser);
+    console.log('batch', batch);
+    console.log('password', password);
+    console.log('-------------------------------');
     if (
       name === '' ||
       phone === '' ||
@@ -83,7 +96,7 @@ const FacultySignup = ({ location, history }) => {
 
   return (
     <>
-       <Link to='/'>
+      <Link to='/'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
@@ -161,7 +174,7 @@ const FacultySignup = ({ location, history }) => {
             >
               <option>select</option>
               {courses.map((course) => (
-                <option>
+                <option key={course.CourseID}>
                   {course.CourseID} {course.CourseName}
                 </option>
               ))}
