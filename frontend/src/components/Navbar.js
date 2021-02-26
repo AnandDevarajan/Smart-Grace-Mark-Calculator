@@ -118,19 +118,19 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link>
+                <Link to='/admin/profile'>
                   <AccountCircleIcon />
                   <span>Profile</span>
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link>
+                <Link to='/admin/students'>
                   <PeopleIcon />
                   <span>Students</span>
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link>
+                <Link to='/admin/faculties'>
                   <PeopleOutlineIcon />
                   <span>Faculty</span>
                 </Link>

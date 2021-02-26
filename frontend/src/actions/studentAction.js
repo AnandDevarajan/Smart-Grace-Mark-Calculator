@@ -123,7 +123,7 @@ export const listStudents = () => async (dispatch, getState) => {
     });
 
     const {
-      adminLogin: { adminInfo },
+      adminSignin: { adminInfo },
     } = getState();
 
     const config = {
@@ -131,7 +131,7 @@ export const listStudents = () => async (dispatch, getState) => {
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };
-    const { data } = await axios.get('/admin/student', config);
+    const { data } = await axios.get('/admin/students', config);
 
     dispatch({
       type: STUDENT_LIST_SUCCESS,
