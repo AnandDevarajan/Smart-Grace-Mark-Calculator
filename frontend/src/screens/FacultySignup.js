@@ -43,19 +43,6 @@ const FacultySignup = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('-------------------------------');
-    console.log('name', name);
-    console.log('email', email);
-    console.log('phone', phone);
-    console.log('address', address);
-    console.log('dob', dob);
-    console.log('gender', gender);
-    console.log('courseId', courseId);
-    console.log('department', department);
-    console.log('adviser', adviser);
-    console.log('batch', batch);
-    console.log('password', password);
-    console.log('-------------------------------');
     if (
       name === '' ||
       phone === '' ||

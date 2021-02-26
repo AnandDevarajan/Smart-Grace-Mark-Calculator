@@ -50,19 +50,6 @@ exports.registerFaculty = (req, res) => {
   const courseCode = courseId.substring(0, 8);
   let newBatch = batch;
   adviser === 'No' ? (newBatch = 'N/A') : batch;
-  console.log('-------------------------------');
-  console.log('name', name);
-  console.log('email', email);
-  console.log('phone', phone);
-  console.log('address', address);
-  console.log('dob', dob);
-  console.log('gender', gender);
-  console.log('courseId', courseCode);
-  console.log('department', department);
-  console.log('adviser', adviser);
-  console.log('batch', newBatch);
-  console.log('password', password);
-  console.log('-------------------------------');
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log(err);
