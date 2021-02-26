@@ -37,6 +37,7 @@ const StudentProfile = () => {
         <Col md={4}></Col>
         <Col md={4}></Col>
       </Row>
+      <Button></Button>
     </div>
   );
 };

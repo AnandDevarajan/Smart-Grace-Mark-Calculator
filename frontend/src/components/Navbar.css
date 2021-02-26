@@ -22,12 +22,12 @@
   position: fixed;
   top: 0;
   left: -100%;
-  transition: 850ms;
+  transition: 200ms;
 }
 
 .nav-menu.active {
   left: 0;
-  transition: 350ms;
+
 }
 
 .nav-text {
@@ -85,7 +85,7 @@ span {
     position: fixed;
     left: 0;
     top: -100%;
-    transition: 850ms;
+
   }
   .navbar-toggle {
     background-color: #0f3057;
@@ -97,7 +97,7 @@ span {
   }
   .nav-menu.active {
     top: 0;
-    transition: 350ms;
+
   }
 
   .nav-menu-items {
