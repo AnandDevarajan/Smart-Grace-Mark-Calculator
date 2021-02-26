@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -37,7 +38,9 @@ const StudentProfile = () => {
         <Col md={4}></Col>
         <Col md={4}></Col>
       </Row>
-      <Button></Button>
+      <Link className='btn btn-success my-3' to='student/request'>
+        Request for Grace Mark
+      </Link>
     </div>
   );
 };
