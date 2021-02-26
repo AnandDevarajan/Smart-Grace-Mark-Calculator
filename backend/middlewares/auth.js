@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/db');
 const con = config.con;
 const asyncHandler = require('express-async-handler');
+
 exports.verifyAuth = asyncHandler(async (req, res, next) => {
   if (req.headers.authorization) {
     try {
@@ -11,9 +12,9 @@ exports.verifyAuth = asyncHandler(async (req, res, next) => {
       con.query(
         `SELECT * FROM STUDENT WHERE RollNum = '${decoded.id}'`,
         (err, result) => {
-          if (err) {
+          if (result.length === 0 || err) {
             return res.status(400).json({
-              message: 'Access denied',
+              message: 'ACCESS DENIED',
             });
           }
           req.user = result[0];
@@ -22,8 +23,18 @@ exports.verifyAuth = asyncHandler(async (req, res, next) => {
       );
     } catch (error) {
       res.status(401).json({
-        error: 'Not Autherized',
+        message: 'Not Autherized',
       });
     }
   }
 });
+
+exports.admin = (req, res, next) => {
+  if (req.user && req.user.role === 3) {
+    next();
+  } else {
+    res.status(401).json({
+      message: 'Not authorized as an Admin',
+    });
+  }
+};
