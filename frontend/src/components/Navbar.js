@@ -49,6 +49,7 @@ function Navbar() {
             Smart Grace Mark Calculator
           </h3>
         </div>
+
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           {studentInfo ? (
             <ul className='nav-menu-items' onClick={showSidebar}>
@@ -72,7 +73,7 @@ function Navbar() {
               <li className='nav-text'>
                 <Link onClick={studentlogOutHandler}>
                   <ExitToAppIcon />
-                  <span>Sign out</span>
+                  <span>Logout</span>
                 </Link>
               </li>
             </ul>
@@ -106,7 +107,7 @@ function Navbar() {
               <li className='nav-text'>
                 <Link onClick={facultylogOutHandler}>
                   <ExitToAppIcon />
-                  <span>Sign out</span>
+                  <span>Logout</span>
                 </Link>
               </li>
             </ul>
@@ -138,7 +139,7 @@ function Navbar() {
               <li className='nav-text'>
                 <Link onClick={adminlogOutHandler}>
                   <ExitToAppIcon />
-                  <span>Sign out</span>
+                  <span>Logout</span>
                 </Link>
               </li>
             </ul>
