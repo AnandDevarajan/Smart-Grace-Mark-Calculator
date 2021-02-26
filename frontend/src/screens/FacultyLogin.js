@@ -5,7 +5,7 @@ import Message from '../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 import { facultyLogin } from '../actions/facultyAction';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const FacultyLogin = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,8 +32,10 @@ const FacultyLogin = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/'>
-        <Button>Go Back</Button>
+       <Link to='/'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
       </Link>
       <FormContainer>
         <h3>Faculty Login</h3>

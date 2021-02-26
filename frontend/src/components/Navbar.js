@@ -43,7 +43,10 @@ function Navbar() {
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
-            <MenuIcon style={{ marginBottom: '25px' }} onClick={showSidebar} />
+            <MenuIcon
+              style={{ marginBottom: '25px', color: 'white' }}
+              onClick={showSidebar}
+            />
           </Link>
           <h3 className='text-white ml-auto mr-auto'>
             Smart Grace Mark Calculator
@@ -55,7 +58,7 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                  <CloseIcon />
+                  <CloseIcon style={{ color: 'white' }} />
                 </Link>
               </li>
               <li className='nav-text'>
@@ -81,7 +84,7 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                  <CloseIcon />
+                <CloseIcon style={{ color: 'white' }}/>
                 </Link>
               </li>
               <li className='nav-text'>
@@ -115,7 +118,7 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                  <CloseIcon />
+                <CloseIcon style={{ color: 'white' }}/>
                 </Link>
               </li>
               <li className='nav-text'>
@@ -147,7 +150,7 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                  <CloseIcon />
+                <CloseIcon style={{ color: 'white' }}/>
                 </Link>
               </li>
               <li className='nav-text'>

@@ -18,9 +18,9 @@ const Home = () => {
           className='text-white'
         >
           <Button
-            variant='success'
+            variant='info'
             className='mt-3 text-white'
-            style={{ width: '210px' }}
+            style={{ width: '218px' }}
           >
             {' '}
             Sign in as student
@@ -31,7 +31,7 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='primary' className='mt-3' style={{ width: '210px' }}>
+          <Button variant='success' className='mt-3' style={{ width: '218px' }}>
             create student account
           </Button>
         </Link>
@@ -41,14 +41,14 @@ const Home = () => {
         <Image
           src='https://static.thenounproject.com/png/2011000-200.png'
        
-          style={{ objectFit: 'coverF' }}
+          style={{ objectFit: 'cover' }}
         />
         <Link
           to='/faculty/login'
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='success' className='mt-3' style={{ width: '210px' }}>
+          <Button variant='info' className='mt-3' style={{ width: '218px' }}>
             Sign in as Faculty
           </Button>
         </Link>
@@ -57,7 +57,7 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='primary' className='mt-3' style={{ width: '210px' }}>
+          <Button variant='success' className='mt-3' style={{ width: '218px' }}>
             create Faculty account
           </Button>
         </Link>
@@ -74,7 +74,7 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='success' className='mt-3' style={{ width: '210px' }}>
+          <Button variant='info' className='mt-3' style={{ width: '218px' }}>
             {' '}
             Sign in as Admin
           </Button>
@@ -84,7 +84,7 @@ const Home = () => {
           style={{ textDecoration: 'none' }}
           className='text-white'
         >
-          <Button variant='primary' className='mt-3' style={{ width: '210px' }}>
+          <Button variant='success' className='mt-3' style={{ width: '218px' }}>
             {' '}
             create Admin account
           </Button>

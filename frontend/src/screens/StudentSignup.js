@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import { studentRegister } from '../actions/studentAction';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const StudentSignup = ({ location, history }) => {
   const [name, setName] = useState('');
   const [rollno, setRollNo] = useState('');
@@ -76,8 +76,10 @@ const StudentSignup = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/'>
-        <Button>Go Back</Button>
+         <Link to='/'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
       </Link>
       <FormContainer>
         <h1>CREATE A STUDENT ACCOUNT</h1>

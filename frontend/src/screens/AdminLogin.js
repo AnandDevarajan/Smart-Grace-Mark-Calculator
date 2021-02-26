@@ -5,6 +5,7 @@ import Message from '../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 import { adminLogin } from '../actions/adminAction';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const AdminLogin = ({ location, history }) => {
   const [email, setEmail] = useState('');
@@ -32,7 +33,9 @@ const AdminLogin = ({ location, history }) => {
   return (
     <>
       <Link to='/'>
-        <Button>Go Back</Button>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
       </Link>
       <FormContainer>
         <h3>Administration Login</h3>

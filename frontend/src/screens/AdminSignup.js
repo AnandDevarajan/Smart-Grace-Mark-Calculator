@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import { adminRegister } from '../actions/adminAction';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const AdminSignup = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -58,8 +58,10 @@ const AdminSignup = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/'>
-        <Button>Go Back</Button>
+       <Link to='/'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
       </Link>
       <FormContainer>
         <h1>CREATE AN ADMIN ACCOUNT</h1>
