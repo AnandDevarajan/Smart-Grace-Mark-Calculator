@@ -4,30 +4,30 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-import { studentLogin } from '../actions/studentAction';
+import { createGracemark } from '../actions/gracemarkAction';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 const GraceMarkForm = ({ location, history }) => {
   const [description, setDescription] = useState('');
   const [mark, setMark] = useState('');
-
+  const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
 
-  const studentSignin = useSelector((state) => state.studentSignin);
-  const { error, studentInfo } = studentSignin;
+  const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
+  const { success: successGrace, error } = gracemarkCreate;
 
   const redirect = location.search
     ? location.search.split('=')[1]
     : '/admin/profile';
 
-  useEffect(() => {
-    if (studentInfo) {
-      history.push(redirect);
-    }
-  }, [history, studentInfo, redirect]);
-
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(studentLogin(email, password));
+    dispatch(createGracemark(description, mark));
+    if (successGrace) {
+      setSuccess(!success);
+    }
+    setDescription('');
+    setMark('');
   };
 
   return (
@@ -40,6 +40,12 @@ const GraceMarkForm = ({ location, history }) => {
       <FormContainer>
         <h3>ADD GRACE MARK</h3>
         {error && <Message variant='danger'>{error}</Message>}
+        {success && (
+          <Message variant='success'>
+            Grace Mark Created successfully{' '}
+            <Link to='/admin/profile'> Go to profile</Link>
+          </Message>
+        )}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='description'>
             <Form.Label>Description of Grace Mark</Form.Label>
@@ -59,8 +65,8 @@ const GraceMarkForm = ({ location, history }) => {
               onChange={(e) => setMark(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type='submit' variant='info'>
-            Add
+          <Button type='submit' variant='success'>
+            Create
           </Button>
         </Form>
         <Row className='py-3'></Row>

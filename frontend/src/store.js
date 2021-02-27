@@ -15,6 +15,8 @@ import {
   facultyLoginReducer,
   facultyListReducer,
 } from './reducers/facultyReducer';
+
+import { gracemarkCreateReducer } from './reducers/gracemarkReducer';
 import { courseListReducer } from './reducers/courseReducer';
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
@@ -25,6 +27,7 @@ const reducer = combineReducers({
   facultySignup: facultyRegisterReducer,
   facultySignin: facultyLoginReducer,
   facultyList: facultyListReducer,
+  gracemarkCreate: gracemarkCreateReducer,
   courseList: courseListReducer,
 });
 
