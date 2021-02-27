@@ -12,7 +12,8 @@ import AdminProfile from './screens/AdminProfile';
 import FacultyLogin from './screens/FacultyLogin';
 import FacultySignup from './screens/FacultySignup';
 import FacultyProfile from './screens/FacultyProfile';
-import StudentList from './screens/StudentList';
+import AllStudentList from './screens/AllStudentList';
+import AllFacultyList from './screens/AllFacultyList';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -37,7 +38,8 @@ function App() {
         <Route path='/admin/login' component={AdminLogin} />
         <Route path='/admin/signup' component={AdminSignup} />
         <Route path='/admin/profile' component={AdminProfile} />
-        <Route path='/admin/students' component={StudentList} />
+        <Route path='/admin/students' component={AllStudentList} />
+        <Route path='/admin/faculties' component={AllFacultyList} />
         <Route path='/student/login' component={StudentLogin} />
         <Route path='/student/signup' component={StudentSignup} />
         <Route path='/student/profile' component={StudentProfile} />

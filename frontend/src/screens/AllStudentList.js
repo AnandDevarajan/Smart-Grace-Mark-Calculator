@@ -1,0 +1,60 @@
+import React, { useEffect } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import { listStudents } from '../actions/studentAction';
+
+const AllStudentList = ({ history }) => {
+  const dispatch = useDispatch();
+
+  const studentList = useSelector((state) => state.studentList);
+  const { error, students } = studentList;
+  
+  const adminSignin = useSelector((state) => state.adminSignin);
+  const { adminInfo } = adminSignin;
+
+  useEffect(() => {
+    if (adminInfo) {
+      dispatch(listStudents());
+    } else {
+      history.push('/');
+    }
+  }, [dispatch, history, adminInfo]);
+
+  return (
+    <>
+      <h1>STUDENT LIST</h1>
+      {error ? (
+        <Message variant='danger'>{error}</Message>
+      ) : (
+        <Table striped bordered hover responsive className='table-sm'>
+          <thead>
+            <tr>
+              <th>Roll No</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Branch</th>
+              <th>Batch</th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((student) => (
+              <tr key={student.RollNum}>
+                <td>{student.RollNum}</td>
+                <td>{student.Name}</td>
+                <td>
+                  <a href={`mailto:${student.EmailID}`}>{student.EmailID}</a>
+                </td>
+                <td>{student.Branch}</td>
+                <td>{student.Batch}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+    </>
+  );
+};
+
+export default AllStudentList;

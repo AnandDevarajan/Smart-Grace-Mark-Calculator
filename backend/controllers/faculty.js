@@ -97,14 +97,14 @@ exports.registerFaculty = (req, res) => {
 };
 
 exports.getAllFaculties = (req, res) => {
-  con.query(`SELECT * FROM Faculty`, (err, result) => {
+  con.query(`SELECT * FROM FACULTY`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: 'No Faculty found',
       });
     }
     return res.json({
-      students: result,
+      faculties: result,
     });
   });
 };

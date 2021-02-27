@@ -3,51 +3,58 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
-import { listStudents } from '../actions/studentAction';
+import { listFaculties } from '../actions/facultyAction';
 
-const StudentList = ({ history }) => {
+const AllFacultyList = ({ history }) => {
   const dispatch = useDispatch();
 
-  const studentList = useSelector((state) => state.studentList);
-  const { error, students } = studentList;
-  
+  const facultyList = useSelector((state) => state.facultyList);
+  const { error, faculties } = facultyList;
+
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
 
   useEffect(() => {
     if (adminInfo) {
-      dispatch(listStudents());
+      dispatch(listFaculties());
     } else {
       history.push('/');
     }
   }, [dispatch, history, adminInfo]);
 
+  console.log(faculties);
   return (
     <>
-      <h1>STUDENT LIST</h1>
+      <h1>Faculty LIST</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
             <tr>
-              <th>Roll No</th>
+              <th>Faculty ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Branch</th>
+              <th>Phone</th>
+              <th>Department</th>
+              <th>Course ID</th>
+              <th>Class Adviser</th>
               <th>Batch</th>
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
-              <tr key={student.RollNum}>
-                <td>{student.RollNum}</td>
-                <td>{student.Name}</td>
+            {faculties.map((faculty) => (
+              <tr key={faculty.FacultyID}>
+                <td>{faculty.FacultyID}</td>
+                <td>{faculty.Name}</td>
                 <td>
-                  <a href={`mailto:${student.EmailID}`}>{student.EmailID}</a>
+                  <a href={`mailto:${faculty.EmailID}`}>{faculty.EmailID}</a>
                 </td>
-                <td>{student.Branch}</td>
-                <td>{student.Batch}</td>
+                <td>{faculty.PhoneNum}</td>
+                <td>{faculty.Department}</td>
+                <td>{faculty.CourseID}</td>
+                <td>{faculty.ClassAdviser}</td>
+                <td>{faculty.Batch}</td>
               </tr>
             ))}
           </tbody>
@@ -57,4 +64,4 @@ const StudentList = ({ history }) => {
   );
 };
 
-export default StudentList;
+export default AllFacultyList;
