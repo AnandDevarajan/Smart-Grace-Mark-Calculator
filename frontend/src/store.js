@@ -13,6 +13,7 @@ import {
 import {
   facultyRegisterReducer,
   facultyLoginReducer,
+  facultyListReducer,
 } from './reducers/facultyReducer';
 import { courseListReducer } from './reducers/courseReducer';
 const reducer = combineReducers({
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   adminSignin: adminLoginReducer,
   facultySignup: facultyRegisterReducer,
   facultySignin: facultyLoginReducer,
+  facultyList: facultyListReducer,
   courseList: courseListReducer,
 });
 

@@ -6,6 +6,9 @@ import {
   FACULTY_LOGIN_SUCCESS,
   FACULTY_LOGIN_FAIL,
   FACULTY_LOGOUT,
+  FACULTY_LIST_REQUEST,
+  FACULTY_LIST_SUCCESS,
+  FACULTY_LIST_FAIL
 } from '../constants/facultyConstant';
 
 export const facultyRegisterReducer = (state = {}, action) => {
@@ -31,6 +34,22 @@ export const facultyLoginReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case FACULTY_LOGOUT:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const facultyListReducer = (state = { faculties: [] }, action) => {
+  switch (action.type) {
+    case FACULTY_LIST_REQUEST:
+      return { loading: true, faculties: [] };
+    case FACULTY_LIST_SUCCESS:
+      return {
+        loading: false,
+        faculties: action.payload.faculties,
+      };
+    case FACULTY_LIST_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

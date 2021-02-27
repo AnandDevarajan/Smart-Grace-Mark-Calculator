@@ -6,6 +6,9 @@ import {
   FACULTY_LOGIN_SUCCESS,
   FACULTY_LOGIN_FAIL,
   FACULTY_LOGOUT,
+  FACULTY_LIST_REQUEST,
+  FACULTY_LIST_SUCCESS,
+  FACULTY_LIST_FAIL,
 } from '../constants/facultyConstant';
 
 import axios from 'axios';
@@ -109,4 +112,36 @@ export const facultyLogout = () => (dispatch) => {
     type: FACULTY_LOGOUT,
   });
   document.location.href = '/';
+};
+
+export const listFaculties = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: FACULTY_LIST_REQUEST,
+    });
+
+    const {
+      adminSignin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+    const { data } = await axios.get('/admin/faculties', config);
+
+    dispatch({
+      type: FACULTY_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FACULTY_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
