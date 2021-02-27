@@ -16,10 +16,6 @@ const GraceMarkForm = ({ location, history }) => {
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
   const { success: successGrace, error } = gracemarkCreate;
 
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/admin/profile';
-
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(createGracemark(description, mark));
