@@ -14,6 +14,7 @@ import FacultySignup from './screens/FacultySignup';
 import FacultyProfile from './screens/FacultyProfile';
 import AllStudentList from './screens/AllStudentList';
 import AllFacultyList from './screens/AllFacultyList';
+import GraceMarkForm from './screens/GraceMarkForm';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -40,6 +41,7 @@ function App() {
         <Route path='/admin/profile' component={AdminProfile} />
         <Route path='/admin/students' component={AllStudentList} />
         <Route path='/admin/faculties' component={AllFacultyList} />
+        <Route path='/admin/addGraceMarkDetails' component={GraceMarkForm} />
         <Route path='/student/login' component={StudentLogin} />
         <Route path='/student/signup' component={StudentSignup} />
         <Route path='/student/profile' component={StudentProfile} />
