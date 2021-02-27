@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { registerStudent, authStudent } = require('../controllers/student');
-const { verifyAuth } = require('../middlewares/auth');
 
 router.post('/', registerStudent);
 router.post('/login', authStudent);
