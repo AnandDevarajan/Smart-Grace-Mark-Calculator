@@ -6,24 +6,38 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 import { createGracemark } from '../actions/gracemarkAction';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { GRACEMARK_CREATE_RESET } from '../constants/gracemarkConstant';
 
 const GraceMarkForm = ({ location, history }) => {
   const [description, setDescription] = useState('');
   const [mark, setMark] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
 
+  const adminSignin = useSelector((state) => state.adminSignin);
+  const { adminInfo } = adminSignin;
+
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
-  const { success: successGrace, error } = gracemarkCreate;
+  const { success, error, gracemarkInfo } = gracemarkCreate;
+
+  useEffect(() => {
+    dispatch({
+      type: GRACEMARK_CREATE_RESET,
+    });
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createGracemark(description, mark));
-    if (successGrace) {
-      setSuccess(!success);
+    if (description === '' || mark === '') {
+      setMessage('Enter all the details');
+    } else {
+      dispatch(createGracemark(description, mark));
+      setDescription('');
+      setMark('');
+      if (message !== null || error || success) {
+        setMessage(null);
+      }
     }
-    setDescription('');
-    setMark('');
   };
 
   return (
@@ -34,11 +48,12 @@ const GraceMarkForm = ({ location, history }) => {
         </Button>
       </Link>
       <FormContainer>
-        <h3>ADD GRACE MARK</h3>
+        <h3>CREATE GRACE MARK</h3>
+        {message && <Message variant='warning'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {success && (
           <Message variant='success'>
-            Grace Mark Created successfully{' '}
+            Grace Mark created successfully{' '}
             <Link to='/admin/profile'> Go to profile</Link>
           </Message>
         )}

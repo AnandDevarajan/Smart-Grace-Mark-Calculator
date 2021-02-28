@@ -1,7 +1,7 @@
 const config = require('../config/db');
 const con = config.con;
 
-exports.addGraceMark = (req, res) => {
+exports.createGraceMark = (req, res) => {
   const { description, mark } = req.body;
 
   con.query(
@@ -10,7 +10,7 @@ exports.addGraceMark = (req, res) => {
     (err, result) => {
       if (err) {
         return res.status(400).json({
-          message: 'Unable to add Grace Mark details',
+          message: 'Unable to create Grace Mark details',
         });
       }
       if (result) {
