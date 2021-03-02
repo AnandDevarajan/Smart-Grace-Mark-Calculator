@@ -38,6 +38,7 @@ const RequestForm = ({ location, history }) => {
     } else {
       setMessage('');
       dispatch(studentRequest(request));
+      history.push(redirect);
     }
   };
 
@@ -48,33 +49,42 @@ const RequestForm = ({ location, history }) => {
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      <FormContainer>
-        <h1>Request for Grace mark</h1>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='gracemarkId'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Grace mark
-            </Form.Label>
-            <Form.Control
-              as='select'
-              value={request}
-              onChange={(e) => setRequest(e.target.value)}
-            >
-              <option>select</option>
-              {gracemarks.map((gracemark) => (
-                <option key={gracemark.GraceMarkID}>
-                  {gracemark.Description}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Button type='submit' variant='primary'>
-            Request
-          </Button>
-        </Form>
-      </FormContainer>
+      {studentInfo.result.Requested === 'pending' ? (
+        <FormContainer>
+          <Message variant='warning'>
+            Already requested for grace Mark{' '}
+            <Link to='/student/profile'> Go to profile</Link>
+          </Message>
+        </FormContainer>
+      ) : (
+        <FormContainer>
+          <h1>Request for Grace mark</h1>
+          {message && <Message variant='danger'>{message}</Message>}
+          {error && <Message variant='danger'>{error}</Message>}
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId='gracemarkId'>
+              <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                Grace mark
+              </Form.Label>
+              <Form.Control
+                as='select'
+                value={request}
+                onChange={(e) => setRequest(e.target.value)}
+              >
+                <option>select</option>
+                {gracemarks.map((gracemark) => (
+                  <option key={gracemark.GraceMarkID}>
+                    {gracemark.Description}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+            <Button type='submit' variant='primary'>
+              Request
+            </Button>
+          </Form>
+        </FormContainer>
+      )}
     </>
   );
 };

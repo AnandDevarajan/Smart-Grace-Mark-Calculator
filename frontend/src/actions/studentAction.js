@@ -152,6 +152,7 @@ export const listStudents = () => async (dispatch, getState) => {
 };
 
 export const studentRequest = (request) => async (dispatch, getState) => {
+  console.log(request);
   try {
     dispatch({
       type: REQUEST_ADD_REQUEST,
@@ -167,8 +168,8 @@ export const studentRequest = (request) => async (dispatch, getState) => {
         Authorization: `Bearer ${studentInfo.token}`,
       },
     };
-    const { data } = await axios.get(
-      `/student/request/:${studentInfo.result.RollNum}`,
+    const { data } = await axios.put(
+      `/student/request/${studentInfo.result.RollNum}`,
       { request },
       config
     );
@@ -177,6 +178,7 @@ export const studentRequest = (request) => async (dispatch, getState) => {
       type: REQUEST_ADD_SUCCESS,
       payload: data,
     });
+    localStorage.setItem('studentInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: REQUEST_ADD_FAIL,

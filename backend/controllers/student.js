@@ -108,11 +108,12 @@ exports.getAllStudents = (req, res) => {
 exports.addRequest = (req, res) => {
   let id = req.params.id;
   const { request } = req.body;
+  console.log(request);
   if (request !== 'select' || request.length > 0) {
     let Requested = 'pending';
     con.query(
-      `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,
-      [Requested, id],
+      `UPDATE STUDENT SET Requested=?, GraceDesc=? WHERE RollNum=?`,
+      [Requested, request, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.json({
@@ -120,11 +121,26 @@ exports.addRequest = (req, res) => {
           });
         }
         if (result) {
-          res.json({
-            message: 'Requested Successfully',
-          });
+          con.query(
+            `SELECT * FROM STUDENT WHERE RollNum='${id}'`,
+            (err, result) => {
+              if (err) {
+                return res.status(400).json({
+                  message: 'No user found',
+                });
+              }
+              return res.json({
+                result: result[0],
+                token: generateToken(result[0].RollNum),
+              });
+            }
+          );
         }
       }
     );
+  } else {
+    return res.json({
+      message: 'Unable to request for grace marks',
+    });
   }
 };
