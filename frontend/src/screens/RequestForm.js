@@ -8,7 +8,7 @@ import { listGracemarks } from '../actions/gracemarkAction';
 import { studentRequest } from '../actions/studentAction';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const RequestForm = ({ location, history }) => {
-  const [request, setRequest] = useState('select');
+  const [request, setRequest] = useState('');
   const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
@@ -33,11 +33,11 @@ const RequestForm = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (request === '' || 'select') {
+    if (request === '' || request === 'select') {
       setMessage('Select an option');
     } else {
       setMessage('');
-      dispatch(studentRequest());
+      dispatch(studentRequest(request));
     }
   };
 

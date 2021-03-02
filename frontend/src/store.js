@@ -6,6 +6,7 @@ import {
   studentRegisterReducer,
   studentLoginReducer,
   studentListReducer,
+  studentRequestReducer,
 } from './reducers/studentReducer';
 import {
   adminRegisterReducer,
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,
   studentList: studentListReducer,
+  studentRequest: studentRequestReducer,
   adminSignup: adminRegisterReducer,
   adminSignin: adminLoginReducer,
   facultySignup: facultyRegisterReducer,

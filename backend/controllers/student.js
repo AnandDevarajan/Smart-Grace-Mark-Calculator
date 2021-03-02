@@ -109,7 +109,22 @@ exports.addRequest = (req, res) => {
   let id = req.params.id;
   const { request } = req.body;
   if (request !== 'select' || request.length > 0) {
-    request = 'Pending';
+    let Requested = 'pending';
+    con.query(
+      `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,
+      [Requested, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.json({
+            message: 'Unable to request grace mark',
+          });
+        }
+        if (result) {
+          res.json({
+            message: 'Requested Successfully',
+          });
+        }
+      }
+    );
   }
-  con.query(`UPDATE STUDENT SET Requested=? WHERE RollNum=?`, [request, id]);
 };

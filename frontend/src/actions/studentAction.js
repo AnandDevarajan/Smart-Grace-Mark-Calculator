@@ -9,9 +9,11 @@ import {
   STUDENT_LIST_FAIL,
   STUDENT_LIST_SUCCESS,
   STUDENT_LIST_REQUEST,
+  REQUEST_ADD_FAIL,
+  REQUEST_ADD_SUCCESS,
+  REQUEST_ADD_REQUEST,
 } from '../constants/studentConstant';
 import axios from 'axios';
-
 
 export const studentLogin = (email, password) => async (dispatch) => {
   try {
@@ -86,7 +88,7 @@ export const studentRegister = (
       },
       config
     );
-    
+
     dispatch({
       type: STUDENT_REGISTER_SUCCESS,
       payload: data,
@@ -141,6 +143,43 @@ export const listStudents = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: STUDENT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const studentRequest = (request) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: REQUEST_ADD_REQUEST,
+    });
+
+    const {
+      studentSignin: { studentInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${studentInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(
+      `/student/request/:${studentInfo.result.RollNum}`,
+      { request },
+      config
+    );
+
+    dispatch({
+      type: REQUEST_ADD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: REQUEST_ADD_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
