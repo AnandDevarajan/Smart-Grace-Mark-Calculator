@@ -35,12 +35,18 @@ const StudentProfile = () => {
             </ListGroup>
           </Card>
         </Col>
-        <Col md={4}></Col>
+        <Col md={4}>
+          {' '}
+          {studentInfo.result.Requested === 'pending' ? (
+            <Button className='btn btn-warning'>Pending</Button>
+          ) : (
+            <Link className='btn btn-success my-3' to='/student/request'>
+              Request for Grace Mark
+            </Link>
+          )}
+        </Col>
         <Col md={4}></Col>
       </Row>
-      <Link className='btn btn-success my-3' to='/student/request'>
-        Request for Grace Mark
-      </Link>
     </div>
   );
 };
