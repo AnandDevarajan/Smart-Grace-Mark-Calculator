@@ -104,3 +104,12 @@ exports.getAllStudents = (req, res) => {
     });
   });
 };
+
+exports.addRequest = (req, res) => {
+  let id = req.params.id;
+  const { request } = req.body;
+  if (request !== 'select' || request.length > 0) {
+    request = 'Pending';
+  }
+  con.query(`UPDATE STUDENT SET Requested=? WHERE RollNum=?`, [request, id]);
+};
