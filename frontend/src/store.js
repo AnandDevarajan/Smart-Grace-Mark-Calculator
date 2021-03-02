@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 import {
   studentRegisterReducer,
   studentLoginReducer,
@@ -18,6 +19,7 @@ import {
 
 import { gracemarkCreateReducer } from './reducers/gracemarkReducer';
 import { courseListReducer } from './reducers/courseReducer';
+
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,

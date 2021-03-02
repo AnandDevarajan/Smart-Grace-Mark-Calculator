@@ -10,8 +10,8 @@ import {
   STUDENT_LIST_SUCCESS,
   STUDENT_LIST_REQUEST,
 } from '../constants/studentConstant';
-
 import axios from 'axios';
+
 
 export const studentLogin = (email, password) => async (dispatch) => {
   try {
@@ -86,6 +86,7 @@ export const studentRegister = (
       },
       config
     );
+    
     dispatch({
       type: STUDENT_REGISTER_SUCCESS,
       payload: data,

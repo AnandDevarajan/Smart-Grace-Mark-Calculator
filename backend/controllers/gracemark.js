@@ -31,3 +31,16 @@ exports.createGraceMark = (req, res) => {
     }
   );
 };
+
+exports.getAllGraceMarks = (req, res) => {
+  con.query(`SELECT * FROM GRACEMARK`, (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No Gracemarks found',
+      });
+    }
+    return res.json({
+      courses: result,
+    });
+  });
+};
