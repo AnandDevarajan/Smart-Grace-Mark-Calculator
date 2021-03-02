@@ -17,7 +17,10 @@ import {
   facultyListReducer,
 } from './reducers/facultyReducer';
 
-import { gracemarkCreateReducer } from './reducers/gracemarkReducer';
+import {
+  gracemarkCreateReducer,
+  gracemarkListReducer,
+} from './reducers/gracemarkReducer';
 import { courseListReducer } from './reducers/courseReducer';
 
 const reducer = combineReducers({
@@ -30,6 +33,7 @@ const reducer = combineReducers({
   facultySignin: facultyLoginReducer,
   facultyList: facultyListReducer,
   gracemarkCreate: gracemarkCreateReducer,
+  gracemarkList: gracemarkListReducer,
   courseList: courseListReducer,
 });
 

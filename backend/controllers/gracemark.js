@@ -40,7 +40,7 @@ exports.getAllGraceMarks = (req, res) => {
       });
     }
     return res.json({
-      courses: result,
+      gracemarks: result,
     });
   });
 };

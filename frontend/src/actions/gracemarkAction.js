@@ -2,6 +2,9 @@ import {
   GRACEMARK_CREATE_FAIL,
   GRACEMARK_CREATE_SUCCESS,
   GRACEMARK_CREATE_REQUEST,
+  GRACEMARK_LIST_REQUEST,
+  GRACEMARK_LIST_SUCCESS,
+  GRACEMARK_LIST_FAIL,
 } from '../constants/gracemarkConstant';
 import axios from 'axios';
 export const createGracemark = (description, mark) => async (
@@ -40,6 +43,27 @@ export const createGracemark = (description, mark) => async (
     console.log(error);
     dispatch({
       type: GRACEMARK_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listGracemarks = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: GRACEMARK_LIST_REQUEST,
+    });
+    const { data } = await axios.get('/gracemark');
+    dispatch({
+      type: GRACEMARK_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GRACEMARK_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
