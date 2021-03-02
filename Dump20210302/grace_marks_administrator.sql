@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: grace_marks
+-- Host: localhost    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -16,26 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `course`
+-- Table structure for table `administrator`
 --
 
-DROP TABLE IF EXISTS `course`;
+DROP TABLE IF EXISTS `administrator`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `course` (
-  `CourseID` varchar(45) NOT NULL,
-  `CourseName` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`CourseID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `administrator` (
+  `adminID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(45) NOT NULL,
+  `EmailID` varchar(45) NOT NULL,
+  `PhoneNum` varchar(10) NOT NULL,
+  `Address` varchar(300) DEFAULT 'Null',
+  `DOB` varchar(30) NOT NULL,
+  `Gender` varchar(45) NOT NULL,
+  `Password` varchar(500) NOT NULL,
+  `role` int NOT NULL DEFAULT '3',
+  PRIMARY KEY (`adminID`),
+  UNIQUE KEY `EmailID_UNIQUE` (`EmailID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `course`
+-- Dumping data for table `administrator`
 --
 
-LOCK TABLES `course` WRITE;
-/*!40000 ALTER TABLE `course` DISABLE KEYS */;
-/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+LOCK TABLES `administrator` WRITE;
+/*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
+INSERT INTO `administrator` VALUES (1,'Admin','admin@123.com','9207251675','Earth','12/12/21','male','$2b$10$wHG9TYXNXOWz.kU3Obi78OrlV3VRe3T.TmWljtCYerShEnbikQwJW',3),(2,'Admin207','admin@207.com','1122223222','sdsa','12/21/21','','$2b$10$ynBGTagLNC6ZymGg8MSDMOXARpz7LAguFxys0YGF0kraCRTrBxJzi',3),(5,'admin2','admin@2.com1','aaa','aa','111','Male','$2b$10$rjXX0QgXMdropsmwnkSGo.KOMKRoIeaHI.uNdFoK5Y3dj1KuWhMcu',3);
+/*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-23 18:50:15
+-- Dump completed on 2021-03-02 19:48:14

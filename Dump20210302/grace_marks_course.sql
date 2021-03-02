@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: grace_marks
+-- Host: localhost    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -16,32 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `administrator`
+-- Table structure for table `course`
 --
 
-DROP TABLE IF EXISTS `administrator`;
+DROP TABLE IF EXISTS `course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `administrator` (
-  `adminID` int NOT NULL,
-  `Name` varchar(45) NOT NULL,
-  `EmailID` varchar(45) NOT NULL,
-  `PhoneNum` varchar(10) NOT NULL,
-  `Address` varchar(300) DEFAULT 'Null',
-  `DOB` date NOT NULL,
-  `Gender` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL,
-  PRIMARY KEY (`adminID`)
+CREATE TABLE `course` (
+  `CourseID` varchar(45) NOT NULL,
+  `CourseName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`CourseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `administrator`
+-- Dumping data for table `course`
 --
 
-LOCK TABLES `administrator` WRITE;
-/*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
-/*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
+LOCK TABLES `course` WRITE;
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES ('15CSE201','Data Structures and Algorithms'),('15CSE213','Operating Systems'),('15CSE302','DBMS'),('15CSE311','Compiler Design'),('15CSE312','Computer Networks'),('15CSE313','Software Engineering');
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-23 18:50:16
+-- Dump completed on 2021-03-02 19:48:14

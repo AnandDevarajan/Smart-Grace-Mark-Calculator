@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: grace_marks
+-- Host: localhost    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -28,13 +28,18 @@ CREATE TABLE `student` (
   `EmailID` varchar(45) NOT NULL,
   `PhoneNum` varchar(10) NOT NULL,
   `Address` varchar(300) DEFAULT NULL,
-  `DOB` date NOT NULL,
+  `DOB` varchar(10) NOT NULL,
   `Gender` varchar(10) NOT NULL,
   `Branch` varchar(45) NOT NULL,
+  `Batch` varchar(45) NOT NULL,
   `Degree` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL,
+  `Password` varchar(300) NOT NULL,
+  `role` int NOT NULL DEFAULT '1',
+  `Requested` varchar(45) NOT NULL DEFAULT 'N/A',
+  `GraceDesc` varchar(45) NOT NULL DEFAULT 'N/A',
   PRIMARY KEY (`RollNum`),
-  UNIQUE KEY `RollNum_UNIQUE` (`RollNum`)
+  UNIQUE KEY `RollNum_UNIQUE` (`RollNum`),
+  UNIQUE KEY `EmailID_UNIQUE` (`EmailID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -44,6 +49,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES ('1234','Abc','abc@123.com','1234567890','eArTh','12/23/12','','CSE','','BTech','$2b$10$28dhc6ii84jKajtmwLxQNO75g/ARfOXt23vXcdn0rYTLmdMp9HTbW',1,'N/A','N/A'),('207','Anand','anand@207.com','1111111111','sadsadsdadsa addas','11/11/11','','CSE','C','BTech','$2b$10$VGRQJveCynTfWHX9aZR/A.NGMuy592AV/QtG8NTMfYx1cHppUmWxq',1,'N/A','N/A'),('CB.EN.U4CSE18207','Anand Devarajan','anand@123.com','9207251675','Earth,Solar System','777711171','','CSE','','BTech','$2b$10$JQOQ0HNDZ3Siv235xC46SOZwPjiNUaX8.LtrmJ/.hZPKs8yzIXAPm',1,'pending','NSS'),('das12223','adsads','asddsa@22.com','1111111111','sdasd ads','111111','Female','CSE','A','BTech','$2b$10$1umV/LJViml.hfti/3yUXOjuocJP27R13HmFTvJknIu1/y91Ctxj2',1,'N/A','N/A'),('dsa','asddas','asd@123.com','sad','sda','das','','CSE','','BTech','$2b$10$R2wzNxp0QdKfDGSQQXZz1e7YyaelIlyPFOlxTmvu/76.ZsaiI5U96',1,'N/A','N/A'),('dsads','asdbksjand','asddsa@123.com','123456789','sdsad','12/21/22','','CSE','','BTech','$2b$10$nPwjdYhnqujAz00oYCrFTOdM03FZY0wnK6MrkXHzbafPvNx7BQLYi',1,'N/A','N/A'),('sadsaddas','dsa','ads@1233.com','saddsa','adsdsa','asddsa','','CSE','','BTech','$2b$10$Msx9HCUeonjO5iL1nFYizuWot.xY/WnoY5RlQL9CkS3wE2upZXywW',1,'N/A','N/A');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-23 18:50:16
+-- Dump completed on 2021-03-02 19:48:14

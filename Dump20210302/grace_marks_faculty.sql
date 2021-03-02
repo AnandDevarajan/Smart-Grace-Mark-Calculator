@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: grace_marks
+-- Host: localhost    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -28,16 +28,20 @@ CREATE TABLE `faculty` (
   `EmailID` varchar(45) NOT NULL,
   `PhoneNum` varchar(10) NOT NULL,
   `Address` varchar(300) DEFAULT NULL,
-  `DOB` date NOT NULL,
+  `DOB` varchar(20) NOT NULL,
   `Gender` varchar(45) NOT NULL,
   `Department` varchar(45) NOT NULL,
   `CourseID` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL,
-  `ClassAdviser` varchar(3) DEFAULT 'No',
+  `Password` varchar(500) NOT NULL,
+  `ClassAdviser` varchar(10) NOT NULL,
+  `Batch` varchar(45) NOT NULL DEFAULT 'N/A',
+  `role` int NOT NULL DEFAULT '2',
   PRIMARY KEY (`FacultyID`),
+  UNIQUE KEY `FacultyID_UNIQUE` (`FacultyID`),
+  UNIQUE KEY `EmailID_UNIQUE` (`EmailID`),
   KEY `CID_idx` (`CourseID`),
   CONSTRAINT `CID` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +50,7 @@ CREATE TABLE `faculty` (
 
 LOCK TABLES `faculty` WRITE;
 /*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
+INSERT INTO `faculty` VALUES (6,'dsa','ads@123','1','1','1','Male','CSE','15CSE213','$2b$10$QruKp1UF2cETey8udjp9tOreFaDPcwqs55kqKsU8JkeU4iAkeisvy','Yes','B',2),(7,'faculty2','faculty2@123.com','1111111111','111','11111','Male','CSE','15CSE312','$2b$10$4IJIGR3IDp3z9XWZAHW.l.exwREEHcBLwHluvYI5XGWqacPTnTiGi','No','N/A',2),(8,'faculty1','faculty@1.com','9207251675','Earth','12/12/21','male','CSE','15CSE302','$2b$10$0UAQtESyIUOfQgcgcZz7a.Tcobje/9bKSQ1c4lo5D90BUNET150nK','No','N/A',2);
 /*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-23 18:50:16
+-- Dump completed on 2021-03-02 19:48:14
