@@ -33,12 +33,7 @@ CREATE TABLE `course` (
 -- Dumping data for table `course`
 --
 
-LOCK TABLES `course` WRITE;
-/*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES ('15CSE201','Data Structures and Algorithms'),('15CSE213','Operating Systems'),('15CSE302','DBMS'),('15CSE311','Compiler Design'),('15CSE312','Computer Networks'),('15CSE313','Software Engineering');
-/*!40000 ALTER TABLE `course` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

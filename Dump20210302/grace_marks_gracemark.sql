@@ -35,13 +35,6 @@ CREATE TABLE `gracemark` (
 -- Dumping data for table `gracemark`
 --
 
-LOCK TABLES `gracemark` WRITE;
-/*!40000 ALTER TABLE `gracemark` DISABLE KEYS */;
-INSERT INTO `gracemark` VALUES (40,'NSS','20'),(41,'Sports','100'),(45,'NSS1','2'),(46,'sad','2wq'),(49,'REw','sda'),(53,'q','s'),(56,'NSS100','w'),(57,'NSS500','FDS'),(58,'7','3'),(60,'23e','ds'),(61,'dsa','cxz'),(62,'szx','czsx'),(66,'23sdw','dsczx'),(67,'sac','cxz'),(75,'5yr','ry'),(76,'bb','cc'),(79,'ewads','ads'),(80,'dsaadscxz','xcz'),(83,'cxzcx','zcx'),(85,'GSDSF','SAD'),(88,'ra','sd'),(89,'SADSA','ASDSAD'),(90,'ASDDSA','ADSDAS'),(94,'2eaw','sad'),(95,'',''),(98,'GTT','ASDS'),(101,'SA','ADS'),(105,'RR','d'),(107,'bbxc','xczcz'),(108,'CZXCZ','CZXCZ'),(109,'SCZXXZC','ZASASD'),(112,'trtterw','ewrerer'),(114,'sczxczxc','weawea'),(115,'DSASCZX','ZXCZCX'),(118,'DSHDAKADIW','22ESQAWDSX'),(120,'GASDSADC','ZCZ'),(121,'kasdlksa','adxczc');
-/*!40000 ALTER TABLE `gracemark` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

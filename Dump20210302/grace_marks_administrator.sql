@@ -41,12 +41,6 @@ CREATE TABLE `administrator` (
 -- Dumping data for table `administrator`
 --
 
-LOCK TABLES `administrator` WRITE;
-/*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
-INSERT INTO `administrator` VALUES (1,'Admin','admin@123.com','9207251675','Earth','12/12/21','male','$2b$10$wHG9TYXNXOWz.kU3Obi78OrlV3VRe3T.TmWljtCYerShEnbikQwJW',3),(2,'Admin207','admin@207.com','1122223222','sdsa','12/21/21','','$2b$10$ynBGTagLNC6ZymGg8MSDMOXARpz7LAguFxys0YGF0kraCRTrBxJzi',3),(5,'admin2','admin@2.com1','aaa','aa','111','Male','$2b$10$rjXX0QgXMdropsmwnkSGo.KOMKRoIeaHI.uNdFoK5Y3dj1KuWhMcu',3);
-/*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

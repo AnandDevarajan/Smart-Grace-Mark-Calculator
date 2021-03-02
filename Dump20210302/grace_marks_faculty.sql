@@ -48,12 +48,7 @@ CREATE TABLE `faculty` (
 -- Dumping data for table `faculty`
 --
 
-LOCK TABLES `faculty` WRITE;
-/*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-INSERT INTO `faculty` VALUES (6,'dsa','ads@123','1','1','1','Male','CSE','15CSE213','$2b$10$QruKp1UF2cETey8udjp9tOreFaDPcwqs55kqKsU8JkeU4iAkeisvy','Yes','B',2),(7,'faculty2','faculty2@123.com','1111111111','111','11111','Male','CSE','15CSE312','$2b$10$4IJIGR3IDp3z9XWZAHW.l.exwREEHcBLwHluvYI5XGWqacPTnTiGi','No','N/A',2),(8,'faculty1','faculty@1.com','9207251675','Earth','12/12/21','male','CSE','15CSE302','$2b$10$0UAQtESyIUOfQgcgcZz7a.Tcobje/9bKSQ1c4lo5D90BUNET150nK','No','N/A',2);
-/*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

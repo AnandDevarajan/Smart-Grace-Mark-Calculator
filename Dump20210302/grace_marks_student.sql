@@ -47,12 +47,6 @@ CREATE TABLE `student` (
 -- Dumping data for table `student`
 --
 
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('1234','Abc','abc@123.com','1234567890','eArTh','12/23/12','','CSE','','BTech','$2b$10$28dhc6ii84jKajtmwLxQNO75g/ARfOXt23vXcdn0rYTLmdMp9HTbW',1,'N/A','N/A'),('207','Anand','anand@207.com','1111111111','sadsadsdadsa addas','11/11/11','','CSE','C','BTech','$2b$10$VGRQJveCynTfWHX9aZR/A.NGMuy592AV/QtG8NTMfYx1cHppUmWxq',1,'N/A','N/A'),('CB.EN.U4CSE18207','Anand Devarajan','anand@123.com','9207251675','Earth,Solar System','777711171','','CSE','','BTech','$2b$10$JQOQ0HNDZ3Siv235xC46SOZwPjiNUaX8.LtrmJ/.hZPKs8yzIXAPm',1,'pending','NSS'),('das12223','adsads','asddsa@22.com','1111111111','sdasd ads','111111','Female','CSE','A','BTech','$2b$10$1umV/LJViml.hfti/3yUXOjuocJP27R13HmFTvJknIu1/y91Ctxj2',1,'N/A','N/A'),('dsa','asddas','asd@123.com','sad','sda','das','','CSE','','BTech','$2b$10$R2wzNxp0QdKfDGSQQXZz1e7YyaelIlyPFOlxTmvu/76.ZsaiI5U96',1,'N/A','N/A'),('dsads','asdbksjand','asddsa@123.com','123456789','sdsad','12/21/22','','CSE','','BTech','$2b$10$nPwjdYhnqujAz00oYCrFTOdM03FZY0wnK6MrkXHzbafPvNx7BQLYi',1,'N/A','N/A'),('sadsaddas','dsa','ads@1233.com','saddsa','adsdsa','asddsa','','CSE','','BTech','$2b$10$Msx9HCUeonjO5iL1nFYizuWot.xY/WnoY5RlQL9CkS3wE2upZXywW',1,'N/A','N/A');
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
