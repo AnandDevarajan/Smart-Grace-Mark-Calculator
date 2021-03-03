@@ -158,14 +158,14 @@ exports.acceptRequest = (req, res) => {
         });
       }
       if (result) {
-        con.query(`SELECT * FROM STUDENT'`, (err, result1) => {
-          if (err || result1.length === 0) {
+        con.query(`SELECT * FROM STUDENT'`, (err, result) => {
+          if (err || result.length === 0) {
             return res.status(400).json({
               message: 'No students found',
             });
           }
           return res.json({
-            students: result1,
+            students: result,
           });
         });
       }

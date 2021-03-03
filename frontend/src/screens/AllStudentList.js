@@ -3,7 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
-import { listStudents } from '../actions/studentAction';
+import { listStudents, requestAccept } from '../actions/studentAction';
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -22,9 +22,11 @@ const AllStudentList = ({ history }) => {
     } else {
       history.push('/');
     }
-  }, [dispatch, history, adminInfo, students]);
-  
+  }, [dispatch, history, adminInfo]);
 
+  // const acceptHandler = (id) => {
+  //   dispatch(requestAccept(id));
+  // };
 
   return (
     <div className='ml-5'>
@@ -78,7 +80,7 @@ const AllStudentList = ({ history }) => {
                   <td>
                     <CheckIcon
                       style={{ color: 'green' }}
-                      onClick={() => acceptHandler(student.RollNum)}
+                      // onClick={() => acceptHandler(student.RollNum)}
                     />
                   </td>
                 )}

@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { verifyAdmin, admin } = require('../middlewares/auth');
-const {
-  registerAdmin,
-  authAdmin,
-  acceptRequest,
-} = require('../controllers/admin');
-const { getAllStudents } = require('../controllers/student');
+const { registerAdmin, authAdmin } = require('../controllers/admin');
+const { getAllStudents, acceptRequest } = require('../controllers/student');
 const { getAllFaculties } = require('../controllers/faculty');
 
 router.post('/', registerAdmin);

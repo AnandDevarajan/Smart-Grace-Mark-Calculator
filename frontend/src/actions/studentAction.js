@@ -12,6 +12,9 @@ import {
   REQUEST_ADD_FAIL,
   REQUEST_ADD_SUCCESS,
   REQUEST_ADD_REQUEST,
+  REQUEST_ACCEPT_REQUEST,
+  REQUEST_ACCEPT_SUCCESS,
+  REQUEST_ACCEPT_FAIL,
 } from '../constants/studentConstant';
 import axios from 'axios';
 
@@ -189,3 +192,38 @@ export const studentRequest = (request) => async (dispatch, getState) => {
     });
   }
 };
+
+// export const requestAccept = (id) => async (dispatch, getState) => {
+//   try {
+//     dispatch({
+//       type: REQUEST_ACCEPT_REQUEST,
+//     });
+
+//     const {
+//       adminSignin: { adminInfo },
+//     } = getState();
+
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${adminInfo.token}`,
+//       },
+//     };
+//     const { data } = await axios.put(
+//       `/admin/student/request/accept/${id}`,
+//       config
+//     );
+
+//     dispatch({
+//       type: REQUEST_ACCEPT_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: REQUEST_ACCEPT_FAIL,
+//       payload: 
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
