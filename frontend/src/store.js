@@ -44,7 +44,7 @@ const reducer = combineReducers({
   gracemarkCreate: gracemarkCreateReducer,
   gracemarkList: gracemarkListReducer,
   gracemarkUpdate: gracemarkUpdateReducer,
-  gracemarkDetail:gracemarkDetailsReducer,
+  gracemarkDetails: gracemarkDetailsReducer,
   gracemarkDelete: gracemarkDeleteReducer,
   courseList: courseListReducer,
 });

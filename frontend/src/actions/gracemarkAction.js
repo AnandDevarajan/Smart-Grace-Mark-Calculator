@@ -82,14 +82,17 @@ export const listGracemarks = () => async (dispatch) => {
   }
 };
 
-export const getGracemarkDetails = (id) => async (dispatch, getState) => {
+export const getGracemarkDetails = (gracemarkId) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch({
       type: GRACEMARK_DETAILS_REQUEST,
     });
 
     const {
-      adminLogin: { adminInfo },
+      adminSignin: { adminInfo },
     } = getState();
 
     const config = {
@@ -98,7 +101,7 @@ export const getGracemarkDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/gracemark/${id}`, config);
+    const { data } = await axios.get(`/gracemark/${gracemarkId}`, config);
 
     dispatch({
       type: GRACEMARK_DETAILS_SUCCESS,
@@ -133,7 +136,7 @@ export const updateGracemark = (gracemark) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/gracemark/${gracemark.GraceMarkID}`,
+      `/gracemark/${gracemark.id}`,
       gracemark,
       config
     );

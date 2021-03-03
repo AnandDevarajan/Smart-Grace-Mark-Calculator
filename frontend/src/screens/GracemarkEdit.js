@@ -18,7 +18,7 @@ const GracemarkEdit = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const gracemarkDetails = useSelector((state) => state.gracemarkDetails);
-  const { loading, error, gracemark } = gracemarkDetails;
+  const { error, gracemark } = gracemarkDetails;
 
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
@@ -44,7 +44,7 @@ const GracemarkEdit = ({ match, history }) => {
         history.push('/admin/login');
       }
     }
-  }, [gracemarkId, dispatch, gracemark, history, adminInfo, successUpdate]);
+  }, [gracemarkId, gracemark, history, adminInfo, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();

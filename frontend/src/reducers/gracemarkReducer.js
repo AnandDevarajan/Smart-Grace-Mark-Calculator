@@ -55,24 +55,11 @@ export const gracemarkDetailsReducer = (state = { gracemark: {} }, action) => {
     case GRACEMARK_DETAILS_REQUEST:
       return { ...state, loading: true };
     case GRACEMARK_DETAILS_SUCCESS:
-      return { loading: false, gracemark: action.payload };
+      return { loading: false, gracemark: action.payload.gracemark };
     case GRACEMARK_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     case GRACEMARK_DETAILS_RESET:
       return { gracemark: {} };
-    default:
-      return state;
-  }
-};
-
-export const gracemarkDeleteReducer = (state = {}, action) => {
-  switch (action.type) {
-    case GRACEMARK_DELETE_REQUEST:
-      return { loading: true };
-    case GRACEMARK_DELETE_SUCCESS:
-      return { loading: false, success: true };
-    case GRACEMARK_DELETE_FAIL:
-      return { loading: false, error: action.payload };
     default:
       return state;
   }
@@ -90,6 +77,19 @@ export const gracemarkUpdateReducer = (state = { gracemark: {} }, action) => {
       return {
         gracemark: {},
       };
+    default:
+      return state;
+  }
+};
+
+export const gracemarkDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GRACEMARK_DELETE_REQUEST:
+      return { loading: true };
+    case GRACEMARK_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case GRACEMARK_DELETE_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

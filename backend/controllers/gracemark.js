@@ -44,3 +44,54 @@ exports.getAllGraceMarks = (req, res) => {
     });
   });
 };
+
+exports.getGraceMarkDetails = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM GRACEMARK WHERE GraceMarkID=?`,
+    [id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(400).json({
+          message: 'No Gracemark Found',
+        });
+      }
+      return res.json({
+        gracemark: result[0],
+      });
+    }
+  );
+};
+
+exports.updateGraceMarkDetails = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM GRACEMARK WHERE GraceMarkID=?`,
+    [id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(400).json({
+          message: 'No Gracemark Found',
+        });
+      }
+      if (result) {
+        result[0].Description = req.body.description || result[0].Description;
+        result[0].GraceMark = req.body.marks || result[0].GraceMark;
+        con.query(
+          `UPDATE GRACEMARK SET Description=?,GraceMark=? WHERE GraceMarkID=?`,
+          [result[0].Description, result[0].GraceMark, id],
+          (err, result) => {
+            if (err || result.length === 0) {
+              return res.status(400).json({
+                message: 'Failed to update',
+              });
+            }
+            return res.json({
+              gracemark: result,
+            });
+          }
+        );
+      }
+    }
+  );
+};
