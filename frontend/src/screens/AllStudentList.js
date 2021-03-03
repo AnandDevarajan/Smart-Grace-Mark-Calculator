@@ -3,7 +3,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
-import { listStudents, requestAccept } from '../actions/studentAction';
+import {
+  listStudents,
+  requestAccept,
+  requestReject,
+} from '../actions/studentAction';
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -27,6 +31,11 @@ const AllStudentList = ({ history }) => {
 
   const acceptHandler = (id) => {
     dispatch(requestAccept(id));
+    dispatch(listStudents());
+  };
+
+  const rejectHandler = (id) => {
+    dispatch(requestReject(id));
     dispatch(listStudents());
   };
 
@@ -93,7 +102,11 @@ const AllStudentList = ({ history }) => {
                 )}
                 {student.Requested === 'pending' && (
                   <td>
-                    <ClearIcon className='icon' style={{ color: 'red' }} />
+                    <ClearIcon
+                      className='icon'
+                      style={{ color: 'red' }}
+                      onClick={() => rejectHandler(student.RollNum)}
+                    />
                   </td>
                 )}
               </tr>

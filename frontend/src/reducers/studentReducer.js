@@ -15,6 +15,9 @@ import {
   REQUEST_ACCEPT_REQUEST,
   REQUEST_ACCEPT_SUCCESS,
   REQUEST_ACCEPT_FAIL,
+  REQUEST_REJECT_SUCCESS,
+  REQUEST_REJECT_FAIL,
+  REQUEST_REJECT_REQUEST,
 } from '../constants/studentConstant';
 
 export const studentRegisterReducer = (state = {}, action) => {
@@ -81,6 +84,19 @@ export const requestAcceptReducer = (state = { students: [] }, action) => {
     case REQUEST_ACCEPT_SUCCESS:
       return { loading: false, students: action.payload.students };
     case REQUEST_ACCEPT_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const requestRejectReducer = (state = { students: [] }, action) => {
+  switch (action.type) {
+    case REQUEST_REJECT_REQUEST:
+      return { loading: true, students: [] };
+    case REQUEST_REJECT_SUCCESS:
+      return { loading: false, students: action.payload.students };
+    case REQUEST_REJECT_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

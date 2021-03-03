@@ -15,6 +15,9 @@ import {
   REQUEST_ACCEPT_REQUEST,
   REQUEST_ACCEPT_SUCCESS,
   REQUEST_ACCEPT_FAIL,
+  REQUEST_REJECT_SUCCESS,
+  REQUEST_REJECT_FAIL,
+  REQUEST_REJECT_REQUEST,
 } from '../constants/studentConstant';
 import axios from 'axios';
 
@@ -219,6 +222,40 @@ export const requestAccept = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: REQUEST_ACCEPT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const requestReject = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: REQUEST_REJECT_REQUEST,
+    });
+    const {
+      adminSignin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(
+      `/admin/student/request/reject/${id}`,
+      config
+    );
+    console.log(data);
+    dispatch({
+      type: REQUEST_REJECT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: REQUEST_REJECT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
