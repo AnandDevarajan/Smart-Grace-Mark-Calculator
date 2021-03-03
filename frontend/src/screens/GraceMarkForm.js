@@ -42,7 +42,7 @@ const GraceMarkForm = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/'>
+      <Link to='/admin/gracemarklist'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>

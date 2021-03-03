@@ -13,11 +13,7 @@ const AdminProfile = () => {
 
   return (
     <div>
-      <h3>
-        <Link className='my-3' to='/admin/addGraceMarkDetails'>
-          <Button variant='success'> Add Grace Mark Details</Button>
-        </Link>
-      </h3>
+      <h3>Welcome to ADMIN PROFILE</h3>
     </div>
   );
 };

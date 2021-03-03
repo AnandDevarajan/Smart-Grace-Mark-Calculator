@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { deleteGracemark, listGracemarks } from '../actions/gracemarkAction';
@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 const GracemarkList = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -33,12 +34,23 @@ const GracemarkList = ({ history }) => {
   };
   return (
     <div className='ml-5'>
-      <Link to='/'>
+      <Link to='/admin/profile'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      <h1>Grace Mark List</h1>
+      <Row className='align-items-center'>
+        <Col>
+          <h1>Grace Mark List</h1>
+        </Col>
+        <Col className='text-right'>
+          <Link to='/admin/addGraceMarkDetails'>
+            <Button>
+              <AddBoxIcon /> Create Grace Mark
+            </Button>
+          </Link>
+        </Col>
+      </Row>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
