@@ -26,19 +26,23 @@ const GracemarkEdit = ({ match, history }) => {
 
   const gracemarkUpdate = useSelector((state) => state.gracemarkUpdate);
   const { error: errorUpdate, success: successUpdate } = gracemarkUpdate;
-  
-  console.log(gracemark);
-  
+
+  console.log(gracemark.Description);
+  console.log(gracemark.GraceMark);
+
   useEffect(() => {
     if (successUpdate) {
       dispatch({
         type: GRACEMARK_UPDATE_RESET,
       });
+
       history.push('/admin/gracemarklist');
     } else {
       if (adminInfo) {
         if (!gracemark || gracemark.GraceMarkID !== gracemarkId) {
           dispatch(getGracemarkDetails(gracemarkId));
+          setDescription(gracemark.Description);
+          setMarks(gracemark.GraceMark);
         } else {
           setDescription(gracemark.Description);
           setMarks(gracemark.GraceMark);
@@ -47,11 +51,11 @@ const GracemarkEdit = ({ match, history }) => {
         history.push('/admin/login');
       }
     }
-  }, [gracemarkId, history, adminInfo, successUpdate]);
+  }, [gracemarkId, dispatch, history, adminInfo, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (description !== '' || marks !== '') {
+    if (description !== '' && marks !== '') {
       setMessage('');
       dispatch(updateGracemark({ id: gracemarkId, description, marks }));
     } else {
