@@ -54,7 +54,7 @@ const GraceMarkForm = ({ location, history }) => {
         {success && (
           <Message variant='success'>
             Grace Mark created successfully{' '}
-            <Link to='/admin/profile'> Go to profile</Link>
+            <Link to='/admin/gracemarklist'> Go to Gracemark List</Link>
           </Message>
         )}
         <Form onSubmit={submitHandler}>

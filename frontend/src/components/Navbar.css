@@ -33,7 +33,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 8px 0px 8px 16px;
+  padding: 8px 0px 8px 0px;
   list-style: none;
   height: 60px;
 }
@@ -111,4 +111,3 @@ span {
     height: 100px;
   }
 }
-
