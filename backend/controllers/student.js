@@ -147,6 +147,8 @@ exports.addRequest = (req, res) => {
 
 exports.acceptRequest = (req, res) => {
   let id = req.params.id;
+  console.log('Below me');
+  console.log('From front end', id);
   let Requested = 'accepted';
   con.query(
     `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,

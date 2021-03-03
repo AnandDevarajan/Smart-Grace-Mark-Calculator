@@ -38,9 +38,15 @@ const StudentProfile = () => {
         <Col md={4}>
           {' '}
           {studentInfo.result.Requested === 'pending' ? (
-            <Button className='btn btn-warning'>Pending</Button>
+            <Button className='btn btn-warning'>
+              Grace mark request Pending
+            </Button>
+          ) : studentInfo.result.Requested === 'accepted' ? (
+            <Button className='btn btn-success'>
+              Grace mark request Accepted
+            </Button>
           ) : (
-            <Link className='btn btn-success my-3' to='/student/request'>
+            <Link className='btn btn-info my-3' to='/student/request'>
               Request for Grace Mark
             </Link>
           )}

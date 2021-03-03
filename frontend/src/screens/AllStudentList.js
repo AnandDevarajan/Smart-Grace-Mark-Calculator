@@ -7,6 +7,7 @@ import { listStudents, requestAccept } from '../actions/studentAction';
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import './Home.css';
 const AllStudentList = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -24,9 +25,10 @@ const AllStudentList = ({ history }) => {
     }
   }, [dispatch, history, adminInfo]);
 
-  // const acceptHandler = (id) => {
-  //   dispatch(requestAccept(id));
-  // };
+  const acceptHandler = (id) => {
+    dispatch(requestAccept(id));
+    dispatch(listStudents());
+  };
 
   return (
     <div className='ml-5'>
@@ -65,11 +67,15 @@ const AllStudentList = ({ history }) => {
                   </td>
                 ) : student.Requested === 'accepted' ? (
                   <td>
-                    <Button variant='success'>Accepted</Button>
+                    <Button variant='success' className='btn btn-sm'>
+                      Accepted
+                    </Button>
                   </td>
                 ) : student.Requested === 'rejected' ? (
                   <td>
-                    <Button variant='warning'>Rejected</Button>
+                    <Button variant='danger' className='btn btn-sm'>
+                      Rejected
+                    </Button>
                   </td>
                 ) : (
                   <td>
@@ -79,14 +85,15 @@ const AllStudentList = ({ history }) => {
                 {student.Requested === 'pending' && (
                   <td>
                     <CheckIcon
+                      className='icon'
                       style={{ color: 'green' }}
-                      // onClick={() => acceptHandler(student.RollNum)}
+                      onClick={() => acceptHandler(student.RollNum)}
                     />
                   </td>
                 )}
                 {student.Requested === 'pending' && (
                   <td>
-                    <ClearIcon style={{ color: 'red' }} />
+                    <ClearIcon className='icon' style={{ color: 'red' }} />
                   </td>
                 )}
               </tr>

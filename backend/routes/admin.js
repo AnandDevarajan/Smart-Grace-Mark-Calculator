@@ -9,5 +9,5 @@ router.post('/', registerAdmin);
 router.post('/login', authAdmin);
 router.get('/students', verifyAdmin, admin, getAllStudents);
 router.get('/faculties', verifyAdmin, admin, getAllFaculties);
-router.put('/student/request/accept/:id', verifyAdmin, admin, acceptRequest);
+router.get('/student/request/accept/:id', verifyAdmin, admin, acceptRequest);
 module.exports = router;
