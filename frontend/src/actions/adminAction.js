@@ -8,6 +8,7 @@ import {
   ADMIN_LOGOUT,
 } from '../constants/adminConstant';
 
+import { GRACEMARK_DETAILS_RESET } from '../constants/gracemarkConstant';
 import axios from 'axios';
 
 export const adminLogin = (email, password) => async (dispatch) => {
@@ -101,6 +102,9 @@ export const adminLogout = () => (dispatch) => {
   localStorage.removeItem('adminInfo');
   dispatch({
     type: ADMIN_LOGOUT,
+  });
+  dispatch({
+    type: GRACEMARK_DETAILS_RESET,
   });
   document.location.href = '/';
 };

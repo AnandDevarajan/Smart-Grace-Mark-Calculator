@@ -9,13 +9,9 @@ import {
   updateGracemark,
 } from '../actions/gracemarkAction';
 import { GRACEMARK_UPDATE_RESET } from '../constants/gracemarkConstant';
-
+import axios from 'axios';
 const GracemarkEdit = ({ match, history }) => {
   const gracemarkId = match.params.id;
-  const [description, setDescription] = useState('');
-  const [marks, setMarks] = useState('');
-  const [message, setMessage] = useState(null);
-
   const dispatch = useDispatch();
 
   const gracemarkDetails = useSelector((state) => state.gracemarkDetails);
@@ -27,34 +23,37 @@ const GracemarkEdit = ({ match, history }) => {
   const gracemarkUpdate = useSelector((state) => state.gracemarkUpdate);
   const { error: errorUpdate, success: successUpdate } = gracemarkUpdate;
 
-  console.log(gracemark.Description);
-  console.log(gracemark.GraceMark);
+  const [description, setDescription] = useState('');
+  const [marks, setMarks] = useState('');
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     if (successUpdate) {
       dispatch({
         type: GRACEMARK_UPDATE_RESET,
       });
-
       history.push('/admin/gracemarklist');
     } else {
       if (adminInfo) {
-        if (!gracemark || gracemark.GraceMarkID !== gracemarkId) {
-          dispatch(getGracemarkDetails(gracemarkId));
-          setDescription(gracemark.Description);
-          setMarks(gracemark.GraceMark);
-        } else {
-          setDescription(gracemark.Description);
-          setMarks(gracemark.GraceMark);
-        }
+        axios
+          .get(`/gracemark/${gracemarkId}`)
+          .then((response) => {
+            console.log(response);
+            setDescription(response.data.gracemark.Description);
+            setMarks(response.data.gracemark.GraceMark);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         history.push('/admin/login');
       }
     }
-  }, [gracemarkId, dispatch, history, adminInfo, successUpdate]);
+  }, [successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     if (description !== '' && marks !== '') {
       setMessage('');
       dispatch(updateGracemark({ id: gracemarkId, description, marks }));
@@ -70,9 +69,10 @@ const GracemarkEdit = ({ match, history }) => {
       </Link>
 
       <FormContainer>
-        <h1>EDIT GRACE MARK ID:{gracemark.GraceMarkID}</h1>
+        <h1>EDIT GRACE MARK ID:{gracemarkId}</h1>
         {message && <Message variant='warning'>{message}</Message>}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+        {console.log('State', description)}
         {error ? (
           <Message variant='danger'>{error}</Message>
         ) : (
