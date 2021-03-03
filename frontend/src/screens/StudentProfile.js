@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -10,8 +10,11 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
+import axios from 'axios';
 
 const StudentProfile = ({ history }) => {
+  const [status, setStatus] = useState('');
+
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
 
@@ -19,7 +22,15 @@ const StudentProfile = ({ history }) => {
     if (!studentInfo) {
       history.push('/');
     }
-  }, [studentInfo]);
+    axios
+      .get(`/student/${studentInfo.result.RollNum}`)
+      .then((response) => {
+        setStatus(response.data.student.Requested);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className='ml-5'>
@@ -42,11 +53,11 @@ const StudentProfile = ({ history }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 {' '}
-                {studentInfo.result.Requested === 'pending' ? (
+                {status === 'pending' ? (
                   <Button className='btn btn-warning'>
                     Grace mark request Pending
                   </Button>
-                ) : studentInfo.result.Requested === 'accepted' ? (
+                ) : status === 'accepted' ? (
                   <Button className='btn btn-success'>
                     Grace mark request Accepted
                   </Button>

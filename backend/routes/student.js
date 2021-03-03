@@ -4,11 +4,13 @@ const {
   registerStudent,
   authStudent,
   addRequest,
+  getStudent,
 } = require('../controllers/student');
 const { verifyStudent } = require('../middlewares/auth');
 
 router.post('/', registerStudent);
 router.post('/login', authStudent);
+router.get('/:id', getStudent);
 router.put('/request/:id', verifyStudent, addRequest);
 
 module.exports = router;

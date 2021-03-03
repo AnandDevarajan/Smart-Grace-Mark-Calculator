@@ -105,6 +105,20 @@ exports.getAllStudents = (req, res) => {
   });
 };
 
+exports.getStudent = (req, res) => {
+  const id = req.params.id;
+  con.query(`SELECT * FROM STUDENT WHERE RollNum=?`, [id], (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No students found',
+      });
+    }
+    return res.json({
+      student: result[0],
+    });
+  });
+};
+
 exports.addRequest = (req, res) => {
   let id = req.params.id;
   const { request } = req.body;
