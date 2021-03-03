@@ -70,8 +70,13 @@ const AllStudentList = ({ history }) => {
                 <td>{student.GraceDesc}</td>
                 {student.Requested === 'pending' ? (
                   <td>
-                    <Button variant='warning'   className='btn btn-sm'
-                      style={{ width: '100px' }}>Pending</Button>
+                    <Button
+                      variant='warning'
+                      className='btn btn-sm'
+                      style={{ width: '100px' }}
+                    >
+                      Pending
+                    </Button>
                   </td>
                 ) : student.Requested === 'accepted' ? (
                   <td>
@@ -85,8 +90,13 @@ const AllStudentList = ({ history }) => {
                   </td>
                 ) : student.Requested === 'rejected' ? (
                   <td>
-                    <Button variant='danger'   className='btn btn-sm'
-                      style={{ width: '100px' }}>Rejected</Button>
+                    <Button
+                      variant='danger'
+                      className='btn btn-sm'
+                      style={{ width: '100px' }}
+                    >
+                      Rejected
+                    </Button>
                   </td>
                 ) : (
                   <td>

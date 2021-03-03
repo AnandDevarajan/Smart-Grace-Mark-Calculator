@@ -18,6 +18,7 @@ import GraceMarkForm from './screens/GraceMarkForm';
 import RequestForm from './screens/RequestForm';
 import GracemarkList from './screens/Gracemarklist';
 import GracemarkEdit from './screens/GracemarkEdit';
+import Footer from './components/Footer';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -29,32 +30,35 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Container>
-        {studentInfo ? (
-          <Route exact path='/' component={StudentProfile} />
-        ) : adminInfo ? (
-          <Route exact path='/' component={AdminProfile} />
-        ) : facultyInfo ? (
-          <Route exact path='/' component={FacultyProfile} />
-        ) : (
-          <Route exact path='/' component={Home} />
-        )}
-        <Route path='/admin/login' component={AdminLogin} />
-        <Route path='/admin/signup' component={AdminSignup} />
-        <Route path='/admin/profile' component={AdminProfile} />
-        <Route path='/admin/students' component={AllStudentList} />
-        <Route path='/admin/faculties' component={AllFacultyList} />
-        <Route path='/admin/addGraceMarkDetails' component={GraceMarkForm} />
-        <Route path='/admin/gracemarklist' component={GracemarkList} />
-        <Route path='/admin/gracemark/:id' component={GracemarkEdit} />
-        <Route path='/student/login' component={StudentLogin} />
-        <Route path='/student/signup' component={StudentSignup} />
-        <Route path='/student/profile' component={StudentProfile} />
-        <Route path='/student/request' component={RequestForm} />
-        <Route path='/faculty/login' component={FacultyLogin} />
-        <Route path='/faculty/signup' component={FacultySignup} />
-        <Route path='/faculty/profile' component={FacultyProfile} />
-      </Container>
+      <main className='py-3'>
+        <Container>
+          {studentInfo ? (
+            <Route exact path='/' component={StudentProfile} />
+          ) : adminInfo ? (
+            <Route exact path='/' component={AdminProfile} />
+          ) : facultyInfo ? (
+            <Route exact path='/' component={FacultyProfile} />
+          ) : (
+            <Route exact path='/' component={Home} />
+          )}
+          <Route path='/admin/login' component={AdminLogin} />
+          <Route path='/admin/signup' component={AdminSignup} />
+          <Route path='/admin/profile' component={AdminProfile} />
+          <Route path='/admin/students' component={AllStudentList} />
+          <Route path='/admin/faculties' component={AllFacultyList} />
+          <Route path='/admin/addGraceMarkDetails' component={GraceMarkForm} />
+          <Route path='/admin/gracemarklist' component={GracemarkList} />
+          <Route path='/admin/gracemark/:id' component={GracemarkEdit} />
+          <Route path='/student/login' component={StudentLogin} />
+          <Route path='/student/signup' component={StudentSignup} />
+          <Route path='/student/profile' component={StudentProfile} />
+          <Route path='/student/request' component={RequestForm} />
+          <Route path='/faculty/login' component={FacultyLogin} />
+          <Route path='/faculty/signup' component={FacultySignup} />
+          <Route path='/faculty/profile' component={FacultyProfile} />
+        </Container>
+      </main>
+      <Footer />
     </Router>
   );
 }

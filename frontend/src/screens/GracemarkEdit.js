@@ -14,6 +14,7 @@ const GracemarkEdit = ({ match, history }) => {
   const gracemarkId = match.params.id;
   const [description, setDescription] = useState('');
   const [marks, setMarks] = useState('');
+  const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -25,7 +26,9 @@ const GracemarkEdit = ({ match, history }) => {
 
   const gracemarkUpdate = useSelector((state) => state.gracemarkUpdate);
   const { error: errorUpdate, success: successUpdate } = gracemarkUpdate;
-
+  
+  console.log(gracemark);
+  
   useEffect(() => {
     if (successUpdate) {
       dispatch({
@@ -44,11 +47,16 @@ const GracemarkEdit = ({ match, history }) => {
         history.push('/admin/login');
       }
     }
-  }, [gracemarkId, gracemark, history, adminInfo, successUpdate]);
+  }, [gracemarkId, history, adminInfo, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateGracemark({ id: gracemarkId, description, marks }));
+    if (description !== '' || marks !== '') {
+      setMessage('');
+      dispatch(updateGracemark({ id: gracemarkId, description, marks }));
+    } else {
+      setMessage('Enter all details');
+    }
   };
 
   return (
@@ -58,7 +66,8 @@ const GracemarkEdit = ({ match, history }) => {
       </Link>
 
       <FormContainer>
-        <h1>EDIT GRACE MARK</h1>
+        <h1>EDIT GRACE MARK ID:{gracemark.GraceMarkID}</h1>
+        {message && <Message variant='warning'>{message}</Message>}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {error ? (
           <Message variant='danger'>{error}</Message>
