@@ -23,6 +23,9 @@ import {
 import {
   gracemarkCreateReducer,
   gracemarkListReducer,
+  gracemarkDeleteReducer,
+  gracemarkUpdateReducer,
+  gracemarkDetailsReducer,
 } from './reducers/gracemarkReducer';
 import { courseListReducer } from './reducers/courseReducer';
 
@@ -40,6 +43,9 @@ const reducer = combineReducers({
   facultyList: facultyListReducer,
   gracemarkCreate: gracemarkCreateReducer,
   gracemarkList: gracemarkListReducer,
+  gracemarkUpdate: gracemarkUpdateReducer,
+  gracemarkDetail:gracemarkDetailsReducer,
+  gracemarkDelete: gracemarkDeleteReducer,
   courseList: courseListReducer,
 });
 

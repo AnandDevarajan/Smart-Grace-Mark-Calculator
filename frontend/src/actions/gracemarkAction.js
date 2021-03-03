@@ -5,8 +5,18 @@ import {
   GRACEMARK_LIST_REQUEST,
   GRACEMARK_LIST_SUCCESS,
   GRACEMARK_LIST_FAIL,
+  GRACEMARK_DELETE_FAIL,
+  GRACEMARK_DELETE_SUCCESS,
+  GRACEMARK_DELETE_REQUEST,
+  GRACEMARK_UPDATE_FAIL,
+  GRACEMARK_UPDATE_REQUEST,
+  GRACEMARK_UPDATE_SUCCESS,
+  GRACEMARK_DETAILS_REQUEST,
+  GRACEMARK_DETAILS_SUCCESS,
+  GRACEMARK_DETAILS_FAIL,
 } from '../constants/gracemarkConstant';
 import axios from 'axios';
+
 export const createGracemark = (description, mark) => async (
   dispatch,
   getState
@@ -64,6 +74,112 @@ export const listGracemarks = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GRACEMARK_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getGracemarkDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GRACEMARK_DETAILS_REQUEST,
+    });
+
+    const {
+      adminLogin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/gracemark/${id}`, config);
+
+    dispatch({
+      type: GRACEMARK_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GRACEMARK_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateGracemark = (gracemark) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GRACEMARK_UPDATE_REQUEST,
+    });
+
+    const {
+      adminSignin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/gracemark/${gracemark.GraceMarkID}`,
+      gracemark,
+      config
+    );
+
+    dispatch({
+      type: GRACEMARK_UPDATE_SUCCESS,
+    });
+    dispatch({
+      type: GRACEMARK_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GRACEMARK_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteGracemark = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GRACEMARK_DELETE_REQUEST,
+    });
+
+    const {
+      adminSignin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/gracemark/${id}`, config);
+
+    dispatch({
+      type: GRACEMARK_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: GRACEMARK_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
