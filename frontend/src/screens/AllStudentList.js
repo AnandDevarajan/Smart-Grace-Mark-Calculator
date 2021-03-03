@@ -22,7 +22,9 @@ const AllStudentList = ({ history }) => {
     } else {
       history.push('/');
     }
-  }, [dispatch, history, adminInfo]);
+  }, [dispatch, history, adminInfo, students]);
+  
+
 
   return (
     <div className='ml-5'>
@@ -59,11 +61,11 @@ const AllStudentList = ({ history }) => {
                       Pending
                     </Button>
                   </td>
-                ) : student.Requested === 'Accepted' ? (
+                ) : student.Requested === 'accepted' ? (
                   <td>
                     <Button variant='success'>Accepted</Button>
                   </td>
-                ) : student.Requested === 'Rejected' ? (
+                ) : student.Requested === 'rejected' ? (
                   <td>
                     <Button variant='warning'>Rejected</Button>
                   </td>
@@ -74,7 +76,10 @@ const AllStudentList = ({ history }) => {
                 )}
                 {student.Requested === 'pending' && (
                   <td>
-                    <CheckIcon style={{ color: 'green' }} />
+                    <CheckIcon
+                      style={{ color: 'green' }}
+                      onClick={() => acceptHandler(student.RollNum)}
+                    />
                   </td>
                 )}
                 {student.Requested === 'pending' && (

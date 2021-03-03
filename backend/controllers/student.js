@@ -144,3 +144,31 @@ exports.addRequest = (req, res) => {
     });
   }
 };
+
+exports.acceptRequest = (req, res) => {
+  let id = req.params.id;
+  let Requested = 'accepted';
+  con.query(
+    `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,
+    [Requested, id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.json({
+          message: 'Unable to update request',
+        });
+      }
+      if (result) {
+        con.query(`SELECT * FROM STUDENT'`, (err, result1) => {
+          if (err || result1.length === 0) {
+            return res.status(400).json({
+              message: 'No students found',
+            });
+          }
+          return res.json({
+            students: result1,
+          });
+        });
+      }
+    }
+  );
+};
