@@ -4,13 +4,15 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { listStudents } from '../actions/studentAction';
-
+import { Link } from 'react-router-dom';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 const AllStudentList = ({ history }) => {
   const dispatch = useDispatch();
 
   const studentList = useSelector((state) => state.studentList);
   const { error, students } = studentList;
-  
+
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
 
@@ -23,7 +25,7 @@ const AllStudentList = ({ history }) => {
   }, [dispatch, history, adminInfo]);
 
   return (
-    <>
+    <div className='ml-5'>
       <h1>STUDENT LIST</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
@@ -36,6 +38,8 @@ const AllStudentList = ({ history }) => {
               <th>Email</th>
               <th>Branch</th>
               <th>Batch</th>
+              <th>Reason</th>
+              <th>Request</th>
             </tr>
           </thead>
           <tbody>
@@ -48,12 +52,42 @@ const AllStudentList = ({ history }) => {
                 </td>
                 <td>{student.Branch}</td>
                 <td>{student.Batch}</td>
+                <td>{student.GraceDesc}</td>
+                {student.Requested === 'pending' ? (
+                  <td>
+                    <Button variant='warning' className='btn btn-sm'>
+                      Pending
+                    </Button>
+                  </td>
+                ) : student.Requested === 'Accepted' ? (
+                  <td>
+                    <Button variant='success'>Accepted</Button>
+                  </td>
+                ) : student.Requested === 'Rejected' ? (
+                  <td>
+                    <Button variant='warning'>Rejected</Button>
+                  </td>
+                ) : (
+                  <td>
+                    <Link>N/A</Link>
+                  </td>
+                )}
+                {student.Requested === 'pending' && (
+                  <td>
+                    <CheckIcon style={{ color: 'green' }} />
+                  </td>
+                )}
+                {student.Requested === 'pending' && (
+                  <td>
+                    <ClearIcon style={{ color: 'red' }} />
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
         </Table>
       )}
-    </>
+    </div>
   );
 };
 
