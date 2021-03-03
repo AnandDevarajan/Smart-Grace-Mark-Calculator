@@ -5,6 +5,7 @@ const {
   getAllGraceMarks,
   getGraceMarkDetails,
   updateGraceMarkDetails,
+  deleteGraceMarkDetails
 } = require('../controllers/gracemark');
 const { verifyAdmin, admin } = require('../middlewares/auth');
 router.post('/', verifyAdmin, admin, createGraceMark);

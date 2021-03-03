@@ -95,3 +95,17 @@ exports.updateGraceMarkDetails = (req, res) => {
     }
   );
 };
+
+exports.deleteGraceMarkDetails = (req, res) => {
+  const id = req.params.id;
+  con.query(`DELETE  FROM GRACEMARK WHERE GraceMarkID=${id}`, (err, result) => {
+    if (err) {
+      return res.status(400).json({
+        message: 'Unable to delete',
+      });
+    }
+    return res.status(400).json({
+      messag: 'Successfully deleted',
+    });
+  });
+};

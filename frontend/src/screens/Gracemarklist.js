@@ -6,7 +6,8 @@ import Message from '../components/Message';
 import { deleteGracemark, listGracemarks } from '../actions/gracemarkAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-
+import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const GracemarkList = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -27,10 +28,16 @@ const GracemarkList = ({ history }) => {
   const deleteHandler = (id) => {
     if (window.confirm('Do you want to delete this Grace Mark ?')) {
       dispatch(deleteGracemark(id));
+      dispatch(listGracemarks());
     }
   };
   return (
     <div className='ml-5'>
+      <Link to='/'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
+      </Link>
       <h1>Grace Mark List</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
