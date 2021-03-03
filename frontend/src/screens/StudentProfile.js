@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -10,9 +10,17 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
-const StudentProfile = () => {
+
+const StudentProfile = ({ history }) => {
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
+
+  useEffect(() => {
+    if (!studentInfo) {
+      history.push('/');
+    }
+  }, [studentInfo]);
+
   return (
     <div>
       <h3>Welcome to Student Profile</h3>

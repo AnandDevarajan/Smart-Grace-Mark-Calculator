@@ -29,7 +29,7 @@ const RequestForm = ({ location, history }) => {
     } else {
       dispatch(listGracemarks());
     }
-  }, [history, studentInfo, redirect]);
+  }, [history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ const RequestForm = ({ location, history }) => {
     } else {
       setMessage('');
       dispatch(studentRequest(request));
-      history.push(redirect);
+      history.push('/student/profile');
     }
   };
 
