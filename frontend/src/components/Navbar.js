@@ -13,6 +13,7 @@ import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import BeenhereIcon from '@material-ui/icons/Beenhere';
 import './Navbar.css';
 
 function Navbar() {
@@ -84,7 +85,7 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                <CloseIcon style={{ color: 'white' }}/>
+                  <CloseIcon style={{ color: 'white' }} />
                 </Link>
               </li>
               <li className='nav-text'>
@@ -118,7 +119,7 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                <CloseIcon style={{ color: 'white' }}/>
+                  <CloseIcon style={{ color: 'white' }} />
                 </Link>
               </li>
               <li className='nav-text'>
@@ -140,6 +141,12 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
+                <Link to='/admin/gracemarklist'>
+                  <BeenhereIcon />
+                  <span>Grace Mark</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
                 <Link onClick={adminlogOutHandler}>
                   <ExitToAppIcon />
                   <span>Logout</span>
@@ -150,7 +157,7 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                <CloseIcon style={{ color: 'white' }}/>
+                  <CloseIcon style={{ color: 'white' }} />
                 </Link>
               </li>
               <li className='nav-text'>
