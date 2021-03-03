@@ -28,51 +28,50 @@ const GracemarkList = ({ history }) => {
     if (window.confirm('Do you want to delete this Grace Mark ?')) {
       dispatch(deleteGracemark(id));
     }
-
-    return (
-      <div className='ml-5'>
-        <h1>Grace Mark List</h1>
-        {error ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-          <Table striped bordered hover responsive className='table-sm'>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Description</th>
-                <th>Marks Alloted</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {gracemarks.map((gracemark) => (
-                <tr key={gracemark.GraceMarkID}>
-                  <td>{gracemark.GraceMarkID}</td>
-                  <td>{gracemark.Description}</td>
-                  <td>{gracemark.GraceMark}</td>
-                  <td>
-                    <LinkContainer
-                      to={`/admin/gracemark.${gracemark.GraceMarkID}`}
-                    >
-                      <EditIcon className='icon' style={{ color: 'black' }} />
-                    </LinkContainer>
-                  </td>
-                  <td>
-                    <DeleteIcon
-                      className='icon'
-                      style={{ color: '#f05454' }}
-                      onClick={() => deleteHandler(gracemark.GraceMarkID)}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </div>
-    );
   };
+  return (
+    <div className='ml-5'>
+      <h1>Grace Mark List</h1>
+      {error ? (
+        <Message variant='danger'>{error}</Message>
+      ) : (
+        <Table striped bordered hover responsive className='table-sm'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Description</th>
+              <th>Marks Alloted</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {gracemarks.map((gracemark) => (
+              <tr key={gracemark.GraceMarkID}>
+                <td>{gracemark.GraceMarkID}</td>
+                <td>{gracemark.Description}</td>
+                <td>{gracemark.GraceMark}</td>
+                <td>
+                  <LinkContainer
+                    to={`/admin/gracemark/${gracemark.GraceMarkID}`}
+                  >
+                    <EditIcon className='icon' style={{ color: 'black' }} />
+                  </LinkContainer>
+                </td>
+                <td>
+                  <DeleteIcon
+                    className='icon'
+                    style={{ color: '#f05454' }}
+                    onClick={() => deleteHandler(gracemark.GraceMarkID)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+    </div>
+  );
 };
 
 export default GracemarkList;
