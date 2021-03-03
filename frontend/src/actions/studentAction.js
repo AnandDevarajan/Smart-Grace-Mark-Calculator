@@ -157,7 +157,7 @@ export const listStudents = () => async (dispatch, getState) => {
   }
 };
 
-export const studentRequest = (request) => async (dispatch, getState) => {
+export const studentRequestGM = (request) => async (dispatch, getState) => {
   console.log(request);
   try {
     dispatch({

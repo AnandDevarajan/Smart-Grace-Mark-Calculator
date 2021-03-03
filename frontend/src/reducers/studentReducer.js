@@ -18,6 +18,7 @@ import {
   REQUEST_REJECT_SUCCESS,
   REQUEST_REJECT_FAIL,
   REQUEST_REJECT_REQUEST,
+  REQUEST_ADD_RESET,
 } from '../constants/studentConstant';
 
 export const studentRegisterReducer = (state = {}, action) => {
@@ -69,9 +70,11 @@ export const studentRequestReducer = (state = {}, action) => {
     case REQUEST_ADD_REQUEST:
       return { loading: true };
     case REQUEST_ADD_SUCCESS:
-      return { loading: false, studentInfo: action.payload };
+      return { loading: false, studentInfo: action.payload, success: true };
     case REQUEST_ADD_FAIL:
       return { loading: false, error: action.payload };
+    case REQUEST_ADD_RESET:
+      return {};
     default:
       return state;
   }

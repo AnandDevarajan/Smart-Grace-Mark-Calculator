@@ -22,7 +22,7 @@ const StudentProfile = ({ history }) => {
   }, [studentInfo]);
 
   return (
-    <div>
+    <div className='ml-5'>
       <h3>Welcome to Student Profile</h3>
       <Row>
         <Col md={4}>
@@ -40,25 +40,26 @@ const StudentProfile = ({ history }) => {
               <ListGroup.Item>
                 <h4>{studentInfo.result.Branch}</h4>
               </ListGroup.Item>
+              <ListGroup.Item>
+                {' '}
+                {studentInfo.result.Requested === 'pending' ? (
+                  <Button className='btn btn-warning'>
+                    Grace mark request Pending
+                  </Button>
+                ) : studentInfo.result.Requested === 'accepted' ? (
+                  <Button className='btn btn-success'>
+                    Grace mark request Accepted
+                  </Button>
+                ) : (
+                  <Link className='btn btn-info my-3' to='/student/request'>
+                    Request for Grace Mark
+                  </Link>
+                )}
+              </ListGroup.Item>
             </ListGroup>
           </Card>
         </Col>
-        <Col md={4}>
-          {' '}
-          {studentInfo.result.Requested === 'pending' ? (
-            <Button className='btn btn-warning'>
-              Grace mark request Pending
-            </Button>
-          ) : studentInfo.result.Requested === 'accepted' ? (
-            <Button className='btn btn-success'>
-              Grace mark request Accepted
-            </Button>
-          ) : (
-            <Link className='btn btn-info my-3' to='/student/request'>
-              Request for Grace Mark
-            </Link>
-          )}
-        </Col>
+        <Col md={4}></Col>
         <Col md={4}></Col>
       </Row>
     </div>

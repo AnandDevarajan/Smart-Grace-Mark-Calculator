@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import { listGracemarks } from '../actions/gracemarkAction';
-import { studentRequest } from '../actions/studentAction';
+import { studentRequestGM, studentLogin } from '../actions/studentAction';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 const RequestForm = ({ location, history }) => {
   const [request, setRequest] = useState('');
   const [message, setMessage] = useState(null);
@@ -19,17 +20,20 @@ const RequestForm = ({ location, history }) => {
   const gracemarkList = useSelector((state) => state.gracemarkList);
   const { gracemarks } = gracemarkList;
 
+  const studentRequest = useSelector((state) => state.studentRequest);
+  const { success, studentInfo: updatedStudent } = studentRequest;
+
   const redirect = location.search
     ? location.search.split('=')[1]
     : '/student/login';
 
   useEffect(() => {
-    if (!studentInfo) {
-      history.push(redirect);
+    if (success) {
+      history.push('/student/profile');
     } else {
       dispatch(listGracemarks());
     }
-  }, [history, redirect]);
+  }, [history, redirect, success, updatedStudent]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -37,7 +41,7 @@ const RequestForm = ({ location, history }) => {
       setMessage('Select an option');
     } else {
       setMessage('');
-      dispatch(studentRequest(request));
+      dispatch(studentRequestGM(request));
       history.push('/student/profile');
     }
   };
