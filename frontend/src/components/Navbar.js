@@ -125,7 +125,7 @@ function Navbar() {
               <li className='nav-text'>
                 <Link to='/admin/profile'>
                   <AccountCircleIcon />
-                  <span>Profile</span>
+                  <span>{adminInfo.result.Name}</span>
                 </Link>
               </li>
               <li className='nav-text'>

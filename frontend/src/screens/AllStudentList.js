@@ -40,7 +40,7 @@ const AllStudentList = ({ history }) => {
   };
 
   return (
-    <div className='ml-5'>
+    <div className='ml-5 align-items-center'>
       <h1>STUDENT LIST</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
