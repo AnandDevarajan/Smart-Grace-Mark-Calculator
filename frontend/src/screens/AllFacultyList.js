@@ -4,7 +4,8 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { listFaculties } from '../actions/facultyAction';
-
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 const AllFacultyList = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -53,7 +54,13 @@ const AllFacultyList = ({ history }) => {
                 <td>{faculty.PhoneNum}</td>
                 <td>{faculty.Department}</td>
                 <td>{faculty.CourseID}</td>
-                <td>{faculty.ClassAdviser}</td>
+                <td>
+                  {faculty.ClassAdviser === 'Yes' ? (
+                    <CheckIcon style={{ color: 'green' }} />
+                  ) : (
+                    <CloseIcon style={{ color: 'red' }} />
+                  )}
+                </td>
                 <td>{faculty.Batch}</td>
               </tr>
             ))}
