@@ -90,7 +90,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link>
+                <Link to='/faculty/profile'>
                   <AccountCircleIcon />
                   <span>Profile</span>
                 </Link>
@@ -108,7 +108,7 @@ function Navbar() {
                 </li>
               )}
               <li className='nav-text'>
-                <Link>
+                <Link to='/faculty/students'>
                   <PeopleIcon />
                   <span>Students</span>
                 </Link>

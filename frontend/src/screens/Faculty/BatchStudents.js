@@ -4,7 +4,6 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { listAdviserBatch } from '../../actions/facultyActions';
-import { listGracemarks } from '../../actions/gracemarkActions';
 import { Link } from 'react-router-dom';
 import '../Home.css';
 
