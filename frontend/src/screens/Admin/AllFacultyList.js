@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { listFaculties } from '../../actions/facultyActions';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const AllFacultyList = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -25,7 +27,12 @@ const AllFacultyList = ({ history }) => {
 
   console.log(faculties);
   return (
-    <>
+    <div className='ml-5 align-items-center'>
+      <Link to='/admin/profile'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
+      </Link>
       <h1>Faculty LIST</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
@@ -71,7 +78,7 @@ const AllFacultyList = ({ history }) => {
           </tbody>
         </Table>
       )}
-    </>
+    </div>
   );
 };
 

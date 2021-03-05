@@ -43,7 +43,7 @@ const BatchStudents = ({ history, match }) => {
               <th>Reason</th>
               <th>Status</th>
               <th>Grace</th>
-              <th>View</th>
+              <th>Performance</th>
             </tr>
           </thead>
           <tbody>
@@ -111,7 +111,7 @@ const BatchStudents = ({ history, match }) => {
                     )}
                     <td>
                       <Button variant='info' className='btn btn-sm'>
-                        Performance
+                        View
                       </Button>
                     </td>
                   </tr>

@@ -11,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
 const AllStudentList = ({ history }) => {
   const dispatch = useDispatch();
@@ -41,6 +42,11 @@ const AllStudentList = ({ history }) => {
 
   return (
     <div className='ml-5 align-items-center'>
+      <Link to='/admin/profile'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
+      </Link>
       <h1>STUDENT LIST</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
@@ -54,6 +60,7 @@ const AllStudentList = ({ history }) => {
               <th>Branch</th>
               <th>Batch</th>
               <th>Reason</th>
+              <th>Grace</th>
               <th>Request</th>
             </tr>
           </thead>
@@ -72,6 +79,11 @@ const AllStudentList = ({ history }) => {
                   <td>-</td>
                 ) : (
                   <td>{student.GraceDesc}</td>
+                )}
+                {student.Requested === 'accepted' ? (
+                  <td>{student.GraceMark}</td>
+                ) : (
+                  <td>-</td>
                 )}
 
                 {student.Requested === 'pending' ? (
@@ -109,6 +121,7 @@ const AllStudentList = ({ history }) => {
                     <Link>-</Link>
                   </td>
                 )}
+
                 {student.Requested === 'pending' && (
                   <td>
                     <CheckIcon
