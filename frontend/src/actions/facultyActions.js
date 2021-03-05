@@ -164,15 +164,16 @@ export const listAdviserBatch = (department, batch) => async (
 
     const config = {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${facultyInfo.token}`,
       },
     };
+    console.log('action', department, batch);
     const { data } = await axios.get(
       '/faculty/adviser/students',
       { department, batch },
       config
     );
-
     dispatch({
       type: ADVISER_BATCH_LIST_SUCCESS,
       payload: data,

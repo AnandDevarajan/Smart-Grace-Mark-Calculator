@@ -217,7 +217,7 @@ exports.rejectRequest = (req, res) => {
 
 exports.batchStudents = (req, res) => {
   const { department, batch } = req.body;
-  const id = req.params.id;
+  console.log('Hi', department, batch);
   con.query(
     `SELECT * FROM STUDENT WHERE Branch=? AND Batch=?`,
     [department, batch],
