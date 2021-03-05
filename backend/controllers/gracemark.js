@@ -66,7 +66,7 @@ exports.getGraceMarkDetails = (req, res) => {
 exports.updateGraceMarkDetails = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM GRACEMARK WHERE GraceMarkID=?`,
+    `SELECT * FROM GRACEMARK WHERE GraceMarkID=?;`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -78,8 +78,14 @@ exports.updateGraceMarkDetails = (req, res) => {
         result[0].Description = req.body.description || result[0].Description;
         result[0].GraceMark = req.body.marks || result[0].GraceMark;
         con.query(
-          `UPDATE GRACEMARK SET Description=?,GraceMark=? WHERE GraceMarkID=?`,
-          [result[0].Description, result[0].GraceMark, id],
+          `UPDATE GRACEMARK SET Description=?,GraceMark=? WHERE GraceMarkID=?;UPDATE STUDENT SET GraceDesc=?,GraceMark=?`,
+          [
+            result[0].Description,
+            result[0].GraceMark,
+            id,
+            result[0].Description,
+            result[0].GraceMark,
+          ],
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({
