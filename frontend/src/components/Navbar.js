@@ -98,7 +98,7 @@ function Navbar() {
               {facultyInfo.result.ClassAdviser === 'Yes' && (
                 <li className='nav-text'>
                   <Link
-                    to={`/faculty/adviser/${facultyInfo.result.Department}/${facultyInfo.result.Batch}`}
+                    to={`/faculty/adviser/students/${facultyInfo.result.Department}/${facultyInfo.result.Batch}`}
                   >
                     <ClassIcon />
                     <span>

@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import '../Home.css';
-const AllStudentList = ({ history, match }) => {
+const BatchStudents = ({ history, match }) => {
   const batch = match.params.id;
+  console.log(batch);
   const dispatch = useDispatch();
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
@@ -118,4 +119,4 @@ const AllStudentList = ({ history, match }) => {
   );
 };
 
-export default AllStudentList;
+export default BatchStudents;
