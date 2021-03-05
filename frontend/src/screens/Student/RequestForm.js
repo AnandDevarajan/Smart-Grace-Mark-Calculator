@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import FormContainer from '../components/FormContainer';
-import { listGracemarks } from '../actions/gracemarkActions';
-import { studentRequestGM, studentLogin } from '../actions/studentActions';
+import Message from '../../components/Message';
+import FormContainer from '../../components/FormContainer';
+import { listGracemarks } from '../../actions/gracemarkActions';
+import { studentRequestGM, studentLogin } from '../../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const RequestForm = ({ location, history }) => {

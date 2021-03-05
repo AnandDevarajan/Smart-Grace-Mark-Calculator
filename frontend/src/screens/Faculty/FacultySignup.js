@@ -2,51 +2,58 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import FormContainer from '../components/FormContainer';
-import { studentRegister } from '../actions/studentActions';
+import Message from '../../components/Message';
+import FormContainer from '../../components/FormContainer';
+import { facultyRegister } from '../../actions/facultyActions';
+import { listCourses } from '../../actions/courseActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const StudentSignup = ({ location, history }) => {
+const FacultySignup = ({ location, history }) => {
   const [name, setName] = useState('');
-  const [rollno, setRollNo] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [dob, setDob] = useState('');
   const [gender, setGender] = useState('select');
-  const [branch, setBranch] = useState('CSE');
-  const [batch, setBatch] = useState('[choose batch]');
-  const [degree, setDegree] = useState('BTech');
+  const [department, setDepartment] = useState('CSE');
+  const [courseId, setCourseId] = useState('');
+  const [adviser, setAdviser] = useState('[choose]');
+  const [batch, setBatch] = useState('N/A');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
 
-  const studentSignup = useSelector((state) => state.studentSignup);
-  const { error, studentInfo } = studentSignup;
+  const facultySignup = useSelector((state) => state.facultySignup);
+  const { error, facultyInfo } = facultySignup;
 
+  const courseList = useSelector((state) => state.courseList);
+  const { courses } = courseList;
   const redirect = location.search
     ? location.search.split('=')[1]
-    : '/student/profile';
+    : '/faculty/profile';
 
   useEffect(() => {
-    if (studentInfo) {
+    if (facultyInfo) {
       history.push(redirect);
+    } else {
+      dispatch(listCourses());
     }
-  }, [history, studentInfo, redirect]);
+  }, [history, facultyInfo, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (
       name === '' ||
-      rollno === '' ||
       phone === '' ||
       address === '' ||
       dob === '' ||
-      batch === '[choose batch]' ||
+      adviser === '[choose]' ||
+      department === '' ||
+      courseId === 'select' ||
       gender === 'select' ||
+      batch === '[choose batch]' ||
       email === '' ||
       password === '' ||
       confirmPassword === ''
@@ -58,15 +65,15 @@ const StudentSignup = ({ location, history }) => {
     } else {
       setMessage('');
       dispatch(
-        studentRegister(
+        facultyRegister(
           name,
           email,
           password,
-          rollno,
           dob,
-          branch,
+          adviser,
+          department,
+          courseId,
           batch,
-          degree,
           gender,
           phone,
           address
@@ -83,7 +90,7 @@ const StudentSignup = ({ location, history }) => {
         </Button>
       </Link>
       <FormContainer>
-        <h1>CREATE A STUDENT ACCOUNT</h1>
+        <h1>CREATE A FACULTY ACCOUNT</h1>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         <Form onSubmit={submitHandler}>
@@ -109,17 +116,7 @@ const StudentSignup = ({ location, history }) => {
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='rollno'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Roll Number
-            </Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter  Roll Number'
-              value={rollno}
-              onChange={(e) => setRollNo(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+
           <Form.Group controlId='password'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
               password
@@ -142,47 +139,69 @@ const StudentSignup = ({ location, history }) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='degree'>
+          <Form.Group controlId='department'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Degree
+              Department
             </Form.Label>
             <Form.Control
               as='select'
-              value={degree}
-              onChange={(e) => setDegree(e.target.value)}
-            >
-              <option>BTech</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId='branch'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Branch
-            </Form.Label>
-            <Form.Control
-              as='select'
-              value={branch}
-              onChange={(e) => setBranch(e.target.value)}
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
             >
               <option>CSE</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId='batch'>
+          <Form.Group controlId='courseId'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Select batch
+              Course
             </Form.Label>
             <Form.Control
               as='select'
-              value={batch}
-              onChange={(e) => setBatch(e.target.value)}
+              value={courseId}
+              onChange={(e) => setCourseId(e.target.value)}
             >
-              <option>[choose batch]</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-              <option>D</option>
-              <option>E</option>
+              <option>select</option>
+              {courses.map((course) => (
+                <option key={course.CourseID}>
+                  {course.CourseID} {course.CourseName}
+                </option>
+              ))}
             </Form.Control>
           </Form.Group>
+          <Form.Group controlId='adviser'>
+            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+              Class Adviser
+            </Form.Label>
+            <Form.Control
+              as='select'
+              value={adviser}
+              onChange={(e) => setAdviser(e.target.value)}
+            >
+              <option>[choose]</option>
+              <option>Yes</option>
+              <option>No</option>
+            </Form.Control>
+          </Form.Group>
+          {adviser === 'Yes' && (
+            <Form.Group controlId='batch'>
+              <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                Select batch
+              </Form.Label>
+              <Form.Control
+                as='select'
+                value={batch}
+                onChange={(e) => setBatch(e.target.value)}
+              >
+                <option>[choose batch]</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+                <option>E</option>
+              </Form.Control>
+            </Form.Group>
+          )}
+
           <Form.Group controlId='dob'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
               Date of Birth
@@ -240,8 +259,8 @@ const StudentSignup = ({ location, history }) => {
             <Link
               to={
                 redirect
-                  ? `/student/login?redirect=${redirect}`
-                  : '/student/login'
+                  ? `/faculty/login?redirect=${redirect}`
+                  : '/faculty/login'
               }
             >
               {' '}
@@ -254,4 +273,4 @@ const StudentSignup = ({ location, history }) => {
   );
 };
 
-export default StudentSignup;
+export default FacultySignup;

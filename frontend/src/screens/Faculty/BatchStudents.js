@@ -2,32 +2,35 @@ import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
+import Message from '../../components/Message';
 import {
   listStudents,
   requestAccept,
   requestReject,
-} from '../actions/studentActions';
+} from '../../actions/studentActions';
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import './Home.css';
-const AllStudentList = ({ history }) => {
+import '../Home.css';
+const AllStudentList = ({ history, match }) => {
   const dispatch = useDispatch();
+
+  const facultySignin = useSelector((state) => state.facultySignin);
+  const { facultyInfo } = facultySignin;
 
   const studentList = useSelector((state) => state.studentList);
   const { error, students } = studentList;
 
-  const adminSignin = useSelector((state) => state.adminSignin);
-  const { adminInfo } = adminSignin;
+  const batch = match.params.id;
+  const department = facultyInfo.result.Department;
 
   useEffect(() => {
-    if (adminInfo) {
+    if (facultyInfo) {
       dispatch(listStudents());
     } else {
       history.push('/');
     }
-  }, [dispatch, history, adminInfo]);
+  }, [dispatch, history, facultyInfo]);
 
   const acceptHandler = (id) => {
     dispatch(requestAccept(id));
@@ -41,7 +44,9 @@ const AllStudentList = ({ history }) => {
 
   return (
     <div className='ml-5 align-items-center'>
-      <h1>STUDENT LIST</h1>
+      <h1>
+        {department}-{batch}
+      </h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (

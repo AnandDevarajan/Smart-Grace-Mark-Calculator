@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Message from '../components/Message';
+import Message from '../../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import FormContainer from '../components/FormContainer';
-import { studentLogin } from '../actions/studentActions';
+import FormContainer from '../../components/FormContainer';
+import { studentLogin } from '../../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const StudentLogin = ({ location, history }) => {
   const [email, setEmail] = useState('');
@@ -32,7 +32,7 @@ const StudentLogin = ({ location, history }) => {
 
   return (
     <>
-        <Link to='/'>
+      <Link to='/'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>

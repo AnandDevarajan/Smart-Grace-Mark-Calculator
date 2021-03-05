@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Message from '../components/Message';
+import Message from '../../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import FormContainer from '../components/FormContainer';
-import { facultyLogin } from '../actions/facultyActions';
+import FormContainer from '../../components/FormContainer';
+import { facultyLogin } from '../../actions/facultyActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 const FacultyLogin = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +33,7 @@ const FacultyLogin = ({ location, history }) => {
 
   return (
     <>
-       <Link to='/'>
+      <Link to='/'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>

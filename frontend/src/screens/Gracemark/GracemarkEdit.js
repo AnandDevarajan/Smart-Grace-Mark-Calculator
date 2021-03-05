@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import FormContainer from '../components/FormContainer';
+import Message from '../../components/Message';
+import FormContainer from '../../components/FormContainer';
 import {
   getGracemarkDetails,
   updateGracemark,
-} from '../actions/gracemarkActions';
-import { GRACEMARK_UPDATE_RESET } from '../constants/gracemarkConstants';
+} from '../../actions/gracemarkActions';
+import { GRACEMARK_UPDATE_RESET } from '../../constants/gracemarkConstants';
 import axios from 'axios';
+
 const GracemarkEdit = ({ match, history }) => {
   const gracemarkId = match.params.id;
   const dispatch = useDispatch();

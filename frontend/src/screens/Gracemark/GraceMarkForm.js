@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Message from '../components/Message';
+import Message from '../../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import FormContainer from '../components/FormContainer';
-import { createGracemark } from '../actions/gracemarkActions';
+import FormContainer from '../../components/FormContainer';
+import { createGracemark } from '../../actions/gracemarkActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { GRACEMARK_CREATE_RESET } from '../constants/gracemarkConstants';
+import { GRACEMARK_CREATE_RESET } from '../../constants/gracemarkConstants';
 
 const GraceMarkForm = ({ location, history }) => {
   const [description, setDescription] = useState('');

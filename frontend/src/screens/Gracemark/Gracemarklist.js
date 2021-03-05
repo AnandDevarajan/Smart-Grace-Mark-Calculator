@@ -2,13 +2,17 @@ import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import { deleteGracemark, listGracemarks } from '../actions/gracemarkActions';
+import Message from '../../components/Message';
+import {
+  deleteGracemark,
+  listGracemarks,
+} from '../../actions/gracemarkActions';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+
 const GracemarkList = ({ history }) => {
   const dispatch = useDispatch();
 

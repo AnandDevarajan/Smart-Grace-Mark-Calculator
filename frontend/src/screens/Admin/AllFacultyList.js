@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import { listFaculties } from '../actions/facultyActions';
+import Message from '../../components/Message';
+import { listFaculties } from '../../actions/facultyActions';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 const AllFacultyList = ({ history }) => {
