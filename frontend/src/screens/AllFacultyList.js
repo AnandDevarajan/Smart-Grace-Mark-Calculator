@@ -61,7 +61,11 @@ const AllFacultyList = ({ history }) => {
                     <CloseIcon style={{ color: 'red' }} />
                   )}
                 </td>
-                <td>{faculty.Batch}</td>
+                {faculty.Batch !== 'N/A' ? (
+                  <td>{faculty.Batch}</td>
+                ) : (
+                  <td>-</td>
+                )}
               </tr>
             ))}
           </tbody>
