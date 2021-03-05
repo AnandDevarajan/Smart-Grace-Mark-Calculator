@@ -220,14 +220,18 @@ exports.rejectRequest = (req, res) => {
 
 exports.batchStudents = (req, res) => {
   const id = req.params.id;
-  con.query(`SELECT * FROM STUDENT WHERE Batch=?`, [id], (err, result) => {
-    if (result.length === 0 || err) {
-      return res.status(400).json({
-        message: 'No students found',
+  con.query(
+    `SELECT * FROM STUDENT WHERE Batch=?`,
+    [id],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: 'No students found',
+        });
+      }
+      return res.json({
+        students: result,
       });
     }
-    return res.json({
-      students: result,
-    });
-  });
+  );
 };

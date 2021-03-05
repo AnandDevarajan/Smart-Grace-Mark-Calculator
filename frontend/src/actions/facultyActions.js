@@ -165,7 +165,6 @@ export const listAdviserBatch = (batch) => async (dispatch, getState) => {
         Authorization: `Bearer ${facultyInfo.token}`,
       },
     };
-    console.log('inside action', batch);
     const { data } = await axios.get(
       `/faculty/adviser/students/${batch}`,
       config

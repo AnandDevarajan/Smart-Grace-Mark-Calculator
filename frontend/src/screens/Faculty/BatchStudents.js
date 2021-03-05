@@ -48,71 +48,76 @@ const BatchStudents = ({ history, match }) => {
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
-              <tr key={student.RollNum}>
-                <td>{student.RollNum}</td>
-                <td>{student.Name}</td>
-                <td>
-                  <a href={`mailto:${student.EmailID}`}>{student.EmailID}</a>
-                </td>
-                <td>{student.Branch}</td>
-                <td>{student.Batch}</td>
+            {students.map(
+              (student) =>
+                student.Branch === facultyInfo.result.Department && (
+                  <tr key={student.RollNum}>
+                    <td>{student.RollNum}</td>
+                    <td>{student.Name}</td>
+                    <td>
+                      <a href={`mailto:${student.EmailID}`}>
+                        {student.EmailID}
+                      </a>
+                    </td>
+                    <td>{student.Branch}</td>
+                    <td>{student.Batch}</td>
 
-                {student.GraceDesc === 'N/A' ? (
-                  <td>-</td>
-                ) : (
-                  <td>{student.GraceDesc}</td>
-                )}
+                    {student.GraceDesc === 'N/A' ? (
+                      <td>-</td>
+                    ) : (
+                      <td>{student.GraceDesc}</td>
+                    )}
 
-                {student.Requested === 'pending' ? (
-                  <td>
-                    <Button
-                      variant='warning'
-                      className='btn btn-sm'
-                      style={{ width: '100px' }}
-                    >
-                      Pending
-                    </Button>
-                  </td>
-                ) : student.Requested === 'accepted' ? (
-                  <td>
-                    <Button
-                      variant='success'
-                      className='btn btn-sm'
-                      style={{ width: '100px' }}
-                    >
-                      Accepted
-                    </Button>
-                  </td>
-                ) : student.Requested === 'rejected' ? (
-                  <td>
-                    <Button
-                      variant='danger'
-                      className='btn btn-sm'
-                      style={{ width: '100px' }}
-                    >
-                      Rejected
-                    </Button>
-                  </td>
-                ) : (
-                  <td>
-                    <Link>-</Link>
-                  </td>
-                )}
-                {student.Requested === 'accepted' ? (
-                  <td>{student.GraceMark}</td>
-                ) : (
-                  <td>
-                    <Link>-</Link>
-                  </td>
-                )}
-                <td>
-                  <Button variant='info' className='btn btn-sm'>
-                    Performance
-                  </Button>
-                </td>
-              </tr>
-            ))}
+                    {student.Requested === 'pending' ? (
+                      <td>
+                        <Button
+                          variant='warning'
+                          className='btn btn-sm'
+                          style={{ width: '100px' }}
+                        >
+                          Pending
+                        </Button>
+                      </td>
+                    ) : student.Requested === 'accepted' ? (
+                      <td>
+                        <Button
+                          variant='success'
+                          className='btn btn-sm'
+                          style={{ width: '100px' }}
+                        >
+                          Accepted
+                        </Button>
+                      </td>
+                    ) : student.Requested === 'rejected' ? (
+                      <td>
+                        <Button
+                          variant='danger'
+                          className='btn btn-sm'
+                          style={{ width: '100px' }}
+                        >
+                          Rejected
+                        </Button>
+                      </td>
+                    ) : (
+                      <td>
+                        <Link>-</Link>
+                      </td>
+                    )}
+                    {student.Requested === 'accepted' ? (
+                      <td>{student.GraceMark}</td>
+                    ) : (
+                      <td>
+                        <Link>-</Link>
+                      </td>
+                    )}
+                    <td>
+                      <Button variant='info' className='btn btn-sm'>
+                        Performance
+                      </Button>
+                    </td>
+                  </tr>
+                )
+            )}
           </tbody>
         </Table>
       )}
