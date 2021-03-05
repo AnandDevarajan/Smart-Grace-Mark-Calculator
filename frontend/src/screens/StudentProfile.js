@@ -30,7 +30,7 @@ const StudentProfile = ({ history }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [status]);
 
   return (
     <div className='ml-5'>

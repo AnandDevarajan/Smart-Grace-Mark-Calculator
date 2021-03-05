@@ -8,7 +8,6 @@ import { studentRegister } from '../actions/studentAction';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const StudentSignup = ({ location, history }) => {
-  
   const [name, setName] = useState('');
   const [rollno, setRollNo] = useState('');
   const [email, setEmail] = useState('');
@@ -78,7 +77,7 @@ const StudentSignup = ({ location, history }) => {
 
   return (
     <>
-         <Link to='/'>
+      <Link to='/'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>

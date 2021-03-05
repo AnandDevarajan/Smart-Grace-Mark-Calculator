@@ -14,6 +14,7 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import BeenhereIcon from '@material-ui/icons/Beenhere';
+import ClassIcon from '@material-ui/icons/Class';
 import './Navbar.css';
 
 function Navbar() {
@@ -94,11 +95,11 @@ function Navbar() {
                   <span>Profile</span>
                 </Link>
               </li>
-              {facultyInfo.result.ClassAdviser === 'yes' && (
+              {facultyInfo.result.ClassAdviser === 'Yes' && (
                 <li className='nav-text'>
                   <Link>
-                    <PeopleIcon />
-                    <span>Class students</span>
+                    <ClassIcon />
+                    <span>{facultyInfo.result.Department}-{facultyInfo.result.Batch}</span>
                   </Link>
                 </li>
               )}
