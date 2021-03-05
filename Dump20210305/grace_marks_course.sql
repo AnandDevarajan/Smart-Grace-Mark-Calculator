@@ -16,41 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `faculty`
+-- Table structure for table `course`
 --
 
-DROP TABLE IF EXISTS `faculty`;
+DROP TABLE IF EXISTS `course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `faculty` (
-  `FacultyID` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(45) NOT NULL,
-  `EmailID` varchar(45) NOT NULL,
-  `PhoneNum` varchar(10) NOT NULL,
-  `Address` varchar(300) DEFAULT NULL,
-  `DOB` varchar(20) NOT NULL,
-  `Gender` varchar(45) NOT NULL,
-  `Department` varchar(45) NOT NULL,
+CREATE TABLE `course` (
   `CourseID` varchar(45) NOT NULL,
-  `Password` varchar(500) NOT NULL,
-  `ClassAdviser` varchar(10) NOT NULL,
-  `Batch` varchar(45) NOT NULL DEFAULT 'N/A',
-  `role` int NOT NULL DEFAULT '2',
-  PRIMARY KEY (`FacultyID`),
-  UNIQUE KEY `FacultyID_UNIQUE` (`FacultyID`),
-  UNIQUE KEY `EmailID_UNIQUE` (`EmailID`),
-  KEY `CID_idx` (`CourseID`),
-  CONSTRAINT `CID` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `CourseName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `faculty`
+-- Dumping data for table `course`
 --
 
-LOCK TABLES `faculty` WRITE;
-/*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-/*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
+LOCK TABLES `course` WRITE;
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES ('15CSE201','Data Structures and Algorithms'),('15CSE213','Operating Systems'),('15CSE302','DBMS'),('15CSE311','Compiler Design'),('15CSE312','Computer Networks'),('15CSE313','Software Engineering');
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -62,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-03 21:54:33
+-- Dump completed on 2021-03-05 23:28:52
