@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/db');
 const con = config.con;
-const asyncHandler = require('express-async-handler');
 
-exports.verifyStudent = asyncHandler(async (req, res, next) => {
+exports.verifyStudent = async (req, res, next) => {
   if (req.headers.authorization) {
     try {
       let token = req.headers.authorization.split(' ')[1];
@@ -27,9 +26,9 @@ exports.verifyStudent = asyncHandler(async (req, res, next) => {
       });
     }
   }
-});
+};
 
-exports.verifyFaculty = asyncHandler(async (req, res, next) => {
+exports.verifyFaculty = async (req, res, next) => {
   if (req.headers.authorization) {
     try {
       let token = req.headers.authorization.split(' ')[1];
@@ -53,9 +52,9 @@ exports.verifyFaculty = asyncHandler(async (req, res, next) => {
       });
     }
   }
-});
+};
 
-exports.verifyAdmin = asyncHandler(async (req, res, next) => {
+exports.verifyAdmin = async (req, res, next) => {
   if (req.headers.authorization) {
     try {
       let token = req.headers.authorization.split(' ')[1];
@@ -79,7 +78,7 @@ exports.verifyAdmin = asyncHandler(async (req, res, next) => {
       });
     }
   }
-});
+};
 
 exports.admin = (req, res, next) => {
   if (req.user && req.user.role === 3) {
@@ -87,6 +86,16 @@ exports.admin = (req, res, next) => {
   } else {
     res.status(401).json({
       message: 'Not authorized as an Admin',
+    });
+  }
+};
+
+exports.faculty = (req, res, next) => {
+  if (req.user && req.user.role === 2) {
+    next();
+  } else {
+    res.status(401).json({
+      message: 'Not authorized as an Faculty',
     });
   }
 };

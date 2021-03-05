@@ -214,3 +214,22 @@ exports.rejectRequest = (req, res) => {
     }
   );
 };
+
+exports.batchStudents = (req, res) => {
+  const { department, batch } = req.body;
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM STUDENT WHERE Branch=? AND Batch=?`,
+    [department, batch],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: 'No students found',
+        });
+      }
+      return res.json({
+        student: result,
+      });
+    }
+  );
+};

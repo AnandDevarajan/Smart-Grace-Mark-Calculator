@@ -18,6 +18,7 @@ import GraceMarkForm from './screens/GraceMarkForm';
 import RequestForm from './screens/RequestForm';
 import GracemarkList from './screens/Gracemarklist';
 import GracemarkEdit from './screens/GracemarkEdit';
+import BatchStudents from './screens/BatchStudents';
 import Footer from './components/Footer';
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />
+          <Route path='/faculty/adviser/:id/:id' component={BatchStudents} />
         </Container>
       </main>
       <Footer />

@@ -25,7 +25,7 @@ exports.authFaculty = (req, res) => {
         }
         return res.json({
           result: result[0],
-          token: generateToken(result[0].facultyID),
+          token: generateToken(result[0].FacultyID),
         });
       });
     }
@@ -86,7 +86,7 @@ exports.registerFaculty = (req, res) => {
               }
               res.json({
                 result: result[0],
-                token: generateToken(result[0].facultyID),
+                token: generateToken(result[0].FacultyID),
               });
             }
           );
