@@ -67,7 +67,13 @@ const AllStudentList = ({ history }) => {
                 </td>
                 <td>{student.Branch}</td>
                 <td>{student.Batch}</td>
-                <td>{student.GraceDesc}</td>
+
+                {student.GraceDesc === 'N/A' ? (
+                  <td>-</td>
+                ) : (
+                  <td>{student.GraceDesc}</td>
+                )}
+
                 {student.Requested === 'pending' ? (
                   <td>
                     <Button
@@ -100,7 +106,7 @@ const AllStudentList = ({ history }) => {
                   </td>
                 ) : (
                   <td>
-                    <Link>N/A</Link>
+                    <Link>-</Link>
                   </td>
                 )}
                 {student.Requested === 'pending' && (
