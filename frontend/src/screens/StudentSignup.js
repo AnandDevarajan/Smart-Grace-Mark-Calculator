@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { studentRegister } from '../actions/studentAction';
+import { studentRegister } from '../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const StudentSignup = ({ location, history }) => {

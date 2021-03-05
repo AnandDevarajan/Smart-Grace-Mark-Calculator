@@ -6,7 +6,7 @@ import {
   ADMIN_LOGIN_SUCCESS,
   ADMIN_LOGIN_FAIL,
   ADMIN_LOGOUT,
-} from '../constants/adminConstant';
+} from '../constants/adminConstants';
 
 export const adminRegisterReducer = (state = {}, action) => {
   switch (action.type) {

@@ -19,7 +19,7 @@ import {
   REQUEST_REJECT_FAIL,
   REQUEST_REJECT_REQUEST,
   REQUEST_ADD_RESET,
-} from '../constants/studentConstant';
+} from '../constants/studentConstants';
 
 export const studentRegisterReducer = (state = {}, action) => {
   switch (action.type) {

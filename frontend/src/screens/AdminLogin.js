@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-import { adminLogin } from '../actions/adminAction';
+import { adminLogin } from '../actions/adminActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const AdminLogin = ({ location, history }) => {

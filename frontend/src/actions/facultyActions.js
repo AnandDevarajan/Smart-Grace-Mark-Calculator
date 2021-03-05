@@ -9,7 +9,7 @@ import {
   FACULTY_LIST_REQUEST,
   FACULTY_LIST_SUCCESS,
   FACULTY_LIST_FAIL,
-} from '../constants/facultyConstant';
+} from '../constants/facultyConstants';
 
 import axios from 'axios';
 

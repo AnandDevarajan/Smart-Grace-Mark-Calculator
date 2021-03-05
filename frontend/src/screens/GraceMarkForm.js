@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-import { createGracemark } from '../actions/gracemarkAction';
+import { createGracemark } from '../actions/gracemarkActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { GRACEMARK_CREATE_RESET } from '../constants/gracemarkConstant';
+import { GRACEMARK_CREATE_RESET } from '../constants/gracemarkConstants';
 
 const GraceMarkForm = ({ location, history }) => {
   const [description, setDescription] = useState('');

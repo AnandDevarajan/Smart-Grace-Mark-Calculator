@@ -4,8 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { facultyRegister } from '../actions/facultyAction';
-import { listCourses } from '../actions/courseAction';
+import { facultyRegister } from '../actions/facultyActions';
+import { listCourses } from '../actions/courseActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const FacultySignup = ({ location, history }) => {
   const [name, setName] = useState('');

@@ -12,7 +12,7 @@ import {
   ADVISER_BATCH_LIST_REQUEST,
   ADVISER_BATCH_LIST_SUCCESS,
   ADVISER_BATCH_LIST_FAIL,
-} from '../constants/facultyConstant';
+} from '../constants/facultyConstants';
 
 export const facultyRegisterReducer = (state = {}, action) => {
   switch (action.type) {
@@ -37,22 +37,6 @@ export const facultyLoginReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case FACULTY_LOGOUT:
       return {};
-    default:
-      return state;
-  }
-};
-
-export const facultyListReducer = (state = { faculties: [] }, action) => {
-  switch (action.type) {
-    case FACULTY_LIST_REQUEST:
-      return { loading: true, faculties: [] };
-    case FACULTY_LIST_SUCCESS:
-      return {
-        loading: false,
-        faculties: action.payload.faculties,
-      };
-    case FACULTY_LIST_FAIL:
-      return { loading: false, error: action.payload };
     default:
       return state;
   }

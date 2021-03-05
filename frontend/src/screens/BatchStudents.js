@@ -7,13 +7,14 @@ import {
   listStudents,
   requestAccept,
   requestReject,
-} from '../actions/studentAction';
+} from '../actions/studentActions';
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import './Home.css';
 const AllStudentList = ({ history, match }) => {
   const dispatch = useDispatch();
+
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
 
@@ -43,7 +44,9 @@ const AllStudentList = ({ history, match }) => {
 
   return (
     <div className='ml-5 align-items-center'>
-      <h1>{}</h1>
+      <h1>
+        {department}-{batch}
+      </h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (

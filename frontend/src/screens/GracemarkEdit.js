@@ -7,8 +7,8 @@ import FormContainer from '../components/FormContainer';
 import {
   getGracemarkDetails,
   updateGracemark,
-} from '../actions/gracemarkAction';
-import { GRACEMARK_UPDATE_RESET } from '../constants/gracemarkConstant';
+} from '../actions/gracemarkActions';
+import { GRACEMARK_UPDATE_RESET } from '../constants/gracemarkConstants';
 import axios from 'axios';
 const GracemarkEdit = ({ match, history }) => {
   const gracemarkId = match.params.id;

@@ -17,7 +17,7 @@ import {
   GRACEMARK_DETAILS_SUCCESS,
   GRACEMARK_DETAILS_FAIL,
   GRACEMARK_DETAILS_RESET,
-} from '../constants/gracemarkConstant';
+} from '../constants/gracemarkConstants';
 
 export const gracemarkCreateReducer = (state = {}, action) => {
   switch (action.type) {

@@ -7,7 +7,7 @@ import {
   listStudents,
   requestAccept,
   requestReject,
-} from '../actions/studentAction';
+} from '../actions/studentActions';
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';

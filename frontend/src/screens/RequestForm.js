@@ -4,8 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { listGracemarks } from '../actions/gracemarkAction';
-import { studentRequestGM, studentLogin } from '../actions/studentAction';
+import { listGracemarks } from '../actions/gracemarkActions';
+import { studentRequestGM, studentLogin } from '../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const RequestForm = ({ location, history }) => {

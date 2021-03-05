@@ -2,7 +2,7 @@ import {
   COURSE_LIST_REQUEST,
   COURSE_LIST_SUCCESS,
   COURSE_LIST_FAIL,
-} from '../constants/courseConstant';
+} from '../constants/courseConstants';
 import axios from 'axios';
 
 export const listCourses = () => async (dispatch) => {

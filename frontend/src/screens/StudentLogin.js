@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-import { studentLogin } from '../actions/studentAction';
+import { studentLogin } from '../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const StudentLogin = ({ location, history }) => {
   const [email, setEmail] = useState('');

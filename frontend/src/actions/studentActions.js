@@ -18,7 +18,7 @@ import {
   REQUEST_REJECT_SUCCESS,
   REQUEST_REJECT_FAIL,
   REQUEST_REJECT_REQUEST,
-} from '../constants/studentConstant';
+} from '../constants/studentConstants';
 import axios from 'axios';
 
 export const studentLogin = (email, password) => async (dispatch) => {

@@ -14,7 +14,7 @@ import {
   GRACEMARK_DETAILS_REQUEST,
   GRACEMARK_DETAILS_SUCCESS,
   GRACEMARK_DETAILS_FAIL,
-} from '../constants/gracemarkConstant';
+} from '../constants/gracemarkConstants';
 import axios from 'axios';
 
 export const createGracemark = (description, mark) => async (
