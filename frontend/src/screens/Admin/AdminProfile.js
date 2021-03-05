@@ -12,7 +12,7 @@ const AdminProfile = () => {
   // }, []);
 
   return (
-    <div>
+    <div className='ml-5'>
       <h3>Welcome to ADMIN PROFILE</h3>
     </div>
   );

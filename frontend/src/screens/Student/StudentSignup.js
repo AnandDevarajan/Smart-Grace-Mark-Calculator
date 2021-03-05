@@ -51,10 +51,14 @@ const StudentSignup = ({ location, history }) => {
       password === '' ||
       confirmPassword === ''
     ) {
+      setMessage('');
       setMessage('Enter all the details');
     } else if (password !== confirmPassword) {
       setMessage('');
       setMessage('Passwords do not match');
+    } else if (phone.length != 10) {
+      setMessage('');
+      setMessage('Invalid phone number');
     } else {
       setMessage('');
       dispatch(
@@ -84,7 +88,7 @@ const StudentSignup = ({ location, history }) => {
       </Link>
       <FormContainer>
         <h1>CREATE A STUDENT ACCOUNT</h1>
-        {message && <Message variant='danger'>{message}</Message>}
+        {message && <Message variant='warning'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>

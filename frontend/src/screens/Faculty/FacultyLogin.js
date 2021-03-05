@@ -64,7 +64,11 @@ const FacultyLogin = ({ location, history }) => {
             Sign In
           </Button>
         </Form>
-        <Row className='py-3'></Row>
+        <Row className='py-3'>
+          <Col>
+            <Link to='/forgotpassword'>Forgot Password</Link>
+          </Col>
+        </Row>
       </FormContainer>
     </>
   );

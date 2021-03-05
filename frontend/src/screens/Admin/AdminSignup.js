@@ -44,10 +44,14 @@ const AdminSignup = ({ location, history }) => {
       password === '' ||
       confirmPassword === ''
     ) {
+      setMessage('');
       setMessage('Enter all the details');
     } else if (password !== confirmPassword) {
       setMessage('');
       setMessage('Passwords do not match');
+    } else if (phone.length != 10) {
+      setMessage('');
+      setMessage('Invalid phone number');
     } else {
       setMessage('');
       dispatch(
@@ -58,7 +62,7 @@ const AdminSignup = ({ location, history }) => {
 
   return (
     <>
-       <Link to='/'>
+      <Link to='/'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
