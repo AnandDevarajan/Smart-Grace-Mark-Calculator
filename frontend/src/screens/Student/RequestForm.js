@@ -78,7 +78,7 @@ const RequestForm = ({ location, history }) => {
                 <option>select</option>
                 {gracemarks.map((gracemark) => (
                   <option key={gracemark.GraceMarkID}>
-                    {gracemark.Description}
+                    {gracemark.Description} {gracemark.GraceMark}
                   </option>
                 ))}
               </Form.Control>

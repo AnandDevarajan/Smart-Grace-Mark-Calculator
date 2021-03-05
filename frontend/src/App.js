@@ -57,7 +57,7 @@ function App() {
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />
-          <Route path='/faculty/adviser/students/:id/:id' component={BatchStudents} />
+          <Route path='/faculty/adviser/students/:id' component={BatchStudents} />
         </Container>
       </main>
       <Footer />

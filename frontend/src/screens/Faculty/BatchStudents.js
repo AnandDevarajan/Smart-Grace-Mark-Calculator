@@ -4,13 +4,12 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { listAdviserBatch } from '../../actions/facultyActions';
+import { listGracemarks } from '../../actions/gracemarkActions';
 import { Link } from 'react-router-dom';
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
 import '../Home.css';
+
 const BatchStudents = ({ history, match }) => {
   const batch = match.params.id;
-  console.log(batch);
   const dispatch = useDispatch();
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
@@ -20,13 +19,11 @@ const BatchStudents = ({ history, match }) => {
 
   useEffect(() => {
     if (facultyInfo) {
-      let department = facultyInfo.result.Department;
-      dispatch(listAdviserBatch(department, batch));
+      dispatch(listAdviserBatch(batch));
     } else {
       history.push('/');
     }
   }, [dispatch, history, facultyInfo]);
-  console.log(students);
 
   return (
     <div className='ml-5 align-items-center'>
@@ -45,7 +42,9 @@ const BatchStudents = ({ history, match }) => {
               <th>Branch</th>
               <th>Batch</th>
               <th>Reason</th>
-              <th>Request</th>
+              <th>Status</th>
+              <th>Grace</th>
+              <th>View</th>
             </tr>
           </thead>
           <tbody>
@@ -100,16 +99,18 @@ const BatchStudents = ({ history, match }) => {
                     <Link>-</Link>
                   </td>
                 )}
-                {student.Requested === 'pending' && (
+                {student.Requested === 'accepted' ? (
+                  <td>{student.GraceMark}</td>
+                ) : (
                   <td>
-                    <CheckIcon className='icon' style={{ color: 'green' }} />
+                    <Link>-</Link>
                   </td>
                 )}
-                {student.Requested === 'pending' && (
-                  <td>
-                    <ClearIcon className='icon' style={{ color: 'red' }} />
-                  </td>
-                )}
+                <td>
+                  <Button variant='info' className='btn btn-sm'>
+                    Performance
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>

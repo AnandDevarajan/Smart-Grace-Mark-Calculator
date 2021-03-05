@@ -149,10 +149,7 @@ export const listFaculties = () => async (dispatch, getState) => {
   }
 };
 
-export const listAdviserBatch = (department, batch) => async (
-  dispatch,
-  getState
-) => {
+export const listAdviserBatch = (batch) => async (dispatch, getState) => {
   try {
     dispatch({
       type: ADVISER_BATCH_LIST_REQUEST,
@@ -168,10 +165,9 @@ export const listAdviserBatch = (department, batch) => async (
         Authorization: `Bearer ${facultyInfo.token}`,
       },
     };
-    console.log('inside action', department, batch);
+    console.log('inside action', batch);
     const { data } = await axios.get(
-      '/faculty/adviser/students',
-      { department, batch },
+      `/faculty/adviser/students/${batch}`,
       config
     );
     dispatch({

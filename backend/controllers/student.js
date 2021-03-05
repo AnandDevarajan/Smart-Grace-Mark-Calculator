@@ -122,12 +122,15 @@ exports.getStudent = (req, res) => {
 exports.addRequest = (req, res) => {
   let id = req.params.id;
   const { request } = req.body;
+  let length = request.length;
+  let desc = request.substring(0, length - 3);
+  let mark = request.substring(length - 2, length);
   console.log(request);
   if (request !== 'select' || request.length > 0) {
     let Requested = 'pending';
     con.query(
-      `UPDATE STUDENT SET Requested=?, GraceDesc=? WHERE RollNum=?`,
-      [Requested, request, id],
+      `UPDATE STUDENT SET Requested=?, GraceDesc=?,GraceMark=? WHERE RollNum=?`,
+      [Requested, desc, mark, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.json({
@@ -216,20 +219,15 @@ exports.rejectRequest = (req, res) => {
 };
 
 exports.batchStudents = (req, res) => {
-  const { department, batch } = req.body;
-  console.log('Hi', department, batch);
-  con.query(
-    `SELECT * FROM STUDENT WHERE Branch=? AND Batch=?`,
-    [department, batch],
-    (err, result) => {
-      if (result.length === 0 || err) {
-        return res.status(400).json({
-          message: 'No students found',
-        });
-      }
-      return res.json({
-        students: result,
+  const id = req.params.id;
+  con.query(`SELECT * FROM STUDENT WHERE Batch=?`, [id], (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No students found',
       });
     }
-  );
+    return res.json({
+      students: result,
+    });
+  });
 };
