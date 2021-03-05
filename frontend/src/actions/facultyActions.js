@@ -9,6 +9,9 @@ import {
   FACULTY_LIST_REQUEST,
   FACULTY_LIST_SUCCESS,
   FACULTY_LIST_FAIL,
+  ADVISER_BATCH_LIST_REQUEST,
+  ADVISER_BATCH_LIST_SUCCESS,
+  ADVISER_BATCH_LIST_FAIL,
 } from '../constants/facultyConstants';
 
 import axios from 'axios';
@@ -138,6 +141,45 @@ export const listFaculties = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: FACULTY_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listAdviserBatch = (department, batch) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: ADVISER_BATCH_LIST_REQUEST,
+    });
+
+    const {
+      facultySignin: { facultyInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${facultyInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(
+      '/faculty/adviser/students',
+      { department, batch },
+      config
+    );
+
+    dispatch({
+      type: ADVISER_BATCH_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADVISER_BATCH_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
