@@ -18,6 +18,7 @@ import {
   facultyRegisterReducer,
   facultyLoginReducer,
   facultyListReducer,
+  adviserStudentListReducer,
 } from './reducers/facultyReducer';
 
 import {
@@ -41,6 +42,7 @@ const reducer = combineReducers({
   facultySignup: facultyRegisterReducer,
   facultySignin: facultyLoginReducer,
   facultyList: facultyListReducer,
+  adviserStudentList: adviserStudentListReducer,
   gracemarkCreate: gracemarkCreateReducer,
   gracemarkList: gracemarkListReducer,
   gracemarkUpdate: gracemarkUpdateReducer,

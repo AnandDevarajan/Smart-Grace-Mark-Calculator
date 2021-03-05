@@ -228,7 +228,7 @@ exports.batchStudents = (req, res) => {
         });
       }
       return res.json({
-        student: result,
+        students: result,
       });
     }
   );
