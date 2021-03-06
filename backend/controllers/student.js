@@ -162,7 +162,7 @@ exports.resetPassword = (req, res) => {
                         subject: 'Reset Password',
                         html: `
                         <p>You requested for password reset </p>
-                        <h5>Click on this <a href="http://localhost:3000/student/reset/${token}">link</a> to reset password</h5>
+                        <h3>Click on this <a href="http://localhost:3000/student/reset/${token}">link</a> to reset password</h3>
                         `,
                       },
                       function (error, info) {
