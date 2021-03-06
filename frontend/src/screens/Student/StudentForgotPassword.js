@@ -29,10 +29,14 @@ const StudentForgotPassword = ({ location, history }) => {
     <>
       {message === 'Check your email' ? (
         <>
+          <Link to='/'>
+            <Button variant='light'>
+              <ArrowBackIcon /> Go Back
+            </Button>
+          </Link>
           <h3>Student password reset</h3>
           <Message variant='success'>
-            Check your email to reset password{' '}
-            <Link to='/student/login'>Click here to Login</Link>
+            Check your email to reset password
           </Message>
         </>
       ) : (

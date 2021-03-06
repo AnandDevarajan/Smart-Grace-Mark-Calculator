@@ -21,7 +21,7 @@ const StudentResetPassword = ({ location, history }) => {
         .then((response) => {
           console.log(response);
           setMessage(null);
-          history.push('/student/login');
+          setMessage(response.data.message);
         })
         .catch((err) => {
           console.log(err);
@@ -36,40 +36,51 @@ const StudentResetPassword = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/'>
-        <Button variant='light'>
-          <ArrowBackIcon /> Go Back
-        </Button>
-      </Link>
-      <FormContainer>
-        <h3>CREATE NEW PASSWORD</h3>
-        {message && <Message variant='danger'>{message}</Message>}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='confirmPassword'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Confirm Password
-            </Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Confirm password'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button type='submit' variant='primary'>
-            Update password
-          </Button>
-        </Form>
-      </FormContainer>
+      {message === 'Password updated successfully' ? (
+        <>
+          <Message variant='success'>
+            Password updated successfully{' '}
+            <Link to='/student/login'>click here to login</Link>
+          </Message>
+        </>
+      ) : (
+        <>
+          <Link to='/'>
+            <Button variant='light'>
+              <ArrowBackIcon /> Go Back
+            </Button>
+          </Link>
+          <FormContainer>
+            <h3>CREATE NEW PASSWORD</h3>
+            {message && <Message variant='danger'>{message}</Message>}
+            <Form onSubmit={submitHandler}>
+              <Form.Group controlId='password'>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Enter password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='confirmPassword'>
+                <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                  Confirm Password
+                </Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Confirm password'
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Button type='submit' variant='primary'>
+                Update password
+              </Button>
+            </Form>
+          </FormContainer>
+        </>
+      )}
     </>
   );
 };
