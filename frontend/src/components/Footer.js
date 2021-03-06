@@ -6,7 +6,7 @@ const Footer = () => {
       <Container>
         <Row>
           <Col className='text-center py-3'>
-            Copyright &copy; C8 - Smart Grace Mark Calculator - 2021
+           &copy; C8 - Smart Grace Mark Calculator - 2021
           </Col>
         </Row>
       </Container>

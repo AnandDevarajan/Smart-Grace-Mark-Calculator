@@ -1,7 +1,18 @@
 const config = require('../config/db');
 const con = config.con;
 const { generateToken } = require('../utils/auth');
+const crypto = require('crypto');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EmailID,
+    pass: process.env.Pass,
+  },
+});
 
 exports.authStudent = (req, res) => {
   const { email, password } = req.body;
@@ -84,7 +95,53 @@ exports.registerStudent = (req, res) => {
                 result: result[0],
                 token: generateToken(result[0].RollNum),
               });
+              transporter.sendMail(
+                {
+                  from: 'c8.smartgracemarkcalculator@gmail.com',
+                  to: result[0].EmailID,
+                  subject: 'Welcome to Smart Grace Mark Calculator',
+                  text: `Dear Student,
+                       YOU HAVE SUCCESSFULLY CREATED AN ACCOUNT!`,
+                },
+                function (error, info) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log('Email sent: ' + info.response);
+                  }
+                }
+              );
             }
+          );
+        }
+      }
+    );
+  });
+};
+
+exports.forgotPassword = (req, res) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    const { email } = req.body;
+    if (err) {
+      console.log(err);
+    }
+    const token = buffer.toString('hex');
+    con.query(
+      `SELECT * FROM STUDENT WHERE EmailID=?`,
+      [email],
+      (err, result) => {
+        if (result.length === 0 || err) {
+          return res.status(400).json({
+            message: 'User not found',
+          });
+        }
+        if (result.length > 0) {
+          result[0].resettoken = token;
+          result[0].expiresin = Date.now() + 3600000;
+          con.query(
+            'UPDATE STUDENT SET resettoken=?, expiresin=? WHERE EmailID=?',
+            [result[0].resettoken, result[0].expiresin, email],
+            (err, result) => {}
           );
         }
       }
@@ -220,18 +277,14 @@ exports.rejectRequest = (req, res) => {
 
 exports.batchStudents = (req, res) => {
   const id = req.params.id;
-  con.query(
-    `SELECT * FROM STUDENT WHERE Batch=?`,
-    [id],
-    (err, result) => {
-      if (result.length === 0 || err) {
-        return res.status(400).json({
-          message: 'No students found',
-        });
-      }
-      return res.json({
-        students: result,
+  con.query(`SELECT * FROM STUDENT WHERE Batch=?`, [id], (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No students found',
       });
     }
-  );
+    return res.json({
+      students: result,
+    });
+  });
 };

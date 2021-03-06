@@ -2,6 +2,16 @@ const config = require('../config/db');
 const con = config.con;
 const { generateToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EmailID,
+    pass: process.env.Pass,
+  },
+});
 
 exports.authAdmin = (req, res) => {
   const { email, password } = req.body;
@@ -64,6 +74,22 @@ exports.registerAdmin = (req, res) => {
                 result: result[0],
                 token: generateToken(result[0].adminID),
               });
+              transporter.sendMail(
+                {
+                  from: 'c8.smartgracemarkcalculator@gmail.com',
+                  to: result[0].EmailID,
+                  subject: 'Welcome to Smart Grace Mark Calculator',
+                  text: `Dear User,
+                       YOU HAVE SUCCESSFULLY CREATED AN ACCOUNT!`,
+                },
+                function (error, info) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log('Email sent: ' + info.response);
+                  }
+                }
+              );
             }
           );
         }
@@ -71,4 +97,3 @@ exports.registerAdmin = (req, res) => {
     );
   });
 };
-

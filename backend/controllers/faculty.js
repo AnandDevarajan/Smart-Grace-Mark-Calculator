@@ -2,6 +2,16 @@ const config = require('../config/db');
 const con = config.con;
 const { generateToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EmailID,
+    pass: process.env.Pass,
+  },
+});
 
 exports.authFaculty = (req, res) => {
   const { email, password } = req.body;
@@ -88,6 +98,22 @@ exports.registerFaculty = (req, res) => {
                 result: result[0],
                 token: generateToken(result[0].FacultyID),
               });
+              transporter.sendMail(
+                {
+                  from: 'c8.smartgracemarkcalculator@gmail.com',
+                  to: result[0].EmailID,
+                  subject: 'Welcome to Smart Grace Mark Calculator',
+                  text: `Dear Faculty,
+                       YOU HAVE SUCCESSFULLY CREATED AN ACCOUNT!`,
+                },
+                function (error, info) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log('Email sent: ' + info.response);
+                  }
+                }
+              );
             }
           );
         }
