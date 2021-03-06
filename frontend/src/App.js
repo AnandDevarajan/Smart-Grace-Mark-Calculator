@@ -22,6 +22,7 @@ import BatchStudents from './screens/Faculty/BatchStudents';
 import Footer from './components/Footer';
 import StudentForgotPassword from './screens/Student/StudentForgotPassword';
 import StudentResetPassword from './screens/Student/StudentResetPassword';
+import FacultyForgotPassword from './screens/Faculty/FacultyForgotPassword';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -70,6 +71,10 @@ function App() {
           <Route
             path='/faculty/adviser/students/:id'
             component={BatchStudents}
+          />
+          <Route
+            path='/faculty/forgotpassword'
+            component={FacultyForgotPassword}
           />
         </Container>
       </main>

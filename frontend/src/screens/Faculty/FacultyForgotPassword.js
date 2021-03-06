@@ -1,19 +1,18 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Message from '../../components/Message';
-import { Form, Button} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import FormContainer from '../../components/FormContainer';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import axios from 'axios';
-const StudentForgotPassword = ({ location, history }) => {
+const FacultyForgotPassword = ({ location, history }) => {
   const [email, setEmail] = useState('');
-
   const [message, setMessage] = useState(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`/student/resetpassword`, { email })
+      .post(`/faculty/resetpassword`, { email })
       .then((response) => {
         console.log(response);
         setMessage(null);
@@ -47,7 +46,7 @@ const StudentForgotPassword = ({ location, history }) => {
             </Button>
           </Link>
           <FormContainer>
-            <h3>Student password reset</h3>
+            <h3>Faculty password reset</h3>
             {message && <Message variant='danger'>{message}</Message>}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='email'>
@@ -70,4 +69,4 @@ const StudentForgotPassword = ({ location, history }) => {
   );
 };
 
-export default StudentForgotPassword;
+export default FacultyForgotPassword;
