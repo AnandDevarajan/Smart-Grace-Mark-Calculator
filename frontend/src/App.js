@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './screens/Home';
 import Navbar from './components/Navbar';
 import AdminLogin from './screens/Admin/AdminLogin';
 import StudentSignup from './screens/Student/StudentSignup';
 import AdminSignup from './screens/Admin/AdminSignup';
 import StudentLogin from './screens/Student/StudentLogin';
-import Home from './screens/Home';
+import StudentForgotPassword from './screens/Student/StudentForgotPassword';
+import StudentResetPassword from './screens/Student/StudentResetPassword';
 import StudentProfile from './screens/Student/StudentProfile';
 import AdminProfile from './screens/Admin/AdminProfile';
 import FacultyLogin from './screens/Faculty/FacultyLogin';
@@ -14,16 +16,16 @@ import FacultySignup from './screens/Faculty/FacultySignup';
 import FacultyProfile from './screens/Faculty/FacultyProfile';
 import AllStudentList from './screens/Admin/AllStudentList';
 import AllFacultyList from './screens/Admin/AllFacultyList';
+import FacultyForgotPassword from './screens/Faculty/FacultyForgotPassword';
+import FacultyResetPassword from './screens/Faculty/FacultyResetPassword';
 import GraceMarkForm from './screens/Gracemark/GraceMarkForm';
 import RequestForm from './screens/Student/RequestForm';
 import GracemarkList from './screens/Gracemark/Gracemarklist';
 import GracemarkEdit from './screens/Gracemark/GracemarkEdit';
 import BatchStudents from './screens/Faculty/BatchStudents';
+import AdminForgotPassword from './screens/Admin/AdminForgotPassword';
+import AdminResetPassword from './screens/Admin/AdminResetPassword';
 import Footer from './components/Footer';
-import StudentForgotPassword from './screens/Student/StudentForgotPassword';
-import StudentResetPassword from './screens/Student/StudentResetPassword';
-import FacultyForgotPassword from './screens/Faculty/FacultyForgotPassword';
-import FacultyResetPassword from './screens/Faculty/FacultyResetPassword';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -48,6 +50,8 @@ function App() {
           )}
           <Route path='/admin/login' component={AdminLogin} />
           <Route path='/admin/signup' component={AdminSignup} />
+          <Route path='/admin/forgotpassword' component={AdminForgotPassword} />
+          <Route path='/admin/reset/:token' component={AdminResetPassword} />
           <Route path='/admin/profile' component={AdminProfile} />
           <Route path='/admin/students' component={AllStudentList} />
           <Route path='/admin/faculties' component={AllFacultyList} />
