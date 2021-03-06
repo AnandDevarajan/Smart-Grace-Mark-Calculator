@@ -204,8 +204,8 @@ exports.newPassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          'UPDATE STUDENT SET Password=? WHERE resettoken=?',
-          [hash, token],
+          'UPDATE STUDENT SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?',
+          [hash, 'N/A', 'N/A', token],
           (err, result) => {
             if (err) {
               return res.status(400).json({

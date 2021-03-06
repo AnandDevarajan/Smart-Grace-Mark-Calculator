@@ -11,7 +11,7 @@ const { verifyFaculty, faculty } = require('../middlewares/auth');
 
 router.post('/', registerFaculty);
 router.post('/resetpassword', resetPassword);
-// router.post('/newpassword', newPassword);
+router.post('/newpassword', newPassword);
 router.post('/login', authFaculty);
 router.get('/adviser/students/:id', verifyFaculty, faculty, batchStudents);
 module.exports = router;

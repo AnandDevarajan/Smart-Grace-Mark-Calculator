@@ -202,3 +202,40 @@ exports.resetPassword = (req, res) => {
     );
   });
 };
+
+exports.newPassword = (req, res) => {
+  const { password, token } = req.body;
+  console.log(token, password);
+  con.query(
+    `SELECT * FROM FACULTY WHERE resettoken=? AND expiresin>=?`,
+    [token, Date.now()],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(422).json({
+          message: 'Session Expired',
+        });
+      }
+      bcrypt.hash(password, 10, (err, hash) => {
+        if (err) {
+          return console.log(err);
+        }
+        con.query(
+          'UPDATE FACULTY SET Password=? WHERE resettoken=?',
+          [hash, token],
+          (err, result) => {
+            if (err) {
+              return res.status(400).json({
+                message: 'Unable to reset password',
+              });
+            }
+            if (result) {
+              res.json({
+                message: 'Password updated successfully',
+              });
+            }
+          }
+        );
+      });
+    }
+  );
+};
