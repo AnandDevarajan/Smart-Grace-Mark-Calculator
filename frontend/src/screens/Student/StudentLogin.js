@@ -65,7 +65,7 @@ const StudentLogin = ({ location, history }) => {
         </Form>
         <Row className='py-3'>
           <Col>
-            <Link to='/forgotpassword'>Forgot Password</Link>
+            <Link to='/student/forgotpassword'>Forgot Password</Link>
           </Col>
         </Row>
       </FormContainer>

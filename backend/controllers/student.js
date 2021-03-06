@@ -119,7 +119,7 @@ exports.registerStudent = (req, res) => {
   });
 };
 
-exports.forgotPassword = (req, res) => {
+exports.resetPassword = (req, res) => {
   crypto.randomBytes(32, (err, buffer) => {
     const { email } = req.body;
     if (err) {
@@ -141,12 +141,87 @@ exports.forgotPassword = (req, res) => {
           con.query(
             'UPDATE STUDENT SET resettoken=?, expiresin=? WHERE EmailID=?',
             [result[0].resettoken, result[0].expiresin, email],
-            (err, result) => {}
+            (err, result) => {
+              if (err) {
+                console.log(err);
+              }
+              if (result) {
+                con.query(
+                  `SELECT * FROM STUDENT WHERE EmailID=?`,
+                  [email],
+                  (err, result) => {
+                    if (err) {
+                      return res.status(400).json({
+                        message: 'No user found',
+                      });
+                    }
+                    transporter.sendMail(
+                      {
+                        from: 'c8.smartgracemarkcalculator@gmail.com',
+                        to: result[0].EmailID,
+                        subject: 'Reset Password',
+                        html: `
+                        <p>You requested for password reset </p>
+                        <h5>Click on this <a href="http://localhost:3000/student/reset/${token}">link</a> to reset password</h5>
+                        `,
+                      },
+                      function (error, info) {
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log('Email sent: ' + info.response);
+                          res.json({
+                            message: 'Check your email',
+                          });
+                        }
+                      }
+                    );
+                  }
+                );
+              }
+            }
           );
         }
       }
     );
   });
+};
+
+exports.newPassword = (req, res) => {
+  const { password, token } = req.body;
+  console.log(token, password);
+  con.query(
+    `SELECT * FROM STUDENT WHERE resettoken=? AND expiresin>=?`,
+    [token, Date.now()],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(422).json({
+          message: 'Session Expired',
+        });
+      }
+      bcrypt.hash(password, 10, (err, hash) => {
+        if (err) {
+          return console.log(err);
+        }
+        con.query(
+          'UPDATE STUDENT SET Password=? WHERE resettoken=?',
+          [hash, token],
+          (err, result) => {
+            if (err) {
+              return res.status(400).json({
+                message: 'Unable to reset password',
+              });
+            }
+            if (result) {
+              res.json({
+                message: 'Password updated successfully',
+              });
+            }
+          }
+        );
+      });
+    }
+  );
 };
 
 exports.getAllStudents = (req, res) => {

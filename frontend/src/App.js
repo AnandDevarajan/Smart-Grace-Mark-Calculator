@@ -20,6 +20,8 @@ import GracemarkList from './screens/Gracemark/Gracemarklist';
 import GracemarkEdit from './screens/Gracemark/GracemarkEdit';
 import BatchStudents from './screens/Faculty/BatchStudents';
 import Footer from './components/Footer';
+import StudentForgotPassword from './screens/Student/StudentForgotPassword';
+import StudentResetPassword from './screens/Student/StudentResetPassword';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -53,11 +55,22 @@ function App() {
           <Route path='/student/login' component={StudentLogin} />
           <Route path='/student/signup' component={StudentSignup} />
           <Route path='/student/profile' component={StudentProfile} />
+          <Route
+            path='/student/forgotpassword'
+            component={StudentForgotPassword}
+          />
+          <Route
+            path='/student/reset/:token'
+            component={StudentResetPassword}
+          />
           <Route path='/student/request' component={RequestForm} />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />
-          <Route path='/faculty/adviser/students/:id' component={BatchStudents} />
+          <Route
+            path='/faculty/adviser/students/:id'
+            component={BatchStudents}
+          />
         </Container>
       </main>
       <Footer />
