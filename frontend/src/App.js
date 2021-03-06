@@ -23,6 +23,7 @@ import Footer from './components/Footer';
 import StudentForgotPassword from './screens/Student/StudentForgotPassword';
 import StudentResetPassword from './screens/Student/StudentResetPassword';
 import FacultyForgotPassword from './screens/Faculty/FacultyForgotPassword';
+import FacultyResetPassword from './screens/Faculty/FacultyResetPassword';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -75,6 +76,10 @@ function App() {
           <Route
             path='/faculty/forgotpassword'
             component={FacultyForgotPassword}
+          />
+          <Route
+            path='/faculty/reset/:token'
+            component={FacultyResetPassword}
           />
         </Container>
       </main>

@@ -1,6 +1,7 @@
 const config = require('../config/db');
 const con = config.con;
 const { generateToken } = require('../utils/auth');
+const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
