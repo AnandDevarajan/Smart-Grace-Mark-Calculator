@@ -18,9 +18,13 @@ const CourseStudents = ({ history, match }) => {
   const department = match.params.id;
   const [edit, setEdit] = useState(false);
   const [internals, setInternals] = useState('');
+  const [intern, setIntern] = useState('');
   const [mark, setMark] = useState('');
   const [list, setList] = useState('');
   const [message, setMessage] = useState(null);
+  let flag = 0;
+  let flag1 = 0;
+  let flag2 = 0;
 
   const dispatch = useDispatch();
   const courseStudentList = useSelector((state) => state.courseStudentList);
@@ -86,36 +90,78 @@ const CourseStudents = ({ history, match }) => {
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
-            <tr key={student.RollNum}>
-              <td>{student.RollNum}</td>
-              <td>{student.Name}</td>
-              <td>{student.Branch}</td>
-              <td>{student.Batch}</td>
-              <td id={student.RollNum}>
-                <Input onChange={(e) => setInternals(e.target.value)}></Input>
-              </td>
-              <td>
-                <Input onChange={(e) => setMark(e.target.value)}></Input>
-              </td>
-              <td></td>
-              {edit ? (
+          {students.map((student) => {
+            flag = 0;
+            flag1 = 0;
+            flag2 = 0;
+            return (
+              <tr key={student.RollNum}>
+                <td>{student.RollNum}</td>
+                <td>{student.Name}</td>
+                <td>{student.Branch}</td>
+                <td>{student.Batch}</td>
+
                 <td>
-                  <EditIcon />
+                  {markList.map((mark) => {
+                    if (mark.RollNum === student.RollNum && mark.Internals) {
+                      if (flag == 0) {
+                        flag = 1;
+                        return mark.Internals;
+                      }
+                    }
+                  })}
+                  {flag == 0 ? (
+                    <Input
+                      onChange={(e) => setInternals(e.target.value)}
+                    ></Input>
+                  ) : (
+                    <></>
+                  )}
                 </td>
-              ) : (
+
                 <td>
-                  <CheckBoxIcon
-                    style={{ color: 'green' }}
-                    className='icon'
-                    onClick={() => {
-                      submitMarks(student.RollNum, internals, mark);
-                    }}
-                  />
+                  {markList.map((mark) => {
+                    if (mark.RollNum === student.RollNum && mark.Marks) {
+                      if (flag1 == 0) {
+                        flag1 = 1;
+                        return mark.Marks;
+                      }
+                    }
+                  })}
+                  {flag1 == 0 ? (
+                    <Input onChange={(e) => setMark(e.target.value)}></Input>
+                  ) : (
+                    <></>
+                  )}
                 </td>
-              )}
-            </tr>
-          ))}
+                <td>
+                  {markList.map((mark) => {
+                    if (mark.RollNum === student.RollNum && mark.Total) {
+                      if (flag2 == 0) {
+                        flag2 = 1;
+                        return mark.Total;
+                      }
+                    }
+                  })}
+                </td>
+                {flag2 == 1 ? (
+                  <td>
+                    <EditIcon />
+                  </td>
+                ) : (
+                  <td>
+                    <CheckBoxIcon
+                      style={{ color: 'green' }}
+                      className='icon'
+                      onClick={() => {
+                        submitMarks(student.RollNum, internals, mark);
+                      }}
+                    />
+                  </td>
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </div>
