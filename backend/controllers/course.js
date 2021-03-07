@@ -16,28 +16,19 @@ exports.getAllCourses = (req, res) => {
 
 exports.addCourseMarks = (req, res) => {
   let id = req.params.id;
-  const { cid, total, internals, marks } = req.body;
+  const { cid, total, internals, mark } = req.body;
   con.query(
     `INSERT INTO COURSE_MARK (RollNum,CourseID,Internals,Marks,Total) VALUES (?,?,?,?,?)`,
-    [id, cid, internals, marks, total],
+    [id, cid, internals, mark, total],
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
-          message: 'Unable to update request',
+          message: 'Unable to Update Marks',
         });
       }
-      if (result) {
-        con.query(`SELECT * FROM COURSE_MARK'`, (err, result) => {
-          if (err || result.length === 0) {
-            return res.status(400).json({
-              message: 'No students found',
-            });
-          }
-          return res.json({
-            markList: result,
-          });
-        });
-      }
+      return res.json({
+        message: 'Successfully Updated',
+      });
     }
   );
 };
@@ -54,7 +45,7 @@ exports.getCourseMark = (req, res) => {
         });
       }
       return res.json({
-        courseMarkList: result,
+        markList: result,
       });
     }
   );

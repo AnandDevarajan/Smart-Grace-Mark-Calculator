@@ -29,13 +29,17 @@ import {
   gracemarkUpdateReducer,
   gracemarkDetailsReducer,
 } from './reducers/gracemarkReducers';
-import { courseListReducer, courseMarkListReducer } from './reducers/courseReducers';
+import {
+  courseListReducer,
+  courseAddMarkListReducer,
+  courseMarkListReducer,
+} from './reducers/courseReducers';
 
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,
   studentList: studentListReducer,
-  courseStudentList:courseStudentListReducer,
+  courseStudentList: courseStudentListReducer,
   studentRequest: studentRequestReducer,
   requestAccept: requestAcceptReducer,
   requestReject: requestRejectReducer,
@@ -51,7 +55,8 @@ const reducer = combineReducers({
   gracemarkDetails: gracemarkDetailsReducer,
   gracemarkDelete: gracemarkDeleteReducer,
   courseList: courseListReducer,
-  courseMark:courseMarkListReducer,
+  courseAddMark: courseAddMarkListReducer,
+  courseMarkList: courseMarkListReducer,
 });
 
 const middleware = [thunk];

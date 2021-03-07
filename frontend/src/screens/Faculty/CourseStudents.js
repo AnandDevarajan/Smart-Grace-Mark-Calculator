@@ -4,11 +4,12 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { listCourseStudents } from '../../actions/studentActions';
-import { addCourseMarks } from '../../actions/courseActions';
+import { addCourseMarks, listCourseMarks } from '../../actions/courseActions';
 import { Link } from 'react-router-dom';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import EditIcon from '@material-ui/icons/Edit';
 import { Input } from '@material-ui/core';
 import axios from 'axios';
@@ -17,49 +18,50 @@ const CourseStudents = ({ history, match }) => {
   const department = match.params.id;
   const [edit, setEdit] = useState(false);
   const [internals, setInternals] = useState('');
-  const [marks, setMarks] = useState('');
+  const [mark, setMark] = useState('');
+  const [list, setList] = useState('');
   const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
   const courseStudentList = useSelector((state) => state.courseStudentList);
-  const { error, students } = courseStudentList;
+  const { students } = courseStudentList;
 
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
 
   const [cid, setCid] = useState(facultyInfo.result.CourseID);
 
+  const courseMarkList = useSelector((state) => state.courseMarkList);
+  const { markList } = courseMarkList;
+
+  const courseAddMark = useSelector((state) => state.courseAddMark);
+  const { data, error } = courseAddMark;
   useEffect(() => {
     if (facultyInfo) {
       dispatch(listCourseStudents(department));
-      axios
-        .get(`/course/markList/${facultyInfo.result.CourseID}`)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      dispatch(listCourseMarks(cid));
     } else {
       history.push('/');
     }
-  }, [dispatch, history, facultyInfo]);
+  }, [dispatch, history, facultyInfo, data]);
 
-  const submitMarks = (id, internals, marks) => {
-    if (internals === ' ' || marks === '') {
-      setMessage('');
+  const submitMarks = (id, internals, mark) => {
+    if (internals === ' ' || mark === '') {
+      setMessage(null);
       setMessage('Enter all the details');
-    } else if (internals > 50 || marks > 50) {
-      setMessage('');
+    } else if (internals > 50 || mark > 50) {
+      setMessage(null);
       setMessage('Invalid details');
     } else {
-      let total = parseInt(internals) + parseInt(marks);
-      dispatch(addCourseMarks(id, cid, internals, marks, total));
-      setMessage('');
-      setMessage('Marks updated successfully');
+      let total = parseInt(internals) + parseInt(mark);
+      dispatch(addCourseMarks(id, cid, internals, mark, total));
     }
   };
 
+  console.log('error', error);
+  console.log('data', data);
+  console.log('Students', students);
+  console.log('marks', markList);
   return (
     <div className='ml-5 align-items-center'>
       <Link to='/faculty/profile'>
@@ -68,8 +70,9 @@ const CourseStudents = ({ history, match }) => {
         </Button>
       </Link>
       <h1>STUDENT LIST - {facultyInfo.result.CourseID}</h1>
-      {error && <Message variant='danger'>{error}</Message>}
-      {message && <Message variant='warning'>{message}</Message>}
+      {data !== 'Successfully Updated ' && (
+        <Message variant='info'>{data}</Message>
+      )}
       <Table striped bordered hover responsive className='table-sm'>
         <thead>
           <tr>
@@ -93,7 +96,7 @@ const CourseStudents = ({ history, match }) => {
                 <Input onChange={(e) => setInternals(e.target.value)}></Input>
               </td>
               <td>
-                <Input onChange={(e) => setMarks(e.target.value)}></Input>
+                <Input onChange={(e) => setMark(e.target.value)}></Input>
               </td>
               <td></td>
               {edit ? (
@@ -104,8 +107,9 @@ const CourseStudents = ({ history, match }) => {
                 <td>
                   <CheckBoxIcon
                     style={{ color: 'green' }}
+                    className='icon'
                     onClick={() => {
-                      submitMarks(student.RollNum, internals, marks);
+                      submitMarks(student.RollNum, internals, mark);
                     }}
                   />
                 </td>

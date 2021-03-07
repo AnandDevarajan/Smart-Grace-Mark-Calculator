@@ -7,7 +7,7 @@ const {
 } = require('../controllers/course');
 const { verifyFaculty, faculty } = require('../middlewares/auth');
 router.get('/', getAllCourses);
-router.get('/markList/:id', getCourseMark);
+router.get('/markList/:id', verifyFaculty, faculty, getCourseMark);
 router.post('/marks/:id', verifyFaculty, faculty, addCourseMarks);
 
 module.exports = router;

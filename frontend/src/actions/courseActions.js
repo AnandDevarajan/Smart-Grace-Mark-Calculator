@@ -5,6 +5,9 @@ import {
   COURSE_ADD_MARKS_REQUEST,
   COURSE_ADD_MARKS_SUCCESS,
   COURSE_ADD_MARKS_FAIL,
+  COURSE_MARK_LIST_FAIL,
+  COURSE_MARK_LIST_SUCCESS,
+  COURSE_MARK_LIST_REQUEST,
 } from '../constants/courseConstants';
 import axios from 'axios';
 
@@ -29,7 +32,40 @@ export const listCourses = () => async (dispatch) => {
   }
 };
 
-export const addCourseMarks = (id, cid, internals, marks, total) => async (
+export const listCourseMarks = (cid) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: COURSE_MARK_LIST_REQUEST,
+    });
+
+    const {
+      facultySignin: { facultyInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${facultyInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/course/markList/${cid}`, config);
+    dispatch({
+      type: COURSE_MARK_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: COURSE_MARK_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const addCourseMarks = (id, cid, internals, mark, total) => async (
   dispatch,
   getState
 ) => {
@@ -51,7 +87,7 @@ export const addCourseMarks = (id, cid, internals, marks, total) => async (
 
     const { data } = await axios.post(
       `/course/marks/${id}`,
-      { cid, internals, marks, total },
+      { cid, internals, mark, total },
       config
     );
 
