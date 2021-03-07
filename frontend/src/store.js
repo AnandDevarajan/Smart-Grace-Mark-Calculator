@@ -29,7 +29,7 @@ import {
   gracemarkUpdateReducer,
   gracemarkDetailsReducer,
 } from './reducers/gracemarkReducers';
-import { courseListReducer } from './reducers/courseReducers';
+import { courseListReducer, courseMarkListReducer } from './reducers/courseReducers';
 
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
@@ -51,6 +51,7 @@ const reducer = combineReducers({
   gracemarkDetails: gracemarkDetailsReducer,
   gracemarkDelete: gracemarkDeleteReducer,
   courseList: courseListReducer,
+  courseMark:courseMarkListReducer,
 });
 
 const middleware = [thunk];
