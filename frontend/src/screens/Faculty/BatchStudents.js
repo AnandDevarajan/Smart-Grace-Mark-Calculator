@@ -25,19 +25,19 @@ const BatchStudents = ({ history, match }) => {
   }, [dispatch, history, facultyInfo]);
 
   return (
-    <div className='ml-5 align-items-center'>
+    <div className='align-items-center'>
       <h1>
         {facultyInfo.result.Department}-{batch}
       </h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Table striped bordered hover responsive className='table-sm'>
+        <Table striped bordered hover  className='table-sm'>
           <thead>
             <tr>
               <th>Roll No</th>
               <th>Name</th>
-              <th>Email</th>
+              <th >Email</th>
               <th>Branch</th>
               <th>Batch</th>
               <th>Reason</th>

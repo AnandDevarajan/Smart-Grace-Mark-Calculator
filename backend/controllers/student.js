@@ -363,3 +363,18 @@ exports.batchStudents = (req, res) => {
     });
   });
 };
+
+exports.courseStudents = (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  con.query(`SELECT * FROM STUDENT WHERE Branch=?`, [id], (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No students found',
+      });
+    }
+    return res.json({
+      students: result,
+    });
+  });
+};
