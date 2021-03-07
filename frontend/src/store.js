@@ -9,6 +9,7 @@ import {
   studentRequestReducer,
   requestAcceptReducer,
   requestRejectReducer,
+  courseStudentListReducer,
 } from './reducers/studentReducers';
 import {
   adminRegisterReducer,
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,
   studentList: studentListReducer,
+  courseStudentList:courseStudentListReducer,
   studentRequest: studentRequestReducer,
   requestAccept: requestAcceptReducer,
   requestReject: requestRejectReducer,

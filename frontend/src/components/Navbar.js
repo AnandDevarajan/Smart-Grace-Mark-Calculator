@@ -108,7 +108,7 @@ function Navbar() {
                 </li>
               )}
               <li className='nav-text'>
-                <Link to='/faculty/students'>
+                <Link to={`/faculty/students/${facultyInfo.result.Department}`}>
                   <PeopleIcon />
                   <span>Students</span>
                 </Link>

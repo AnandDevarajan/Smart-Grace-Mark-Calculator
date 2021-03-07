@@ -26,6 +26,7 @@ import BatchStudents from './screens/Faculty/BatchStudents';
 import AdminForgotPassword from './screens/Admin/AdminForgotPassword';
 import AdminResetPassword from './screens/Admin/AdminResetPassword';
 import Footer from './components/Footer';
+import CourseStudents from './screens/Faculty/CourseStudents';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -65,6 +66,7 @@ function App() {
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />
+          <Route path='/faculty/students/:id' component={CourseStudents} />
           <Route
             path='/faculty/adviser/students/:id'
             component={BatchStudents}

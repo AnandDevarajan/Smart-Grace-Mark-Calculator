@@ -18,6 +18,9 @@ import {
   REQUEST_REJECT_SUCCESS,
   REQUEST_REJECT_FAIL,
   REQUEST_REJECT_REQUEST,
+  STUDENT_LIST_COURSE_FAIL,
+  STUDENT_LIST_COURSE_SUCCESS,
+  STUDENT_LIST_COURSE_REQUEST,
 } from '../constants/studentConstants';
 import axios from 'axios';
 
@@ -149,6 +152,41 @@ export const listStudents = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: STUDENT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listCourseStudents = (department) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: STUDENT_LIST_COURSE_REQUEST,
+    });
+
+    const {
+      facultySignin: { facultyInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${facultyInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(`/faculty/students/${department}`, config);
+
+    dispatch({
+      type: STUDENT_LIST_COURSE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: STUDENT_LIST_COURSE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
