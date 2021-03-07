@@ -54,7 +54,7 @@ export const addCourseMarks = (id, total) => async (dispatch, getState) => {
     });
   } catch (error) {
     dispatch({
-      type: COURSE_ADD_MARKS_AIL,
+      type: COURSE_ADD_MARKS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
