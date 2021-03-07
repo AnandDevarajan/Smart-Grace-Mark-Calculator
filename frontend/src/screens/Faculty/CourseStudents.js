@@ -146,7 +146,7 @@ const CourseStudents = ({ history, match }) => {
                 </td>
                 {flag2 == 1 ? (
                   <td>
-                    <EditIcon />
+                    <EditIcon className='icon' />
                   </td>
                 ) : (
                   <td>
