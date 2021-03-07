@@ -32,43 +32,47 @@ const StudentLogin = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/'>
-        <Button variant='light'>
-          <ArrowBackIcon /> Go Back
-        </Button>
-      </Link>
-      <FormContainer>
-        <h3>Student Login</h3>
-        {error && <Message variant='danger'>{error}</Message>}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='email'>
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type='email'
-              placeholder='Enter email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='password'>
-            <Form.Label>password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button type='submit' variant='info'>
-            Sign In
-          </Button>
-        </Form>
-        <Row className='py-3'>
-          <Col>
-            <Link to='/student/forgotpassword'>Forgot Password</Link>
-          </Col>
-        </Row>
-      </FormContainer>
+      {!studentInfo && (
+        <>
+          <Link to='/'>
+            <Button variant='light'>
+              <ArrowBackIcon /> Go Back
+            </Button>
+          </Link>
+          <FormContainer>
+            <h3>Student Login</h3>
+            {error && <Message variant='danger'>{error}</Message>}
+            <Form onSubmit={submitHandler}>
+              <Form.Group controlId='email'>
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type='email'
+                  placeholder='Enter email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='password'>
+                <Form.Label>password</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Enter password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Button type='submit' variant='info'>
+                Sign In
+              </Button>
+            </Form>
+            <Row className='py-3'>
+              <Col>
+                <Link to='/student/forgotpassword'>Forgot Password</Link>
+              </Col>
+            </Row>
+          </FormContainer>
+        </>
+      )}
     </>
   );
 };

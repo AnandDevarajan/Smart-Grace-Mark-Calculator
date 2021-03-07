@@ -39,15 +39,7 @@ function App() {
       <Navbar />
       <main className='py-3'>
         <Container>
-          {studentInfo ? (
-            <Route exact path='/' component={StudentProfile} />
-          ) : adminInfo ? (
-            <Route exact path='/' component={AdminProfile} />
-          ) : facultyInfo ? (
-            <Route exact path='/' component={FacultyProfile} />
-          ) : (
-            <Route exact path='/' component={Home} />
-          )}
+          <Route exact path='/' component={Home} />
           <Route path='/admin/login' component={AdminLogin} />
           <Route path='/admin/signup' component={AdminSignup} />
           <Route path='/admin/forgotpassword' component={AdminForgotPassword} />
