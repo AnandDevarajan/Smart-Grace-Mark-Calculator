@@ -11,6 +11,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
 import EditIcon from '@material-ui/icons/Edit';
 import { Input } from '@material-ui/core';
+import axios from 'axios';
 
 const CourseStudents = ({ history, match }) => {
   const department = match.params.id;
@@ -26,9 +27,19 @@ const CourseStudents = ({ history, match }) => {
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
 
+  const [cid, setCid] = useState(facultyInfo.result.CourseID);
+
   useEffect(() => {
     if (facultyInfo) {
       dispatch(listCourseStudents(department));
+      axios
+        .get(`/course/markList/${facultyInfo.result.CourseID}`)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       history.push('/');
     }
@@ -43,7 +54,9 @@ const CourseStudents = ({ history, match }) => {
       setMessage('Invalid details');
     } else {
       let total = parseInt(internals) + parseInt(marks);
-      dispatch(addCourseMarks(id, total));
+      dispatch(addCourseMarks(id, cid, internals, marks, total));
+      setMessage('');
+      setMessage('Marks updated successfully');
     }
   };
 
@@ -55,54 +68,52 @@ const CourseStudents = ({ history, match }) => {
         </Button>
       </Link>
       <h1>STUDENT LIST - {facultyInfo.result.CourseID}</h1>
-      {message ? (
-        <Message variant='warning'>{message}</Message>
-      ) : (
-        <Table striped bordered hover responsive className='table-sm'>
-          <thead>
-            <tr>
-              <th>Roll No</th>
-              <th>Name</th>
-              <th>Branch</th>
-              <th>Batch</th>
-              <th>Internals</th>
-              <th>Marks</th>
-              <th>Total </th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((student) => (
-              <tr key={student.RollNum}>
-                <td>{student.RollNum}</td>
-                <td>{student.Name}</td>
-                <td>{student.Branch}</td>
-                <td>{student.Batch}</td>
-                <td id={student.RollNum}>
-                  <Input onChange={(e) => setInternals(e.target.value)}></Input>
-                </td>
+      {error && <Message variant='danger'>{error}</Message>}
+      {message && <Message variant='warning'>{message}</Message>}
+      <Table striped bordered hover responsive className='table-sm'>
+        <thead>
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Batch</th>
+            <th>Internals</th>
+            <th>Marks</th>
+            <th>Total </th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((student) => (
+            <tr key={student.RollNum}>
+              <td>{student.RollNum}</td>
+              <td>{student.Name}</td>
+              <td>{student.Branch}</td>
+              <td>{student.Batch}</td>
+              <td id={student.RollNum}>
+                <Input onChange={(e) => setInternals(e.target.value)}></Input>
+              </td>
+              <td>
+                <Input onChange={(e) => setMarks(e.target.value)}></Input>
+              </td>
+              <td></td>
+              {edit ? (
                 <td>
-                  <Input onChange={(e) => setMarks(e.target.value)}></Input>
+                  <EditIcon />
                 </td>
-                <td></td>
-                {edit ? (
-                  <td>
-                    <EditIcon />
-                  </td>
-                ) : (
-                  <td>
-                    <CheckBoxIcon
-                      style={{ color: 'green' }}
-                      onClick={() => {
-                        submitMarks(student.RollNum, internals, marks);
-                      }}
-                    />
-                  </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+              ) : (
+                <td>
+                  <CheckBoxIcon
+                    style={{ color: 'green' }}
+                    onClick={() => {
+                      submitMarks(student.RollNum, internals, marks);
+                    }}
+                  />
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 };

@@ -29,7 +29,10 @@ export const listCourses = () => async (dispatch) => {
   }
 };
 
-export const addCourseMarks = (id, total) => async (dispatch, getState) => {
+export const addCourseMarks = (id, cid, internals, marks, total) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch({
       type: COURSE_ADD_MARKS_REQUEST,
@@ -46,7 +49,11 @@ export const addCourseMarks = (id, total) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/course/marks/${id}`, { total }, config);
+    const { data } = await axios.post(
+      `/course/marks/${id}`,
+      { cid, internals, marks, total },
+      config
+    );
 
     dispatch({
       type: COURSE_ADD_MARKS_SUCCESS,
