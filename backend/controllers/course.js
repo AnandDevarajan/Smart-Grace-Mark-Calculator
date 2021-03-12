@@ -53,13 +53,13 @@ exports.getCourseMark = (req, res) => {
 
 exports.getACourseMark = (req, res) => {
   const id = req.params.id;
-  n = id.length;
+  let n = id.length;
   let rollno = id.substring(0, n - 9);
   let courseid = id.substring(n - 8, n);
 
   con.query(
     `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
-    [rollno, courseid],
+    [courseid, rollno],
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
@@ -69,6 +69,49 @@ exports.getACourseMark = (req, res) => {
       return res.json({
         markList: result,
       });
+    }
+  );
+};
+
+exports.updateCourseMarkDetails = (req, res) => {
+  const id = req.params.id;
+  let n = id.length;
+  let rollno = id.substring(0, n - 9);
+  let courseid = id.substring(n - 8, n);
+  con.query(
+    `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
+    [courseid, rollno],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(400).json({
+          message: 'No Gracemark Found',
+        });
+      }
+      if (result) {
+        result[0].Internals = req.body.internals || result[0].Internals;
+        result[0].Marks = req.body.marks || result[0].Marks;
+        result[0].Total = result[0].Internals + result[0].Marks;
+        con.query(
+          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Toatal=? WHERE CourseID=? AND RollNum=?`,
+          [
+            result[0].Internals,
+            result[0].Marksk,
+            result[0].Total,
+            courseid,
+            rollno,
+          ],
+          (err, result) => {
+            if (err || result.length === 0) {
+              return res.status(400).json({
+                message: 'Failed to update',
+              });
+            }
+            return res.json({
+              updatedMark: result,
+            });
+          }
+        );
+      }
     }
   );
 };
