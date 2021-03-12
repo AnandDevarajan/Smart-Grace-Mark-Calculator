@@ -12,7 +12,6 @@ import '../Home.css';
 import EditIcon from '@material-ui/icons/Edit';
 import { Input } from '@material-ui/core';
 
-
 const CourseStudents = ({ history, match }) => {
   const department = match.params.id;
   const [edit, setEdit] = useState(false);
@@ -76,7 +75,7 @@ const CourseStudents = ({ history, match }) => {
       {data !== 'Successfully Updated ' && (
         <Message variant='info'>{data}</Message>
       )}
-      {message && <Message variant='success'>{message}</Message>}
+      {message && <Message variant='info'>{message}</Message>}
       <Table striped bordered hover responsive className='table-sm'>
         <thead>
           <tr>

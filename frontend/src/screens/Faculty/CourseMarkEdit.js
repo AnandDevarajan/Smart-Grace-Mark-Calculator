@@ -34,7 +34,8 @@ const CourseMarkEdit = ({ match, history }) => {
       dispatch({
         type: COURSE_MARK_UPDATE_RESET,
       });
-      history.push(`/faculty/students/${facultyInfo.result.Department}`);
+
+      //   history.push(`/faculty/students/${facultyInfo.result.Department}`);
     } else {
       if (facultyInfo) {
         axios
@@ -59,6 +60,7 @@ const CourseMarkEdit = ({ match, history }) => {
     if (internals !== '' && marks !== '') {
       setMessage('');
       dispatch(updateCoursemark(editID, internals, marks));
+      setMessage(`Course Marks updated successfully`);
     } else {
       setMessage('Enter all details');
     }
@@ -76,7 +78,14 @@ const CourseMarkEdit = ({ match, history }) => {
       <FormContainer>
         <h1>EDIT MARK {courseid} </h1>
         <p>Roll Number : {rollno}</p>
-        {message && <Message variant='warning'>{message}</Message>}
+        {message && (
+          <Message variant='success'>
+            {message}{' '}
+            <Link to={`/faculty/students/${facultyInfo.result.Department}`}>
+              Go to student list
+            </Link>
+          </Message>
+        )}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {error ? (
           <Message variant='danger'>{error}</Message>
