@@ -8,6 +8,10 @@ import {
   COURSE_MARK_LIST_FAIL,
   COURSE_MARK_LIST_SUCCESS,
   COURSE_MARK_LIST_REQUEST,
+  COURSE_MARK_UPDATE_REQUEST,
+  COURSE_MARK_UPDATE_SUCCESS,
+  COURSE_MARK_UPDATE_FAIL,
+  COURSE_MARK_UPDATE_RESET,
 } from '../constants/courseConstants';
 
 export const courseListReducer = (state = { courses: [] }, action) => {
@@ -53,6 +57,26 @@ export const courseMarkListReducer = (state = { markList: [] }, action) => {
       };
     case COURSE_MARK_LIST_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const coursemarkUpdateReducer = (
+  state = { updatedMark: {} },
+  action
+) => {
+  switch (action.type) {
+    case COURSE_MARK_UPDATE_REQUEST:
+      return { loading: true };
+    case COURSE_MARK_UPDATE_SUCCESS:
+      return { loading: false, success: true };
+    case COURSE_MARK_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case COURSE_MARK_UPDATE_RESET:
+      return {
+        updatedMark: {},
+      };
     default:
       return state;
   }

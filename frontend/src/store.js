@@ -33,6 +33,7 @@ import {
   courseListReducer,
   courseAddMarkListReducer,
   courseMarkListReducer,
+  coursemarkUpdateReducer,
 } from './reducers/courseReducers';
 
 const reducer = combineReducers({
@@ -57,6 +58,7 @@ const reducer = combineReducers({
   courseList: courseListReducer,
   courseAddMark: courseAddMarkListReducer,
   courseMarkList: courseMarkListReducer,
+  coursemarkUpdate: coursemarkUpdateReducer,
 });
 
 const middleware = [thunk];
