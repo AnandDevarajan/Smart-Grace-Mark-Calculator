@@ -14,6 +14,7 @@ import AdminProfile from './screens/Admin/AdminProfile';
 import FacultyLogin from './screens/Faculty/FacultyLogin';
 import FacultySignup from './screens/Faculty/FacultySignup';
 import FacultyProfile from './screens/Faculty/FacultyProfile';
+import CourseMarkEdit from './screens/Faculty/CourseMarkEdit';
 import AllStudentList from './screens/Admin/AllStudentList';
 import AllFacultyList from './screens/Admin/AllFacultyList';
 import FacultyForgotPassword from './screens/Faculty/FacultyForgotPassword';
@@ -67,6 +68,10 @@ function App() {
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />
           <Route path='/faculty/students/:id' component={CourseStudents} />
+          <Route
+            path='/faculty/course/mark/edit/:id'
+            component={CourseMarkEdit}
+          />
           <Route
             path='/faculty/adviser/students/:id'
             component={BatchStudents}

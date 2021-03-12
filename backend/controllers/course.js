@@ -50,3 +50,25 @@ exports.getCourseMark = (req, res) => {
     }
   );
 };
+
+exports.getACourseMark = (req, res) => {
+  const id = req.params.id;
+  n = id.length;
+  let rollno = id.substring(0, n - 9);
+  let courseid = id.substring(n - 8, n);
+
+  con.query(
+    `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
+    [rollno, courseid],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: 'No Marks found',
+        });
+      }
+      return res.json({
+        markList: result,
+      });
+    }
+  );
+};

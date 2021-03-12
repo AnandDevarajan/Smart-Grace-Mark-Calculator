@@ -4,10 +4,13 @@ const {
   getAllCourses,
   addCourseMarks,
   getCourseMark,
+  getACourseMark,
 } = require('../controllers/course');
 const { verifyFaculty, faculty } = require('../middlewares/auth');
 router.get('/', getAllCourses);
 router.get('/markList/:id', verifyFaculty, faculty, getCourseMark);
 router.post('/marks/:id', verifyFaculty, faculty, addCourseMarks);
+router.post('/mark/edit/:id', getACourseMark);
+router.put('/mark/update/:id', updateCourseMark);
 
 module.exports = router;

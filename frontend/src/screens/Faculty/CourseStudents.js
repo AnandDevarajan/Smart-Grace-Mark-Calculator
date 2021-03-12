@@ -145,9 +145,13 @@ const CourseStudents = ({ history, match }) => {
                   })}
                 </td>
                 {flag2 == 1 ? (
-                  <td>
-                    <EditIcon className='icon' />
-                  </td>
+                  <LinkContainer
+                    to={`faculty/course/mark/edit/${student.RollNum}-${facultyInfo.result.CourseID}`}
+                  >
+                    <td>
+                      <EditIcon className='icon' />
+                    </td>
+                  </LinkContainer>
                 ) : (
                   <td>
                     <CheckBoxIcon
