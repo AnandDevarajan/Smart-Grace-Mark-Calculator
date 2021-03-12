@@ -78,24 +78,27 @@ exports.updateCourseMarkDetails = (req, res) => {
   let n = id.length;
   let rollno = id.substring(0, n - 9);
   let courseid = id.substring(n - 8, n);
+  const { internals, marks } = req.body;
+  console.log(internals, marks);
   con.query(
     `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
     [courseid, rollno],
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: 'No Gracemark Found',
+          message: 'No course marks Found',
         });
       }
       if (result) {
-        result[0].Internals = req.body.internals || result[0].Internals;
-        result[0].Marks = req.body.marks || result[0].Marks;
-        result[0].Total = result[0].Internals + result[0].Marks;
+        result[0].Internals = internals || result[0].Internals;
+        result[0].Marks = marks || result[0].Marks;
+        result[0].Total =
+          parseInt(result[0].Internals) + parseInt(result[0].Marks);
         con.query(
-          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Toatal=? WHERE CourseID=? AND RollNum=?`,
+          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=? WHERE CourseID=? AND RollNum=?`,
           [
             result[0].Internals,
-            result[0].Marksk,
+            result[0].Marks,
             result[0].Total,
             courseid,
             rollno,

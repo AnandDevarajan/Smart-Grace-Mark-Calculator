@@ -8,6 +8,12 @@ import {
   COURSE_MARK_LIST_FAIL,
   COURSE_MARK_LIST_SUCCESS,
   COURSE_MARK_LIST_REQUEST,
+  COURSE_MARK_DETAILS_FAIL,
+  COURSE_MARK_DETAILS_SUCCESS,
+  COURSE_MARK_DETAILS_REQUEST,
+  COURSE_MARK_UPDATE_SUCCESS,
+  COURSE_MARK_UPDATE_REQUEST,
+  COURSE_MARK_UPDATE_FAIL,
 } from '../constants/courseConstants';
 import axios from 'axios';
 
@@ -98,6 +104,83 @@ export const addCourseMarks = (id, cid, internals, mark, total) => async (
   } catch (error) {
     dispatch({
       type: COURSE_ADD_MARKS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateCoursemark = (editID, internals, marks) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: COURSE_MARK_UPDATE_REQUEST,
+    });
+
+    const {
+      facultySignin: { facultyInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${facultyInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/course/mark/update/${editID}`,
+      { internals, marks },
+      config
+    );
+
+    dispatch({
+      type: COURSE_MARK_UPDATE_SUCCESS,
+    });
+    dispatch({
+      type: COURSE_MARK_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: COURSE_MARK_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getCoursemarkDetails = (editID) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: COURSE_MARK_DETAILS_REQUEST,
+    });
+
+    const {
+      facultySignin: { facultyInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${facultyInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/course/mark/edit/${editID}`, config);
+
+    dispatch({
+      type: COURSE_MARK_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: COURSE_MARK_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

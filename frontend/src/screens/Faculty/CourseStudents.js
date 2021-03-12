@@ -9,10 +9,9 @@ import { Link } from 'react-router-dom';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import EditIcon from '@material-ui/icons/Edit';
 import { Input } from '@material-ui/core';
-import axios from 'axios';
+
 
 const CourseStudents = ({ history, match }) => {
   const department = match.params.id;
@@ -77,6 +76,7 @@ const CourseStudents = ({ history, match }) => {
       {data !== 'Successfully Updated ' && (
         <Message variant='info'>{data}</Message>
       )}
+      {message && <Message variant='success'>{message}</Message>}
       <Table striped bordered hover responsive className='table-sm'>
         <thead>
           <tr>
@@ -146,7 +146,7 @@ const CourseStudents = ({ history, match }) => {
                 </td>
                 {flag2 == 1 ? (
                   <LinkContainer
-                    to={`faculty/course/mark/edit/${student.RollNum}-${facultyInfo.result.CourseID}`}
+                    to={`/faculty/course/mark/edit/${student.RollNum}-${facultyInfo.result.CourseID}`}
                   >
                     <td>
                       <EditIcon className='icon' />

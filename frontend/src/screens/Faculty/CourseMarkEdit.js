@@ -4,25 +4,26 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import FormContainer from '../../components/FormContainer';
-import {
-  listCourseMarks,
-  updateCoursemark,
-} from '../../actions/gracemarkActions';
-import { GRACEMARK_UPDATE_RESET } from '../../constants/gracemarkConstants';
+import { updateCoursemark } from '../../actions/courseActions';
+import { COURSE_MARK_UPDATE_RESET } from '../../constants/courseConstants';
 import axios from 'axios';
 
 const CourseMarkEdit = ({ match, history }) => {
   const editID = match.params.id;
-  const dispatch = useDispatch();
+  let n = editID.length;
+  let rollno = editID.substring(0, n - 9);
+  let courseid = editID.substring(n - 8, n);
 
-  const courseMarkList = useSelector((state) => state.courseMarkList);
-  const { markList } = courseMarkList;
+  const dispatch = useDispatch();
 
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
 
-  const gracemarkUpdate = useSelector((state) => state.gracemarkUpdate);
-  const { error: errorUpdate, success: successUpdate } = gracemarkUpdate;
+  const courseDetails = useSelector((state) => state.courseDetails);
+  const { error, markList } = courseDetails;
+
+  const coursemarkUpdate = useSelector((state) => state.coursemarkUpdate);
+  const { error: errorUpdate, success: successUpdate } = coursemarkUpdate;
 
   const [internals, setInternals] = useState('');
   const [marks, setMarks] = useState('');
@@ -31,23 +32,23 @@ const CourseMarkEdit = ({ match, history }) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({
-        type: GRACEMARK_UPDATE_RESET,
+        type: COURSE_MARK_UPDATE_RESET,
       });
-      history.push('/admin/gracemarklist');
+      history.push(`/faculty/students/${facultyInfo.result.Department}`);
     } else {
-      if (adminInfo) {
+      if (facultyInfo) {
         axios
           .get(`/course/mark/edit/${editID}`)
           .then((response) => {
             console.log(response);
-            setInternals(response.data.markList.Internals);
-            setMarks(response.data.markList.Marks);
+            setInternals(response.data.markList[0].Internals);
+            setMarks(response.data.markList[0].Marks);
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
-        history.push('/admin/login');
+        history.push('/faculty/login');
       }
     }
   }, [successUpdate]);
@@ -55,9 +56,9 @@ const CourseMarkEdit = ({ match, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (description !== '' && marks !== '') {
+    if (internals !== '' && marks !== '') {
       setMessage('');
-      dispatch(updateGracemark({ id: gracemarkId, description, marks }));
+      dispatch(updateCoursemark(editID, internals, marks));
     } else {
       setMessage('Enter all details');
     }
@@ -65,15 +66,18 @@ const CourseMarkEdit = ({ match, history }) => {
 
   return (
     <>
-      <Link to={`/faculty/students/${s}`} className='btn btn-light my-3'>
+      <Link
+        to={`/faculty/students/${facultyInfo.result.Department}`}
+        className='btn btn-light my-3'
+      >
         Go Back
       </Link>
 
       <FormContainer>
-        <h1>EDIT MARK ID:{gracemarkId}</h1>
+        <h1>EDIT MARK {courseid} </h1>
+        <p>Roll Number : {rollno}</p>
         {message && <Message variant='warning'>{message}</Message>}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-        {console.log('State', description)}
         {error ? (
           <Message variant='danger'>{error}</Message>
         ) : (
