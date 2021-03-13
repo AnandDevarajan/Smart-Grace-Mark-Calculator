@@ -16,6 +16,9 @@ import {
   COURSE_MARK_DETAILS_SUCCESS,
   COURSE_MARK_DETAILS_FAIL,
   COURSE_MARK_DETAILS_RESET,
+  COURSE_DEPT_LIST_REQUEST,
+  COURSE_DEPT_LIST_SUCCESS,
+  COURSE_DEPT_LIST_FAIL,
 } from '../constants/courseConstants';
 
 export const courseListReducer = (state = { courses: [] }, action) => {
