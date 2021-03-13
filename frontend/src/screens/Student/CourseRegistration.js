@@ -3,31 +3,23 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
-import { listCourses } from '../../actions/courseActions';
+import { listDeptCourses } from '../../actions/courseActions';
 import { Link } from 'react-router-dom';
 import '../Home.css';
-import axios from 'axios';
-import { response } from 'express';
 
 const CourseRegistration = ({ history, match }) => {
   const department = match.params.id;
   const dispatch = useDispatch();
 
-  
-  
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
 
+  const courseDeptList = useSelector((state) => state.courseDeptList);
+  const { courses } = courseDeptList;
+
   useEffect(() => {
     if (studentInfo) {
-      axios
-        .get(`/course/${department}`)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      dispatch(listDeptCourses(department));
     } else {
       history.push('/');
     }
@@ -44,12 +36,12 @@ const CourseRegistration = ({ history, match }) => {
           </tr>
         </thead>
         <tbody>
-          {/* {courses.map((course) => (
+          {courses.map((course) => (
             <tr key={course.CourseID}>
               <td>{course.CourseID}</td>
               <td>{course.CourseName}</td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </Table>
     </div>

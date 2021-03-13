@@ -14,6 +14,9 @@ import {
   COURSE_MARK_UPDATE_SUCCESS,
   COURSE_MARK_UPDATE_REQUEST,
   COURSE_MARK_UPDATE_FAIL,
+  COURSE_DEPT_LIST_FAIL,
+  COURSE_DEPT_LIST_SUCCESS,
+  COURSE_DEPT_LIST_REQUEST,
 } from '../constants/courseConstants';
 import axios from 'axios';
 
@@ -30,6 +33,27 @@ export const listCourses = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: COURSE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listDeptCourses = (department) => async (dispatch) => {
+  try {
+    dispatch({
+      type: COURSE_DEPT_LIST_REQUEST,
+    });
+    const { data } = await axios.get(`/course/${department}`);
+    dispatch({
+      type: COURSE_DEPT_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: COURSE_DEPT_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
