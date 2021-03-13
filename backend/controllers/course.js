@@ -34,10 +34,10 @@ exports.getAllDeptCourses = (req, res) => {
 
 exports.addCourseMarks = (req, res) => {
   let id = req.params.id;
-  const { cid, total, internals, mark } = req.body;
+  const { cid, total, internals, marks } = req.body;
   con.query(
     `INSERT INTO COURSE_MARK (RollNum,CourseID,Internals,Marks,Total) VALUES (?,?,?,?,?)`,
-    [id, cid, internals, mark, total],
+    [id, cid, internals, marks, total],
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
@@ -92,15 +92,12 @@ exports.getACourseMark = (req, res) => {
 };
 
 exports.updateCourseMarkDetails = (req, res) => {
-  const id = req.params.id;
-  let n = id.length;
-  let rollno = id.substring(0, n - 9);
-  let courseid = id.substring(n - 8, n);
-  const { internals, marks } = req.body;
+  const cid = req.params.id;
+  const { internals, marks, id } = req.body;
   console.log(internals, marks);
   con.query(
     `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
-    [courseid, rollno],
+    [cid, id],
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
@@ -114,13 +111,7 @@ exports.updateCourseMarkDetails = (req, res) => {
           parseInt(result[0].Internals) + parseInt(result[0].Marks);
         con.query(
           `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=? WHERE CourseID=? AND RollNum=?`,
-          [
-            result[0].Internals,
-            result[0].Marks,
-            result[0].Total,
-            courseid,
-            rollno,
-          ],
+          [result[0].Internals, result[0].Marks, result[0].Total, cid, id],
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({

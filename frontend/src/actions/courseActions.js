@@ -115,9 +115,9 @@ export const addCourseMarks = (id, cid, internals, mark, total) => async (
       },
     };
 
-    const { data } = await axios.post(
-      `/course/marks/${id}`,
-      { cid, internals, mark, total },
+    const { data } = await axios.put(
+      `/course/marks/${cid}`,
+      { id, internals, mark, total },
       config
     );
 
@@ -136,7 +136,7 @@ export const addCourseMarks = (id, cid, internals, mark, total) => async (
   }
 };
 
-export const updateCoursemark = (editID, internals, marks) => async (
+export const updateCoursemark = (id, cid, internals, marks) => async (
   dispatch,
   getState
 ) => {
@@ -157,8 +157,8 @@ export const updateCoursemark = (editID, internals, marks) => async (
     };
 
     const { data } = await axios.put(
-      `/course/mark/update/${editID}`,
-      { internals, marks },
+      `/course/mark/update/${cid}`,
+      { internals, marks, id },
       config
     );
 

@@ -21,6 +21,9 @@ import {
   STUDENT_LIST_COURSE_FAIL,
   STUDENT_LIST_COURSE_SUCCESS,
   STUDENT_LIST_COURSE_REQUEST,
+  STUDENT_COURSE_MARK_REQUEST,
+  STUDENT_COURSE_MARK_SUCCESS,
+  STUDENT_COURSE_MARK_FAIL,
 } from '../constants/studentConstants';
 import axios from 'axios';
 
@@ -187,6 +190,29 @@ export const listCourseStudents = (department) => async (
   } catch (error) {
     dispatch({
       type: STUDENT_LIST_COURSE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const courseStudentMark = (cid) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: STUDENT_COURSE_MARK_REQUEST,
+    });
+
+    const { data } = await axios.get(`/faculty/course/mark/${cid}`);
+
+    dispatch({
+      type: STUDENT_COURSE_MARK_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: STUDENT_COURSE_MARK_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

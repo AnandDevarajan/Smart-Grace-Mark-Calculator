@@ -384,4 +384,36 @@ exports.courseStudents = (req, res) => {
   });
 };
 
-// select  s.RollNum,s.Name,s.Branch,s.Batch,c.Internals,c.Marks,c.Total from student s inner  join course_mark c on s.RollNum = c.RollNum and c.CourseID LIKE '15CSE213';
+exports.courseStudentsMarks = (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  con.query(
+    `select  s.RollNum,s.Name,s.Branch,s.Batch,c.Internals,c.Marks,c.Total from student s inner  join course_mark c on s.RollNum = c.RollNum and c.CourseID LIKE ?`,
+    [id],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: 'No students found',
+        });
+      }
+      return res.json({
+        students: result,
+      });
+      // if (result) {
+      //   con.query(
+      //     `SELECT * FROM COURSE_MARK WHERE CourseID=?`,
+      //     [id],
+      //     (err, result) => {
+      //       if (err || result.length === 0) {
+      //         return res.status(400).json({
+      //           message: 'No students found',
+      //         });
+      //       }
+      //     }
+      //   );
+      // }
+    }
+  );
+};
+
+// SELECT  s.RollNum,s.Name,s.Branch,s.Batch,c.Internals,c.Marks,c.Total,c.CourseID FROM STUDENT s INNER  JOIN COURSE_MARK c on  c.CourseID LIKE ='15CSE213'

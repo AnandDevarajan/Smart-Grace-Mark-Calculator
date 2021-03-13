@@ -10,6 +10,7 @@ import {
   requestAcceptReducer,
   requestRejectReducer,
   courseStudentListReducer,
+  courseStudentMarkListReducer,
 } from './reducers/studentReducers';
 import {
   adminRegisterReducer,
@@ -63,6 +64,7 @@ const reducer = combineReducers({
   coursemarkUpdate: coursemarkUpdateReducer,
   courseDetails: courseDetailsReducer,
   courseDeptList: courseDeptListReducer,
+  courseStudentMarkList: courseStudentMarkListReducer,
 });
 
 const middleware = [thunk];
