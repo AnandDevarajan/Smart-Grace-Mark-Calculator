@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { listAdviserBatch } from '../../actions/facultyActions';
 import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
 
 const BatchStudents = ({ history, match }) => {
@@ -26,18 +27,23 @@ const BatchStudents = ({ history, match }) => {
 
   return (
     <div className='align-items-center'>
+      <Link to='/faculty/profile'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
+      </Link>
       <h1>
         {facultyInfo.result.Department}-{batch}
       </h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Table striped bordered hover  className='table-sm'>
+        <Table striped bordered hover className='table-sm'>
           <thead>
             <tr>
               <th>Roll No</th>
               <th>Name</th>
-              <th >Email</th>
+              <th>Email</th>
               <th>Branch</th>
               <th>Batch</th>
               <th>Reason</th>
@@ -110,9 +116,13 @@ const BatchStudents = ({ history, match }) => {
                       </td>
                     )}
                     <td>
-                      <Button variant='info' className='btn btn-sm'>
-                        View
-                      </Button>
+                      <LinkContainer
+                        to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
+                      >
+                        <Button variant='info' className='btn btn-sm'>
+                          View
+                        </Button>
+                      </LinkContainer>
                     </td>
                   </tr>
                 )

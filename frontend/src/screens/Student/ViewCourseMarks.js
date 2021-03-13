@@ -3,11 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
-import {
-  listStudents,
-  requestAccept,
-  requestReject,
-} from '../../actions/studentActions';
+
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -63,7 +59,7 @@ const ViewCourseMarks = ({ history, match }) => {
           </Button>
         </Link>
       ) : (
-        <Link to={`/faculty/adviser/students/${facultyInfo.result.Department}`}>
+        <Link to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}>
           <Button variant='light'>
             <ArrowBackIcon /> Go Back
           </Button>
