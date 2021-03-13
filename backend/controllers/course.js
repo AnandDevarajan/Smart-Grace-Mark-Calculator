@@ -73,11 +73,12 @@ exports.getACourseMark = (req, res) => {
   const id = req.params.id;
   let n = id.length;
   let rollno = id.substring(0, n - 9);
-  let courseid = id.substring(n - 8, n);
-
+  let courseID = id.substring(n - 8, n);
+  console.log(rollno);
+  console.log(courseID);
   con.query(
     `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
-    [courseid, rollno],
+    [courseID, rollno],
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({

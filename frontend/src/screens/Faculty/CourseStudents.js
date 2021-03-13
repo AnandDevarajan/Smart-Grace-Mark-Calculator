@@ -4,11 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { courseStudentMark } from '../../actions/studentActions';
-import {
-  addCourseMarks,
-  listCourseMarks,
-  updateCoursemark,
-} from '../../actions/courseActions';
+import { updateCoursemark } from '../../actions/courseActions';
 import { Link } from 'react-router-dom';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -26,6 +22,9 @@ const CourseStudents = ({ history, match }) => {
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
 
+  const courseDetails = useSelector((state) => state.courseDetails);
+  const { error, markList } = courseDetails;
+
   const courseStudentMarkList = useSelector(
     (state) => state.courseStudentMarkList
   );
@@ -38,7 +37,7 @@ const CourseStudents = ({ history, match }) => {
     } else {
       history.push('/');
     }
-  }, [dispatch, history, facultyInfo]);
+  }, [dispatch, history, facultyInfo, edit]);
 
   const submitMarks = (id, internals, marks) => {
     if (internals === ' ' || marks === '') {
@@ -46,89 +45,89 @@ const CourseStudents = ({ history, match }) => {
       setMessage('Enter all the details');
     } else if (internals > 50 || marks > 50) {
       setMessage(null);
+
       setMessage('Invalid details');
     } else {
       dispatch(updateCoursemark(id, cid, internals, marks));
-      history.push(`/faculty/students/${facultyInfo.result.Department}`);
+      window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
     }
   };
 
   return (
     <>
-      {!edit ? (
-        <div className='ml-5 align-items-center'>
-          <Link to='/faculty/profile'>
-            <Button variant='light'>
-              <ArrowBackIcon /> Go Back
-            </Button>
-          </Link>
-          <Row className='align-items-center'>
-            <Col>
-              <h1>STUDENT LIST - {facultyInfo.result.CourseID}</h1>
-            </Col>
-            <Col className='text-right'>
-              <Button >Edit</Button>
-            </Col>
-          </Row>
-
-          {/* {data !== 'Successfully Updated ' && (
-      <Message variant='info'>{data}</Message>
-    )} */}
-          {message && <Message variant='info'>{message}</Message>}
-          <Table striped bordered hover responsive className='table-sm'>
-            <thead>
-              <tr style={{ color: 'black' }}>
-                <th>Roll No</th>
-                <th>Name</th>
-                <th>Branch</th>
-                <th>Batch</th>
-                <th>Internals</th>
-                <th>Marks</th>
-                <th>Total </th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((student) => (
-                <tr key={student.RollNum}>
-                  <td>{student.RollNum}</td>
-                  <td>{student.Name}</td>
-                  <td>{student.Branch}</td>
-                  <td>{student.Batch}</td>
-                  <td>
-                    {student.Internals === 'N/P' ? (
-                      <input onChange={(e) => setInternals(e.target.value)} />
-                    ) : (
-                      <td>{student.Internals}</td>
-                    )}
-                  </td>
-                  <td>
-                    {student.Marks === 'N/P' ? (
-                      <input onChange={(e) => setMarks(e.target.value)} />
-                    ) : (
-                      <td>{student.Marks}</td>
-                    )}
-                  </td>
+      <div className='ml-5 align-items-center'>
+        <Link to='/faculty/profile'>
+          <Button variant='light'>
+            <ArrowBackIcon /> Go Back
+          </Button>
+        </Link>
+        <Row className='align-items-center'>
+          <Col>
+            <h1>STUDENT LIST - {facultyInfo.result.CourseID}</h1>
+          </Col>
+        </Row>
+        {message && <Message variant='info'>{message}</Message>}
+        <Table striped bordered hover responsive className='table-sm'>
+          <thead>
+            <tr style={{ color: 'black' }}>
+              <th>Roll No</th>
+              <th>Name</th>
+              <th>Branch</th>
+              <th>Batch</th>
+              <th>Internals</th>
+              <th>Marks</th>
+              <th>Total </th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((student) => (
+              <tr key={student.RollNum}>
+                <td>{student.RollNum}</td>
+                <td>{student.Name}</td>
+                <td>{student.Branch}</td>
+                <td>{student.Batch}</td>
+                <td>
+                  {student.Internals === 'N/P' ? (
+                    <input onChange={(e) => setInternals(e.target.value)} />
+                  ) : (
+                    <td>{student.Internals}</td>
+                  )}
+                </td>
+                <td>
+                  {student.Marks === 'N/P' ? (
+                    <input onChange={(e) => setMarks(e.target.value)} />
+                  ) : (
+                    <td>{student.Marks}</td>
+                  )}
+                </td>
+                <td>
                   <td>{student.Total}</td>
-
-                  {!edit ||
-                    (student.Total === 'N/P' && (
-                      <td>
-                        <CheckBoxIcon
-                          style={{ color: 'green' }}
-                          onClick={() => {
-                            submitMarks(student.RollNum, internals, marks);
-                          }}
-                        />
-                      </td>
-                    ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-      ) : (
-        <></>
-      )}
+                </td>
+                {student.Total === 'N/P' ? (
+                  <td>
+                    <CheckBoxIcon
+                      className='icon'
+                      style={{ color: 'green' }}
+                      onClick={() => {
+                        submitMarks(student.RollNum, internals, marks);
+                      }}
+                    />
+                  </td>
+                ) : (
+                  <td>
+                    {' '}
+                    <LinkContainer
+                      to={`/faculty/course/mark/edit/${student.RollNum}`}
+                    >
+                      <EditIcon className='icon' />
+                    </LinkContainer>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </>
   );
 };

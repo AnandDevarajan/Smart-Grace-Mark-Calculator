@@ -9,15 +9,13 @@ import { COURSE_MARK_UPDATE_RESET } from '../../constants/courseConstants';
 import axios from 'axios';
 
 const CourseMarkEdit = ({ match, history }) => {
-  const editID = match.params.id;
-  let n = editID.length;
-  let rollno = editID.substring(0, n - 9);
-  let courseid = editID.substring(n - 8, n);
-
+  const id = match.params.id;
   const dispatch = useDispatch();
 
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
+
+  const [cid, setCid] = useState(facultyInfo.result.CourseID);
 
   const courseDetails = useSelector((state) => state.courseDetails);
   const { error, markList } = courseDetails;
@@ -35,11 +33,11 @@ const CourseMarkEdit = ({ match, history }) => {
         type: COURSE_MARK_UPDATE_RESET,
       });
 
-      //   history.push(`/faculty/students/${facultyInfo.result.Department}`);
+      history.push(`/faculty/students/${facultyInfo.result.Department}`);
     } else {
       if (facultyInfo) {
         axios
-          .get(`/course/mark/edit/${editID}`)
+          .get(`/course/mark/edit/${id}-${cid}`)
           .then((response) => {
             console.log(response);
             setInternals(response.data.markList[0].Internals);
@@ -56,11 +54,12 @@ const CourseMarkEdit = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    if (internals !== '' && marks !== '') {
+    if (internals > 50 || marks > 50) {
       setMessage('');
-      dispatch(updateCoursemark(editID, internals, marks));
-      setMessage(`Course Marks updated successfully`);
+      setMessage('Invalid details');
+    } else if (internals !== '' && marks !== '') {
+      setMessage('');
+      dispatch(updateCoursemark(id, cid, internals, marks));
     } else {
       setMessage('Enter all details');
     }
@@ -76,16 +75,9 @@ const CourseMarkEdit = ({ match, history }) => {
       </Link>
 
       <FormContainer>
-        <h1>EDIT MARK {courseid} </h1>
-        <p>Roll Number : {rollno}</p>
-        {message && (
-          <Message variant='success'>
-            {message}{' '}
-            <Link to={`/faculty/students/${facultyInfo.result.Department}`}>
-              Go to student list
-            </Link>
-          </Message>
-        )}
+        <h1>EDIT MARK {cid} </h1>
+        <p>Roll Number : {id}</p>
+        {message && <Message variant='danger'>{message}</Message>}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {error ? (
           <Message variant='danger'>{error}</Message>
