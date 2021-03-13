@@ -7,10 +7,12 @@ const {
   getACourseMark,
   getAllDeptCourses,
   updateCourseMarkDetails,
+  getCourseMarkOfStudent,
 } = require('../controllers/course');
 const { verifyFaculty, faculty } = require('../middlewares/auth');
 router.get('/', getAllCourses);
 router.get('/:id', getAllDeptCourses);
+router.get('/student/mark/:id', getCourseMarkOfStudent);
 router.get('/markList/:id', verifyFaculty, faculty, getCourseMark);
 router.get('/mark/edit/:id', getACourseMark);
 router.put('/marks/:id', verifyFaculty, faculty, addCourseMarks);

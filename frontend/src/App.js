@@ -28,6 +28,7 @@ import AdminForgotPassword from './screens/Admin/AdminForgotPassword';
 import AdminResetPassword from './screens/Admin/AdminResetPassword';
 import Footer from './components/Footer';
 import CourseStudents from './screens/Faculty/CourseStudents';
+import ViewCourseMarks from './screens/Student/ViewCourseMarks';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -64,6 +65,10 @@ function App() {
             component={StudentResetPassword}
           />
           <Route path='/student/request' component={RequestForm} />
+          <Route
+            path='/student/view/marklist/:id'
+            component={viewCourseMarks}
+          />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />

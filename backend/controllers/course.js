@@ -69,6 +69,24 @@ exports.getCourseMark = (req, res) => {
   );
 };
 
+exports.getCourseMarkOfStudent = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM COURSE_MARK WHERE RollNum=?`,
+    [id],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: 'No marks found',
+        });
+      }
+      return res.json({
+        markList: result,
+      });
+    }
+  );
+};
+
 exports.getACourseMark = (req, res) => {
   const id = req.params.id;
   let n = id.length;

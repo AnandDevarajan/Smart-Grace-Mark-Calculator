@@ -9,7 +9,7 @@ const {
   newPassword,
   courseStudentsMarks,
 } = require('../controllers/student');
-const { verifyStudent} = require('../middlewares/auth');
+const { verifyStudent } = require('../middlewares/auth');
 
 router.post('/', registerStudent);
 router.post('/login', authStudent);

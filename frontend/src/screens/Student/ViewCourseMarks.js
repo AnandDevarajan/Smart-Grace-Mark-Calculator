@@ -14,7 +14,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
 
-const AllStudentList = ({ history }) => {
+const ViewCourseMarks = ({ history, match }) => {
+  const rollnum = req.params.match;
   const dispatch = useDispatch();
 
   const studentList = useSelector((state) => state.studentList);
@@ -157,4 +158,4 @@ const AllStudentList = ({ history }) => {
   );
 };
 
-export default AllStudentList;
+export default ViewCourseMarks;
