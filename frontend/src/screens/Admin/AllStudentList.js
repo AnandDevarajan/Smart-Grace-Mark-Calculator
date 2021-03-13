@@ -78,7 +78,7 @@ const AllStudentList = ({ history }) => {
                 <td>{student.Batch}</td>
                 <td>
                   <LinkContainer
-                    to={`/student/view/marklist/${student.RollNum}`}
+                    to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
                   >
                     <Button className='btn btn-sm btn-info'>View</Button>
                   </LinkContainer>

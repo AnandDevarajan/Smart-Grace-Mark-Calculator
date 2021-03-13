@@ -67,7 +67,7 @@ function App() {
           <Route path='/student/request' component={RequestForm} />
           <Route
             path='/student/view/marklist/:id'
-            component={viewCourseMarks}
+            component={ViewCourseMarks}
           />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />

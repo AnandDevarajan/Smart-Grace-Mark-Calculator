@@ -399,21 +399,6 @@ exports.courseStudentsMarks = (req, res) => {
       return res.json({
         students: result,
       });
-      // if (result) {
-      //   con.query(
-      //     `SELECT * FROM COURSE_MARK WHERE CourseID=?`,
-      //     [id],
-      //     (err, result) => {
-      //       if (err || result.length === 0) {
-      //         return res.status(400).json({
-      //           message: 'No students found',
-      //         });
-      //       }
-      //     }
-      //   );
-      // }
     }
   );
 };
-
-// SELECT  s.RollNum,s.Name,s.Branch,s.Batch,c.Internals,c.Marks,c.Total,c.CourseID FROM STUDENT s INNER  JOIN COURSE_MARK c on  c.CourseID LIKE ='15CSE213'

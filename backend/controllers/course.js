@@ -72,7 +72,7 @@ exports.getCourseMark = (req, res) => {
 exports.getCourseMarkOfStudent = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM COURSE_MARK WHERE RollNum=?`,
+    `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.Total,s.CourseName from course_mark c inner  join course s on s.CourseID = c.CourseID and c.RollNum LIKE ?`,
     [id],
     (err, result) => {
       if (result.length === 0 || err) {
