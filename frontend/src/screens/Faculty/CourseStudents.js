@@ -90,78 +90,15 @@ const CourseStudents = ({ history, match }) => {
         </thead>
         <tbody>
           {students.map((student) => {
-            flag = 0;
-            flag1 = 0;
-            flag2 = 0;
             return (
               <tr key={student.RollNum}>
                 <td>{student.RollNum}</td>
                 <td>{student.Name}</td>
                 <td>{student.Branch}</td>
                 <td>{student.Batch}</td>
-
-                <td>
-                  {markList.map((mark) => {
-                    if (mark.RollNum === student.RollNum && mark.Internals) {
-                      if (flag == 0) {
-                        flag = 1;
-                        return mark.Internals;
-                      }
-                    }
-                  })}
-                  {flag == 0 ? (
-                    <Input
-                      onChange={(e) => setInternals(e.target.value)}
-                    ></Input>
-                  ) : (
-                    <></>
-                  )}
-                </td>
-
-                <td>
-                  {markList.map((mark) => {
-                    if (mark.RollNum === student.RollNum && mark.Marks) {
-                      if (flag1 == 0) {
-                        flag1 = 1;
-                        return mark.Marks;
-                      }
-                    }
-                  })}
-                  {flag1 == 0 ? (
-                    <Input onChange={(e) => setMark(e.target.value)}></Input>
-                  ) : (
-                    <></>
-                  )}
-                </td>
-                <td>
-                  {markList.map((mark) => {
-                    if (mark.RollNum === student.RollNum && mark.Total) {
-                      if (flag2 == 0) {
-                        flag2 = 1;
-                        return mark.Total;
-                      }
-                    }
-                  })}
-                </td>
-                {flag2 == 1 ? (
-                  <LinkContainer
-                    to={`/faculty/course/mark/edit/${student.RollNum}-${facultyInfo.result.CourseID}`}
-                  >
-                    <td>
-                      <EditIcon className='icon' />
-                    </td>
-                  </LinkContainer>
-                ) : (
-                  <td>
-                    <CheckBoxIcon
-                      style={{ color: 'green' }}
-                      className='icon'
-                      onClick={() => {
-                        submitMarks(student.RollNum, internals, mark);
-                      }}
-                    />
-                  </td>
-                )}
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             );
           })}

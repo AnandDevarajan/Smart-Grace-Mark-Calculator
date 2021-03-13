@@ -62,7 +62,7 @@ exports.registerStudent = (req, res) => {
       console.log(err);
     }
     con.query(
-      `INSERT INTO STUDENT (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Batch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO STUDENT (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Batch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?);INSERT INTO COURSE_MARK (RollNum,Name,Branch,Batch) VALUES (?,?,?,?)`,
       [
         rollno,
         name,
@@ -75,8 +75,13 @@ exports.registerStudent = (req, res) => {
         batch,
         degree,
         hash,
+        rollno,
+        name,
+        branch,
+        batch,
       ],
       (err, result) => {
+  
         if (err) {
           return res.status(400).json({
             message: 'Unable to create user',
@@ -378,3 +383,9 @@ exports.courseStudents = (req, res) => {
     });
   });
 };
+
+
+
+
+
+// select  s.RollNum,s.Name,s.Branch,s.Batch,c.Internals,c.Marks,c.Total from student s inner  join course_mark c on s.RollNum = c.RollNum and c.CourseID LIKE '15CSE213';

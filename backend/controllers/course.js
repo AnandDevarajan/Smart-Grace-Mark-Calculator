@@ -14,6 +14,20 @@ exports.getAllCourses = (req, res) => {
   });
 };
 
+exports.getAllDeptCourses = (req, res) => {
+  const id = req.params.id;
+  con.query(`SELECT * FROM COURSE WHERE Department=?`, [id], (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No Courses found',
+      });
+    }
+    return res.json({
+      courses: result,
+    });
+  });
+};
+
 exports.addCourseMarks = (req, res) => {
   let id = req.params.id;
   const { cid, total, internals, mark } = req.body;

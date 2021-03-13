@@ -70,7 +70,15 @@ const StudentProfile = ({ history }) => {
             </ListGroup>
           </Card>
         </Col>
-        <Col md={4}></Col>
+        <Col md={4} className='ml-5'>
+          {' '}
+          <Link
+            className='btn btn-primary my-3'
+            to={`/student/course/registration/${studentInfo.result.Branch}`}
+          >
+            Course Registration
+          </Link>
+        </Col>
         <Col md={4}></Col>
       </Row>
     </div>

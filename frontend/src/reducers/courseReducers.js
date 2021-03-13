@@ -34,6 +34,22 @@ export const courseListReducer = (state = { courses: [] }, action) => {
   }
 };
 
+export const courseDeptListReducer = (state = { courses: [] }, action) => {
+  switch (action.type) {
+    case COURSE_DEPT_LIST_REQUEST:
+      return { loading: true, courses: [] };
+    case COURSE_DEPT_LIST_SUCCESS:
+      return {
+        loading: false,
+        courses: action.payload.courses,
+      };
+    case COURSE_DEPT_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
 export const courseAddMarkListReducer = (state = {}, action) => {
   switch (action.type) {
     case COURSE_ADD_MARKS_REQUEST:

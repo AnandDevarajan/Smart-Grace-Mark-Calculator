@@ -155,6 +155,7 @@ const FacultySignup = ({ location, history }) => {
                   onChange={(e) => setDepartment(e.target.value)}
                 >
                   <option>CSE</option>
+                  <option>ECE</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId='courseId'>
