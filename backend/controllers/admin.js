@@ -203,3 +203,38 @@ exports.newPassword = (req, res) => {
     }
   );
 };
+
+exports.publishResults = (req, res) => {
+  con.query(`SELECT EmailID from STUDENT`, (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(422).json({
+        message: 'No Email Found',
+      });
+    }
+    res.json({
+      Emails: result,
+    });
+
+    con.query(`UPDATE COURSE_MARK SET status='P'`, (error, field) => {
+      if (err || field.length == 0) {
+        return res.status(400).json({
+          message: 'Failed to update',
+        });
+      }
+    });
+    let mailOptions = {
+      from: 'c8.smartgracemarkcalculator@gmail.com',
+      to: JSON.stringify(result),
+      subject: 'Results published',
+      html: ` 
+      <h3>Dear student , The results for current semester has been published . Click on this <a href="http://localhost:3000/student/login/$">link</a> to view results</h3>`,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Email sent:${info.response}`);
+      }
+    });
+  });
+};
