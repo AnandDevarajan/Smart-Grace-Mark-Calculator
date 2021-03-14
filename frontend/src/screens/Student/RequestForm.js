@@ -48,7 +48,7 @@ const RequestForm = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/'>
+      <Link to='/student/profile'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
