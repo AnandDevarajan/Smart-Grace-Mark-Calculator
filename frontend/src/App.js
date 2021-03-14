@@ -42,12 +42,20 @@ function App() {
       <Navbar />
       <main className='py-3'>
         <Container>
-          <Route exact path='/' component={Home} />
+          {facultyInfo ? (
+            <Route exact path='/faculty/profile' component={FacultyProfile} />
+          ) : adminInfo ? (
+            <Route exact path='/admin/profile' component={AdminProfile} />
+          ) : studentInfo ? (
+            <Route exact path='/student/profile' component={StudentProfile} />
+          ) : (
+            <Route exact path='/' component={Home} />
+          )}
+
           <Route path='/admin/login' component={AdminLogin} />
           <Route path='/admin/signup' component={AdminSignup} />
           <Route path='/admin/forgotpassword' component={AdminForgotPassword} />
           <Route path='/admin/reset/:token' component={AdminResetPassword} />
-          <Route path='/admin/profile' component={AdminProfile} />
           <Route path='/admin/students' component={AllStudentList} />
           <Route path='/admin/faculties' component={AllFacultyList} />
           <Route path='/admin/addGraceMarkDetails' component={GraceMarkForm} />
@@ -55,7 +63,6 @@ function App() {
           <Route path='/admin/gracemark/:id' component={GracemarkEdit} />
           <Route path='/student/login' component={StudentLogin} />
           <Route path='/student/signup' component={StudentSignup} />
-          <Route path='/student/profile' component={StudentProfile} />
           <Route
             path='/student/forgotpassword'
             component={StudentForgotPassword}
@@ -71,7 +78,6 @@ function App() {
           />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
-          <Route path='/faculty/profile' component={FacultyProfile} />
           <Route path='/faculty/students/:id' component={CourseStudents} />
           <Route
             path='/faculty/course/mark/edit/:id'
