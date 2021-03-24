@@ -45,7 +45,7 @@ function App() {
           {facultyInfo ? (
             <Route exact path='/faculty/profile' component={FacultyProfile} />
           ) : adminInfo ? (
-            <Router exact path='/admin/profile' component={AdminProfile} />
+            <Route exact path='/admin/profile' component={AdminProfile} />
           ) : studentInfo ? (
             <Route exact path='/student/profile' component={StudentProfile} />
           ) : (
