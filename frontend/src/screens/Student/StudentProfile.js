@@ -32,6 +32,7 @@ const StudentProfile = ({ history }) => {
       });
   }, [status]);
 
+  console.log(studentInfo);
   return (
     <div className='ml-5'>
       <h3>Welcome to Student Profile</h3>
@@ -70,8 +71,7 @@ const StudentProfile = ({ history }) => {
             </ListGroup>
           </Card>
         </Col>
-        <Col md={4} className='ml-5'>
-        </Col>
+        <Col md={4} className='ml-5'></Col>
         <Col md={4}></Col>
       </Row>
     </div>
