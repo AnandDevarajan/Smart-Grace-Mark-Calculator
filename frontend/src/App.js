@@ -43,11 +43,11 @@ function App() {
       <main className='py-3'>
         <Container>
           {facultyInfo ? (
-            <Route path='/faculty/profile' component={FacultyProfile} />
+            <Route exact path='/faculty/profile' component={FacultyProfile} />
           ) : adminInfo ? (
-            <Router path='/admin/profile' component={AdminProfile} />
+            <Router exact path='/admin/profile' component={AdminProfile} />
           ) : studentInfo ? (
-            <Route path='/student/profile' component={StudentProfile} />
+            <Route exact path='/student/profile' component={StudentProfile} />
           ) : (
             <Route exact path='/' component={Home} />
           )}
