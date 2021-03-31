@@ -23,6 +23,11 @@ const StudentProfileEdit = ({ location, history, match }) => {
   const studentSignin = useSelector((state) => state.studentSignin);
   const { error, studentInfo } = studentSignin;
 
+  const studentProfileUpdate = useSelector(
+    (state) => state.studentProfileUpdate
+  );
+  const { error: errorUpdate, success: successUpdate } = studentProfileUpdate;
+
   const redirect = location.search
     ? location.search.split('=')[1]
     : '/student/profile';
@@ -32,7 +37,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
       dispatch({
         type: STUDENT_PROFILE_UPDATE_RESET,
       });
-      history.push('/student/profile');
+      history.push(redirect);
     } else {
       if (studentInfo) {
         axios
@@ -48,14 +53,14 @@ const StudentProfileEdit = ({ location, history, match }) => {
           });
       }
     }
-  }, [history, studentInfo, redirect]);
+  }, [successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (description !== '' && marks !== '') {
+    if (email !== '' && phone !== '' && address != '') {
       setMessage('');
-      dispatch(updateStudentProfile({ id, email, phone, address }));
+      dispatch(updateStudentProfile(id, email, phone, address));
     } else {
       setMessage('Enter all details');
     }
@@ -63,69 +68,66 @@ const StudentProfileEdit = ({ location, history, match }) => {
 
   return (
     <>
-      {!show && (
-        <>
-          <Link to='/student/profile'>
-            <Button variant='light'>
-              <ArrowBackIcon /> Go Back
-            </Button>
+      <Link to='/student/profile'>
+        <Button variant='light'>
+          <ArrowBackIcon /> Go Back
+        </Button>
+      </Link>
+      <FormContainer>
+        <h1>Edit Your Profile</h1>
+
+        {message && <Message variant='warning'>{message}</Message>}
+        {error && <Message variant='danger'>{error}</Message>}
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId='email'>
+            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+              Email Address
+            </Form.Label>
+            <Form.Control
+              type='email'
+              placeholder='Enter email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId='phone'>
+            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+              Phone Number
+            </Form.Label>
+            <Form.Control
+              type='name'
+              placeholder='Enter phone number'
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId='address'>
+            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+              Address
+            </Form.Label>
+            <Form.Control
+              type='name'
+              placeholder='Enter  Address'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Link
+            onClick={() => {
+              setShow(!show);
+            }}
+          >
+            Change Password?{' '}
           </Link>
-          <FormContainer>
-            <h1>Edit Your Profile</h1>
+          <br />
+          <Button type='submit' variant='primary' className='mt-3'>
+            Save Changes
+          </Button>
+        </Form>
+      </FormContainer>
 
-            {message && <Message variant='warning'>{message}</Message>}
-            {error && <Message variant='danger'>{error}</Message>}
-            <Form onSubmit={submitHandler}>
-              <Form.Group controlId='email'>
-                <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-                  Email Address
-                </Form.Label>
-                <Form.Control
-                  type='email'
-                  placeholder='Enter email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-
-              <Form.Group controlId='phone'>
-                <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-                  Phone Number
-                </Form.Label>
-                <Form.Control
-                  type='name'
-                  placeholder='Enter phone number'
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId='address'>
-                <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-                  Address
-                </Form.Label>
-                <Form.Control
-                  type='name'
-                  placeholder='Enter  Address'
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Link
-                onClick={() => {
-                  setShow(!show);
-                }}
-              >
-                Change Password?{' '}
-              </Link>
-              <br />
-              <Button type='submit' variant='primary' className='mt-3'>
-                Save Changes
-              </Button>
-            </Form>
-          </FormContainer>
-        </>
-      )}
-      {show && (
+      {/* {show && (
         <>
           <Link to='/student/profile'>
             <Button variant='light'>
@@ -163,7 +165,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
             </Form>
           </FormContainer>
         </>
-      )}
+      )} */}
     </>
   );
 };

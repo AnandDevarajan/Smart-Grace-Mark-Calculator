@@ -24,6 +24,9 @@ import {
   STUDENT_COURSE_MARK_REQUEST,
   STUDENT_COURSE_MARK_SUCCESS,
   STUDENT_COURSE_MARK_FAIL,
+  STUDENT_PROFILE_UPDATE_REQUEST,
+  STUDENT_PROFILE_UPDATE_SUCCESS,
+  STUDENT_PROFILE_UPDATE_FAIL,
 } from '../constants/studentConstants';
 import axios from 'axios';
 
@@ -320,6 +323,46 @@ export const requestReject = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: REQUEST_REJECT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateStudentProfile = (id, email, phone, address) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: STUDENT_PROFILE_UPDATE_REQUEST,
+    });
+
+    const {
+      studentSignin: { studentInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${studentInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/student/${id}`,
+      { email, phone, address },
+      config
+    );
+
+    dispatch({
+      type: STUDENT_PROFILE_UPDATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: STUDENT_PROFILE_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
