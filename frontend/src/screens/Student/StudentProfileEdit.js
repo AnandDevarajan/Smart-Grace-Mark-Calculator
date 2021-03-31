@@ -14,9 +14,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [show, setShow] = useState(false);
+
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
 
@@ -113,11 +111,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
               onChange={(e) => setAddress(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Link
-            onClick={() => {
-              setShow(!show);
-            }}
-          >
+          <Link to={`/student/edit/profile/changepassword/${id}`}>
             Change Password?{' '}
           </Link>
           <br />
