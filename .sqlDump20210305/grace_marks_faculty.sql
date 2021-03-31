@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: localhost    Database: grace_marks
+-- Host: 127.0.0.1    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -36,6 +36,8 @@ CREATE TABLE `faculty` (
   `ClassAdviser` varchar(10) NOT NULL,
   `Batch` varchar(45) NOT NULL DEFAULT 'N/A',
   `role` int NOT NULL DEFAULT '2',
+  `resettoken` varchar(500) NOT NULL DEFAULT 'N/A',
+  `expiresin` varchar(45) NOT NULL DEFAULT 'N/A',
   PRIMARY KEY (`FacultyID`),
   UNIQUE KEY `FacultyID_UNIQUE` (`FacultyID`),
   UNIQUE KEY `EmailID_UNIQUE` (`EmailID`),
@@ -50,7 +52,7 @@ CREATE TABLE `faculty` (
 
 LOCK TABLES `faculty` WRITE;
 /*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-INSERT INTO `faculty` VALUES (9,'Faculty1','Faculty1@123.com','8946578467','sdsad, 1221 ,sdsadsa','11/12/11','Female','CSE','15CSE213','$2b$10$DntNk0t2c/I.MdPU0xpb0O9kNuNVTnBlkOINTLLJfj6t0HLFojCSC','Yes','B',2),(10,'faculty2','faculty2@123.com','7856478378','adsa 13 ads','11/09/85','Male','CSE','15CSE302','$2b$10$Mw.FR3fCZ7dO5B074TSUjuWD06QIuozUl0OOB1rltMsnONaBSo.Ua','No','N/A',2);
+INSERT INTO `faculty` VALUES (9,'Faculty1','Faculty1@123.com','8946578467','sdsad, 1221 ,sdsadsa','11/12/11','Female','CSE','15CSE213','$2b$10$DntNk0t2c/I.MdPU0xpb0O9kNuNVTnBlkOINTLLJfj6t0HLFojCSC','Yes','B',2,'N/A','N/A'),(10,'faculty2','faculty2@123.com','7856478378','adsa 13 ads','11/09/85','Male','CSE','15CSE302','$2b$10$Mw.FR3fCZ7dO5B074TSUjuWD06QIuozUl0OOB1rltMsnONaBSo.Ua','No','N/A',2,'N/A','N/A');
 /*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-05 23:28:53
+-- Dump completed on 2021-03-31 21:52:45

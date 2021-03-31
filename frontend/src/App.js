@@ -29,6 +29,7 @@ import AdminResetPassword from './screens/Admin/AdminResetPassword';
 import Footer from './components/Footer';
 import CourseStudents from './screens/Faculty/CourseStudents';
 import ViewCourseMarks from './screens/Student/ViewCourseMarks';
+import StudentProfileEdit from './screens/Student/StudentProfileEdit';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -63,6 +64,7 @@ function App() {
           <Route path='/admin/gracemark/:id' component={GracemarkEdit} />
           <Route path='/student/login' component={StudentLogin} />
           <Route path='/student/signup' component={StudentSignup} />
+          <Route path='/student/edit/profile' component={StudentProfileEdit} />
           <Route
             path='/student/forgotpassword'
             component={StudentForgotPassword}

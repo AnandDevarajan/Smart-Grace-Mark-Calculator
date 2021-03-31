@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: localhost    Database: grace_marks
+-- Host: 127.0.0.1    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -32,9 +32,11 @@ CREATE TABLE `administrator` (
   `Gender` varchar(45) NOT NULL,
   `Password` varchar(500) NOT NULL,
   `role` int NOT NULL DEFAULT '3',
+  `resettoken` varchar(500) NOT NULL DEFAULT 'N/A',
+  `expiresin` varchar(45) NOT NULL DEFAULT 'N/A',
   PRIMARY KEY (`adminID`),
   UNIQUE KEY `EmailID_UNIQUE` (`EmailID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +45,7 @@ CREATE TABLE `administrator` (
 
 LOCK TABLES `administrator` WRITE;
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
-INSERT INTO `administrator` VALUES (6,'Admin207','admin@207.com','9207251675','Home Name , India','15/16/029','Male','$2b$10$SshC8YuEbNbzdNxYjib1MepDHLTd/jFfOQHn6ZmoAYlLOEQi8Elj6',3);
+INSERT INTO `administrator` VALUES (6,'Admin207','admin@207.com','9207251675','Home Name , India','15/16/029','Male','$2b$10$SshC8YuEbNbzdNxYjib1MepDHLTd/jFfOQHn6ZmoAYlLOEQi8Elj6',3,'N/A','N/A'),(7,'admin10','admin10@gmail.com','9765676545','Chennai','04/12/90','Male','$2b$10$1t563nubFVrbwqsi7vpN7.QHDLeqwB6827INAALCQloJKnUXyGirO',3,'N/A','N/A');
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-05 23:28:52
+-- Dump completed on 2021-03-31 21:52:45

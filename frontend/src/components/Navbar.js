@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -15,9 +15,19 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import BeenhereIcon from '@material-ui/icons/Beenhere';
 import ClassIcon from '@material-ui/icons/Class';
+import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import './Navbar.css';
 
 function Navbar() {
+  const [dt, setDt] = useState(new Date().toLocaleString());
+  useEffect(() => {
+      let secTimer = setInterval( () => {
+        setDt(new Date().toLocaleString())
+      },1000)
+
+      return () => clearInterval(secTimer);
+  }, []);
+
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -53,6 +63,7 @@ function Navbar() {
           <h3 className='text-white ml-auto mr-auto'>
             Smart Grace Mark Calculator
           </h3>
+          <h7 className="text-white ">{dt}</h7>
         </div>
 
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -67,6 +78,12 @@ function Navbar() {
                 <Link to='/student/profile'>
                   <AccountCircleIcon />
                   <span>Profile</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link to='/student/edit/profile'>
+                  <EditTwoToneIcon/>
+                  <span>Edit Profile</span>
                 </Link>
               </li>
               <li className='nav-text'>
@@ -93,6 +110,12 @@ function Navbar() {
                 <Link to='/faculty/profile'>
                   <AccountCircleIcon />
                   <span>Profile</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link to='/faculty/profile'>
+                  <EditTwoToneIcon/>
+                  <span>Edit Profile</span>
                 </Link>
               </li>
               {facultyInfo.result.ClassAdviser === 'Yes' && (
@@ -131,6 +154,12 @@ function Navbar() {
                 <Link to='/admin/profile'>
                   <AccountCircleIcon />
                   <span>{adminInfo.result.Name}</span>
+                </Link>
+              </li>
+              <li className='nav-text'>
+                <Link to='/admin/profile'>
+                  <EditTwoToneIcon/>
+                  <span>Edit Profile</span>
                 </Link>
               </li>
               <li className='nav-text'>
