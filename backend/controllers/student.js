@@ -436,33 +436,42 @@ exports.updateStudentProfile = (req, res) => {
 
 exports.changePassword = (req, res) => {
   const id = req.params.id;
-  const { password } = req.body;
+  const { oldPassword, newPassword } = req.body;
   con.query(`SELECT * FROM STUDENT WHERE RollNum=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
         message: 'No studentFound',
       });
     }
-    bcrypt.hash(password, 10, (err, hash) => {
-      if (err) {
-        return console.log(err);
-      }
-      con.query(
-        'UPDATE STUDENT SET Password=? WHERE RollNum=?',
-        [hash, password],
-        (err, result) => {
-          if (err) {
-            return res.status(400).json({
-              message: 'Unable to reset password',
-            });
-          }
-          if (result) {
-            res.json({
-              message: 'Password updated successfully',
-            });
-          }
+    if (result.length > 0) {
+      bcrypt.compare(oldPassword, result[0].Password, (err, hash) => {
+        if (!hash) {
+          return res.status(400).json({
+            message: 'current Password is Invalid',
+          });
         }
-      );
-    });
+        bcrypt.hash(newPassword, 10, (err, hash) => {
+          if (err) {
+            return console.log(err);
+          }
+          con.query(
+            'UPDATE STUDENT SET Password=? WHERE RollNum=?',
+            [hash, id],
+            (err, result) => {
+              if (err) {
+                return res.status(400).json({
+                  message: 'Unable to reset password',
+                });
+              }
+              if (result) {
+                res.json({
+                  message: 'Password updated successfully',
+                });
+              }
+            }
+          );
+        });
+      });
+    }
   });
 };
