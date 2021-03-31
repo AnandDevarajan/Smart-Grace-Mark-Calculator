@@ -29,7 +29,6 @@ import AdminResetPassword from './screens/Admin/AdminResetPassword';
 import Footer from './components/Footer';
 import CourseStudents from './screens/Faculty/CourseStudents';
 import ViewCourseMarks from './screens/Student/ViewCourseMarks';
-import StudentProfileEdit from './screens/Student/StudentProfileEdit';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -55,6 +54,7 @@ function App() {
 
           <Route path='/admin/login' component={AdminLogin} />
           <Route path='/admin/signup' component={AdminSignup} />
+          <Route path='/admin/profile' component={AdminProfile} />
           <Route path='/admin/forgotpassword' component={AdminForgotPassword} />
           <Route path='/admin/reset/:token' component={AdminResetPassword} />
           <Route path='/admin/students' component={AllStudentList} />
@@ -64,7 +64,7 @@ function App() {
           <Route path='/admin/gracemark/:id' component={GracemarkEdit} />
           <Route path='/student/login' component={StudentLogin} />
           <Route path='/student/signup' component={StudentSignup} />
-          <Route path='/student/edit/profile' component={StudentProfileEdit} />
+          <Route path='/student/profile' component={StudentProfile} />
           <Route
             path='/student/forgotpassword'
             component={StudentForgotPassword}
@@ -80,6 +80,7 @@ function App() {
           />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
+          <Route path='/faculty/profile' component={FacultyProfile} />
           <Route path='/faculty/students/:id' component={CourseStudents} />
           <Route
             path='/faculty/course/mark/edit/:id'
