@@ -79,7 +79,10 @@ function App() {
             path='/student/view/marklist/:id'
             component={ViewCourseMarks}
           />
-          <Route path='/student/edit/profile' component={StudentProfileEdit} />
+          <Route
+            path='/student/edit/profile/:id'
+            component={StudentProfileEdit}
+          />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />

@@ -4,8 +4,9 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import FormContainer from '../../components/FormContainer';
-import { studentRegister } from '../../actions/studentActions';
+import { updateStudentProfile } from '../../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { STUDENT_PROFILE_UPDATE_RESET } from '../../constants/studentConstants';
 import axios from 'axios';
 
 const StudentProfileEdit = ({ location, history, match }) => {
@@ -19,30 +20,44 @@ const StudentProfileEdit = ({ location, history, match }) => {
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
 
-  const studentSignup = useSelector((state) => state.studentSignup);
-  const { error, studentInfo } = studentSignup;
+  const studentSignin = useSelector((state) => state.studentSignin);
+  const { error, studentInfo } = studentSignin;
 
   const redirect = location.search
     ? location.search.split('=')[1]
     : '/student/profile';
 
   useEffect(() => {
-    if (studentInfo) {
-      history.push(redirect);
+    if (successUpdate) {
+      dispatch({
+        type: STUDENT_PROFILE_UPDATE_RESET,
+      });
+      history.push('/student/profile');
+    } else {
+      if (studentInfo) {
+        axios
+          .get(`/student/${id}`)
+          .then((response) => {
+            console.log(response);
+            setEmail(response.data.student.EmailID);
+            setPhone(response.data.student.PhoneNum);
+            setAddress(response.data.student.Address);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     }
   }, [history, studentInfo, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (phone === '' || address === '' || email === '' || password === '') {
+
+    if (description !== '' && marks !== '') {
       setMessage('');
-      setMessage('Enter all the details');
-    } else if (phone.length != 10) {
-      setMessage('');
-      setMessage('Invalid phone number');
+      dispatch(updateStudentProfile({ id, email, phone, address }));
     } else {
-      setMessage('');
-      dispatch(studentRegister(email, password, phone, address));
+      setMessage('Enter all details');
     }
   };
 
