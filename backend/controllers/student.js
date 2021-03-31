@@ -402,4 +402,3 @@ exports.courseStudentsMarks = (req, res) => {
     }
   );
 };
-
