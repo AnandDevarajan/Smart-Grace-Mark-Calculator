@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -21,11 +21,11 @@ import './Navbar.css';
 function Navbar() {
   const [dt, setDt] = useState(new Date().toLocaleString());
   useEffect(() => {
-      let secTimer = setInterval( () => {
-        setDt(new Date().toLocaleString())
-      },1000)
+    let secTimer = setInterval(() => {
+      setDt(new Date().toLocaleString());
+    }, 1000);
 
-      return () => clearInterval(secTimer);
+    return () => clearInterval(secTimer);
   }, []);
 
   const [sidebar, setSidebar] = useState(false);
@@ -63,7 +63,7 @@ function Navbar() {
           <h3 className='text-white ml-auto mr-auto'>
             Smart Grace Mark Calculator
           </h3>
-          <h7 className="text-white ">{dt}</h7>
+          <h7 className='text-white '>{dt}</h7>
         </div>
 
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -81,8 +81,10 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link to='/student/edit/profile'>
-                  <EditTwoToneIcon/>
+                <Link
+                  to={`/student/edit/profile/${studentInfo.result.RollNum}`}
+                >
+                  <EditTwoToneIcon />
                   <span>Edit Profile</span>
                 </Link>
               </li>
@@ -114,7 +116,7 @@ function Navbar() {
               </li>
               <li className='nav-text'>
                 <Link to='/faculty/profile'>
-                  <EditTwoToneIcon/>
+                  <EditTwoToneIcon />
                   <span>Edit Profile</span>
                 </Link>
               </li>
@@ -158,7 +160,7 @@ function Navbar() {
               </li>
               <li className='nav-text'>
                 <Link to='/admin/profile'>
-                  <EditTwoToneIcon/>
+                  <EditTwoToneIcon />
                   <span>Edit Profile</span>
                 </Link>
               </li>

@@ -32,6 +32,8 @@ const StudentSignup = ({ location, history }) => {
     : '/student/profile';
 
   useEffect(() => {
+    
+    
     if (studentInfo) {
       history.push(redirect);
     }

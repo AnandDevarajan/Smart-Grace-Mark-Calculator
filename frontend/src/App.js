@@ -10,6 +10,7 @@ import StudentLogin from './screens/Student/StudentLogin';
 import StudentForgotPassword from './screens/Student/StudentForgotPassword';
 import StudentResetPassword from './screens/Student/StudentResetPassword';
 import StudentProfile from './screens/Student/StudentProfile';
+import StudentProfileEdit from './screens/Student/StudentProfileEdit';
 import AdminProfile from './screens/Admin/AdminProfile';
 import FacultyLogin from './screens/Faculty/FacultyLogin';
 import FacultySignup from './screens/Faculty/FacultySignup';
@@ -78,6 +79,7 @@ function App() {
             path='/student/view/marklist/:id'
             component={ViewCourseMarks}
           />
+          <Route path='/student/edit/profile' component={StudentProfileEdit} />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
           <Route path='/faculty/profile' component={FacultyProfile} />
