@@ -121,45 +121,6 @@ const StudentProfileEdit = ({ location, history, match }) => {
         </Form>
       </FormContainer>
 
-      {/* {show && (
-        <>
-          <Link to='/student/profile'>
-            <Button variant='light'>
-              <ArrowBackIcon /> Go Back
-            </Button>
-          </Link>
-          <FormContainer>
-            <Form onSubmit={submitHandler}>
-              <h1>Change Password</h1>
-              <Form.Group controlId='password'>
-                <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-                  password
-                </Form.Label>
-                <Form.Control
-                  type='password'
-                  placeholder='Enter password'
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId='confirmPassword'>
-                <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-                  Confirm Password
-                </Form.Label>
-                <Form.Control
-                  type='password'
-                  placeholder='Confirm password'
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Button type='submit' variant='primary'>
-                Save Changes
-              </Button>
-            </Form>
-          </FormContainer>
-        </>
-      )} */}
     </>
   );
 };
