@@ -6,6 +6,9 @@ import {
   ADMIN_LOGIN_SUCCESS,
   ADMIN_LOGIN_FAIL,
   ADMIN_LOGOUT,
+  ADMIN_PROFILE_UPDATE_FAIL,
+  ADMIN_PROFILE_UPDATE_SUCCESS,
+  ADMIN_PROFILE_UPDATE_REQUEST,
 } from '../constants/adminConstants';
 
 import { GRACEMARK_DETAILS_RESET } from '../constants/gracemarkConstants';
@@ -107,4 +110,44 @@ export const adminLogout = () => (dispatch) => {
     type: GRACEMARK_DETAILS_RESET,
   });
   document.location.href = '/';
+};
+
+export const updateAdminProfile = (id, email, phone, address) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: ADMIN_PROFILE_UPDATE_REQUEST,
+    });
+
+    const {
+      adminSignin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/admin/${id}`,
+      { email, phone, address },
+      config
+    );
+
+    dispatch({
+      type: ADMIN_PROFILE_UPDATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_PROFILE_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

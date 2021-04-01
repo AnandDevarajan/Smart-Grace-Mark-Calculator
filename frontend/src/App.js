@@ -33,6 +33,8 @@ import ViewCourseMarks from './screens/Student/ViewCourseMarks';
 import StudentChangePassword from './screens/Student/StudentChangePassword';
 import FacultyProfileEdit from './screens/Faculty/FacultyProfileEdit';
 import FacultyChangePassword from './screens/Faculty/FacultyChangePassword';
+import AdminProfileEdit from './screens/Admin/AdminProfileEdit';
+import AdminChangePassword from './screens/Admin/AdminChangePassword';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -66,6 +68,16 @@ function App() {
           <Route path='/admin/addGraceMarkDetails' component={GraceMarkForm} />
           <Route path='/admin/gracemarklist' component={GracemarkList} />
           <Route path='/admin/gracemark/:id' component={GracemarkEdit} />
+          <Route
+            exact
+            path='/admin/edit/profile/:id'
+            component={AdminProfileEdit}
+          />
+          <Route
+            exact
+            path='/admin/edit/profile/changepassword/:id'
+            component={AdminChangePassword}
+          />
           <Route path='/student/login' component={StudentLogin} />
           <Route path='/student/signup' component={StudentSignup} />
           <Route path='/student/profile' component={StudentProfile} />
