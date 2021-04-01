@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import EmailIcon from '@material-ui/icons/Email';
+import PersonIcon from '@material-ui/icons/Person';
+import PhoneIcon from '@material-ui/icons/Phone';
+import HomeIcon from '@material-ui/icons/Home';
+import PublishIcon from '@material-ui/icons/Publish';
 import {
   Row,
   Col,
@@ -44,39 +49,50 @@ const AdminProfile = ({ history }) => {
   }, [adminInfo, name, email, address, phone]);
   return (
     <div className='ml-5'>
-      <Row>
-        <Col md={8}>
-          <h3>Welcome to Admin Profile&nbsp;!!</h3>
-        </Col>
-      </Row>
+      <h3 className='btn  btn-primary'>Welcome to Admin Profile</h3>
+
       <Row className='mt-5'>
-        <Col md={7} style={{ backgroundColor: '#92a8d1' }}>
+        <Col md={7} style={{ backgroundColor: '#2B2E4A' }}>
           <ListGroup variant='flush' className='mt-4 ml-2'>
             <ListGroup.Item>
-              <h4>
-                Name:&nbsp;&nbsp;&nbsp;<i>{name}</i>
+              <h4 style={{ textTransform: 'capitalize' }}>
+                <PersonIcon />
+                :&nbsp;&nbsp;&nbsp;
+                {name}
+              </h4>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <h4 style={{ textTransform: 'lowercase' }}>
+                <EmailIcon />
+                :&nbsp;&nbsp;&nbsp;{email}
               </h4>
             </ListGroup.Item>
             <ListGroup.Item>
               <h4>
-                Email ID:&nbsp;&nbsp;&nbsp;<i>{email}</i>
+                <PhoneIcon />
+                :&nbsp;&nbsp;&nbsp;
+                {phone}
               </h4>
             </ListGroup.Item>
             <ListGroup.Item>
-              <h4>
-                Phone Number:&nbsp;&nbsp;&nbsp;
-                <i>{phone}</i>
+              <h4 style={{ textTransform: 'capitalize' }}>
+                <HomeIcon />
+                :&nbsp;&nbsp;&nbsp;{address}
               </h4>
             </ListGroup.Item>
             <ListGroup.Item>
-              <h4>
-                Address:&nbsp;&nbsp;&nbsp;<i>{address}</i>
+              <h4 style={{ textTransform: 'capitalize' }}>
+                <PublishIcon />
+                :&nbsp;&nbsp;&nbsp;
+                <button className='btn btn-sm btn-success '>
+                  Publish Results
+                </button>
               </h4>
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col style={{ backgroundColor: '#92a8d1' }}>
-          <div className='mt-5 ml-5 mb-5'>
+        <Col style={{ backgroundColor: '#343f56' }}>
+          <div className='mt-4 ml-5 mb-5'>
             <Calendar onChange={onChange} value={value} />
           </div>
         </Col>
