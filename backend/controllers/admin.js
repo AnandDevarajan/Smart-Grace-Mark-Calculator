@@ -238,3 +238,94 @@ exports.publishResults = (req, res) => {
     });
   });
 };
+
+exports.getAdmin = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM ADMINISTRATOR WHERE adminID=?`,
+    [id],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: 'No admin found',
+        });
+      }
+      return res.json({
+        admin: result[0],
+      });
+    }
+  );
+};
+
+exports.updateAdminProfile = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM ADMINISTRATOR WHERE adminID=?;`,
+    [id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(400).json({
+          message: 'No admin Found',
+        });
+      }
+      if (result) {
+        result[0].PhoneNum = req.body.phone || result[0].PhoneNum;
+        result[0].EmailID = req.body.email || result[0].EmailID;
+        result[0].Address = req.body.address || result[0].Address;
+
+        con.query(
+          `UPDATE ADMINISTRATOR SET PhoneNum=?,EmailID=?,Address=? WHERE adminID=?`,
+          [result[0].PhoneNum, result[0].EmailID, result[0].Address, id],
+          (err, result) => {
+            if (err || result.length === 0) {
+              return res.status(400).json({
+                message: 'Failed to update',
+              });
+            }
+            return res.json({
+              admin: result,
+            });
+          }
+        );
+      }
+    }
+  );
+};
+
+exports.changePassword = (req, res) => {
+  const id = req.params.id;
+  const { password } = req.body;
+  con.query(
+    `SELECT * FROM ADMINISTRATOR WHERE adminID=?;`,
+    [id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(400).json({
+          message: 'No admin found',
+        });
+      }
+
+      bcrypt.hash(password, 10, (err, hash) => {
+        if (err) {
+          return console.log(err);
+        }
+        con.query(
+          'UPDATE ADMINISTRATOR SET Password=? WHERE adminID=?',
+          [hash, id],
+          (err, result) => {
+            if (err) {
+              return res.status(400).json({
+                message: 'Unable to reset password',
+              });
+            }
+            if (result) {
+              res.json({
+                message: 'Password updated successfully',
+              });
+            }
+          }
+        );
+      });
+    }
+  );
+};
