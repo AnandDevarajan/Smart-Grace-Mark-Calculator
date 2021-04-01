@@ -32,6 +32,7 @@ import CourseStudents from './screens/Faculty/CourseStudents';
 import ViewCourseMarks from './screens/Student/ViewCourseMarks';
 import StudentChangePassword from './screens/Student/StudentChangePassword';
 import FacultyProfileEdit from './screens/Faculty/FacultyProfileEdit';
+import FacultyChangePassword from './screens/Faculty/FacultyChangePassword';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -98,6 +99,11 @@ function App() {
             exact
             path='/faculty/edit/profile/:id'
             component={FacultyProfileEdit}
+          />
+          <Route
+            exact
+            path='/faculty/edit/profile/changepassword/:id'
+            component={FacultyChangePassword}
           />
           <Route path='/faculty/students/:id' component={CourseStudents} />
           <Route

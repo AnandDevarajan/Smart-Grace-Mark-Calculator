@@ -111,7 +111,7 @@ const FacultyProfileEdit = ({ location, history, match }) => {
               onChange={(e) => setAddress(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Link to={`/student/edit/profile/changepassword/${id}`}>
+          <Link to={`/faculty/edit/profile/changepassword/${id}`}>
             Change Password?{' '}
           </Link>
           <br />
