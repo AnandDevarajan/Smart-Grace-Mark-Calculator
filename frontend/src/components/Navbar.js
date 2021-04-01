@@ -115,7 +115,9 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link to='/faculty/profile'>
+                <Link
+                  to={`/faculty/edit/profile/${facultyInfo.result.FacultyID}`}
+                >
                   <EditTwoToneIcon />
                   <span>Edit Profile</span>
                 </Link>
