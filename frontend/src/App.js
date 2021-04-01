@@ -35,6 +35,7 @@ import FacultyProfileEdit from './screens/Faculty/FacultyProfileEdit';
 import FacultyChangePassword from './screens/Faculty/FacultyChangePassword';
 import AdminProfileEdit from './screens/Admin/AdminProfileEdit';
 import AdminChangePassword from './screens/Admin/AdminChangePassword';
+import ViewGrade from './screens/Student/ViewGrade';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -94,6 +95,7 @@ function App() {
             path='/student/view/marklist/:id'
             component={ViewCourseMarks}
           />
+          <Route path='/student/grade/:id' component={ViewGrade} />
           <Route
             exact
             path='/student/edit/profile/:id'

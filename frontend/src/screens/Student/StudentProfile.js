@@ -3,6 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import EmailIcon from '@material-ui/icons/Email';
+import PersonIcon from '@material-ui/icons/Person';
+import PhoneIcon from '@material-ui/icons/Phone';
+import HomeIcon from '@material-ui/icons/Home';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import ClassIcon from '@material-ui/icons/Class';
+import SchoolIcon from '@material-ui/icons/School';
+import SendIcon from '@material-ui/icons/Send';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import PublishIcon from '@material-ui/icons/Publish';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+
 import {
   Row,
   Col,
@@ -15,9 +27,16 @@ import {
 import axios from 'axios';
 
 const StudentProfile = ({ history }) => {
-  const [value, onChange] = useState(new Date());
-
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [roll, setRoll] = useState('');
+  const [degree, setDegree] = useState('');
+  const [branch, setBranch] = useState('');
+  const [batch, setBatch] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
   const [status, setStatus] = useState('');
+  const [value, onChange] = useState(new Date());
 
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
@@ -29,6 +48,14 @@ const StudentProfile = ({ history }) => {
     axios
       .get(`/student/${studentInfo.result.RollNum}`)
       .then((response) => {
+        setName(response.data.student.Name);
+        setRoll(response.data.student.RollNum);
+        setEmail(response.data.student.EmailID);
+        setDegree(response.data.student.Degree);
+        setBranch(response.data.student.Branch);
+        setBatch(response.data.student.Batch);
+        setPhone(response.data.student.PhoneNum);
+        setAddress(response.data.student.Address);
         setStatus(response.data.student.Requested);
       })
       .catch((err) => {
@@ -38,47 +65,77 @@ const StudentProfile = ({ history }) => {
 
   return (
     <div className='ml-5'>
-      <Row>
-        <Col md={8}><h3>Welcome to Student Profile&nbsp;!!</h3></Col>  
-        
-      </Row> 
-      <Row className="mt-5">
-        <Col md={7} style={{backgroundColor : "#92a8d1" }}>
-          
-            <ListGroup variant='flush' className="mt-4 mb-4 ml-2">
-              <ListGroup.Item>
-                <h4>Name:&nbsp;&nbsp;&nbsp;<i>{studentInfo.result.Name}</i></h4>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <h4>Roll Number:&nbsp;&nbsp;&nbsp;<i>{studentInfo.result.RollNum}</i></h4>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <h4>Degree:&nbsp;&nbsp;&nbsp;<i>{studentInfo.result.Degree}</i></h4>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <h4>Branch:&nbsp;&nbsp;&nbsp;<i>{studentInfo.result.Branch}</i></h4>
-              </ListGroup.Item>
-              <ListGroup.Item><h4>Grace Mark Request:</h4>
-                {' '}
-                {status === 'pending' ? (
-                  <Button className='btn btn-warning'>
-                    Pending
+      <h3 className='btn  btn-primary'>Welcome to Student Profile</h3>
+
+      <Row className='mt-5'>
+        <Col md={7} style={{ backgroundColor: '#2B2E4A' }}>
+          <ListGroup variant='flush' className='mt-4 mb-4 ml-2'>
+            <ListGroup.Item>
+              <h4 style={{ textTransform: 'capitalize' }}>
+                <PersonIcon />
+                :&nbsp;&nbsp;&nbsp;
+                {name}
+              </h4>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <h4>
+                <FormatListNumberedIcon />
+                :&nbsp;&nbsp;&nbsp;
+                {studentInfo.result.RollNum}
+              </h4>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <h4 style={{ textTransform: 'lowercase' }}>
+                <EmailIcon />
+                :&nbsp;&nbsp;&nbsp;{email}
+              </h4>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <h4 style={{ textTransform: 'Capitalize' }}>
+                <SchoolIcon />
+                :&nbsp;&nbsp;&nbsp;{degree}&nbsp;&nbsp;{branch} - {batch}
+              </h4>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <h4>
+                <PhoneIcon />
+                :&nbsp;&nbsp;&nbsp;
+                {phone}
+              </h4>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              {status === 'pending' ? (
+                <h4>
+                  <AutorenewIcon />
+                  :&nbsp;&nbsp;&nbsp;
+                  <Button className='btn btn-sm btn-warning'>
+                    Grace Mark Request Pending
                   </Button>
-                ) : status === 'accepted' ? (
-                  <Button className='btn btn-success'>
-                    Accepted
+                </h4>
+              ) : status === 'accepted' ? (
+                <h4>
+                  <DoneAllIcon />
+                  :&nbsp;&nbsp;&nbsp;
+                  <Button className='btn btn-sm btn-success'>
+                    Grace Mark Request Accepted
                   </Button>
-                ) : (
-                  <Link className='btn btn-info my-3' to='/student/request'>
-                   Click to Request
+                </h4>
+              ) : (
+                <h4>
+                  <SendIcon /> :&nbsp;&nbsp;&nbsp;
+                  <Link className='btn btn-sm btn-info' to='/student/request'>
+                    Request For Grace Mark
                   </Link>
-                )}
-              </ListGroup.Item>
-            </ListGroup>
-          
+                </h4>
+              )}
+            </ListGroup.Item>
+          </ListGroup>
         </Col>
-        <Col  style={{backgroundColor : "#92a8d1" }}><div className="mt-5 ml-5" ><Calendar onChange={onChange} value={value}/></div></Col>
-        
+        <Col style={{ backgroundColor: '#343f56' }}>
+          <div className='mt-4 ml-5'>
+            <Calendar onChange={onChange} value={value} />
+          </div>
+        </Col>
       </Row>
     </div>
   );

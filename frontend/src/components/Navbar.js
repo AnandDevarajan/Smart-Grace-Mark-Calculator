@@ -89,7 +89,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link to='/student/grade'>
+                <Link to={`/student/grade/${studentInfo.result.RollNum}`}>
                   <MenuBookIcon />
                   <span>Grades</span>
                 </Link>
