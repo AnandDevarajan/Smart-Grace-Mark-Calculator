@@ -12,7 +12,6 @@ import '../Home.css';
 import EditIcon from '@material-ui/icons/Edit';
 
 const CourseStudents = ({ history, match }) => {
-  const department = match.params.id;
   const [message, setMessage] = useState(null);
   const [internals, setInternals] = useState('');
   const [marks, setMarks] = useState('');

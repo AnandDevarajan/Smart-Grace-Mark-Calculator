@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CourseStudents from '../CourseStudents';
+import Footer from '../Footer';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<CourseStudents />, div);
+  ReactDOM.render(<Footer></Footer>, div);
 });
-
-export default CourseStudents.test;

@@ -10,6 +10,8 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.2",
     "axios": "^0.21.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-calendar": "^3.3.1",
@@ -20,8 +22,10 @@
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-testing-library": "^8.0.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "web-vitals": "^1.1.0"
   },
@@ -50,7 +54,6 @@
     ]
   },
   "devDependencies": {
-    "jest-dom": "^4.0.0",
     "react-test-render": "^1.1.2"
   }
 }

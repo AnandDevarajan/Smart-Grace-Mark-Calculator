@@ -32,14 +32,12 @@ const StudentSignup = ({ location, history }) => {
     : '/student/profile';
 
   useEffect(() => {
-    
-    
     if (studentInfo) {
       history.push(redirect);
     }
   }, [history, studentInfo, redirect]);
 
-  const submitHandler = (e) => {
+   const submitHandler = (e) => {
     e.preventDefault();
     if (
       name === '' ||
