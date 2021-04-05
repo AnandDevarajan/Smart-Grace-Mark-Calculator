@@ -22,9 +22,7 @@ const AdminSignup = ({ location, history }) => {
   const adminSignup = useSelector((state) => state.adminSignup);
   const { error, adminInfo } = adminSignup;
 
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/admin/profile';
+  const redirect = '/admin/profile';
 
   useEffect(() => {
     if (adminInfo) {

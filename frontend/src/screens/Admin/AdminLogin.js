@@ -15,10 +15,10 @@ const AdminLogin = ({ location, history }) => {
   const adminSignin = useSelector((state) => state.adminSignin);
   const { error, adminInfo } = adminSignin;
 
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/admin/profile';
-
+  // const redirect = location.search
+  //   ? location.search.split('=')[1]
+  //   : '/admin/profile';
+  const redirect = '/admin/profile';
   useEffect(() => {
     if (adminInfo) {
       history.push(redirect);
