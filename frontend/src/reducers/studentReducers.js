@@ -25,6 +25,10 @@ import {
   STUDENT_COURSE_MARK_REQUEST,
   STUDENT_COURSE_MARK_SUCCESS,
   STUDENT_COURSE_MARK_FAIL,
+  STUDENT_PROFILE_UPDATE_REQUEST,
+  STUDENT_PROFILE_UPDATE_SUCCESS,
+  STUDENT_PROFILE_UPDATE_FAIL,
+  STUDENT_PROFILE_UPDATE_RESET,
 } from '../constants/studentConstants';
 
 export const studentRegisterReducer = (state = {}, action) => {
@@ -142,6 +146,26 @@ export const requestRejectReducer = (state = { students: [] }, action) => {
       return { loading: false, students: action.payload.students };
     case REQUEST_REJECT_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const studentProfileUpdateReducer = (
+  state = { student: {} },
+  action
+) => {
+  switch (action.type) {
+    case STUDENT_PROFILE_UPDATE_REQUEST:
+      return { loading: true };
+    case STUDENT_PROFILE_UPDATE_SUCCESS:
+      return { loading: false, success: true };
+    case STUDENT_PROFILE_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case STUDENT_PROFILE_UPDATE_RESET:
+      return {
+        student: {},
+      };
     default:
       return state;
   }

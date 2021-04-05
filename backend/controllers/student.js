@@ -403,3 +403,67 @@ exports.courseStudentsMarks = (req, res) => {
   );
 };
 
+exports.updateStudentProfile = (req, res) => {
+  const id = req.params.id;
+  con.query(`SELECT * FROM STUDENT WHERE RollNum=?;`, [id], (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(400).json({
+        message: 'No studentFound',
+      });
+    }
+    if (result) {
+      result[0].PhoneNum = req.body.phone || result[0].PhoneNum;
+      result[0].EmailID = req.body.email || result[0].EmailID;
+      result[0].Address = req.body.address || result[0].Address;
+
+      con.query(
+        `UPDATE STUDENT SET PhoneNum=?,EmailID=?,Address=? WHERE RollNum=?`,
+        [result[0].PhoneNum, result[0].EmailID, result[0].Address, id],
+        (err, result) => {
+          if (err || result.length === 0) {
+            return res.status(400).json({
+              message: 'Failed to update',
+            });
+          }
+          return res.json({
+            student: result,
+          });
+        }
+      );
+    }
+  });
+};
+
+exports.changePassword = (req, res) => {
+  const id = req.params.id;
+  const { password } = req.body;
+  con.query(`SELECT * FROM STUDENT WHERE RollNum=?;`, [id], (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(400).json({
+        message: 'No studentFound',
+      });
+    }
+
+    bcrypt.hash(password, 10, (err, hash) => {
+      if (err) {
+        return console.log(err);
+      }
+      con.query(
+        'UPDATE STUDENT SET Password=? WHERE RollNum=?',
+        [hash, id],
+        (err, result) => {
+          if (err) {
+            return res.status(400).json({
+              message: 'Unable to reset password',
+            });
+          }
+          if (result) {
+            res.json({
+              message: 'Password updated successfully',
+            });
+          }
+        }
+      );
+    });
+  });
+};

@@ -11,16 +11,19 @@ import {
   requestRejectReducer,
   courseStudentListReducer,
   courseStudentMarkListReducer,
+  studentProfileUpdateReducer,
 } from './reducers/studentReducers';
 import {
   adminRegisterReducer,
   adminLoginReducer,
+  adminProfileUpdateReducer,
 } from './reducers/adminReducers';
 import {
   facultyRegisterReducer,
   facultyLoginReducer,
   facultyListReducer,
   adviserStudentListReducer,
+  facultyProfileUpdateReducer,
 } from './reducers/facultyReducers';
 
 import {
@@ -47,11 +50,14 @@ const reducer = combineReducers({
   studentRequest: studentRequestReducer,
   requestAccept: requestAcceptReducer,
   requestReject: requestRejectReducer,
+  studentProfileUpdate: studentProfileUpdateReducer,
   adminSignup: adminRegisterReducer,
   adminSignin: adminLoginReducer,
+  adminProfileUpdate: adminProfileUpdateReducer,
   facultySignup: facultyRegisterReducer,
   facultySignin: facultyLoginReducer,
   facultyList: facultyListReducer,
+  facultyProfileUpdate: facultyProfileUpdateReducer,
   adviserStudentList: adviserStudentListReducer,
   gracemarkCreate: gracemarkCreateReducer,
   gracemarkList: gracemarkListReducer,

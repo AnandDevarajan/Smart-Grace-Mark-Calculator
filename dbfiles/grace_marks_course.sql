@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `gracemark`
+-- Table structure for table `course`
 --
 
-DROP TABLE IF EXISTS `gracemark`;
+DROP TABLE IF EXISTS `course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `gracemark` (
-  `GraceMarkID` int NOT NULL AUTO_INCREMENT,
-  `Description` varchar(45) NOT NULL,
-  `GraceMark` varchar(45) NOT NULL,
-  UNIQUE KEY `GraceMarkID_UNIQUE` (`GraceMarkID`),
-  UNIQUE KEY `Desc_UNIQUE` (`Description`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `course` (
+  `CourseID` varchar(45) NOT NULL,
+  `CourseName` varchar(45) DEFAULT NULL,
+  `Department` varchar(45) NOT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `gracemark`
+-- Dumping data for table `course`
 --
 
-LOCK TABLES `gracemark` WRITE;
-/*!40000 ALTER TABLE `gracemark` DISABLE KEYS */;
-INSERT INTO `gracemark` VALUES (125,'Inter University Sports and Games Events','15'),(126,'Inter University Events','10'),(127,'National Technical Competitions','10'),(128,'Ashram Related Activities','10'),(129,'Disaster Relief Activities','5'),(130,'National Service Scheme','15');
-/*!40000 ALTER TABLE `gracemark` ENABLE KEYS */;
+LOCK TABLES `course` WRITE;
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES ('15CSE201','Data Structures and Algorithms','CSE'),('15CSE213','Operating Systems','CSE'),('15CSE302','DBMS','CSE'),('15CSE311','Compiler Design','CSE'),('15CSE312','Computer Networks','CSE'),('15CSE313','Software Engineering','CSE');
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-31 21:52:46
+-- Dump completed on 2021-03-31 22:09:36

@@ -10,6 +10,7 @@ import StudentLogin from './screens/Student/StudentLogin';
 import StudentForgotPassword from './screens/Student/StudentForgotPassword';
 import StudentResetPassword from './screens/Student/StudentResetPassword';
 import StudentProfile from './screens/Student/StudentProfile';
+import StudentProfileEdit from './screens/Student/StudentProfileEdit';
 import AdminProfile from './screens/Admin/AdminProfile';
 import FacultyLogin from './screens/Faculty/FacultyLogin';
 import FacultySignup from './screens/Faculty/FacultySignup';
@@ -29,6 +30,12 @@ import AdminResetPassword from './screens/Admin/AdminResetPassword';
 import Footer from './components/Footer';
 import CourseStudents from './screens/Faculty/CourseStudents';
 import ViewCourseMarks from './screens/Student/ViewCourseMarks';
+import StudentChangePassword from './screens/Student/StudentChangePassword';
+import FacultyProfileEdit from './screens/Faculty/FacultyProfileEdit';
+import FacultyChangePassword from './screens/Faculty/FacultyChangePassword';
+import AdminProfileEdit from './screens/Admin/AdminProfileEdit';
+import AdminChangePassword from './screens/Admin/AdminChangePassword';
+import ViewGrade from './screens/Student/ViewGrade';
 
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -42,10 +49,10 @@ function App() {
       <Navbar />
       <main className='py-3'>
         <Container>
-          {adminInfo ? (
-            <Route exact path='/' component={AdminProfile} />
-          ) : facultyInfo ? (
+          {facultyInfo ? (
             <Route exact path='/' component={FacultyProfile} />
+          ) : adminInfo ? (
+            <Route exact path='/' component={AdminProfile} />
           ) : studentInfo ? (
             <Route exact path='/' component={StudentProfile} />
           ) : (
@@ -58,11 +65,20 @@ function App() {
           <Route path='/admin/forgotpassword' component={AdminForgotPassword} />
           <Route path='/admin/reset/:token' component={AdminResetPassword} />
           <Route path='/admin/students' component={AllStudentList} />
-          
           <Route path='/admin/faculties' component={AllFacultyList} />
           <Route path='/admin/addGraceMarkDetails' component={GraceMarkForm} />
           <Route path='/admin/gracemarklist' component={GracemarkList} />
           <Route path='/admin/gracemark/:id' component={GracemarkEdit} />
+          <Route
+            exact
+            path='/admin/edit/profile/:id'
+            component={AdminProfileEdit}
+          />
+          <Route
+            exact
+            path='/admin/edit/profile/changepassword/:id'
+            component={AdminChangePassword}
+          />
           <Route path='/student/login' component={StudentLogin} />
           <Route path='/student/signup' component={StudentSignup} />
           <Route path='/student/profile' component={StudentProfile} />
@@ -79,9 +95,30 @@ function App() {
             path='/student/view/marklist/:id'
             component={ViewCourseMarks}
           />
-          <Route path='/faculty/profile' component={FacultyProfile} />
+          <Route path='/student/grade/:id' component={ViewGrade} />
+          <Route
+            exact
+            path='/student/edit/profile/:id'
+            component={StudentProfileEdit}
+          />
+          <Route
+            exact
+            path='/student/edit/profile/changepassword/:id'
+            component={StudentChangePassword}
+          />
           <Route path='/faculty/login' component={FacultyLogin} />
           <Route path='/faculty/signup' component={FacultySignup} />
+          <Route path='/faculty/profile' component={FacultyProfile} />
+          <Route
+            exact
+            path='/faculty/edit/profile/:id'
+            component={FacultyProfileEdit}
+          />
+          <Route
+            exact
+            path='/faculty/edit/profile/changepassword/:id'
+            component={FacultyChangePassword}
+          />
           <Route path='/faculty/students/:id' component={CourseStudents} />
           <Route
             path='/faculty/course/mark/edit/:id'

@@ -7,6 +7,9 @@ const {
   resetPassword,
   newPassword,
   publishResults,
+  getAdmin,
+  updateAdminProfile,
+  changePassword,
 } = require('../controllers/admin');
 const {
   getAllStudents,
@@ -24,4 +27,7 @@ router.post('/newpassword', newPassword);
 router.get('/publish/result', verifyAdmin, admin, publishResults);
 router.get('/student/request/accept/:id', verifyAdmin, admin, acceptRequest);
 router.get('/student/request/reject/:id', verifyAdmin, admin, rejectRequest);
+router.get('/:id', getAdmin);
+router.put('/:id', updateAdminProfile);
+router.put('/changepassword/:id', changePassword);
 module.exports = router;

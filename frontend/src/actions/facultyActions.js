@@ -12,6 +12,9 @@ import {
   ADVISER_BATCH_LIST_REQUEST,
   ADVISER_BATCH_LIST_SUCCESS,
   ADVISER_BATCH_LIST_FAIL,
+  FACULTY_PROFILE_UPDATE_REQUEST,
+  FACULTY_PROFILE_UPDATE_SUCCESS,
+  FACULTY_PROFILE_UPDATE_FAIL,
 } from '../constants/facultyConstants';
 
 import axios from 'axios';
@@ -176,6 +179,46 @@ export const listAdviserBatch = (batch) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ADVISER_BATCH_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateFacultyProfile = (id, email, phone, address) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: FACULTY_PROFILE_UPDATE_REQUEST,
+    });
+
+    const {
+      facultySignin: { facultyInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${facultyInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/faculty/${id}`,
+      { email, phone, address },
+      config
+    );
+
+    dispatch({
+      type: FACULTY_PROFILE_UPDATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: FACULTY_PROFILE_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

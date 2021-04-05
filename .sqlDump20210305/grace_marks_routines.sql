@@ -16,30 +16,8 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `gracemark`
+-- Dumping routines for database 'grace_marks'
 --
-
-DROP TABLE IF EXISTS `gracemark`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `gracemark` (
-  `GraceMarkID` int NOT NULL AUTO_INCREMENT,
-  `Description` varchar(45) NOT NULL,
-  `GraceMark` varchar(45) NOT NULL,
-  UNIQUE KEY `GraceMarkID_UNIQUE` (`GraceMarkID`),
-  UNIQUE KEY `Desc_UNIQUE` (`Description`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `gracemark`
---
-
-LOCK TABLES `gracemark` WRITE;
-/*!40000 ALTER TABLE `gracemark` DISABLE KEYS */;
-INSERT INTO `gracemark` VALUES (125,'Inter University Sports and Games Events','15'),(126,'Inter University Events','10'),(127,'National Technical Competitions','10'),(128,'Ashram Related Activities','10'),(129,'Disaster Relief Activities','5'),(130,'National Service Scheme','15');
-/*!40000 ALTER TABLE `gracemark` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

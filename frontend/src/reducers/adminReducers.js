@@ -6,6 +6,10 @@ import {
   ADMIN_LOGIN_SUCCESS,
   ADMIN_LOGIN_FAIL,
   ADMIN_LOGOUT,
+  ADMIN_PROFILE_UPDATE_REQUEST,
+  ADMIN_PROFILE_UPDATE_SUCCESS,
+  ADMIN_PROFILE_UPDATE_FAIL,
+  ADMIN_PROFILE_UPDATE_RESET,
 } from '../constants/adminConstants';
 
 export const adminRegisterReducer = (state = {}, action) => {
@@ -31,6 +35,23 @@ export const adminLoginReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case ADMIN_LOGOUT:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const adminProfileUpdateReducer = (state = { admin: {} }, action) => {
+  switch (action.type) {
+    case ADMIN_PROFILE_UPDATE_REQUEST:
+      return { loading: true };
+    case ADMIN_PROFILE_UPDATE_SUCCESS:
+      return { loading: false, success: true };
+    case ADMIN_PROFILE_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case ADMIN_PROFILE_UPDATE_RESET:
+      return {
+        admin: {},
+      };
     default:
       return state;
   }

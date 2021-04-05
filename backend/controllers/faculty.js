@@ -240,3 +240,82 @@ exports.newPassword = (req, res) => {
     }
   );
 };
+
+exports.getFaculty = (req, res) => {
+  const id = req.params.id;
+  con.query(`SELECT * FROM Faculty WHERE FacultyID=?`, [id], (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No faculty found',
+      });
+    }
+    return res.json({
+      faculty: result[0],
+    });
+  });
+};
+
+exports.updateFacultyProfile = (req, res) => {
+  const id = req.params.id;
+  con.query(`SELECT * FROM FACULTY WHERE FacultyID=?;`, [id], (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(400).json({
+        message: 'No faculty Found',
+      });
+    }
+    if (result) {
+      result[0].PhoneNum = req.body.phone || result[0].PhoneNum;
+      result[0].EmailID = req.body.email || result[0].EmailID;
+      result[0].Address = req.body.address || result[0].Address;
+
+      con.query(
+        `UPDATE FACULTY SET PhoneNum=?,EmailID=?,Address=? WHERE FacultyID=?`,
+        [result[0].PhoneNum, result[0].EmailID, result[0].Address, id],
+        (err, result) => {
+          if (err || result.length === 0) {
+            return res.status(400).json({
+              message: 'Failed to update',
+            });
+          }
+          return res.json({
+            faculty: result,
+          });
+        }
+      );
+    }
+  });
+};
+
+exports.changePassword = (req, res) => {
+  const id = req.params.id;
+  const { password } = req.body;
+  con.query(`SELECT * FROM Faculty WHERE FacultyID=?;`, [id], (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(400).json({
+        message: 'No faculty found',
+      });
+    }
+
+    bcrypt.hash(password, 10, (err, hash) => {
+      if (err) {
+        return console.log(err);
+      }
+      con.query(
+        'UPDATE FACULTY SET Password=? WHERE FacultyID=?',
+        [hash, id],
+        (err, result) => {
+          if (err) {
+            return res.status(400).json({
+              message: 'Unable to reset password',
+            });
+          }
+          if (result) {
+            res.json({
+              message: 'Password updated successfully',
+            });
+          }
+        }
+      );
+    });
+  });
+};

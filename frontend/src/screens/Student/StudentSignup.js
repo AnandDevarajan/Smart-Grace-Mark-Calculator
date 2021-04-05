@@ -37,7 +37,7 @@ const StudentSignup = ({ location, history }) => {
     }
   }, [history, studentInfo, redirect]);
 
-  const submitHandler = (e) => {
+   const submitHandler = (e) => {
     e.preventDefault();
     if (
       name === '' ||

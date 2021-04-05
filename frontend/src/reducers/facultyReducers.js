@@ -12,6 +12,10 @@ import {
   ADVISER_BATCH_LIST_REQUEST,
   ADVISER_BATCH_LIST_SUCCESS,
   ADVISER_BATCH_LIST_FAIL,
+  FACULTY_PROFILE_UPDATE_RESET,
+  FACULTY_PROFILE_UPDATE_FAIL,
+  FACULTY_PROFILE_UPDATE_SUCCESS,
+  FACULTY_PROFILE_UPDATE_REQUEST,
 } from '../constants/facultyConstants';
 
 export const facultyRegisterReducer = (state = {}, action) => {
@@ -69,6 +73,26 @@ export const adviserStudentListReducer = (state = { students: [] }, action) => {
       };
     case ADVISER_BATCH_LIST_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const facultyProfileUpdateReducer = (
+  state = { faculty: {} },
+  action
+) => {
+  switch (action.type) {
+    case FACULTY_PROFILE_UPDATE_REQUEST:
+      return { loading: true };
+    case FACULTY_PROFILE_UPDATE_SUCCESS:
+      return { loading: false, success: true };
+    case FACULTY_PROFILE_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case FACULTY_PROFILE_UPDATE_RESET:
+      return {
+        faculty: {},
+      };
     default:
       return state;
   }

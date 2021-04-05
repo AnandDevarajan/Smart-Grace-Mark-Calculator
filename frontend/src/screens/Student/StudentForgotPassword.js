@@ -1,7 +1,7 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Message from '../../components/Message';
-import { Form, Button} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import FormContainer from '../../components/FormContainer';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import axios from 'axios';
@@ -20,6 +20,7 @@ const StudentForgotPassword = ({ location, history }) => {
         setMessage('Check your email');
       })
       .catch((err) => {
+        console.log(err);
         setMessage(null);
         setMessage('Cannot reset password now');
       });

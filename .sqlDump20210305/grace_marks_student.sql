@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: localhost    Database: grace_marks
+-- Host: 127.0.0.1    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -38,6 +38,8 @@ CREATE TABLE `student` (
   `Requested` varchar(45) NOT NULL DEFAULT 'N/A',
   `GraceDesc` varchar(45) NOT NULL DEFAULT 'N/A',
   `GraceMark` varchar(45) NOT NULL DEFAULT 'N/A''',
+  `resettoken` varchar(500) NOT NULL DEFAULT 'N/A',
+  `expiresin` varchar(45) NOT NULL DEFAULT 'N/A',
   PRIMARY KEY (`RollNum`),
   UNIQUE KEY `RollNum_UNIQUE` (`RollNum`),
   UNIQUE KEY `EmailID_UNIQUE` (`EmailID`)
@@ -50,7 +52,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('student2','student2','student2@123.com','4567890345','1234567 fsd ','11/12/19','Female','CSE','B','BTech','$2b$10$qOn27.K/AKRd9SUz6SG/6uoDCQ8u6M2WFHc7glKLXiGbSApa3rFtG',1,'accepted','Disaster Relief Activities','5'),('student3','student3','student3@123.com','9856890567','asd 123 dsa','6/02/1999','Male','CSE','E','BTech','$2b$10$chvr8RHWGqHntRGvz3pzeOZDQEJmmcm3rdLDWrC074xfIOGOLDWqe',1,'pending','Disaster Relief Activities','5');
+INSERT INTO `student` VALUES ('1','student0','s@123.com','9865432123','chennai','04/12/99','Male','CSE','C','BTech','$2b$10$G2aNAhiBTdlSLku9sy2H4Oh5g8hYwrNA7QzFXjDLFsX/MMa7jxjmS',1,'accepted','Inter University Sports and Games Events','15','N/A','N/A'),('student2','student2','student2@123.com','4567890345','1234567 fsd ','11/12/19','Female','CSE','B','BTech','$2b$10$qOn27.K/AKRd9SUz6SG/6uoDCQ8u6M2WFHc7glKLXiGbSApa3rFtG',1,'accepted','Disaster Relief Activities','5','N/A','N/A'),('student3','student3','student3@123.com','9856890567','asd 123 dsa','6/02/1999','Male','CSE','E','BTech','$2b$10$chvr8RHWGqHntRGvz3pzeOZDQEJmmcm3rdLDWrC074xfIOGOLDWqe',1,'pending','Disaster Relief Activities','5','N/A','N/A');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-05 23:28:53
+-- Dump completed on 2021-03-31 21:52:45

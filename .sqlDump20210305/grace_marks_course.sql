@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: localhost    Database: grace_marks
+-- Host: 127.0.0.1    Database: grace_marks
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `CourseID` varchar(45) NOT NULL,
   `CourseName` varchar(45) DEFAULT NULL,
+  `Department` varchar(45) NOT NULL,
   PRIMARY KEY (`CourseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,7 +36,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES ('15CSE201','Data Structures and Algorithms'),('15CSE213','Operating Systems'),('15CSE302','DBMS'),('15CSE311','Compiler Design'),('15CSE312','Computer Networks'),('15CSE313','Software Engineering');
+INSERT INTO `course` VALUES ('15CSE201','Data Structures and Algorithms','CSE'),('15CSE213','Operating Systems','CSE'),('15CSE302','DBMS','CSE'),('15CSE311','Compiler Design','CSE'),('15CSE312','Computer Networks','CSE'),('15CSE313','Software Engineering','CSE');
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-05 23:28:52
+-- Dump completed on 2021-03-31 21:52:45

@@ -16,29 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `gracemark`
+-- Table structure for table `administrator`
 --
 
-DROP TABLE IF EXISTS `gracemark`;
+DROP TABLE IF EXISTS `administrator`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `gracemark` (
-  `GraceMarkID` int NOT NULL AUTO_INCREMENT,
-  `Description` varchar(45) NOT NULL,
-  `GraceMark` varchar(45) NOT NULL,
-  UNIQUE KEY `GraceMarkID_UNIQUE` (`GraceMarkID`),
-  UNIQUE KEY `Desc_UNIQUE` (`Description`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `administrator` (
+  `adminID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(45) NOT NULL,
+  `EmailID` varchar(45) NOT NULL,
+  `PhoneNum` varchar(10) NOT NULL,
+  `Address` varchar(300) DEFAULT 'Null',
+  `DOB` varchar(30) NOT NULL,
+  `Gender` varchar(45) NOT NULL,
+  `Password` varchar(500) NOT NULL,
+  `role` int NOT NULL DEFAULT '3',
+  `resettoken` varchar(500) NOT NULL DEFAULT 'N/A',
+  `expiresin` varchar(45) NOT NULL DEFAULT 'N/A',
+  PRIMARY KEY (`adminID`),
+  UNIQUE KEY `EmailID_UNIQUE` (`EmailID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `gracemark`
+-- Dumping data for table `administrator`
 --
 
-LOCK TABLES `gracemark` WRITE;
-/*!40000 ALTER TABLE `gracemark` DISABLE KEYS */;
-INSERT INTO `gracemark` VALUES (125,'Inter University Sports and Games Events','15'),(126,'Inter University Events','10'),(127,'National Technical Competitions','10'),(128,'Ashram Related Activities','10'),(129,'Disaster Relief Activities','5'),(130,'National Service Scheme','15');
-/*!40000 ALTER TABLE `gracemark` ENABLE KEYS */;
+LOCK TABLES `administrator` WRITE;
+/*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
+INSERT INTO `administrator` VALUES (6,'Admin207','admin@207.com','9207251675','Home Name , India','15/16/029','Male','$2b$10$SshC8YuEbNbzdNxYjib1MepDHLTd/jFfOQHn6ZmoAYlLOEQi8Elj6',3,'N/A','N/A'),(7,'admin10','admin10@gmail.com','9765676545','Chennai','04/12/90','Male','$2b$10$1t563nubFVrbwqsi7vpN7.QHDLeqwB6827INAALCQloJKnUXyGirO',3,'N/A','N/A');
+/*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-31 21:52:46
+-- Dump completed on 2021-03-31 22:09:37

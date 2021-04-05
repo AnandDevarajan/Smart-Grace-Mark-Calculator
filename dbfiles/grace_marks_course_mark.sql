@@ -16,29 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `gracemark`
+-- Table structure for table `course_mark`
 --
 
-DROP TABLE IF EXISTS `gracemark`;
+DROP TABLE IF EXISTS `course_mark`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `gracemark` (
-  `GraceMarkID` int NOT NULL AUTO_INCREMENT,
-  `Description` varchar(45) NOT NULL,
-  `GraceMark` varchar(45) NOT NULL,
-  UNIQUE KEY `GraceMarkID_UNIQUE` (`GraceMarkID`),
-  UNIQUE KEY `Desc_UNIQUE` (`Description`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `course_mark` (
+  `RollNum` varchar(30) NOT NULL DEFAULT 'N/A',
+  `CourseID` varchar(45) NOT NULL DEFAULT 'N/A',
+  `Internals` varchar(45) NOT NULL DEFAULT 'N/P',
+  `Marks` varchar(45) NOT NULL DEFAULT 'N/P',
+  `Total` varchar(45) NOT NULL DEFAULT 'N/P',
+  `Status` varchar(45) NOT NULL DEFAULT 'N/P',
+  PRIMARY KEY (`RollNum`,`CourseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `gracemark`
+-- Dumping data for table `course_mark`
 --
 
-LOCK TABLES `gracemark` WRITE;
-/*!40000 ALTER TABLE `gracemark` DISABLE KEYS */;
-INSERT INTO `gracemark` VALUES (125,'Inter University Sports and Games Events','15'),(126,'Inter University Events','10'),(127,'National Technical Competitions','10'),(128,'Ashram Related Activities','10'),(129,'Disaster Relief Activities','5'),(130,'National Service Scheme','15');
-/*!40000 ALTER TABLE `gracemark` ENABLE KEYS */;
+LOCK TABLES `course_mark` WRITE;
+/*!40000 ALTER TABLE `course_mark` DISABLE KEYS */;
+INSERT INTO `course_mark` VALUES ('1','15CSE201','N/P','N/P','N/P','N/P'),('1','15CSE213','10','50','60','N/P'),('1','15CSE302','N/P','N/P','N/P','N/P'),('1','15CSE312','N/P','N/P','N/P','N/P'),('1','15CSE313','N/P','N/P','N/P','N/P');
+/*!40000 ALTER TABLE `course_mark` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-31 21:52:46
+-- Dump completed on 2021-03-31 22:09:37
