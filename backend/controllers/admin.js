@@ -242,9 +242,12 @@ exports.publishResults = (req, res) => {
             }
           });
         });
+        return res.json({
+          message: "Results Published successfully",
+        });
       } else {
         return res.json({
-          Message:
+          message:
             "Unable to Publish Results now. Mark allocation is yet to be completed",
         });
       }
