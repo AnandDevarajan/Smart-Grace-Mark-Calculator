@@ -27,8 +27,8 @@ import {
   STUDENT_PROFILE_UPDATE_REQUEST,
   STUDENT_PROFILE_UPDATE_SUCCESS,
   STUDENT_PROFILE_UPDATE_FAIL,
-} from '../constants/studentConstants';
-import axios from 'axios';
+} from "../constants/studentConstants";
+import axios from "axios";
 
 export const studentLogin = (email, password) => async (dispatch) => {
   try {
@@ -38,11 +38,11 @@ export const studentLogin = (email, password) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.post(
-      '/student/login',
+      "/student/login",
       { email, password },
       config
     );
@@ -50,7 +50,7 @@ export const studentLogin = (email, password) => async (dispatch) => {
       type: STUDENT_LOGIN_SUCCESS,
       payload: data,
     });
-    localStorage.setItem('studentInfo', JSON.stringify(data));
+    localStorage.setItem("studentInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: STUDENT_LOGIN_FAIL,
@@ -82,12 +82,12 @@ export const studentRegister = (
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     const { data } = await axios.post(
-      '/student',
+      "/student",
       {
         name,
         email,
@@ -113,7 +113,7 @@ export const studentRegister = (
       payload: data,
     });
 
-    localStorage.setItem('studentInfo', JSON.stringify(data));
+    localStorage.setItem("studentInfo", JSON.stringify(data));
   } catch (error) {
     console.log(error);
     dispatch({
@@ -127,11 +127,11 @@ export const studentRegister = (
 };
 
 export const studentLogout = () => (dispatch) => {
-  localStorage.removeItem('studentInfo');
+  localStorage.removeItem("studentInfo");
   dispatch({
     type: STUDENT_LOGOUT,
   });
-  document.location.href = '/';
+  document.location.href = "/";
 };
 
 export const listStudents = () => async (dispatch, getState) => {
@@ -149,7 +149,7 @@ export const listStudents = () => async (dispatch, getState) => {
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };
-    const { data } = await axios.get('/admin/students', config);
+    const { data } = await axios.get("/admin/students", config);
 
     dispatch({
       type: STUDENT_LIST_SUCCESS,
@@ -237,7 +237,7 @@ export const studentRequestGM = (request) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${studentInfo.token}`,
       },
     };
@@ -251,7 +251,7 @@ export const studentRequestGM = (request) => async (dispatch, getState) => {
       type: REQUEST_ADD_SUCCESS,
       payload: data,
     });
-    localStorage.setItem('studentInfo', JSON.stringify(data));
+    localStorage.setItem("studentInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: REQUEST_ADD_FAIL,
@@ -346,7 +346,7 @@ export const updateStudentProfile = (id, email, phone, address) => async (
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${studentInfo.token}`,
       },
     };

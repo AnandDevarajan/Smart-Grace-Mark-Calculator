@@ -60,20 +60,3 @@ export const adminProfileUpdateReducer = (state = { admin: {} }, action) => {
       return state;
   }
 };
-
-export const adminPublishResultReducer = (state = { message: {} }, action) => {
-  switch (action.type) {
-    case ADMIN_PUBLISH_RESULT_REQUEST:
-      return { loading: true };
-    case ADMIN_PUBLISH_RESULT_SUCCESS:
-      return { loading: false, success: true, message: action.payload };
-    case ADMIN_PUBLISH_RESULT_FAIL:
-      return { loading: false, error: action.payload };
-    case ADMIN_PUBLISH_RESULT_RESET:
-      return {
-        admin: {},
-      };
-    default:
-      return state;
-  }
-};

@@ -17,7 +17,6 @@ import {
   adminRegisterReducer,
   adminLoginReducer,
   adminProfileUpdateReducer,
-  adminPublishResultReducer,
 } from "./reducers/adminReducers";
 import {
   facultyRegisterReducer,
@@ -55,7 +54,6 @@ const reducer = combineReducers({
   adminSignup: adminRegisterReducer,
   adminSignin: adminLoginReducer,
   adminProfileUpdate: adminProfileUpdateReducer,
-  adminPublishResult: adminPublishResultReducer,
   facultySignup: facultyRegisterReducer,
   facultySignin: facultyLoginReducer,
   facultyList: facultyListReducer,

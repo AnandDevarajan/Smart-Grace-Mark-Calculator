@@ -9,10 +9,13 @@ import {
   ADMIN_PROFILE_UPDATE_FAIL,
   ADMIN_PROFILE_UPDATE_SUCCESS,
   ADMIN_PROFILE_UPDATE_REQUEST,
-} from '../constants/adminConstants';
+  ADMIN_PUBLISH_RESULT_FAIL,
+  ADMIN_PUBLISH_RESULT_SUCCESS,
+  ADMIN_PUBLISH_RESULT_REQUEST,
+} from "../constants/adminConstants";
 
-import { GRACEMARK_DETAILS_RESET } from '../constants/gracemarkConstants';
-import axios from 'axios';
+import { GRACEMARK_DETAILS_RESET } from "../constants/gracemarkConstants";
+import axios from "axios";
 
 export const adminLogin = (email, password) => async (dispatch) => {
   try {
@@ -22,11 +25,11 @@ export const adminLogin = (email, password) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.post(
-      '/admin/login',
+      "/admin/login",
       { email, password },
       config
     );
@@ -34,7 +37,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
       type: ADMIN_LOGIN_SUCCESS,
       payload: data,
     });
-    localStorage.setItem('adminInfo', JSON.stringify(data));
+    localStorage.setItem("adminInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: ADMIN_LOGIN_FAIL,
@@ -62,12 +65,12 @@ export const adminRegister = (
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     const { data } = await axios.post(
-      '/admin',
+      "/admin",
       {
         name,
         email,
@@ -88,7 +91,7 @@ export const adminRegister = (
       payload: data,
     });
 
-    localStorage.setItem('adminInfo', JSON.stringify(data));
+    localStorage.setItem("adminInfo", JSON.stringify(data));
   } catch (error) {
     console.log(error);
     dispatch({
@@ -102,14 +105,14 @@ export const adminRegister = (
 };
 
 export const adminLogout = () => (dispatch) => {
-  localStorage.removeItem('adminInfo');
+  localStorage.removeItem("adminInfo");
   dispatch({
     type: ADMIN_LOGOUT,
   });
   dispatch({
     type: GRACEMARK_DETAILS_RESET,
   });
-  document.location.href = '/';
+  document.location.href = "/";
 };
 
 export const updateAdminProfile = (id, email, phone, address) => async (
@@ -127,7 +130,7 @@ export const updateAdminProfile = (id, email, phone, address) => async (
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };

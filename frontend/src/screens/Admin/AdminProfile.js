@@ -8,6 +8,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import PhoneIcon from "@material-ui/icons/Phone";
 import HomeIcon from "@material-ui/icons/Home";
 import PublishIcon from "@material-ui/icons/Publish";
+import Message from "../../components/Message";
 import {
   Row,
   Col,
@@ -17,7 +18,6 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import { publishResults } from "../../actions/adminActions";
 import axios from "axios";
 
 const AdminProfile = ({ history }) => {
@@ -29,6 +29,7 @@ const AdminProfile = ({ history }) => {
 
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
   const { success, error } = gracemarkCreate;
+
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
 
@@ -52,14 +53,20 @@ const AdminProfile = ({ history }) => {
       });
   }, [adminInfo, name, email, address, phone]);
 
-  const publishResults = () => {
-    dispatch(publishResults);
+  const publishResult = () => {
+    const config = {
+      headers: { Authorization: `Bearer ${adminInfo.token}` },
+    };
+    axios.get("/admin/publish/result", config).then((response) => {
+      console.log(response);
+    });
   };
+  console.log(message);
 
   return (
     <div className="ml-5">
       <h3 className="btn  btn-primary">Welcome to Admin Profile</h3>
-
+      {/* {msg && <Message variant="success">{msg}</Message>} */}
       <Row className="mt-5">
         <Col md={7} style={{ backgroundColor: "#2B2E4A" }}>
           <ListGroup variant="flush" className="mt-4 ml-2">
@@ -95,7 +102,7 @@ const AdminProfile = ({ history }) => {
                 :&nbsp;&nbsp;&nbsp;
                 <button
                   className="btn btn-sm btn-success "
-                  onClick={publishResults}
+                  onClick={publishResult}
                 >
                   Publish Results
                 </button>
