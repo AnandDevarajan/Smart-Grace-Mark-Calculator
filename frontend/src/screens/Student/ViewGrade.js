@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
-const ViewGrade = ({ match }) => {
-  roll = match.params.id;
+const ViewGrade = ({ match, history }) => {
+  let roll = match.params.id;
+
+  const [status, setStatus] = useState("");
+
+  const studentSignin = useSelector((state) => state.studentSignin);
+  const { studentInfo } = studentSignin;
+
   useEffect(() => {
-    if (!adminInfo) {
+    if (!studentInfo) {
       history.push("/");
     }
     axios
-      .all([axios.get(`/faculty/course/mark/}`), axios.get(`/admin/status`)])
+      .all([
+        axios.get(`/student/view/result/${roll}}`),
+        axios.get(`/admin/status`),
+      ])
       .then(
         axios.spread((response1, response2) => {
-          console.log(response2.data.status);
-          setName(response1.data.admin.Name);
-          setEmail(response1.data.admin.EmailID);
-          setPhone(response1.data.admin.PhoneNum);
-          setAddress(response1.data.admin.Address);
-
           setStatus(response2.data.status);
         })
       );
-  }, [adminInfo, name, email, address, phone, status]);
+  }, [studentInfo, status]);
 
   return (
     <div className="text-center">
