@@ -17,7 +17,7 @@ const ViewGrade = ({ match, history }) => {
     if (!studentInfo) {
       history.push("/");
     }
- 
+
     axios
       .all([
         axios.get(`/student/view/result/${id}`),
@@ -35,7 +35,7 @@ const ViewGrade = ({ match, history }) => {
   console.log(status);
   return (
     <>
-      {status === "Published" ? (
+      {status === "Published" && (
         <div className="ml-5 align-items-center">
           <Link to="/student/profile">
             <Button variant="light">
@@ -68,7 +68,8 @@ const ViewGrade = ({ match, history }) => {
             </tbody>
           </Table>
         </div>
-      ) : (
+      )}
+      {status === "Not Published" && (
         <div>
           <h1 className="text-center">Results Not Published</h1>
         </div>

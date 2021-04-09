@@ -81,14 +81,7 @@ function Navbar() {
                   <span>Profile</span>
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link
-                  to={`/student/edit/profile/${studentInfo.result.RollNum}`}
-                >
-                  <EditTwoToneIcon />
-                  <span>Edit Profile</span>
-                </Link>
-              </li>
+
               <li className="nav-text">
                 <Link
                   to={`/student/grade/${studentInfo.token}-${studentInfo.result.RollNum}`}
