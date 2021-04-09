@@ -1,11 +1,11 @@
-const config = require('../config/db');
+const config = require("../config/db");
 const con = config.con;
 
 exports.getAllCourses = (req, res) => {
   con.query(`SELECT * FROM COURSE`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No Courses found',
+        message: "No Courses found",
       });
     }
     return res.json({
@@ -22,7 +22,7 @@ exports.getAllDeptCourses = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No Courses found',
+          message: "No Courses found",
         });
       }
       return res.json({
@@ -41,11 +41,11 @@ exports.addCourseMarks = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
-          message: 'Unable to Update Marks',
+          message: "Unable to Update Marks",
         });
       }
       return res.json({
-        message: 'Successfully Updated',
+        message: "Successfully Updated",
       });
     }
   );
@@ -59,7 +59,7 @@ exports.getCourseMark = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No Courses found',
+          message: "No Courses found",
         });
       }
       return res.json({
@@ -77,7 +77,7 @@ exports.getCourseMarkOfStudent = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No marks found',
+          message: "No marks found",
         });
       }
       return res.json({
@@ -100,7 +100,7 @@ exports.getACourseMark = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No Marks found',
+          message: "No Marks found",
         });
       }
       return res.json({
@@ -120,7 +120,7 @@ exports.updateCourseMarkDetails = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: 'No course marks Found',
+          message: "No course marks Found",
         });
       }
       if (result) {
@@ -134,7 +134,7 @@ exports.updateCourseMarkDetails = (req, res) => {
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({
-                message: 'Failed to update',
+                message: "Failed to update",
               });
             }
             return res.json({
@@ -143,6 +143,22 @@ exports.updateCourseMarkDetails = (req, res) => {
           }
         );
       }
+    }
+  );
+};
+
+exports.getCourseReport = (req, res) => {
+  con.query(
+    `SELECT c.CourseID,s.CourseName,avg(c.total) as Average,max(c.total) as Max,min(c.total) as Min ,count(c.CourseID) as Num FROM grace_marks.course_mark c  inner join grace_marks.course s on c.CourseID=s.CourseID group by c.CourseID`,
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: "No report found",
+        });
+      }
+      return res.json({
+        report: result,
+      });
     }
   );
 };

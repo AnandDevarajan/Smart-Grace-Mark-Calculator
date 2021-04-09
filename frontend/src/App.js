@@ -67,7 +67,7 @@ function App() {
           <Route path="/admin/reset/:token" component={AdminResetPassword} />
           <Route path="/admin/students" component={AllStudentList} />
           <Route path="/admin/faculties" component={AllFacultyList} />
-          <Route path="//admin/course/report" component={CourseReport} />
+          <Route path="/admin/course/report" component={CourseReport} />
           <Route path="/admin/addGraceMarkDetails" component={GraceMarkForm} />
           <Route path="/admin/gracemarklist" component={GracemarkList} />
           <Route path="/admin/gracemark/:id" component={GracemarkEdit} />

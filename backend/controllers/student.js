@@ -495,4 +495,3 @@ exports.getStudentGrade = (req, res) => {
 
 
 
-// SELECT c.CourseID,s.CourseName,avg(c.total) as Average,max(c.total) as Max,min(c.total) as Min ,count(c.CourseID) as 'No of Students' FROM grace_marks.course_mark c  inner join grace_marks.course s on c.CourseID=s.CourseID group by c.CourseID;
