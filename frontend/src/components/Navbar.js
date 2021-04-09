@@ -89,7 +89,9 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-text">
-                <Link to={`/student/grade/${studentInfo.token}`}>
+                <Link
+                  to={`/student/grade/${studentInfo.token}-${studentInfo.result.RollNum}`}
+                >
                   <MenuBookIcon />
                   <span>Grades</span>
                 </Link>
