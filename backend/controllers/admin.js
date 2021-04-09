@@ -4,6 +4,7 @@ const { generateToken } = require("../utils/auth");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const { error } = require("console");
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
@@ -218,7 +219,6 @@ exports.publishResults = (req, res) => {
           res.json({
             Emails: result,
           });
-
           con.query(`UPDATE COURSE_MARK SET status='P'`, (error, field) => {
             if (err || field.length == 0) {
               return res.status(400).json({
@@ -241,9 +241,6 @@ exports.publishResults = (req, res) => {
               console.log(`Email sent:${info.response}`);
             }
           });
-        });
-        return res.json({
-          message: "Results Published successfully",
         });
       } else {
         return res.json({
@@ -344,4 +341,39 @@ exports.changePassword = (req, res) => {
       });
     }
   );
+};
+
+exports.getStatus = (req, res) => {
+  con.query(`SELECT * from COURSE_MARK WHERE status='N/P'`, (error, result) => {
+    if (result.length === 0) {
+      return res.json({
+        status: "Published",
+      });
+    }
+    return res.json({
+      status: "Not Published",
+    });
+  });
+};
+
+exports.resetPublish = (req, res) => {
+  con.query(`UPDATE COURSE_MARK set STATUS = 'N/P'`, (error, result) => {
+    if (error) {
+      console.log(error);
+    } else {
+      con.query(
+        `SELECT status from COURSE_MARK WHERE status='N/P'`,
+        (error, result) => {
+          if (result.length === 0) {
+            return res.json({
+              status: "Published",
+            });
+          }
+          return res.json({
+            status: "Not Published",
+          });
+        }
+      );
+    }
+  });
 };
