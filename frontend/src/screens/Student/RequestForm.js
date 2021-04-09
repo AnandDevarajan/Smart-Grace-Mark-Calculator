@@ -23,9 +23,7 @@ const RequestForm = ({ location, history }) => {
   const studentRequest = useSelector((state) => state.studentRequest);
   const { success, studentInfo: updatedStudent } = studentRequest;
 
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/student/login';
+  const redirect ='/student/login';
 
   useEffect(() => {
     if (success) {

@@ -14,7 +14,6 @@ const StudentProfileEdit = ({ location, history, match }) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
 
@@ -100,6 +99,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
               onChange={(e) => setPhone(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId='address'>
             <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
               Address
@@ -111,6 +111,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
               onChange={(e) => setAddress(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Link to={`/student/edit/profile/changepassword/${id}`}>
             Change Password?{' '}
           </Link>
@@ -120,7 +121,6 @@ const StudentProfileEdit = ({ location, history, match }) => {
           </Button>
         </Form>
       </FormContainer>
-
     </>
   );
 };
