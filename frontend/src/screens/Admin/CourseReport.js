@@ -52,7 +52,11 @@ const CourseReport = ({ history }) => {
               <td> {report.CourseName}</td>
               <td>{report.Min}</td>
               <td>{report.Max}</td>
-              <td>{report.Average.toFixed(2)}</td>
+              <td>
+                {Number.isInteger(report.Average)
+                  ? report.Average
+                  : report.Average.toFixed(2)}
+              </td>
               <td>{report.Num}</td>
             </tr>
           ))}
