@@ -16,6 +16,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import BeenhereIcon from "@material-ui/icons/Beenhere";
 import ClassIcon from "@material-ui/icons/Class";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import "./Navbar.css";
 
 function Navbar() {
@@ -178,6 +179,12 @@ function Navbar() {
                 <Link to="/admin/faculties">
                   <PeopleOutlineIcon />
                   <span>Faculty</span>
+                </Link>
+              </li>
+              <li className="nav-text">
+                <Link to="/admin/course/report">
+                  <ImportContactsIcon />
+                  <span>Courses</span>
                 </Link>
               </li>
               <li className="nav-text">
