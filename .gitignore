@@ -5,9 +5,13 @@
 node_modules/
 /.pnp
 .pnp.js
-
+/.scannerwork
+.scannerwork/
+sonar-project.properties
+.scannerwork/
 # testing
 /coverage
+
 
 # production
 /build
