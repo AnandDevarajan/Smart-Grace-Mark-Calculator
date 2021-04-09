@@ -8,8 +8,9 @@ import PersonIcon from "@material-ui/icons/Person";
 import PhoneIcon from "@material-ui/icons/Phone";
 import HomeIcon from "@material-ui/icons/Home";
 import PublishIcon from "@material-ui/icons/Publish";
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import CloseIcon from "@material-ui/icons/Close";
-import { Row, Col, ListGroup } from "react-bootstrap";
+import { Row, Col, ListGroup, Image } from "react-bootstrap";
 import axios from "axios";
 
 const AdminProfile = ({ history }) => {
@@ -81,44 +82,85 @@ const AdminProfile = ({ history }) => {
   console.log(message);
   return (
     <div className="ml-5">
-      <h3 className="btn  btn-primary">Welcome to Admin Profile</h3>
       <Row className="mt-5">
-        <Col md={7} style={{ backgroundColor: "#2B2E4A" }}>
-          <ListGroup variant="flush" className="mt-4 ml-2">
-            <ListGroup.Item>
+        <Col md={2} sm={4}>
+          <Image
+            className="mt-5 mr-5"
+            src="https://static.thenounproject.com/png/371299-200.png"
+            style={{
+              height: "200px",
+              width: "200px",
+              objectFit: "contain",
+            }}
+          />
+        </Col>
+        <Col md={7} sm={4}>
+          <ListGroup className="mt-3 mb-4 ml-5">
+            <h4 className="text-center btn btn-block btn-success">
+              Admin Profile
+            </h4>
+            <ListGroup.Item
+              style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+            >
               <h4 style={{ textTransform: "capitalize" }}>
                 <PersonIcon />
                 :&nbsp;&nbsp;&nbsp;
                 {name}
               </h4>
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item
+              style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+            >
               <h4 style={{ textTransform: "lowercase" }}>
                 <EmailIcon />
                 :&nbsp;&nbsp;&nbsp;{email}
               </h4>
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item
+              style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+            >
               <h4>
                 <PhoneIcon />
                 :&nbsp;&nbsp;&nbsp;
                 {phone}
               </h4>
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item
+              style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+            >
               <h4 style={{ textTransform: "capitalize" }}>
                 <HomeIcon />
                 :&nbsp;&nbsp;&nbsp;{address}
               </h4>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <h4 style={{ textTransform: "capitalize" }}>
-                <PublishIcon />
-                :&nbsp;&nbsp;&nbsp;
+          </ListGroup>
+        </Col>
+        <Col md={3} sm={4}>
+          <ListGroup className=" ml-5" style={{ marginTop: "75px" }}>
+            <ListGroup.Item style={{ backgroundColor: "#1e212d" }}>
+              <h6 className=" text-center text-white btn btn-sm btn-block btn-info">
+                Actions
+              </h6>
+            </ListGroup.Item>
+            <ListGroup.Item
+              style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+            >
+              <Link to={`/admin/edit/profile/${adminInfo.result.adminID}`}>
+                <h6 style={{ textTransform: "Capitalize", color: "#eeeeee" }}>
+                  <EditTwoToneIcon />
+                  :&nbsp;&nbsp;Edit Profile
+                </h6>
+              </Link>
+            </ListGroup.Item>
+            <ListGroup.Item
+              style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+            >
+              <h6 style={{ textTransform: "capitalize" }}>
                 {status === "Not Published" && (
                   <button
                     className="btn btn-sm btn-success "
                     onClick={publishResult}
+                    style={{ width: "155px" }}
                   >
                     Publish Results
                   </button>
@@ -128,8 +170,9 @@ const AdminProfile = ({ history }) => {
                     <button
                       className="btn btn-sm btn-warning mr-5"
                       onClick={publishResult}
+                      style={{ width: "81px" }}
                     >
-                      Results Published
+                      Published
                     </button>
                     <CloseIcon
                       className="icon"
@@ -138,14 +181,9 @@ const AdminProfile = ({ history }) => {
                     />
                   </>
                 )}
-              </h4>
+              </h6>
             </ListGroup.Item>
           </ListGroup>
-        </Col>
-        <Col style={{ backgroundColor: "#343f56" }}>
-          <div className="mt-4 ml-5 mb-5">
-            <Calendar onChange={onChange} value={value} />
-          </div>
         </Col>
       </Row>
     </div>

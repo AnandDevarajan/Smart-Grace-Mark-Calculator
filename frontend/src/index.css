@@ -1,5 +1,5 @@
 body {
-  background-color: #fafafa;
+  background-color: #f8f9fc;
 }
 main {
   min-height: 80vh;
@@ -20,5 +20,12 @@ h2 {
 }
 
 tbody {
+  font-weight: bold;
+}
+th{
+  font-weight: bold;
+  color: black;
+}
+td {
   font-weight: bold;
 }
