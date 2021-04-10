@@ -43,13 +43,14 @@ const CourseReport = ({ history }) => {
             <th>Max</th>
             <th>Average</th>
             <th>Number of Students</th>
+            <th>Grade</th>
           </tr>
         </thead>
         <tbody>
           {reports.map((report) => (
             <tr>
               <td>{report.CourseID}</td>
-              <td> {report.CourseName}</td>
+              <td>{report.CourseName}</td>
               <td>{report.Min}</td>
               <td>{report.Max}</td>
               <td>
@@ -58,6 +59,14 @@ const CourseReport = ({ history }) => {
                   : report.Average.toFixed(2)}
               </td>
               <td>{report.Num}</td>
+              <td>
+                <Link
+                  className="btn btn-sm btn-success"
+                  to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
+                >
+                  Set Grade
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

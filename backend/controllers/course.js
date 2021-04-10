@@ -162,3 +162,21 @@ exports.getCourseReport = (req, res) => {
     }
   );
 };
+
+exports.getACourseReport = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT c.CourseID,avg(c.total) as Average,max(c.total) as Max,min(c.total) as Min FROM grace_marks.course_mark c  inner join grace_marks.course s on c.CourseID=? group by c.CourseID`,
+    [id],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: "No report found",
+        });
+      }
+      return res.json({
+        report: result,
+      });
+    }
+  );
+};

@@ -36,6 +36,7 @@ import FacultyChangePassword from "./screens/Faculty/FacultyChangePassword";
 import AdminProfileEdit from "./screens/Admin/AdminProfileEdit";
 import AdminChangePassword from "./screens/Admin/AdminChangePassword";
 import ViewGrade from "./screens/Student/ViewGrade";
+import SetGrade from "./screens/Admin/SetGrade";
 import CourseReport from "./screens/Admin/CourseReport";
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
           <Route path="/admin/addGraceMarkDetails" component={GraceMarkForm} />
           <Route path="/admin/gracemarklist" component={GracemarkList} />
           <Route path="/admin/gracemark/:id" component={GracemarkEdit} />
+          <Route path="/admin/set/grade/:id" component={SetGrade} />
           <Route
             exact
             path="/admin/edit/profile/:id"
