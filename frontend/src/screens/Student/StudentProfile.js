@@ -64,7 +64,7 @@ const StudentProfile = ({ history }) => {
   }, [status]);
 
   return (
-    <div className="ml-5">
+    <Container fluid="sm" className="themed-container">
       <button className="btn btn-primary">Welcome</button>
       <Container className="mt-5 border border-left-0 border-right-0 border-dark">
         <hr></hr>
@@ -98,8 +98,8 @@ const StudentProfile = ({ history }) => {
             </Container>
           </Col>
           <Col md={7} sm={12}>
-            <ListGroup className="mb-5 ml-5" style={{ marginTop: "-30px" }}>
-              <h4 className="text-center btn btn-block btn-info">
+            <ListGroup className="mt-2 mb-4 ml-5" >
+              <h4 className="text-center btn btn-block btn-success">
                 Student Profile
               </h4>
               <ListGroup.Item
@@ -181,7 +181,7 @@ const StudentProfile = ({ history }) => {
                   <h4>
                     <SendIcon /> &nbsp;&nbsp;&nbsp;
                     <Link className="btn btn-sm btn-info" to="/student/request">
-                      Request 
+                      Request
                     </Link>
                   </h4>
                 )}
@@ -191,7 +191,7 @@ const StudentProfile = ({ history }) => {
         </Row>
         <hr></hr>
       </Container>
-    </div>
+    </Container>
   );
 };
 

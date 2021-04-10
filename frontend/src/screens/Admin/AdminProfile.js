@@ -81,8 +81,8 @@ const AdminProfile = ({ history }) => {
 
   console.log(message);
   return (
-    <div className="ml-5">
-      <button className='btn btn-primary'>Welcome</button>
+    <Container fluid="sm" className="themed-container">
+      <button className="btn btn-primary">Welcome</button>
       <Container className="mt-5 border border-left-0 border-right-0 border-dark">
         <hr></hr>
         <Row className="mt-5">
@@ -144,7 +144,7 @@ const AdminProfile = ({ history }) => {
             </ListGroup>
           </Col>
           <Col md={3} sm={12}>
-            <ListGroup className=" ml-5" style={{ marginTop: "75px" }}>
+            <ListGroup className=" ml-2" style={{ marginTop: "75px" }}>
               <ListGroup.Item>
                 <h6 className=" text-center text-white btn btn-sm btn-block btn-primary">
                   Actions
@@ -192,7 +192,7 @@ const AdminProfile = ({ history }) => {
         </Row>
         <hr></hr>
       </Container>
-    </div>
+    </Container>
   );
 };
 

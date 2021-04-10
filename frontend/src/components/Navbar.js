@@ -110,14 +110,7 @@ function Navbar() {
                   <span>Profile</span>
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link
-                  to={`/faculty/edit/profile/${facultyInfo.result.FacultyID}`}
-                >
-                  <EditTwoToneIcon />
-                  <span>Edit Profile</span>
-                </Link>
-              </li>
+      
               {facultyInfo.result.ClassAdviser === "Yes" && (
                 <li className="nav-text">
                   <Link
