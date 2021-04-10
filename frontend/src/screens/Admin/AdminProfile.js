@@ -10,6 +10,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import PublishIcon from "@material-ui/icons/Publish";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import CloseIcon from "@material-ui/icons/Close";
+import Message from "../../components/Message";
 import { Row, Col, ListGroup, Image, Container } from "react-bootstrap";
 import axios from "axios";
 
@@ -77,7 +78,8 @@ const AdminProfile = ({ history }) => {
         console.log(error);
       });
   };
-  console.log("changed", status);
+
+  const msg = status;
 
   console.log(message);
   return (
@@ -104,7 +106,7 @@ const AdminProfile = ({ history }) => {
           </Col>
           <Col md={7} sm={12}>
             <ListGroup className="mt-2 mb-4 ml-5">
-              <h4 className="text-center btn btn-block btn-info">
+              <h4 className="text-center btn btn-block btn-success">
                 Admin Profile
               </h4>
               <ListGroup.Item
@@ -144,7 +146,13 @@ const AdminProfile = ({ history }) => {
             </ListGroup>
           </Col>
           <Col md={3} sm={12}>
-            <ListGroup className=" ml-2" style={{ marginTop: "75px" }}>
+            <ListGroup className=" ml-2" style={{ marginTop: "7px" }}>
+              {msg == "Not Published" && (
+                <Message variant="warning">Results not published</Message>
+              )}
+              {msg == "Published" && (
+                <Message variant="success">Results published</Message>
+              )}
               <ListGroup.Item>
                 <h6 className=" text-center text-white btn btn-sm btn-block btn-primary">
                   Actions
@@ -162,7 +170,7 @@ const AdminProfile = ({ history }) => {
                 <h6 style={{ textTransform: "capitalize" }}>
                   {status === "Not Published" && (
                     <button
-                      className="btn btn-sm btn-success "
+                      className="btn btn-sm btn-info"
                       onClick={publishResult}
                       style={{ width: "155px" }}
                     >
