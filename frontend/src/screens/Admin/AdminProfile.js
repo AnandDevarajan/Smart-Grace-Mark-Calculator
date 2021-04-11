@@ -169,20 +169,24 @@ const AdminProfile = ({ history }) => {
               <ListGroup.Item>
                 <h6 style={{ textTransform: "capitalize" }}>
                   {status === "Not Published" && (
-                    <button
-                      className="btn btn-sm btn-info"
-                      onClick={publishResult}
-                      style={{ width: "155px" }}
-                    >
-                      Publish Results
-                    </button>
+                    <>
+                      <PublishIcon className="mr-2" />
+                      <button
+                        className="btn btn-sm btn-info"
+                        onClick={publishResult}
+                        style={{ width: "155px" }}
+                      >
+                        Publish Results
+                      </button>
+                    </>
                   )}
                   {status === "Published" && (
                     <>
+                      <PublishIcon className="mr-2" />
                       <button
                         className="btn btn-sm btn-warning mr-5"
                         onClick={publishResult}
-                        style={{ width: "81px" }}
+                        style={{ width: "86px" }}
                       >
                         Published
                       </button>
