@@ -73,7 +73,7 @@ const FacultyProfile = ({ history }) => {
               />
             </Container>
           </Col>
-          <Col md={7} sm={12}>
+          <Col md={7} sm={12} style={{ marginTop: "-40px" }}>
             <ListGroup className="mt-2 mb-4 ml-5">
               <h4 className="text-center btn btn-block btn-info">
                 Faculty Profile

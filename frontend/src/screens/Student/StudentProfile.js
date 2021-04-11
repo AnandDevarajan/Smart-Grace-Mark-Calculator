@@ -71,7 +71,7 @@ const StudentProfile = ({ history }) => {
         <Row className="mt-5">
           <Col md={2} sm={12}>
             <Container
-              className="border border-info mt-5 mr-5"
+              className="border border-success mt-5 mr-5"
               style={{ width: "217px" }}
             >
               {studentInfo.result.Gender === "Male" ? (
@@ -98,7 +98,7 @@ const StudentProfile = ({ history }) => {
             </Container>
           </Col>
           <Col md={7} sm={12}>
-            <ListGroup className="mt-2 mb-4 ml-5" >
+            <ListGroup className=" mb-5 ml-5" style={{ marginTop: "-30px" }}>
               <h4 className="text-center btn btn-block btn-success">
                 Student Profile
               </h4>

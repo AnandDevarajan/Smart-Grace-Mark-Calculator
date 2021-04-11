@@ -90,7 +90,7 @@ const AdminProfile = ({ history }) => {
         <Row className="mt-5">
           <Col md={2} sm={12}>
             <Container
-              className="border border-info mt-5 mr-5"
+              className="border border-danger mt-5 mr-5"
               style={{ width: "217px" }}
             >
               <Image
@@ -106,7 +106,10 @@ const AdminProfile = ({ history }) => {
           </Col>
           <Col md={7} sm={12}>
             <ListGroup className="mt-2 mb-4 ml-5">
-              <h4 className="text-center btn btn-block btn-success">
+              <h4
+                className="text-center btn btn-block btn-warning"
+                style={{ backgroundColor: "#ce1212" }}
+              >
                 Admin Profile
               </h4>
               <ListGroup.Item
@@ -174,7 +177,7 @@ const AdminProfile = ({ history }) => {
                       <button
                         className="btn btn-sm btn-info"
                         onClick={publishResult}
-                        style={{ width: "155px" }}
+                        style={{ width: "120px" }}
                       >
                         Publish Results
                       </button>
