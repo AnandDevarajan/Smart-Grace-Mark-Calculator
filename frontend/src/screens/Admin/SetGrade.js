@@ -11,6 +11,14 @@ const SetGrade = ({ match, history }) => {
   const cname = id.substring(9, id.length);
   const [maxMark, setMaxMark] = useState("");
   const [minMark, setMinMark] = useState("");
+  const [O, setO] = useState("");
+  const [Ap, setAp] = useState("");
+  const [A, setA] = useState("");
+  const [Bp, setBp] = useState("");
+  const [B, setB] = useState("");
+  const [C, setC] = useState("");
+  const [D, setD] = useState("");
+  const [F, setF] = useState("");
   const [grs, setGrs] = useState([]);
 
   const adminSignin = useSelector((state) => state.adminSignin);
@@ -38,8 +46,48 @@ const SetGrade = ({ match, history }) => {
         console.log(error);
       });
   }, []);
-
-  const setGradeRange = () => {};
+  console.log(minMark, maxMark);
+  const setGradeRange = (max, min) => {
+    console.log("start");
+    if (max >= 80) {
+      setO(`${max}-${max - 5}`);
+      setAp(`${max - 6}-${max - 10}`);
+      setA(`${max - 11}-${max - 15}`);
+      setBp(`${max - 16}-${max - 20}`);
+      setB(`${max - 21}-${max - 30}`);
+      setC(`${max - 31}-${max - 40}`);
+      setD(`${max - 41}-${max - 65}`);
+      setF(`${max - 66}-0`);
+    } else if (max >= 60 && max < 80) {
+      setO(`${max}-${max - 4}`);
+      setAp(`${max - 5}-${max - 10}`);
+      setA(`${max - 11}-${max - 14}`);
+      setBp(`${max - 15}-${max - 20}`);
+      setB(`${max - 21}-${max - 25}`);
+      setC(`${max - 26}-${max - 30}`);
+      setD(`${max - 31}-${max - 49}`);
+      setF(`${max - 50}-0`);
+    } else if (max >= 50 && max < 60) {
+      setO(`${max}-${max - 3}`);
+      setAp(`${max - 4}-${max - 8}`);
+      setA(`${max - 9}-${max - 12}`);
+      setBp(`${max - 13}-${max - 18}`);
+      setB(`${max - 19}-${max - 23}`);
+      setC(`${max - 24}-${max - 39}`);
+      setD(`${max - 40}-${max - 47}`);
+      setF(`${max - 48}-0`);
+    } else {
+      setO(`${max}-${max - 3}`);
+      setAp(`${max - 4}-${max - 7}`);
+      setA(`${max - 7}-${max - 12}`);
+      setBp(`${max - 13}-${max - 16}`);
+      setB(`${max - 17}-${max - 22}`);
+      setC(`${max - 23}-${max - 29}`);
+      setD(`${max - 30}-${max - 39}`);
+      setF(`${max - 40}-0`);
+    }
+    
+  };
 
   return (
     <div>
@@ -51,9 +99,7 @@ const SetGrade = ({ match, history }) => {
       <h3 style={{ textTransform: "capitalize" }}>
         Grade Range - <span>{cname}</span>
       </h3>
-      <p className="text-center">
-         The marks in each grade represents the lower range
-      </p>
+      <p className="text-center"></p>
       <Table striped bordered hover responsive className="table-sm">
         <thead>
           <tr>
@@ -75,18 +121,28 @@ const SetGrade = ({ match, history }) => {
             <tr>
               <td>{cid}</td>
 
-              <td>{gr.O}</td>
+              {/* <td>{gr.O}</td>
               <td>{gr.Ap}</td>
               <td>{gr.A}</td>
               <td>{gr.Bp}</td>
               <td>{gr.B}</td>
               <td>{gr.C}</td>
               <td>{gr.D}</td>
-              <td>{gr.F}</td>
+              <td>{gr.F}</td> */}
+              <td>{O}</td>
+              <td>{Ap}</td>
+              <td>{A}</td>
+              <td>{Bp}</td>
+              <td>{B}</td>
+              <td>{C}</td>
+              <td>{D}</td>
+              <td>{F}</td>
               <td>
                 <button
                   className="btn btn-sm btn-success"
-                  onClick={setGradeRange}
+                  onClick={() => {
+                    setGradeRange(maxMark, minMark);
+                  }}
                 >
                   Generate
                 </button>
