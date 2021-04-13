@@ -149,7 +149,7 @@ exports.updateCourseMarkDetails = (req, res) => {
 
 exports.getCourseReport = (req, res) => {
   con.query(
-    `SELECT c.CourseID,s.CourseName,avg(c.total) as Average,max(c.total) as Max,min(c.total) as Min ,count(c.CourseID) as Num FROM grace_marks.course_mark c  inner join grace_marks.course s on c.CourseID=s.CourseID group by c.CourseID`,
+    `SELECT c.CourseID,s.CourseName,avg(c.total) as Average,max(c.total) as Max,min(c.total) as Min ,count(c.CourseID) as Num ,g.status FROM grace_marks.course_mark c  inner join grace_marks.course s on c.CourseID=s.CourseID inner join grace_marks.grade_range g on c.CourseID=g.CourseID group by c.CourseID order by c.CourseID`,
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
@@ -179,6 +179,19 @@ exports.getACourseReport = (req, res) => {
       });
     }
   );
+};
+
+exports.getAllGradeRange = (req, res) => {
+  con.query(`SELECT * FROM GRADE_RANGE`, (err, result) => {
+    if (result.length === 0 || err) {
+      return res.status(400).json({
+        message: 'No report found',
+      });
+    }
+    return res.json({
+      allgrade: result,
+    });
+  });
 };
 
 exports.getGradeRange = (req, res) => {

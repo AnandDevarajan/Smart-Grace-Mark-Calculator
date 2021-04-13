@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
-import { gradeRangeDetails } from '../../actions/courseActions';
+import { allGradeRangeDetails } from '../../actions/courseActions';
 import { Table, Button } from 'react-bootstrap';
 const CourseReport = ({ history }) => {
   const [reports, setReports] = useState([]);
@@ -12,14 +12,14 @@ const CourseReport = ({ history }) => {
 
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
-  const gradeRange = useSelector((state) => state.gradeRange);
-  const { error, success } = gradeRange;
+  const allGradeRange = useSelector((state) => state.allGradeRange);
+  const { allgrade } = allGradeRange;
 
   useEffect(() => {
     if (!adminInfo) {
       history.push('/');
     }
-    dispatch(AllgradeRangeDetails());
+    dispatch(allGradeRangeDetails());
     axios
       .get('/course/report')
       .then((response) => {
@@ -30,6 +30,7 @@ const CourseReport = ({ history }) => {
       });
   }, [adminInfo, reports]);
 
+  console.log(reports);
   return (
     <div className='ml-5 align-items-center'>
       <Link to='/admin/profile'>
@@ -66,20 +67,20 @@ const CourseReport = ({ history }) => {
               </td>
               <td>{report.Num}</td>
               <td>
-                {report.status === 'NP' && (
+                {report.status === 'P' ? (
                   <Link
-                    className='btn btn-sm btn-success'
-                    to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
-                  >
-                    Set Grade
-                  </Link>
-                )}
-                {report.status === 'P' && (
-                  <Link
-                    className='btn btn-sm btn-success'
+                    className='btn btn-sm btn-primary'
                     to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
                   >
                     View Grade
+                  </Link>
+                ) : (
+                  <Link
+                    className='btn btn-sm btn-success'
+                    style={{ width: '108px' }}
+                    to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
+                  >
+                    Set Grade
                   </Link>
                 )}
               </td>
