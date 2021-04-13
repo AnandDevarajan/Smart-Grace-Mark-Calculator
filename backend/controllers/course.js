@@ -180,3 +180,21 @@ exports.getACourseReport = (req, res) => {
     }
   );
 };
+
+exports.getGradeRange = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+    [id],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: "No report found",
+        });
+      }
+      return res.json({
+        grade: result,
+      });
+    }
+  );
+};

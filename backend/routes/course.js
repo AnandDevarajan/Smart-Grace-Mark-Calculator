@@ -10,11 +10,13 @@ const {
   getCourseMarkOfStudent,
   getCourseReport,
   getACourseReport,
+  getGradeRange,
 } = require("../controllers/course");
 const { verifyFaculty, faculty } = require("../middlewares/auth");
 router.get("/", getAllCourses);
 router.get("/report", getCourseReport);
 router.get("/get/report/:id", getACourseReport);
+router.get("/graderange/:id", getGradeRange);
 router.get("/:id", getAllDeptCourses);
 router.get("/student/marks/:id", getCourseMarkOfStudent);
 router.get("/markList/:id", verifyFaculty, faculty, getCourseMark);
