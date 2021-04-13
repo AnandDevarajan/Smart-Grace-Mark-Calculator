@@ -216,27 +216,45 @@ exports.updateGradeRange = (req, res) => {
   const id = req.params.id;
   console.log(id);
   const { O, Ap, A, Bp, B, C, P, F } = req.body;
+  let newO = O.substring(O.length - 2, O.length);
+  let newAp = Ap.substring(Ap.length - 2, Ap.length);
+  let newA = A.substring(A.length - 2, A.length);
+  let newBp = Bp.substring(Bp.length - 2, Bp.length);
+  let newB = B.substring(B.length - 2, B.length);
+  let newC = C.substring(C.length - 2, C.length);
+  let newP = P.substring(P.length - 2, P.length);
+  let newF = F.substring(F.length - 2, F.length);
+  console.log(id);
   con.query(
     `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
     [O, Ap, A, Bp, B, C, P, F, 'P', id],
     (err, result) => {
-      if (err || result.length === 0) {
+      if (err) {
         return res.status(400).json({
           message: 'Failed to update',
         });
       }
       con.query(
-        `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
-        [id],
+        `UPDATE GRACE_MARKS.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+        [newO, newAp, newA, newBp, newB, newC, newP, newF, id],
         (err, result2) => {
-          if (result2.length === 0 || err) {
-            return res.status(400).json({
-              message: 'No report found',
-            });
+          if (err) {
+            console.log(err.sqlMessage);
           }
-          return res.json({
-            grade: result2,
-          });
+          con.query(
+            `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+            [id],
+            (err, result2) => {
+              if (result2.length === 0 || err) {
+                return res.status(400).json({
+                  message: 'No grade found',
+                });
+              }
+              return res.json({
+                grade: result2,
+              });
+            }
+          );
         }
       );
     }

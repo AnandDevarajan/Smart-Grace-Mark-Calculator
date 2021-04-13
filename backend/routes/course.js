@@ -25,6 +25,6 @@ router.get('/student/marks/:id', getCourseMarkOfStudent);
 router.get('/markList/:id', verifyFaculty, faculty, getCourseMark);
 router.get('/mark/edit/:id', getACourseMark);
 router.put('/marks/:id', verifyFaculty, faculty, addCourseMarks);
-router.put('/graderange/:id', verifyAdmin, updateGradeRange);
+router.put('/graderange/:id', updateGradeRange);
 router.put('/mark/update/:id', updateCourseMarkDetails);
 module.exports = router;

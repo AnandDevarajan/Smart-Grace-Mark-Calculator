@@ -81,6 +81,7 @@ const CourseStudents = ({ history, match }) => {
               <th>Internals</th>
               <th>Marks</th>
               <th>Total </th>
+              <th></th>
               <th>Grade</th>
             </tr>
           </thead>
@@ -108,9 +109,6 @@ const CourseStudents = ({ history, match }) => {
                 <td>
                   <td>{student.Total}</td>
                 </td>
-                <td>
-                  <td>{student.Grade}</td>
-                </td>
                 {student.Total === 'N/P' ? (
                   <td>
                     <CheckBoxIcon
@@ -131,6 +129,18 @@ const CourseStudents = ({ history, match }) => {
                     </LinkContainer>
                   </td>
                 )}
+                <td>
+                  <td>{student.Grade}</td>
+                </td>
+                <td>
+                  {student.Grade === 'N/P' ? (
+                    <Button className='btn-sm btn-success'>
+                      Calculate Grade
+                    </Button>
+                  ) : (
+                    <td></td>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
