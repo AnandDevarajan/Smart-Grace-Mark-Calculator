@@ -4,19 +4,30 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { courseStudentMark } from '../../actions/studentActions';
-import { updateCoursemark } from '../../actions/courseActions';
+import { updateCoursemark, rangeDetails } from '../../actions/courseActions';
 import { Link } from 'react-router-dom';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
 import EditIcon from '@material-ui/icons/Edit';
+import axios from 'axios';
 
 const CourseStudents = ({ history, match }) => {
   const [message, setMessage] = useState(null);
   const [internals, setInternals] = useState('');
   const [marks, setMarks] = useState('');
   const [edit, setEdit] = useState(false);
-  const dispatch = useDispatch();
+  const [O, setO] = useState('');
+  const [Ap, setAp] = useState('');
+  const [A, setA] = useState('');
+  const [Bp, setBp] = useState('');
+  const [B, setB] = useState('');
+  const [C, setC] = useState('');
+  const [P, setP] = useState('');
+  const [F, setF] = useState('');
+  const [count, setCount] = useState(0);
+  const [grade, setGrade] = useState('');
+  const dispatch = useDispatch('');
 
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
@@ -28,16 +39,29 @@ const CourseStudents = ({ history, match }) => {
     (state) => state.courseStudentMarkList
   );
   const { students } = courseStudentMarkList;
+
   const [cid, setCid] = useState(facultyInfo.result.CourseID);
 
   useEffect(() => {
     if (facultyInfo) {
       dispatch(courseStudentMark(cid));
+      axios.get(`/course/range/details/${cid}`).then((response) => {
+        setO(response.data.range[0].O);
+        setAp(response.data.range[0].Ap);
+        setA(response.data.range[0].A);
+        setBp(response.data.range[0].Bp);
+        setB(response.data.range[0].B);
+        setC(response.data.range[0].C);
+        setP(response.data.range[0].P);
+        setF(response.data.range[0].F);
+      });
+      // dispatch(rangeDetails(cid));
     } else {
       history.push('/');
     }
-  }, [dispatch, history, facultyInfo, edit]);
+  }, [dispatch, history, facultyInfo, edit, O, Ap, A, Bp, B, C, P, F]);
 
+  console.log('count', count);
   const submitMarks = (id, internals, marks) => {
     if (internals === ' ' || marks === '') {
       setMessage(null);
@@ -50,6 +74,28 @@ const CourseStudents = ({ history, match }) => {
       dispatch(updateCoursemark(id, cid, internals, marks));
       window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
     }
+  };
+  console.log('Students', students);
+
+  const calculateGrade = (id, total, O, Ap, A, Bp, B, C, P, F) => {
+    axios
+      .put(`/course/update/grade/${cid}`, {
+        id,
+        total,
+        O,
+        Ap,
+        A,
+        Bp,
+        B,
+        C,
+        P,
+        F,
+      })
+      .then((response) => {
+        if (response.data) {
+          window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
+        }
+      });
   };
 
   return (
@@ -66,7 +112,7 @@ const CourseStudents = ({ history, match }) => {
           </Col>
           <Col className='text-right'>
             <Link to={`/admin/set/grade/${facultyInfo.result.CourseID}`}>
-              <Button>View Grade Ranges</Button>
+              <Button className='btn btn-sm'>View Grade Ranges</Button>
             </Link>
           </Col>
         </Row>
@@ -133,12 +179,28 @@ const CourseStudents = ({ history, match }) => {
                   <td>{student.Grade}</td>
                 </td>
                 <td>
-                  {student.Grade === 'N/P' ? (
-                    <Button className='btn-sm btn-success'>
+                  {student.Grade === 'N/P' && student.Total != 'N/P' ? (
+                    <Button
+                      className='btn-sm btn-success'
+                      onClick={() =>
+                        calculateGrade(
+                          student.RollNum,
+                          student.Total,
+                          O,
+                          Ap,
+                          A,
+                          Bp,
+                          B,
+                          C,
+                          P,
+                          F
+                        )
+                      }
+                    >
                       Calculate Grade
                     </Button>
                   ) : (
-                    <td></td>
+                    <></>
                   )}
                 </td>
               </tr>

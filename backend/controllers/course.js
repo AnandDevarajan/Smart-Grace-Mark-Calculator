@@ -214,7 +214,6 @@ exports.getGradeRange = (req, res) => {
 
 exports.updateGradeRange = (req, res) => {
   const id = req.params.id;
-  console.log(id);
   const { O, Ap, A, Bp, B, C, P, F } = req.body;
   let newO = O.substring(O.length - 2, O.length);
   let newAp = Ap.substring(Ap.length - 2, Ap.length);
@@ -259,4 +258,168 @@ exports.updateGradeRange = (req, res) => {
       );
     }
   );
+};
+
+exports.getRangeDetails = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT * FROM GRACE_MARKS.RANGE WHERE CourseID=?`,
+    [id],
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          message: 'No report found',
+        });
+      }
+      return res.json({
+        range: result,
+      });
+    }
+  );
+};
+
+exports.updateGrade = (req, res) => {
+  const cid = req.params.id;
+  const { id, O, Ap, A, Bp, B, C, P, F, total } = req.body;
+  if (parseInt(total) >= parseInt(O)) {
+    let grade = 'O';
+    console.log('Grade =', grade);
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  } else if (parseInt(total) < parseInt(O) && parseInt(total) >= parseInt(Ap)) {
+    let grade = 'A+';
+    console.log('Grade =', grade);
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  } else if (parseInt(total) < parseInt(Ap) && parseInt(total) >= parseInt(A)) {
+    let grade = 'A';
+    console.log('Grade =', grade);
+
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  } else if (parseInt(total) < parseInt(A) && parseInt(total) >= parseInt(Bp)) {
+    let grade = 'B+';
+    console.log('Grade =', grade);
+
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  } else if (parseInt(total) < parseInt(Bp) && parseInt(total) >= parseInt(B)) {
+    let grade = 'B';
+    console.log('Grade =', grade);
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  } else if (parseInt(total) < parseInt(B) && parseInt(total) >= parseInt(C)) {
+    let grade = 'C';
+    console.log('Grade =', grade);
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  } else if (parseInt(total) < parseInt(C) && parseInt(total) >= parseInt(P)) {
+    let grade = 'P';
+    console.log('Grade =', grade);
+
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  } else if (parseInt(total) < parseInt(P)) {
+    let grade = 'F';
+    console.log('Grade =', grade);
+
+    con.query(
+      `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
+      [grade, cid, id],
+      (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        return res.json({
+          message: 'Updated Successfully',
+        });
+      }
+    );
+  }
 };

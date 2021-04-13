@@ -27,6 +27,9 @@ import {
   ALL_GRADE_RANGE_DETAILS_FAIL,
   ALL_GRADE_RANGE_DETAILS_SUCCESS,
   ALL_GRADE_RANGE_DETAILS_REQUEST,
+  RANGE_DETAILS_REQUEST,
+  RANGE_DETAILS_SUCCESS,
+  RANGE_DETAILS_FAIL,
 } from '../constants/courseConstants';
 import axios from 'axios';
 
@@ -305,6 +308,29 @@ export const allGradeRangeDetails = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_GRADE_RANGE_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const rangeDetails = (cid) => async (dispatch) => {
+  try {
+    dispatch({
+      type: RANGE_DETAILS_REQUEST,
+    });
+
+    const { data } = await axios.get(`/course/range/details/${cid}`);
+
+    dispatch({
+      type: RANGE_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: RANGE_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

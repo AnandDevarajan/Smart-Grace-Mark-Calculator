@@ -43,6 +43,7 @@ import {
   gradeRangeReducer,
   gradeRangeUpdateReducer,
   allGradeRangeReducer,
+  rangeReducer,
 } from './reducers/courseReducers';
 
 const reducer = combineReducers({
@@ -75,6 +76,7 @@ const reducer = combineReducers({
   courseDeptList: courseDeptListReducer,
   courseStudentMarkList: courseStudentMarkListReducer,
   allGradeRange: allGradeRangeReducer,
+  rangeDet: rangeReducer,
   gradeRange: gradeRangeReducer,
   gradeRangeUpdate: gradeRangeUpdateReducer,
 });
