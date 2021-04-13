@@ -31,6 +31,10 @@ const SetGrade = ({ match, history }) => {
 
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
+
+  const facultySignin = useSelector((state) => state.facultySignin);
+  const { facultyInfo } = facultySignin;
+
   const gradeRangeUpdate = useSelector((state) => state.gradeRangeUpdate);
   const { error, success } = gradeRangeUpdate;
 
@@ -39,7 +43,7 @@ const SetGrade = ({ match, history }) => {
       dispatch({
         type: GRADE_RANGE_UPDATE_RESET,
       });
-    } else if (adminInfo) {
+    } else if (adminInfo || facultyInfo) {
       axios
         .all([
           axios.get(`/course/graderange/${cid}`),
@@ -105,7 +109,7 @@ const SetGrade = ({ match, history }) => {
   };
   return (
     <>
-      {generate === false && (
+      {adminInfo && generate === false && (
         <div>
           <Link to='/admin/course/report'>
             <Button variant='light'>
@@ -206,9 +210,52 @@ const SetGrade = ({ match, history }) => {
                         setGradeRange(maxMark);
                       }}
                     >
-                    SET
+                      SET
                     </button>
                   </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      )}
+      {facultyInfo && (
+        <div>
+          <Link to={`/faculty/students/CSE`}>
+            <Button variant='light'>
+              <ArrowBackIcon /> Go Back
+            </Button>
+          </Link>
+          <h3 style={{ textTransform: 'capitalize' }}>
+            Grade Range - <span>{id}</span>
+          </h3>
+          <p className='text-center'></p>
+          <Table striped bordered hover responsive className='table-sm'>
+            <thead>
+              <tr>
+                <th>Course ID</th>
+                <th>O</th>
+                <th>A+</th>
+                <th>A</th>
+                <th>B+</th>
+                <th>B</th>
+                <th>C</th>
+                <th>P</th>
+                <th>F</th>
+              </tr>
+            </thead>
+            <tbody>
+              {grs.map((gr) => (
+                <tr>
+                  <td>{cid}</td>
+                  <td>{gr.O}</td>
+                  <td>{gr.Ap}</td>
+                  <td>{gr.A}</td>
+                  <td>{gr.Bp}</td>
+                  <td>{gr.B}</td>
+                  <td>{gr.C}</td>
+                  <td>{gr.P}</td>
+                  <td>{gr.F}</td>
                 </tr>
               ))}
             </tbody>

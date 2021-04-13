@@ -64,6 +64,11 @@ const CourseStudents = ({ history, match }) => {
           <Col>
             <h1>STUDENT LIST - {facultyInfo.result.CourseID}</h1>
           </Col>
+          <Col className='text-right'>
+            <Link to={`/admin/set/grade/${facultyInfo.result.CourseID}`}>
+              <Button>View Grade Ranges</Button>
+            </Link>
+          </Col>
         </Row>
         {message && <Message variant='info'>{message}</Message>}
         <Table striped bordered hover responsive className='table-sm'>
@@ -76,6 +81,7 @@ const CourseStudents = ({ history, match }) => {
               <th>Internals</th>
               <th>Marks</th>
               <th>Total </th>
+              <th>Grade</th>
             </tr>
           </thead>
           <tbody>
@@ -101,6 +107,9 @@ const CourseStudents = ({ history, match }) => {
                 </td>
                 <td>
                   <td>{student.Total}</td>
+                </td>
+                <td>
+                  <td>{student.Grade}</td>
                 </td>
                 {student.Total === 'N/P' ? (
                   <td>
