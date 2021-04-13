@@ -19,6 +19,10 @@ import {
   COURSE_DEPT_LIST_REQUEST,
   COURSE_DEPT_LIST_SUCCESS,
   COURSE_DEPT_LIST_FAIL,
+  GRADE_RANGE_UPDATE_REQUEST,
+  GRADE_RANGE_UPDATE_SUCCESS,
+  GRADE_RANGE_UPDATE_FAIL,
+  GRADE_RANGE_UPDATE_RESET,
 } from '../constants/courseConstants';
 
 export const courseListReducer = (state = { courses: [] }, action) => {
@@ -115,6 +119,23 @@ export const courseDetailsReducer = (state = { markList: {} }, action) => {
       return { loading: false, error: action.payload };
     case COURSE_MARK_DETAILS_RESET:
       return { markList: {} };
+    default:
+      return state;
+  }
+};
+
+export const gradeRangeUpdateReducer = (state = { gradeRange: {} }, action) => {
+  switch (action.type) {
+    case GRADE_RANGE_UPDATE_REQUEST:
+      return { loading: true };
+    case GRADE_RANGE_UPDATE_SUCCESS:
+      return { loading: false, success: true };
+    case GRADE_RANGE_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case GRADE_RANGE_UPDATE_RESET:
+      return {
+        gradeRange: {},
+      };
     default:
       return state;
   }

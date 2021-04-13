@@ -1,11 +1,11 @@
-const config = require("../config/db");
+const config = require('../config/db');
 const con = config.con;
 
 exports.getAllCourses = (req, res) => {
   con.query(`SELECT * FROM COURSE`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: "No Courses found",
+        message: 'No Courses found',
       });
     }
     return res.json({
@@ -22,7 +22,7 @@ exports.getAllDeptCourses = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: "No Courses found",
+          message: 'No Courses found',
         });
       }
       return res.json({
@@ -41,11 +41,11 @@ exports.addCourseMarks = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
-          message: "Unable to Update Marks",
+          message: 'Unable to Update Marks',
         });
       }
       return res.json({
-        message: "Successfully Updated",
+        message: 'Successfully Updated',
       });
     }
   );
@@ -59,7 +59,7 @@ exports.getCourseMark = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: "No Courses found",
+          message: 'No Courses found',
         });
       }
       return res.json({
@@ -77,7 +77,7 @@ exports.getCourseMarkOfStudent = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: "No marks found",
+          message: 'No marks found',
         });
       }
       return res.json({
@@ -100,7 +100,7 @@ exports.getACourseMark = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: "No Marks found",
+          message: 'No Marks found',
         });
       }
       return res.json({
@@ -120,7 +120,7 @@ exports.updateCourseMarkDetails = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: "No course marks Found",
+          message: 'No course marks Found',
         });
       }
       if (result) {
@@ -134,7 +134,7 @@ exports.updateCourseMarkDetails = (req, res) => {
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({
-                message: "Failed to update",
+                message: 'Failed to update',
               });
             }
             return res.json({
@@ -153,7 +153,7 @@ exports.getCourseReport = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: "No report found",
+          message: 'No report found',
         });
       }
       return res.json({
@@ -171,7 +171,7 @@ exports.getACourseReport = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: "No report found",
+          message: 'No report found',
         });
       }
       return res.json({
@@ -189,12 +189,43 @@ exports.getGradeRange = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: "No report found",
+          message: 'No report found',
         });
       }
       return res.json({
         grade: result,
       });
+    }
+  );
+};
+
+exports.updateGradeRange = (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const { O, Ap, A, Bp, B, C, P, F } = req.body;
+  con.query(
+    `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
+    [O, Ap, A, Bp, B, C, P, F, 'P', id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(400).json({
+          message: 'Failed to update',
+        });
+      }
+      con.query(
+        `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+        [id],
+        (err, result2) => {
+          if (result2.length === 0 || err) {
+            return res.status(400).json({
+              message: 'No report found',
+            });
+          }
+          return res.json({
+            grade: result2,
+          });
+        }
+      );
     }
   );
 };
