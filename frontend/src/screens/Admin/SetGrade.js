@@ -151,7 +151,7 @@ const SetGrade = ({ match, history }) => {
                         setGradeRange(maxMark);
                       }}
                     >
-                      Set
+                      GENERATE
                     </button>
                   </td>
                 </tr>
@@ -206,7 +206,7 @@ const SetGrade = ({ match, history }) => {
                         setGradeRange(maxMark);
                       }}
                     >
-                      Generate
+                    SET
                     </button>
                   </td>
                 </tr>

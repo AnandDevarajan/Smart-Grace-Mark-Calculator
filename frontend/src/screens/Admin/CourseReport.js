@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { Link } from "react-router-dom";
-import { Table, Button } from "react-bootstrap";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { Link } from 'react-router-dom';
+import { gradeRangeDetails } from '../../actions/courseActions';
+import { Table, Button } from 'react-bootstrap';
 const CourseReport = ({ history }) => {
   const [reports, setReports] = useState([]);
 
+  const dispatch = useDispatch();
+
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
+  const gradeRange = useSelector((state) => state.gradeRange);
+  const { error, success } = gradeRange;
 
   useEffect(() => {
     if (!adminInfo) {
-      history.push("/");
+      history.push('/');
     }
+    dispatch(AllgradeRangeDetails());
     axios
-      .get("/course/report")
+      .get('/course/report')
       .then((response) => {
         setReports(response.data.report);
       })
@@ -25,16 +31,16 @@ const CourseReport = ({ history }) => {
   }, [adminInfo, reports]);
 
   return (
-    <div className="ml-5 align-items-center">
-      <Link to="/admin/profile">
-        <Button variant="light">
+    <div className='ml-5 align-items-center'>
+      <Link to='/admin/profile'>
+        <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
 
-      <h1 className="py-3 text-center">Course Report</h1>
+      <h1 className='py-3 text-center'>Course Report</h1>
 
-      <Table striped bordered hover responsive className="table-sm">
+      <Table striped bordered hover responsive className='table-sm'>
         <thead>
           <tr>
             <th>Course ID</th>
@@ -60,12 +66,22 @@ const CourseReport = ({ history }) => {
               </td>
               <td>{report.Num}</td>
               <td>
-                <Link
-                  className="btn btn-sm btn-success"
-                  to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
-                >
-                  Set Grade
-                </Link>
+                {report.status === 'NP' && (
+                  <Link
+                    className='btn btn-sm btn-success'
+                    to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
+                  >
+                    Set Grade
+                  </Link>
+                )}
+                {report.status === 'P' && (
+                  <Link
+                    className='btn btn-sm btn-success'
+                    to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
+                  >
+                    View Grade
+                  </Link>
+                )}
               </td>
             </tr>
           ))}
