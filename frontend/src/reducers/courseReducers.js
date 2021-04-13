@@ -23,6 +23,10 @@ import {
   GRADE_RANGE_UPDATE_SUCCESS,
   GRADE_RANGE_UPDATE_FAIL,
   GRADE_RANGE_UPDATE_RESET,
+  GRADE_RANGE_DETAILS_RESET,
+  GRADE_RANGE_DETAILS_FAIL,
+  GRADE_RANGE_DETAILS_SUCCESS,
+  GRADE_RANGE_DETAILS_REQUEST,
 } from '../constants/courseConstants';
 
 export const courseListReducer = (state = { courses: [] }, action) => {
@@ -136,6 +140,21 @@ export const gradeRangeUpdateReducer = (state = { gradeRange: {} }, action) => {
       return {
         gradeRange: {},
       };
+    default:
+      return state;
+  }
+};
+
+export const gradeRangeReducer = (state = { grade: {} }, action) => {
+  switch (action.type) {
+    case GRADE_RANGE_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case GRADE_RANGE_DETAILS_SUCCESS:
+      return { loading: false, grade: action.payload.grade };
+    case GRADE_RANGE_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    case GRADE_RANGE_DETAILS_RESET:
+      return { grade: {} };
     default:
       return state;
   }

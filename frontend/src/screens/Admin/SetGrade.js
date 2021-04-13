@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
+import {
+  gradeRangeDetails,
+  updateGradeRange,
+} from '../../actions/courseActions';
 import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -21,31 +25,32 @@ const SetGrade = ({ match, history }) => {
   const [F, setF] = useState('');
   const [grs, setGrs] = useState([]);
 
+  const dispatch = useDispatch();
+
   const adminSignin = useSelector((state) => state.adminSignin);
   const { adminInfo } = adminSignin;
+
+  const gradeRange = useSelector((state) => state.gradeRange);
+  const { grade } = gradeRange;
 
   useEffect(() => {
     if (!adminInfo) {
       history.push('/');
     }
+    dispatch(gradeRangeDetails(cid));
     axios
-      .all([
-        axios.get(`/course/graderange/${cid}`),
-        axios.get(`/course/get/report/${cid}`),
-      ])
-      .then(
-        axios.spread((response1, response2) => {
-          console.log('hi', response1, response2);
-          setGrs(response1.data.grade);
-          setMaxMark(response2.data.report[0].Max);
-          setMinMark(response2.data.report[0].Min);
-        })
-      )
+      .get(`/course/get/report/${cid}`)
+      .then((response2) => {
+        console.log('hi', response2);
+        setMaxMark(response2.data.report[0].Max);
+        setMinMark(response2.data.report[0].Min);
+      })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-  console.log(minMark, maxMark);
+  }, [adminInfo]);
+
+  console.log(grade);
   const setGradeRange = (max, min) => {
     if (max >= 80) {
       setO(`${max}-${max - 5}`);
@@ -120,7 +125,7 @@ const SetGrade = ({ match, history }) => {
           </tr>
         </thead>
         <tbody>
-          {grs.map((gr) => (
+          {grade.map((gr) => (
             <tr>
               <td>{cid}</td>
               <td>{gr.O}</td>
@@ -131,14 +136,6 @@ const SetGrade = ({ match, history }) => {
               <td>{gr.C}</td>
               <td>{gr.P}</td>
               <td>{gr.F}</td>
-              {/* <td>{O}</td>
-              <td>{Ap}</td>
-              <td>{A}</td>
-              <td>{Bp}</td>
-              <td>{B}</td>
-              <td>{C}</td>
-              <td>{P}</td>
-              <td>{F}</td> */}
               <td>
                 <button
                   className='btn btn-sm btn-success'
