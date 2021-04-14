@@ -21,7 +21,6 @@ const AdminProfile = ({ history }) => {
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState('');
-  const [value, onChange] = useState(new Date());
 
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
   const { success, error } = gracemarkCreate;
@@ -48,7 +47,7 @@ const AdminProfile = ({ history }) => {
           setStatus(response2.data.status);
         })
       );
-  }, [adminInfo, name, email, address, phone]);
+  }, [adminInfo, name, email, address, phone.replace, status, message]);
 
   const publishResult = () => {
     const config = {
@@ -57,7 +56,7 @@ const AdminProfile = ({ history }) => {
     axios
       .get('/admin/publish/result', config)
       .then((response) => {
-        setStatus(response.data.message);
+        setMessage(response.data.message);
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +70,7 @@ const AdminProfile = ({ history }) => {
     axios
       .get('/admin/reset/publish', config)
       .then((response) => {
-        setStatus(response.data.status);
+        setMessage(response.data.status);
       })
       .catch((error) => {
         console.log(error);
@@ -79,13 +78,14 @@ const AdminProfile = ({ history }) => {
   };
 
   console.log('stat', status);
+  console.log('msg', message);
   return (
     <Container fluid='sm' className='themed-container'>
       <button className='btn btn-primary mb-3'>Welcome</button>
 
       <Container className='mt-5 border border-left-0 border-right-0 border-dark'>
         <hr></hr>
-        <Row className='mt-5'>
+        <Row className='mt-4'>
           <Col md={2} sm={12}>
             <Container
               className='border border-danger mt-5 mr-5'
@@ -148,15 +148,13 @@ const AdminProfile = ({ history }) => {
           </Col>
           <Col md={3} sm={12}>
             <ListGroup className=' ml-2' style={{ marginTop: '7px' }}>
-              {status ===
-                'Unable to Publish Results now. Mark allocation is yet to be completed' && (
-                <Message variant='danger'>{status}</Message>
-              )}
+              {status === 'Not Published' &&
+                message ===
+                  'Unable to Publish Results now. Mark allocation is yet to be completed' && (
+                  <Message variant='danger'>{message}</Message>
+                )}
               {status === 'Published' && (
                 <Message variant='success'>Results published</Message>
-              )}
-              {status === 'Not Published' && (
-                <Message variant='warning'>Results not published</Message>
               )}
               <ListGroup.Item>
                 <h6 className=' text-center text-white btn btn-sm btn-block btn-primary'>
@@ -173,8 +171,7 @@ const AdminProfile = ({ history }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <h6 style={{ textTransform: 'capitalize' }}>
-                  {status ===
-                    'Unable to Publish Results now. Mark allocation is yet to be completed' && (
+                  {status === 'Not Published' && (
                     <>
                       <PublishIcon className='mr-2' />
                       <button
@@ -186,18 +183,7 @@ const AdminProfile = ({ history }) => {
                       </button>
                     </>
                   )}
-                  {status === '' && (
-                    <>
-                      <PublishIcon className='mr-2' />
-                      <button
-                        className='btn btn-sm btn-info'
-                        onClick={publishResult}
-                        style={{ width: '120px' }}
-                      >
-                        Publish Results
-                      </button>
-                    </>
-                  )}
+
                   {status === 'Published' && (
                     <>
                       <PublishIcon className='mr-2' />
