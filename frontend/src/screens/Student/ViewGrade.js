@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { Link } from "react-router-dom";
-import { Table, Button } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { Link } from 'react-router-dom';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 const ViewGrade = ({ match, history }) => {
   let id = match.params.id;
   console.log(id);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState('');
   const [marks, setMarks] = useState([]);
 
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -15,7 +15,7 @@ const ViewGrade = ({ match, history }) => {
 
   useEffect(() => {
     if (!studentInfo) {
-      history.push("/");
+      history.push('/');
     }
 
     axios
@@ -32,46 +32,111 @@ const ViewGrade = ({ match, history }) => {
       );
   }, [studentInfo, status]);
 
-  console.log(status);
+  console.log(marks);
   return (
     <>
-      {status === "Published" && (
-        <div className="ml-5 align-items-center">
-          <Link to="/student/profile">
-            <Button variant="light">
+      {status === 'Published' && (
+        <div className='ml-5 align-items-center'>
+          <Link to='/student/profile'>
+            <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
+          <h1 className='text-center'>Result</h1>
+          <Row className='align-items-center '>
+            <Col className='text-left'>
+              <Button>{studentInfo.result.RollNum}</Button>
+            </Col>
+          </Row>
 
-          <h1 className="py-3 text-center">Mark List</h1>
-
-          <Table striped bordered hover responsive className="table-sm">
+          <Table striped bordered hover responsive className='table-sm mb-5'>
             <thead>
               <tr>
                 <th>Course ID</th>
                 <th>Course Name</th>
-                <th>Internals</th>
-                <th>Marks</th>
-                <th>Total</th>
+                <th>Grade</th>
               </tr>
             </thead>
             <tbody>
               {marks.map((mark) => (
                 <tr>
                   <td>{mark.CourseID}</td>
-                  <td> {mark.CourseName}</td>
-                  <td>{mark.Internals}</td>
-                  <td>{mark.Marks}</td>
-                  <td>{mark.Total}</td>
+                  <td style={{ width: '500px' }}> {mark.CourseName}</td>
+                  <td style={{ width: '20px' }} className='text-center'>
+                    {mark.Grade === 'O' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#289672', width: '46px' }}
+                      >
+                        O
+                      </Button>
+                    )}
+                    {mark.Grade === 'A+' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#29bb89', width: '46px' }}
+                      >
+                        A+
+                      </Button>
+                    )}
+                    {mark.Grade === 'A' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#29bb89', width: '46px' }}
+                      >
+                        A
+                      </Button>
+                    )}
+                    {mark.Grade === 'B+' && (
+                      <Button
+                        className='btn btn-sm btn-success'
+                        style={{ width: '46px' }}
+                      >
+                        B+
+                      </Button>
+                    )}
+                    {mark.Grade === 'B' && (
+                      <Button
+                        className='btn btn-sm btn-success'
+                        style={{ width: '46px' }}
+                      >
+                        B
+                      </Button>
+                    )}
+                    {mark.Grade === 'C' && (
+                      <Button
+                        className='btn btn-sm btn-warning'
+                        style={{ width: '46px' }}
+                      >
+                        C
+                      </Button>
+                    )}
+                    {mark.Grade === 'P' && (
+                      <Button
+                        className='btn btn-sm btn-danger'
+                        style={{ width: '46px' }}
+                      >
+                        P
+                      </Button>
+                    )}
+                    {mark.Grade === 'F' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#be0000', width: '46px' }}
+                      >
+                        F
+                      </Button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </Table>
         </div>
       )}
-      {status === "Not Published" && (
+      {status === 'Not Published' && (
         <div>
-          <h1 className="text-center">Results Not Published</h1>
+          <h1 className='text-center'>Results Not Published</h1>
         </div>
       )}
     </>

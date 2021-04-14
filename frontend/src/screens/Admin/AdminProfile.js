@@ -45,7 +45,6 @@ const AdminProfile = ({ history }) => {
           setEmail(response1.data.admin.EmailID);
           setPhone(response1.data.admin.PhoneNum);
           setAddress(response1.data.admin.Address);
-
           setStatus(response2.data.status);
         })
       );
@@ -157,9 +156,7 @@ const AdminProfile = ({ history }) => {
                 <Message variant='success'>Results published</Message>
               )}
               {status === 'Not Published' && (
-                <Message variant='warning'>
-                  Results not published
-                </Message>
+                <Message variant='warning'>Results not published</Message>
               )}
               <ListGroup.Item>
                 <h6 className=' text-center text-white btn btn-sm btn-block btn-primary'>
@@ -189,7 +186,7 @@ const AdminProfile = ({ history }) => {
                       </button>
                     </>
                   )}
-                  {status === 'Not Published' && (
+                  {status === '' && (
                     <>
                       <PublishIcon className='mr-2' />
                       <button
