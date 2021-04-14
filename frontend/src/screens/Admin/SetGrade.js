@@ -16,15 +16,7 @@ const SetGrade = ({ match, history }) => {
   let cname = id.substring(9, id.length);
   const [maxMark, setMaxMark] = useState('');
   const [minMark, setMinMark] = useState('');
-  const [O, setO] = useState('');
-  const [Ap, setAp] = useState('');
-  const [A, setA] = useState('');
-  const [Bp, setBp] = useState('');
-  const [B, setB] = useState('');
-  const [C, setC] = useState('');
-  const [P, setP] = useState('');
-  const [F, setF] = useState('');
-  const [generate, setGenerate] = useState(false);
+
   const [status, setStatus] = useState('');
   const [grs, setGrs] = useState([]);
 

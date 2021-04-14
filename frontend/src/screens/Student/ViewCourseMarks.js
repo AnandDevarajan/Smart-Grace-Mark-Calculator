@@ -82,6 +82,7 @@ const ViewCourseMarks = ({ history, match }) => {
               <th>Internals</th>
               <th>Marks</th>
               <th>Total</th>
+              <th>Grade</th>
             </tr>
           </thead>
           <tbody>
@@ -92,6 +93,7 @@ const ViewCourseMarks = ({ history, match }) => {
                 <td>{mark.Internals}</td>
                 <td>{mark.Marks}</td>
                 <td>{mark.Total}</td>
+                <td>{mark.Grade}</td>
               </tr>
             ))}
           </tbody>

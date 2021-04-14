@@ -72,13 +72,14 @@ exports.getCourseMark = (req, res) => {
 exports.getCourseMarkOfStudent = (req, res) => {
   const id = req.params.id;
   con.query(
-    `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.Total,s.CourseName from course_mark c inner  join course s on s.CourseID = c.CourseID and c.RollNum LIKE ?`,
+    `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.Total,s.CourseName,c.Grade from course_mark c inner  join course s on s.CourseID = c.CourseID and c.RollNum LIKE ?`,
     [id],
     (err, result) => {
-      if (result.length === 0 || err) {
+      if (err) {
         return res.status(400).json({
           message: 'No marks found',
         });
+        console.log(err.sqlMessage);
       }
       return res.json({
         markList: result,
