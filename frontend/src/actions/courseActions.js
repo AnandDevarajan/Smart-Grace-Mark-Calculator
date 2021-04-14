@@ -226,10 +226,7 @@ export const getCoursemarkDetails = (editID) => async (dispatch, getState) => {
   }
 };
 
-export const updateGradeRange = (cid, O, Ap, A, Bp, B, C, P, F) => async (
-  dispatch,
-  getState
-) => {
+export const updateGradeRange = (cid, max) => async (dispatch, getState) => {
   try {
     dispatch({
       type: GRADE_RANGE_UPDATE_REQUEST,
@@ -248,7 +245,7 @@ export const updateGradeRange = (cid, O, Ap, A, Bp, B, C, P, F) => async (
 
     const { data } = await axios.put(
       `/course/graderange/${cid}`,
-      { O, Ap, A, Bp, B, C, P, F },
+      { max },
       config
     );
 

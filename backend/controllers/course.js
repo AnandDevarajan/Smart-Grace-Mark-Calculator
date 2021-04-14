@@ -129,8 +129,8 @@ exports.updateCourseMarkDetails = (req, res) => {
         result[0].Total =
           parseInt(result[0].Internals) + parseInt(result[0].Marks);
         con.query(
-          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=? WHERE CourseID=? AND RollNum=?`,
-          [result[0].Internals, result[0].Marks, result[0].Total, cid, id],
+          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=? WHERE CourseID=? AND RollNum=?;UPDATE GRADE_RANGE SET status ='N/P' WHERE CourseID=?`,
+          [result[0].Internals, result[0].Marks, result[0].Total, cid, id, cid],
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({
@@ -214,50 +214,215 @@ exports.getGradeRange = (req, res) => {
 
 exports.updateGradeRange = (req, res) => {
   const id = req.params.id;
-  const { O, Ap, A, Bp, B, C, P, F } = req.body;
-  let newO = O.substring(O.length - 2, O.length);
-  let newAp = Ap.substring(Ap.length - 2, Ap.length);
-  let newA = A.substring(A.length - 2, A.length);
-  let newBp = Bp.substring(Bp.length - 2, Bp.length);
-  let newB = B.substring(B.length - 2, B.length);
-  let newC = C.substring(C.length - 2, C.length);
-  let newP = P.substring(P.length - 2, P.length);
-  let newF = F.substring(F.length - 2, F.length);
-  console.log(id);
-  con.query(
-    `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
-    [O, Ap, A, Bp, B, C, P, F, 'P', id],
-    (err, result) => {
-      if (err) {
-        return res.status(400).json({
-          message: 'Failed to update',
-        });
-      }
-      con.query(
-        `UPDATE GRACE_MARKS.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
-        [newO, newAp, newA, newBp, newB, newC, newP, newF, id],
-        (err, result2) => {
-          if (err) {
-            console.log(err.sqlMessage);
-          }
-          con.query(
-            `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
-            [id],
-            (err, result2) => {
-              if (result2.length === 0 || err) {
-                return res.status(400).json({
-                  message: 'No grade found',
+  const { max } = req.body;
+  if (max >= 80) {
+    let O = `${max}-${max - 5}`;
+    let Ap = `${max - 6}-${max - 10}`;
+    let A = `${max - 11}-${max - 15}`;
+    let Bp = `${max - 16}-${max - 20}`;
+    let B = `${max - 21}-${max - 30}`;
+    let C = `${max - 31}-${max - 40}`;
+    let P = `${max - 41}-${max - 65}`;
+    let F = `${max - 66}-0`;
+    let newO = O.substring(O.length - 2, O.length);
+    let newAp = Ap.substring(Ap.length - 2, Ap.length);
+    let newA = A.substring(A.length - 2, A.length);
+    let newBp = Bp.substring(Bp.length - 2, Bp.length);
+    let newB = B.substring(B.length - 2, B.length);
+    let newC = C.substring(C.length - 2, C.length);
+    let newP = P.substring(P.length - 2, P.length);
+    let newF = F.substring(F.length - 2, F.length);
+    con.query(
+      `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
+      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      (err, result) => {
+        if (err) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        con.query(
+          `UPDATE GRACE_MARKS.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+          [newO, newAp, newA, newBp, newB, newC, newP, newF, id],
+          (err, result2) => {
+            if (err) {
+              console.log(err.sqlMessage);
+            }
+            con.query(
+              `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+              [id],
+              (err, result2) => {
+                if (result2.length === 0 || err) {
+                  return res.status(400).json({
+                    message: 'No grade found',
+                  });
+                }
+                return res.json({
+                  grade: result2,
                 });
               }
-              return res.json({
-                grade: result2,
-              });
-            }
-          );
+            );
+          }
+        );
+      }
+    );
+  } else if (max >= 60 && max < 80) {
+    let O = `${max}-${max - 4}`;
+    let Ap = `${max - 5}-${max - 10}`;
+    let A = `${max - 11}-${max - 14}`;
+    let Bp = `${max - 15}-${max - 20}`;
+    let B = `${max - 21}-${max - 25}`;
+    let C = `${max - 26}-${max - 30}`;
+    let P = `${max - 31}-${max - 49}`;
+    let F = `${max - 50}-0`;
+    let newO = O.substring(O.length - 2, O.length);
+    let newAp = Ap.substring(Ap.length - 2, Ap.length);
+    let newA = A.substring(A.length - 2, A.length);
+    let newBp = Bp.substring(Bp.length - 2, Bp.length);
+    let newB = B.substring(B.length - 2, B.length);
+    let newC = C.substring(C.length - 2, C.length);
+    let newP = P.substring(P.length - 2, P.length);
+    let newF = F.substring(F.length - 2, F.length);
+
+    con.query(
+      `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
+      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      (err, result) => {
+        if (err) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
         }
-      );
-    }
-  );
+        con.query(
+          `UPDATE GRACE_MARKS.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+          [newO, newAp, newA, newBp, newB, newC, newP, newF, id],
+          (err, result2) => {
+            if (err) {
+              console.log(err.sqlMessage);
+            }
+            con.query(
+              `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+              [id],
+              (err, result2) => {
+                if (result2.length === 0 || err) {
+                  return res.status(400).json({
+                    message: 'No grade found',
+                  });
+                }
+                return res.json({
+                  grade: result2,
+                });
+              }
+            );
+          }
+        );
+      }
+    );
+  } else if (max >= 50 && max < 60) {
+    let O = `${max}-${max - 3}`;
+    let Ap = `${max - 4}-${max - 8}`;
+    let A = `${max - 9}-${max - 12}`;
+    let Bp = `${max - 13}-${max - 18}`;
+    let B = `${max - 19}-${max - 23}`;
+    let C = `${max - 24}-${max - 39}`;
+    let P = `${max - 40}-${max - 47}`;
+    let F = `${max - 48}-0`;
+    let newO = O.substring(O.length - 2, O.length);
+    let newAp = Ap.substring(Ap.length - 2, Ap.length);
+    let newA = A.substring(A.length - 2, A.length);
+    let newBp = Bp.substring(Bp.length - 2, Bp.length);
+    let newB = B.substring(B.length - 2, B.length);
+    let newC = C.substring(C.length - 2, C.length);
+    let newP = P.substring(P.length - 2, P.length);
+    let newF = F.substring(F.length - 2, F.length);
+
+    con.query(
+      `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
+      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      (err, result) => {
+        if (err) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        con.query(
+          `UPDATE GRACE_MARKS.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+          [newO, newAp, newA, newBp, newB, newC, newP, newF, id],
+          (err, result2) => {
+            if (err) {
+              console.log(err.sqlMessage);
+            }
+            con.query(
+              `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+              [id],
+              (err, result2) => {
+                if (result2.length === 0 || err) {
+                  return res.status(400).json({
+                    message: 'No grade found',
+                  });
+                }
+                return res.json({
+                  grade: result2,
+                });
+              }
+            );
+          }
+        );
+      }
+    );
+  } else {
+    let O = `${max}-${max - 3}`;
+    let Ap = `${max - 4}-${max - 7}`;
+    let A = `${max - 7}-${max - 12}`;
+    let Bp = `${max - 13}-${max - 16}`;
+    let B = `${max - 17}-${max - 22}`;
+    let C = `${max - 23}-${max - 29}`;
+    let P = `${max - 30}-${max - 39}`;
+    let F = `${max - 40}-0`;
+    let newO = O.substring(O.length - 2, O.length);
+    let newAp = Ap.substring(Ap.length - 2, Ap.length);
+    let newA = A.substring(A.length - 2, A.length);
+    let newBp = Bp.substring(Bp.length - 2, Bp.length);
+    let newB = B.substring(B.length - 2, B.length);
+    let newC = C.substring(C.length - 2, C.length);
+    let newP = P.substring(P.length - 2, P.length);
+    let newF = F.substring(F.length - 2, F.length);
+
+    con.query(
+      `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
+      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      (err, result) => {
+        if (err) {
+          return res.status(400).json({
+            message: 'Failed to update',
+          });
+        }
+        con.query(
+          `UPDATE GRACE_MARKS.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+          [newO, newAp, newA, newBp, newB, newC, newP, newF, id],
+          (err, result2) => {
+            if (err) {
+              console.log(err.sqlMessage);
+            }
+            con.query(
+              `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+              [id],
+              (err, result2) => {
+                if (result2.length === 0 || err) {
+                  return res.status(400).json({
+                    message: 'No grade found',
+                  });
+                }
+                return res.json({
+                  grade: result2,
+                });
+              }
+            );
+          }
+        );
+      }
+    );
+  }
 };
 
 exports.getRangeDetails = (req, res) => {
