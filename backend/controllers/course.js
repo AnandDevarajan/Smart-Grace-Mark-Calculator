@@ -79,7 +79,6 @@ exports.getCourseMarkOfStudent = (req, res) => {
         return res.status(400).json({
           message: 'No marks found',
         });
-        console.log(err.sqlMessage);
       }
       return res.json({
         markList: result,

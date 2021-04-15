@@ -64,7 +64,7 @@ function Navbar() {
           <h3 className="text-white ml-auto mr-auto">
             Smart Grace Mark Calculator
           </h3>
-          <h7 className="text-white ">{dt}</h7>
+          <h7 className="text-white text">{dt}</h7>
         </div>
 
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
@@ -78,7 +78,7 @@ function Navbar() {
               <li className="nav-text">
                 <Link to="/student/profile">
                   <AccountCircleIcon />
-                  <span>Profile</span>
+                  <span className="text">Profile</span>
                 </Link>
               </li>
 
@@ -87,13 +87,13 @@ function Navbar() {
                   to={`/student/grade/${studentInfo.token}-${studentInfo.result.RollNum}`}
                 >
                   <MenuBookIcon />
-                  <span>Grades</span>
+                  <span className="text">Grades</span>
                 </Link>
               </li>
               <li className="nav-text">
                 <Link onClick={studentlogOutHandler}>
                   <ExitToAppIcon />
-                  <span>Logout</span>
+                  <span  className="text">Logout</span>
                 </Link>
               </li>
             </ul>
@@ -107,7 +107,7 @@ function Navbar() {
               <li className="nav-text">
                 <Link to="/faculty/profile">
                   <AccountCircleIcon />
-                  <span>Profile</span>
+                  <span  className="text">Profile</span>
                 </Link>
               </li>
       
@@ -117,7 +117,7 @@ function Navbar() {
                     to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}
                   >
                     <ClassIcon />
-                    <span>
+                    <span  className="text">
                       {facultyInfo.result.Department}-{facultyInfo.result.Batch}
                     </span>
                   </Link>
@@ -126,13 +126,13 @@ function Navbar() {
               <li className="nav-text">
                 <Link to={`/faculty/students/${facultyInfo.result.Department}`}>
                   <PeopleIcon />
-                  <span>Students</span>
+                  <span  className="text">Students</span>
                 </Link>
               </li>
               <li className="nav-text">
                 <Link onClick={facultylogOutHandler}>
                   <ExitToAppIcon />
-                  <span>Logout</span>
+                  <span  className="text">Logout</span>
                 </Link>
               </li>
             </ul>
@@ -146,38 +146,38 @@ function Navbar() {
               <li className="nav-text">
                 <Link to="/admin/profile">
                   <AccountCircleIcon />
-                  <span>{adminInfo.result.Name}</span>
+                  <span className="text">{adminInfo.result.Name}</span>
                 </Link>
               </li>
       
               <li className="nav-text">
                 <Link to="/admin/students">
                   <PeopleIcon />
-                  <span>Students</span>
+                  <span className="text">Students</span>
                 </Link>
               </li>
               <li className="nav-text">
                 <Link to="/admin/faculties">
                   <PeopleOutlineIcon />
-                  <span>Faculty</span>
+                  <span className="text">Faculty</span>
                 </Link>
               </li>
               <li className="nav-text">
                 <Link to="/admin/course/report">
                   <ImportContactsIcon />
-                  <span>Courses</span>
+                  <span className="text">Courses</span>
                 </Link>
               </li>
               <li className="nav-text">
                 <Link to="/admin/gracemarklist">
                   <BeenhereIcon />
-                  <span>Grace Mark</span>
+                  <span className="text">Grace Mark</span>
                 </Link>
               </li>
               <li className="nav-text">
                 <Link onClick={adminlogOutHandler}>
                   <ExitToAppIcon />
-                  <span>Logout</span>
+                  <span className="text">Logout</span>
                 </Link>
               </li>
             </ul>
