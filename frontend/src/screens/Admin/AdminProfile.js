@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Message from '../../components/Message';
 import { Row, Col, ListGroup, Image, Container } from 'react-bootstrap';
 import axios from 'axios';
+import './Admin.css';
 
 const AdminProfile = ({ history }) => {
   const [name, setName] = useState('');
@@ -83,16 +84,16 @@ const AdminProfile = ({ history }) => {
     <Container fluid='sm' className='themed-container'>
       <button className='btn btn-primary mb-3'>Welcome</button>
 
-      <Container className='mt-5 border border-left-0 border-right-0 border-dark'>
+      <Container className='mt-5 border border-left-0 border-right-0 border-dark '>
         <hr></hr>
         <Row className='mt-4'>
           <Col md={2} sm={12}>
             <Container
-              className='border border-danger mt-5 mr-5'
-              style={{ width: '217px' }}
+              className='border border-danger mt-5 mr-5 top'
+         
             >
               <Image
-                className='mt-5 '
+                className='mt-5'
                 src='https://static.thenounproject.com/png/371299-200.png'
                 style={{
                   height: '200px',
@@ -103,7 +104,7 @@ const AdminProfile = ({ history }) => {
             </Container>
           </Col>
           <Col md={7} sm={12}>
-            <ListGroup className='mt-2 mb-4 ml-5'>
+            <ListGroup className='mt-2 mb-4 ml-5 middle'>
               <h4
                 className='text-center btn btn-block btn-warning'
                 style={{ backgroundColor: '#ce1212' }}
