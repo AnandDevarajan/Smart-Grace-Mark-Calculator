@@ -1,0 +1,16 @@
+@media (max-width: 900px) {
+  .result-table {
+    margin-top: -50px !important;
+    margin-bottom: -200px !important;
+    margin-left: 0px !important;
+  }
+  .result-table table {
+    margin-bottom: 0px !important;
+  }
+  .result-table h1 {
+    margin-top: 0px;
+  }
+  .go-back {
+    visibility: hidden;
+  }
+}

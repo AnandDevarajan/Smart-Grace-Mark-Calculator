@@ -4,6 +4,8 @@ import axios from 'axios';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { Table, Button, Row, Col } from 'react-bootstrap';
+import './Student.css';
+
 const ViewGrade = ({ match, history }) => {
   let id = match.params.id;
   console.log(id);
@@ -36,9 +38,9 @@ const ViewGrade = ({ match, history }) => {
   return (
     <>
       {status === 'Published' && (
-        <div className='ml-5 align-items-center'>
+        <div className='ml-5 align-items-center result-table'>
           <Link to='/student/profile'>
-            <Button variant='light'>
+            <Button variant='light go-back'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
@@ -49,7 +51,7 @@ const ViewGrade = ({ match, history }) => {
             </Col>
           </Row>
 
-          <Table striped bordered hover responsive className='table-sm mb-5'>
+          <Table striped bordered hover responsive className='table-sm  '>
             <thead>
               <tr>
                 <th>Course ID</th>
@@ -61,8 +63,8 @@ const ViewGrade = ({ match, history }) => {
               {marks.map((mark) => (
                 <tr>
                   <td>{mark.CourseID}</td>
-                  <td style={{ width: '500px' }}> {mark.CourseName}</td>
-                  <td style={{ width: '20px' }} className='text-center'>
+                  <td> {mark.CourseName}</td>
+                  <td className='text-center'>
                     {mark.Grade === 'O' && (
                       <Button
                         className='btn btn-sm'
