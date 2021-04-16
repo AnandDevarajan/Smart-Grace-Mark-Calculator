@@ -82,16 +82,13 @@ const AdminProfile = ({ history }) => {
   console.log('msg', message);
   return (
     <Container fluid='sm' className='themed-container'>
-      <button className='btn btn-primary mb-3'>Welcome</button>
+      <button className='btn btn-success welcome mb-3'>Welcome</button>
 
       <Container className='mt-5 border border-left-0 border-right-0 border-dark '>
         <hr></hr>
         <Row className='mt-4'>
           <Col md={2} sm={12}>
-            <Container
-              className='border border-danger mt-5 mr-5 top'
-         
-            >
+            <Container className='border border-danger mt-5 mr-5 top'>
               <Image
                 className='mt-5'
                 src='https://static.thenounproject.com/png/371299-200.png'
