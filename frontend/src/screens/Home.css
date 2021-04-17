@@ -30,4 +30,43 @@
     margin-left: auto;
     margin-right: auto;
   }
+  .student_image {
+    width: 100px !important;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .faculty_image {
+    width: 100px !important;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .admin_image {
+    width: 100px !important;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .student_button {
+    padding: 1px;
+    font-size: 12px;
+    height: 30px;
+    margin-top: 10px !important;
+    margin-bottom: 10px;
+  }
+  .faculty_button {
+    padding: 1px;
+    font-size: 12px;
+    height: 30px;
+    margin-top: 10px !important;
+    margin-bottom: 10px;
+  }
+  .admin_button {
+    padding: 1px;
+    font-size: 12px;
+    height: 30px;
+    margin-top: 10px !important;
+    margin-bottom: 10px;
+  }
 }
