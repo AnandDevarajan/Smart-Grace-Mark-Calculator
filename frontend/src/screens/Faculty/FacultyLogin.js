@@ -35,13 +35,13 @@ const FacultyLogin = ({ location, history }) => {
     <>
       {!facultyInfo && (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
           <FormContainer>
-            <h3>Faculty Login</h3>
+            <h2>Faculty Login</h2>
             {error && <Message variant='danger'>{error}</Message>}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='email'>

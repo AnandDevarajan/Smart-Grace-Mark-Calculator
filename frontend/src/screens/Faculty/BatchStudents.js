@@ -26,13 +26,13 @@ const BatchStudents = ({ history, match }) => {
   }, [dispatch, history, facultyInfo]);
 
   return (
-    <div className='align-items-center'>
-      <Link to='/faculty/profile'>
+    <div className='align-items-center  ml-5 alllist_div'>
+      <Link to='/faculty/profile' className='goback'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      <h1>
+      <h1 className='list_heading text-center'>
         {facultyInfo.result.Department}-{batch}
       </h1>
       {error ? (

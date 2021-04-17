@@ -100,15 +100,17 @@ const CourseStudents = ({ history, match }) => {
 
   return (
     <>
-      <div className='ml-5 align-items-center'>
-        <Link to='/faculty/profile'>
+      <div className='ml-5 align-items-center alllist_div'>
+        <Link to='/faculty/profile' className='goback'>
           <Button variant='light'>
             <ArrowBackIcon /> Go Back
           </Button>
         </Link>
         <Row className='align-items-center'>
           <Col>
-            <h1>STUDENT LIST - {facultyInfo.result.CourseID}</h1>
+            <h1 className='list_heading'>
+              STUDENT LIST - {facultyInfo.result.CourseID}
+            </h1>
           </Col>
           <Col className='text-right'>
             <Link to={`/admin/set/grade/${facultyInfo.result.CourseID}`}>

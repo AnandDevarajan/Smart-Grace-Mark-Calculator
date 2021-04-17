@@ -28,25 +28,25 @@ const FacultyForgotPassword = ({ location, history }) => {
     <>
       {message === 'Check your email' ? (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <h3>Student password reset</h3>
+          <h2>Faculty password reset</h2>
           <Message variant='success'>
             Check your email to reset password
           </Message>
         </>
       ) : (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
           <FormContainer>
-            <h3>Faculty password reset</h3>
+            <h2>Faculty password reset</h2>
             {message && <Message variant='danger'>{message}</Message>}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='email'>

@@ -90,7 +90,7 @@ const FacultySignup = ({ location, history }) => {
     <>
       {!facultyInfo && (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>

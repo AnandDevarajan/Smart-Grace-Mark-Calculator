@@ -40,18 +40,20 @@ const AdminResetPassword = () => {
         <>
           <Message variant='success'>
             Password updated successfully{' '}
-            <Link to='/admin/login'>click here to login</Link>
+            <Link to='/admin/login' className='goback'>
+              click here to login
+            </Link>
           </Message>
         </>
       ) : (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
           <FormContainer>
-            <h3>CREATE NEW PASSWORD</h3>
+            <h2>CREATE NEW PASSWORD</h2>
             {message && <Message variant='danger'>{message}</Message>}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='password'>
