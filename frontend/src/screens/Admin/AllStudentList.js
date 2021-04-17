@@ -44,13 +44,13 @@ const AllStudentList = ({ history }) => {
   };
 
   return (
-    <div className='ml-5 align-items-center allstudents_div'>
+    <div className='ml-5 align-items-center alllist_div'>
       <Link to='/admin/profile' className='goback'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      <h1 className='text-center studentlist_heading'>STUDENT LIST</h1>
+      <h1 className='text-center list_heading'>STUDENT LIST</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (

@@ -43,10 +43,10 @@
   .mail {
     font-size: 0.72rem;
   }
-  .allstudents_div {
+  .alllist_div {
     margin-left: 0px !important;
   }
-  .studentlist_heading {
+  .list_heading {
     margin-top: -20px;
   }
 }
