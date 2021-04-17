@@ -6,7 +6,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../../components/FormContainer';
 import { adminLogin } from '../../actions/adminActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import './Admin.css';
 const AdminLogin = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,12 +35,12 @@ const AdminLogin = ({ location, history }) => {
       {!adminInfo && (
         <>
           <Link to='/'>
-            <Button variant='light'>
+            <Button variant='light' className='goback'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
           <FormContainer>
-            <h3>Administration Login</h3>
+            <h2>Administration Login</h2>
             {error && <Message variant='danger'>{error}</Message>}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='email'>

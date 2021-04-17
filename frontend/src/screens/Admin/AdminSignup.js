@@ -6,6 +6,7 @@ import Message from '../../components/Message';
 import FormContainer from '../../components/FormContainer';
 import { adminRegister } from '../../actions/adminActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import './Admin.css';
 const AdminSignup = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -62,13 +63,15 @@ const AdminSignup = ({ location, history }) => {
     <>
       {!adminInfo && (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <FormContainer>
-            <h1>CREATE AN ADMIN ACCOUNT</h1>
+          <FormContainer className='signup_form'>
+            <h1 classname='signup_heading'>
+              CREATE AN ADMIN ACCOUNT
+            </h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             <Form onSubmit={submitHandler}>
