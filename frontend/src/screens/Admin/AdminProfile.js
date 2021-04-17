@@ -84,13 +84,13 @@ const AdminProfile = ({ history }) => {
     <Container fluid='sm' className='themed-container'>
       <button className='btn btn-success welcome mb-3'>Welcome</button>
 
-      <Container className='mt-5 border border-left-0 border-right-0 border-dark '>
+      <Container className='mt-5 border border-left-0 border-right-0 border-dark box'>
         <hr></hr>
         <Row className='mt-4'>
-          <Col md={2} sm={12}>
-            <Container className='border border-danger mt-5 mr-5 top'>
+          <Col md={2}>
+            <Container className='border border-danger mt-5 mr-5 top_container'>
               <Image
-                className='mt-5'
+                className='mt-5 top'
                 src='https://static.thenounproject.com/png/371299-200.png'
                 style={{
                   height: '200px',
@@ -112,34 +112,28 @@ const AdminProfile = ({ history }) => {
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4 style={{ textTransform: 'capitalize' }}>
-                  <PersonIcon />
-                  :&nbsp;&nbsp;&nbsp;
-                  {name}
+                  <PersonIcon /> {name}
                 </h4>
               </ListGroup.Item>
               <ListGroup.Item
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
-                <h4 style={{ textTransform: 'lowercase' }}>
-                  <EmailIcon />
-                  :&nbsp;&nbsp;&nbsp;{email}
-                </h4>
+                <p className='mail' style={{ textTransform: 'lowercase' }}>
+                  <EmailIcon /> {email}
+                </p>
               </ListGroup.Item>
               <ListGroup.Item
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4>
-                  <PhoneIcon />
-                  :&nbsp;&nbsp;&nbsp;
-                  {phone}
+                  <PhoneIcon /> {phone}
                 </h4>
               </ListGroup.Item>
               <ListGroup.Item
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4 style={{ textTransform: 'capitalize' }}>
-                  <HomeIcon />
-                  :&nbsp;&nbsp;&nbsp;{address}
+                  <HomeIcon /> {address}
                 </h4>
               </ListGroup.Item>
             </ListGroup>
