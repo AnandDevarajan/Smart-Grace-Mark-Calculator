@@ -3,6 +3,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
+import './Admin.css';
+
 import {
   listStudents,
   requestAccept,
@@ -42,13 +44,13 @@ const AllStudentList = ({ history }) => {
   };
 
   return (
-    <div className='ml-5 align-items-center'>
-      <Link to='/admin/profile'>
+    <div className='ml-5 align-items-center allstudents_div'>
+      <Link to='/admin/profile' className='goback'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      <h1>STUDENT LIST</h1>
+      <h1 className='text-center studentlist_heading'>STUDENT LIST</h1>
       {error ? (
         <Message variant='danger'>{error}</Message>
       ) : (

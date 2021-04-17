@@ -42,5 +42,11 @@
   }
   .mail {
     font-size: 0.72rem;
-  } 
+  }
+  .allstudents_div {
+    margin-left: 0px !important;
+  }
+  .studentlist_heading {
+    margin-top: -20px;
+  }
 }
