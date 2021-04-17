@@ -37,19 +37,19 @@ const GracemarkList = ({ history }) => {
     }
   };
   return (
-    <div className='ml-5'>
-      <Link to='/admin/profile'>
+    <div className='ml-5 alllist_div'>
+      <Link to='/admin/profile' className='goback'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
       <Row className='align-items-center'>
         <Col>
-          <h1>Grace Mark List</h1>
+          <h1 className='text-center list_heading'>Grace Mark List</h1>
         </Col>
         <Col className='text-right'>
-          <Link to='/admin/addGraceMarkDetails'>
-            <Button>
+          <Link to='/admin/addGraceMarkDetails' className='gracemark_create'>
+            <Button className='btn btn-sm'>
               <AddBoxIcon /> Create Grace Mark
             </Button>
           </Link>
