@@ -8,6 +8,7 @@ import {
   getGracemarkDetails,
   updateGracemark,
 } from '../../actions/gracemarkActions';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { GRACEMARK_UPDATE_RESET } from '../../constants/gracemarkConstants';
 import axios from 'axios';
 
@@ -65,12 +66,13 @@ const GracemarkEdit = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/gracemarklist' className='btn btn-light my-3'>
+      <Link to='/admin/gracemarklist' className='btn btn-light my-3 goback'>
+        <ArrowBackIcon />
         Go Back
       </Link>
 
       <FormContainer>
-        <h1>EDIT GRACE MARK ID:{gracemarkId}</h1>
+        <h1 className='text-center'>EDIT ID - {gracemarkId}</h1>
         {message && <Message variant='warning'>{message}</Message>}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {console.log('State', description)}

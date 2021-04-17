@@ -42,13 +42,13 @@ const GraceMarkForm = ({ location, history }) => {
 
   return (
     <>
-      <Link to='/admin/gracemarklist'>
+      <Link to='/admin/gracemarklist' className='goback'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
       <FormContainer>
-        <h3>CREATE GRACE MARK</h3>
+        <h2 className='text-center'>CREATE GRACE MARK</h2>
         {message && <Message variant='warning'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {success && (
