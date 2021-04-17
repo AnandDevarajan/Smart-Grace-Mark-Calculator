@@ -178,7 +178,73 @@ const CourseStudents = ({ history, match }) => {
                   </td>
                 )}
                 <td>
-                  <td>{student.Grade}</td>
+                  <td>
+                    {' '}
+                    {student.Grade === 'O' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#289672', width: '46px' }}
+                      >
+                        O
+                      </Button>
+                    )}
+                    {student.Grade === 'A+' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#29bb89', width: '46px' }}
+                      >
+                        A+
+                      </Button>
+                    )}
+                    {student.Grade === 'A' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#29bb89', width: '46px' }}
+                      >
+                        A
+                      </Button>
+                    )}
+                    {student.Grade === 'B+' && (
+                      <Button
+                        className='btn btn-sm btn-success'
+                        style={{ width: '46px' }}
+                      >
+                        B+
+                      </Button>
+                    )}
+                    {student.Grade === 'B' && (
+                      <Button
+                        className='btn btn-sm btn-success'
+                        style={{ width: '46px' }}
+                      >
+                        B
+                      </Button>
+                    )}
+                    {student.Grade === 'C' && (
+                      <Button
+                        className='btn btn-sm btn-warning'
+                        style={{ width: '46px' }}
+                      >
+                        C
+                      </Button>
+                    )}
+                    {student.Grade === 'P' && (
+                      <Button
+                        className='btn btn-sm btn-danger'
+                        style={{ width: '46px' }}
+                      >
+                        P
+                      </Button>
+                    )}
+                    {student.Grade === 'F' && (
+                      <Button
+                        className='btn btn-sm'
+                        style={{ backgroundColor: '#be0000', width: '46px' }}
+                      >
+                        F
+                      </Button>
+                    )}
+                  </td>
                 </td>
                 <td>
                   {student.Grade === 'N/P' && student.Total != 'N/P' ? (

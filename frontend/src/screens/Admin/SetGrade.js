@@ -189,27 +189,95 @@ const SetGrade = ({ match, history }) => {
 
       {facultyInfo && status === 'P' && (
         <div>
-          <Link to={`/faculty/students/CSE`}>
+          <Link to={`/faculty/students/CSE`} className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <h3 style={{ textTransform: 'capitalize' }}>
-            Grade Range - <span>{id}</span>
-          </h3>
+          <h2 className='text-center list_heading'>Grade Range</h2>
+          <Row className='align-items-center '>
+            <Col className='text-left'>
+              <Button style={{ width: '100%' }}>
+                {cid}
+              </Button>
+            </Col>
+          </Row>
 
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
                 <th>Course ID</th>
-                <th>O</th>
-                <th>A+</th>
-                <th>A</th>
-                <th>B+</th>
-                <th>B</th>
-                <th>C</th>
-                <th>P</th>
-                <th>F</th>
+                <th>
+                  <Button
+                    className='btn btn-sm'
+                    style={{ backgroundColor: '#289672', width: '46px' }}
+                  >
+                    O
+                  </Button>
+                </th>
+                <th>
+                  {' '}
+                  <Button
+                    className='btn btn-sm'
+                    style={{ backgroundColor: '#29bb89', width: '46px' }}
+                  >
+                    A+
+                  </Button>
+                </th>
+                <th>
+                  {' '}
+                  <Button
+                    className='btn btn-sm'
+                    style={{ backgroundColor: '#29bb89', width: '46px' }}
+                  >
+                    A
+                  </Button>
+                </th>
+                <th>
+                  {' '}
+                  <Button
+                    className='btn btn-sm btn-success'
+                    style={{ width: '46px' }}
+                  >
+                    B+
+                  </Button>
+                </th>
+                <th>
+                  {' '}
+                  <Button
+                    className='btn btn-sm btn-success'
+                    style={{ width: '46px' }}
+                  >
+                    B
+                  </Button>
+                </th>
+                <th>
+                  {' '}
+                  <Button
+                    className='btn btn-sm btn-warning'
+                    style={{ width: '46px' }}
+                  >
+                    C
+                  </Button>
+                </th>
+                <th>
+                  {' '}
+                  <Button
+                    className='btn btn-sm btn-danger'
+                    style={{ width: '46px' }}
+                  >
+                    P
+                  </Button>
+                </th>
+                <th>
+                  {' '}
+                  <Button
+                    className='btn btn-sm'
+                    style={{ backgroundColor: '#be0000', width: '46px' }}
+                  >
+                    F
+                  </Button>
+                </th>
               </tr>
             </thead>
             <tbody>
