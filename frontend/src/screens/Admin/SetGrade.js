@@ -7,7 +7,7 @@ import {
   updateGradeRange,
 } from '../../actions/courseActions';
 import { GRADE_RANGE_UPDATE_RESET } from '../../constants/courseConstants';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
 const SetGrade = ({ match, history }) => {
@@ -65,16 +65,20 @@ const SetGrade = ({ match, history }) => {
   return (
     <>
       {adminInfo && (
-        <div>
-          <Link to='/admin/course/report'>
+        <div className='ml-5 align-items-center alllist_div'>
+          <Link to='/admin/course/report' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <h3 style={{ textTransform: 'capitalize' }}>
-            Grade Range - <span>{cname}</span>
-          </h3>
-          <p className='text-center'></p>
+          <h2 className='text-center'>Grade Range</h2>
+          <Row className='align-items-center '>
+            <Col className='text-left'>
+              <Button style={{ width: '100%' }}>
+                {cid} - {cname}
+              </Button>
+            </Col>
+          </Row>
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
