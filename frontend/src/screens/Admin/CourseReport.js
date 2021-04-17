@@ -32,14 +32,14 @@ const CourseReport = ({ history }) => {
 
   console.log(reports);
   return (
-    <div className='ml-5 align-items-center'>
-      <Link to='/admin/profile'>
+    <div className='ml-5 align-items-center alllist_div'>
+      <Link to='/admin/profile' className='goback'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
 
-      <h1 className='py-3 text-center'>Course Report</h1>
+      <h1 className='text-center list_heading'>Course Report</h1>
 
       <Table striped bordered hover responsive className='table-sm'>
         <thead>
