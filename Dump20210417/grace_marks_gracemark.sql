@@ -30,6 +30,16 @@ CREATE TABLE `gracemark` (
   UNIQUE KEY `Desc_UNIQUE` (`Description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gracemark`
+--
+
+LOCK TABLES `gracemark` WRITE;
+/*!40000 ALTER TABLE `gracemark` DISABLE KEYS */;
+INSERT INTO `gracemark` VALUES (125,'Inter University Sports and Games Events','15'),(126,'Inter University Events','10'),(127,'National Technical Competitions','10'),(129,'Disaster Relief Activities','5'),(130,'National Service Scheme','24');
+/*!40000 ALTER TABLE `gracemark` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -40,4 +50,4 @@ CREATE TABLE `gracemark` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-17 22:52:38
+-- Dump completed on 2021-04-17 23:10:29

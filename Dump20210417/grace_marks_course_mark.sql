@@ -33,6 +33,16 @@ CREATE TABLE `course_mark` (
   PRIMARY KEY (`RollNum`,`CourseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course_mark`
+--
+
+LOCK TABLES `course_mark` WRITE;
+/*!40000 ALTER TABLE `course_mark` DISABLE KEYS */;
+INSERT INTO `course_mark` VALUES ('1','15CSE201','N/P','N/P','95','P','N/Ph'),('1','15CSE213','42','42','98','P','O'),('1','15CSE302','N/P','N/P','22','P','B'),('1','15CSE312','N/P','N/P','22','P','C'),('1','15CSE313','N/P','N/P','22','P','S'),('anand123','15CSE201','N/P','N/P','22','P','A+'),('anand123','15CSE213','25','45','70','P','B'),('anand123','15CSE302','N/P','N/P','77','P','O'),('anand123','15CSE312','N/P','N/P','22','P','P'),('anand123','15CSE313','N/P','N/P','22','P','C'),('anand2','15CSE201','N/P','N/P','22','P','C'),('anand2','15CSE213','35','42','77','P','B+'),('anand2','15CSE302','N/P','N/P','80','P','O'),('anand2','15CSE312','N/P','N/P','22','P','F'),('anand2','15CSE313','N/P','N/P','22','P','A'),('xxczzxc','15CSE201','N/P','N/P','89','P','S'),('xxczzxc','15CSE213','21','23','44','P','P'),('xxczzxc','15CSE302','N/P','N/P','90','P','S'),('xxczzxc','15CSE312','N/P','N/P','80','P','S'),('xxczzxc','15CSE313','N/P','N/P','90','P','N/Pa');
+/*!40000 ALTER TABLE `course_mark` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -43,4 +53,4 @@ CREATE TABLE `course_mark` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-17 22:52:38
+-- Dump completed on 2021-04-17 23:10:29

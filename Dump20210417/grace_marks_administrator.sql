@@ -38,6 +38,16 @@ CREATE TABLE `administrator` (
   UNIQUE KEY `EmailID_UNIQUE` (`EmailID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `administrator`
+--
+
+LOCK TABLES `administrator` WRITE;
+/*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
+INSERT INTO `administrator` VALUES (6,'Admin207','admin@207.com','9207251675','Home Name , India','15/16/029','Male','$2b$10$e4EgFw7vXrCv6A8VbFnefOL3Jpau94jQYBj.bgn0lls5MT0TG8urS',3,'3d22b80bd069261a8d3d4aa696c2e709f8a60ca1a33297ad47785cdc2db4004a','1618681306721'),(7,'admin10','admin10@gmail.com','9765676545','Chennai','04/12/90','Male','$2b$10$1t563nubFVrbwqsi7vpN7.QHDLeqwB6827INAALCQloJKnUXyGirO',3,'N/A','N/A');
+/*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -48,4 +58,4 @@ CREATE TABLE `administrator` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-17 22:52:37
+-- Dump completed on 2021-04-17 23:10:28

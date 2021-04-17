@@ -35,6 +35,16 @@ CREATE TABLE `range` (
   PRIMARY KEY (`CourseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `range`
+--
+
+LOCK TABLES `range` WRITE;
+/*!40000 ALTER TABLE `range` DISABLE KEYS */;
+INSERT INTO `range` VALUES ('15CSE201','90','85','80','75','65','55','30','-0'),('15CSE213','93','88','83','78','68','58','33','-0'),('15CSE302','85','80','75','70','60','50','25','-0'),('15CSE312','75','70','65','60','50','40','15','-0'),('15CSE313','85','80','75','70','60','50','25','-0');
+/*!40000 ALTER TABLE `range` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -45,4 +55,4 @@ CREATE TABLE `range` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-17 22:52:37
+-- Dump completed on 2021-04-17 23:10:28
