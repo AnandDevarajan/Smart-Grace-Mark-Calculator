@@ -22,3 +22,12 @@
 .icon:hover {
   cursor: pointer;
 }
+
+@media (max-width: 812px) {
+  .home {
+    margin-top: -10px;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
