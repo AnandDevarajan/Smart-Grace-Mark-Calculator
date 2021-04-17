@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import CloseIcon from "@material-ui/icons/Close";
-import MenuIcon from "@material-ui/icons/Menu";
-import { useDispatch, useSelector } from "react-redux";
-import { studentLogout } from "../actions/studentActions";
-import { adminLogout } from "../actions/adminActions";
-import { facultyLogout } from "../actions/facultyActions";
-import { IconContext } from "react-icons";
-import HomeIcon from "@material-ui/icons/Home";
-import PeopleIcon from "@material-ui/icons/People";
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import BeenhereIcon from "@material-ui/icons/Beenhere";
-import ClassIcon from "@material-ui/icons/Class";
-import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
-import ImportContactsIcon from "@material-ui/icons/ImportContacts";
-import "./Navbar.css";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import CloseIcon from '@material-ui/icons/Close';
+import MenuIcon from '@material-ui/icons/Menu';
+import { useDispatch, useSelector } from 'react-redux';
+import { studentLogout } from '../actions/studentActions';
+import { adminLogout } from '../actions/adminActions';
+import { facultyLogout } from '../actions/facultyActions';
+import { IconContext } from 'react-icons';
+import HomeIcon from '@material-ui/icons/Home';
+import PeopleIcon from '@material-ui/icons/People';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import BeenhereIcon from '@material-ui/icons/Beenhere';
+import ClassIcon from '@material-ui/icons/Class';
+import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import './Navbar.css';
 
 function Navbar() {
   const [dt, setDt] = useState(new Date().toLocaleString());
@@ -53,143 +53,150 @@ function Navbar() {
   };
   return (
     <>
-      <IconContext.Provider value={{ color: "#fff" }}>
-        <div className="navbar">
-          <Link to="#" className="menu-bars">
+      <IconContext.Provider value={{ color: '#fff' }}>
+        <div className='navbar'>
+          <Link to='#' className='menu-bars'>
             <MenuIcon
-              style={{ marginBottom: "25px", color: "white" }}
+              style='menu_icon'
+              style={{ marginBottom: '25px', color: 'white' }}
               onClick={showSidebar}
             />
           </Link>
-          <h3 className="text-white ml-auto mr-auto">
+          <h3 className='text-white ml-auto mr-auto'>
             Smart Grace Mark Calculator
           </h3>
-          <h7 className="text-white text">{dt}</h7>
+          <h7 className='text-white text'>{dt}</h7>
         </div>
 
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           {studentInfo ? (
-            <ul className="nav-menu-items" onClick={showSidebar}>
-              <li className="navbar-toggle">
-                <Link to="#" className="menu-bars">
-                  <CloseIcon style={{ color: "white" }} />
+            <ul className='nav-menu-items' onClick={showSidebar}>
+              <li className='navbar-toggle'>
+                <Link to='#' className='menu-bars'>
+                  <CloseIcon
+                    className='close-icon'
+                    style={{ color: 'white' }}
+                  />
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link to="/student/profile">
+              <li className='nav-text'>
+                <Link to='/student/profile'>
                   <AccountCircleIcon />
-                  <span className="text">Profile</span>
+                  <span className='text'>Profile</span>
                 </Link>
               </li>
 
-              <li className="nav-text">
+              <li className='nav-text'>
                 <Link
                   to={`/student/grade/${studentInfo.token}-${studentInfo.result.RollNum}`}
                 >
                   <MenuBookIcon />
-                  <span className="text">Grades</span>
+                  <span className='text'>Grades</span>
                 </Link>
               </li>
-              <li className="nav-text">
+              <li className='nav-text'>
                 <Link onClick={studentlogOutHandler}>
                   <ExitToAppIcon />
-                  <span  className="text">Logout</span>
+                  <span className='text'>Logout</span>
                 </Link>
               </li>
             </ul>
           ) : facultyInfo ? (
-            <ul className="nav-menu-items" onClick={showSidebar}>
-              <li className="navbar-toggle">
-                <Link to="#" className="menu-bars">
-                  <CloseIcon style={{ color: "white" }} />
+            <ul className='nav-menu-items' onClick={showSidebar}>
+              <li className='navbar-toggle'>
+                <Link to='#' className='menu-bars'>
+                  <CloseIcon style={{ color: 'white' }} />
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link to="/faculty/profile">
+              <li className='nav-text'>
+                <Link to='/faculty/profile'>
                   <AccountCircleIcon />
-                  <span  className="text">Profile</span>
+                  <span className='text'>Profile</span>
                 </Link>
               </li>
-      
-              {facultyInfo.result.ClassAdviser === "Yes" && (
-                <li className="nav-text">
+
+              {facultyInfo.result.ClassAdviser === 'Yes' && (
+                <li className='nav-text'>
                   <Link
                     to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}
                   >
                     <ClassIcon />
-                    <span  className="text">
+                    <span className='text'>
                       {facultyInfo.result.Department}-{facultyInfo.result.Batch}
                     </span>
                   </Link>
                 </li>
               )}
-              <li className="nav-text">
+              <li className='nav-text'>
                 <Link to={`/faculty/students/${facultyInfo.result.Department}`}>
                   <PeopleIcon />
-                  <span  className="text">Students</span>
+                  <span className='text'>Students</span>
                 </Link>
               </li>
-              <li className="nav-text">
+              <li className='nav-text'>
                 <Link onClick={facultylogOutHandler}>
                   <ExitToAppIcon />
-                  <span  className="text">Logout</span>
+                  <span className='text'>Logout</span>
                 </Link>
               </li>
             </ul>
           ) : adminInfo ? (
-            <ul className="nav-menu-items" onClick={showSidebar}>
-              <li className="navbar-toggle">
-                <Link to="#" className="menu-bars">
-                  <CloseIcon style={{ color: "white" }} />
+            <ul className='nav-menu-items' onClick={showSidebar}>
+              <li className='navbar-toggle'>
+                <Link to='#' className='menu-bars'>
+                  <CloseIcon
+                    className='admin_close-icon'
+                    style={{ color: 'white' }}
+                  />
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link to="/admin/profile">
+              <li className='nav-text'>
+                <Link to='/admin/profile'>
                   <AccountCircleIcon />
-                  <span className="text">{adminInfo.result.Name}</span>
+                  <span className='text'>{adminInfo.result.Name}</span>
                 </Link>
               </li>
-      
-              <li className="nav-text">
-                <Link to="/admin/students">
+
+              <li className='nav-text'>
+                <Link to='/admin/students'>
                   <PeopleIcon />
-                  <span className="text">Students</span>
+                  <span className='text'>Students</span>
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link to="/admin/faculties">
+              <li className='nav-text'>
+                <Link to='/admin/faculties'>
                   <PeopleOutlineIcon />
-                  <span className="text">Faculty</span>
+                  <span className='text'>Faculty</span>
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link to="/admin/course/report">
+              <li className='nav-text'>
+                <Link to='/admin/course/report'>
                   <ImportContactsIcon />
-                  <span className="text">Courses</span>
+                  <span className='text'>Courses</span>
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link to="/admin/gracemarklist">
+              <li className='nav-text'>
+                <Link to='/admin/gracemarklist'>
                   <BeenhereIcon />
-                  <span className="text">Grace Mark</span>
+                  <span className='text'>Grace Mark</span>
                 </Link>
               </li>
-              <li className="nav-text">
+              <li className='nav-text'>
                 <Link onClick={adminlogOutHandler}>
                   <ExitToAppIcon />
-                  <span className="text">Logout</span>
+                  <span className='text'>Logout</span>
                 </Link>
               </li>
             </ul>
           ) : (
-            <ul className="nav-menu-items" onClick={showSidebar}>
-              <li className="navbar-toggle">
-                <Link to="#" className="menu-bars">
-                  <CloseIcon style={{ color: "white" }} />
+            <ul className='nav-menu-items' onClick={showSidebar}>
+              <li className='navbar-toggle'>
+                <Link to='#' className='menu-bars'>
+                  <CloseIcon style={{ color: 'white' }} />
                 </Link>
               </li>
-              <li className="nav-text">
-                <Link to="/">
+              <li className='nav-text'>
+                <Link to='/'>
                   <HomeIcon />
                   <span>Home</span>
                 </Link>

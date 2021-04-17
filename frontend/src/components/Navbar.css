@@ -79,6 +79,10 @@ span {
   h3 {
     font-size: 2.5vw;
   }
+
+  .menu_icon {
+    margin-left: -12px;
+  }
   .mobile_form {
     margin-top: -30px !important;
   }
@@ -121,5 +125,8 @@ span {
   }
   .text {
     visibility: hidden;
+  }
+  .admin_close-icon {
+    margin-left: 20px;
   }
 }
