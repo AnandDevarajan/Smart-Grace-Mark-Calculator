@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 import FormContainer from '../../components/FormContainer';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import axios from 'axios';
-
+import './Admin.css';
 const AdminForgotPassword = () => {
   const [email, setEmail] = useState('');
 
@@ -30,25 +30,25 @@ const AdminForgotPassword = () => {
     <>
       {message === 'Check your email' ? (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <h3>Admin password reset</h3>
+          <h2>Admin password reset</h2>
           <Message variant='success'>
             Check your email to reset password
           </Message>
         </>
       ) : (
         <>
-          <Link to='/'>
+          <Link to='/' className='goback'>
             <Button variant='light'>
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
           <FormContainer>
-            <h3>Admin password reset</h3>
+            <h2 className='list_heading'>Admin password reset</h2>
             {message && <Message variant='danger'>{message}</Message>}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='email'>
