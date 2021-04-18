@@ -132,7 +132,7 @@ exports.registerStudent = (req, res) => {
 exports.resetPassword = (req, res) => {
   crypto.randomBytes(32, (err, buffer) => {
     const { email } = req.body;
-    if (err) {
+    if (err) {+
       console.log(err);
     }
     const token = buffer.toString('hex');
