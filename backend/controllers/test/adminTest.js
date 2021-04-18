@@ -44,4 +44,19 @@ describe('Admin', () => {
   //       });
   //   });
   // });
+
+  describe('GET /admin/:id', () => {
+    it('Get Admin details', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get('/admin/6')
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.admin).to.be.an('object');
+          done();
+        });
+    });
+  });
 });

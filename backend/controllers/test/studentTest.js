@@ -48,4 +48,18 @@ describe('Student', () => {
   //       });
   //   });
   // });
+  describe('GET /student/:id', () => {
+    it('Get Student details', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get('/student/anand123')
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.student).to.be.an('object');
+          done();
+        });
+    });
+  });
 });

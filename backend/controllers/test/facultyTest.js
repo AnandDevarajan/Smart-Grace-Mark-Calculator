@@ -47,4 +47,33 @@ describe('Faculty', () => {
   //       });
   //   });
   // });
+  describe('GET /faculty/:id', () => {
+    it('Get Faculty details', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get('/faculty/9')
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.faculty).to.be.an('object');
+          done();
+        });
+    });
+  });
+  describe('PUT /faculty/:id', () => {
+    it('Update Faculty details', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .put('/faculty/9')
+        .send({ email: 'Faculty1@123.com' })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.faculty).to.be.an('object');
+          done();
+        });
+    });
+  });
 });
