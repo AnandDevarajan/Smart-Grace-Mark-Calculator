@@ -76,4 +76,36 @@ describe('Faculty', () => {
         });
     });
   });
+  describe('GET /faculty/course/mark/:id', () => {
+    it('List of Students for Course faculty', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get('/faculty/course/mark/15CSE213')
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.students).to.be.an('Array');
+          done();
+        });
+    });
+  });
+  describe('GET /faculty/adviser/students/:id', () => {
+    it('View Students by class adviser', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get('/faculty/adviser/students/B')
+        .set(
+          'Authorization',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjE4NzIwMDE5LCJleHAiOjE2MjEzMTIwMTl9.1Y3Ab5Zj44HNkU12w7zKtag1By_LWR-gcTozEGm3C3c'
+        )
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.students).to.be.an('Array');
+          done();
+        });
+    });
+  });
 });

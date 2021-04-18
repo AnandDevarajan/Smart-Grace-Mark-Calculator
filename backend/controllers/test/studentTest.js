@@ -62,4 +62,35 @@ describe('Student', () => {
         });
     });
   });
+
+  describe('GET /student/view/result/:id', () => {
+    it('Get Student results grade', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get(
+          '/student/view/result/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFuYW5kMTIzIiwiaWF0IjoxNjE4NzE5MzY5LCJleHAiOjE2MjEzMTEzNjl9.zM0Y3TT4RMOXfBRbpU2fOeEcgorzUY1hGCbsC8ptZQk-anand123'
+        )
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.markList).to.be.an('Array');
+          done();
+        });
+    });
+  });
+  describe('GET /course/student/marks/:id', () => {
+    it('View Students Performance', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get('/course/student/marks/anand123')
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.markList).to.be.an('Array');
+          done();
+        });
+    });
+  });
 });
