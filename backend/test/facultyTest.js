@@ -20,33 +20,33 @@ describe('Faculty', () => {
         });
     });
   });
-  // describe('POST /faculty/', () => {
-  //   it('Faculty Signup', (done) => {
-  //     chai
-  //       .request('http://127.0.0.1:5000')
-  //       .post('/faculty')
-  //       .send({
-  //         name: 'test_faculty',
-  //         email: 'faculty2@test.com',
-  //         password: 'facultytest',
-  //         department: 'CSE',
-  //         courseId: '15CSE313',
-  //         batch: 'N/A',
-  //         adviser: 'No',
-  //         dob: '20/2/1999',
-  //         gender: 'Male',
-  //         phone: '1234567890',
-  //         address: 'testaddress',
-  //       })
-  //       .end((err, res) => {
-  //         if (err) done(err);
-  //         expect(res).to.be.an('object');
-  //         expect(res.body.result).to.be.an('object');
-  //         expect(res.body.token).to.be.a('string');
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('POST /faculty/', () => {
+    it('Faculty Signup', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .post('/faculty')
+        .send({
+          name: 'test_faculty',
+          email: 'faculty2@test.com',
+          password: 'facultytest',
+          department: 'CSE',
+          courseId: '15CSE313',
+          batch: 'N/A',
+          adviser: 'No',
+          dob: '20/2/1999',
+          gender: 'Male',
+          phone: '1234567890',
+          address: 'testaddress',
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.be.an('object');
+          expect(res.body.result).to.be.an('object');
+          expect(res.body.token).to.be.a('string');
+          done();
+        });
+    });
+  });
   describe('GET /faculty/:id', () => {
     it('Get Faculty details', (done) => {
       chai
@@ -126,7 +126,7 @@ describe('Faculty', () => {
   });
 
   describe('PUT /faculty/:id', () => {
-    it('Faculty allocating course marks and internals to students + edit', (done) => {
+    it('Update faculty profile', (done) => {
       chai
         .request('http://127.0.0.1:5000')
         .put('/faculty/9')
@@ -135,7 +135,7 @@ describe('Faculty', () => {
           if (err) done(err);
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
-          expect(res.body.updatedMark).to.be.an('Array');
+          expect(res.body.faculty).to.be.an('Object');
           done();
         });
     });

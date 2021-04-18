@@ -20,30 +20,30 @@ describe('Admin', () => {
         });
     });
   });
-  // describe('POST /admin/', () => {
-  //   it('Admin Signup', (done) => {
-  //     chai
-  //       .request('http://127.0.0.1:5000')
-  //       .post('/admin')
-  //       .send({
-  //         name: 'test_admin',
-  //         email: 'admin@test.com',
-  //         password: 'admintest',
-  //         dob: '20/2/1999',
-  //         gender: 'male',
-  //         phone: '1234567890',
-  //         address: 'testaddress',
-  //       })
-  //       .end((err, res) => {
-  //         if (err) done(err);
-  //         expect(res).to.have.status(200);
-  //         expect(res).to.be.an('object');
-  //         expect(res.body.result).to.be.an('object');
-  //         expect(res.body.token).to.be.a('string');
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('POST /admin/', () => {
+    it('Admin Signup', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .post('/admin')
+        .send({
+          name: 'test_admin',
+          email: 'admin@test.com',
+          password: 'admintest',
+          dob: '20/2/1999',
+          gender: 'male',
+          phone: '1234567890',
+          address: 'testaddress',
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.result).to.be.an('object');
+          expect(res.body.token).to.be.a('string');
+          done();
+        });
+    });
+  });
 
   describe('GET /admin/:id', () => {
     it('Get Admin details', (done) => {

@@ -20,34 +20,34 @@ describe('Student', () => {
         });
     });
   });
-  // describe('POST /student/', () => {
-  //   it('Student Signup', (done) => {
-  //     chai
-  //       .request('http://127.0.0.1:5000')
-  //       .post('/student')
-  //       .send({
-  //         name: 'test_student',
-  //         rollno: 'test5cxcxstuden',
-  //         email: 'student@test.com',
-  //         password: 'studenttest',
-  //         degree: 'BTech',
-  //         branch: 'CSE',
-  //         batch: 'C',
-  //         dob: '20/2/1999',
-  //         gender: 'male',
-  //         phone: '1234567890',
-  //         address: 'testaddress',
-  //       })
-  //       .end((err, res) => {
-  //         if (err) done(err);
-  //         expect(res).to.have.status(200);
-  //         expect(res).to.be.an('object');
-  //         expect(res.body.result).to.be.an('object');
-  //         expect(res.body.token).to.be.a('string');
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('POST /student/', () => {
+    it('Student Signup', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .post('/student')
+        .send({
+          name: 'test_student',
+          rollno: 'test5cxcxstuden',
+          email: 'student@test.com',
+          password: 'studenttest',
+          degree: 'BTech',
+          branch: 'CSE',
+          batch: 'C',
+          dob: '20/2/1999',
+          gender: 'male',
+          phone: '1234567890',
+          address: 'testaddress',
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.result).to.be.an('object');
+          expect(res.body.token).to.be.a('string');
+          done();
+        });
+    });
+  });
   describe('GET /student/:id', () => {
     it('Get Student details', (done) => {
       chai
@@ -93,6 +93,23 @@ describe('Student', () => {
         });
     });
   });
+
+  describe('PUT /student/:id', () => {
+    it('Update student profile', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .put('/student/test')
+        .send({ email: 'test1@123.com' })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.student).to.be.an('Object');
+          done();
+        });
+    });
+  });
+
   describe('GET /student/changepassword/:id', () => {
     it('Change Password', (done) => {
       chai
