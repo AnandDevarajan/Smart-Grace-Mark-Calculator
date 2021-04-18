@@ -133,4 +133,23 @@ describe('Admin', () => {
         });
     });
   });
+  describe('GET /admin/changepassword/:id', () => {
+    it('Change Password', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .put('/admin/changepassword/6')
+        .send({ password: '207' })
+        .set(
+          'Authorization',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE4NzE4OTQ3LCJleHAiOjE2MjEzMTA5NDd9.kGhJE07OUixWkHobeLMdkuIY43mjJ_2c8k8e5CnD6Do'
+        )
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.message).to.be.an('string');
+          done();
+        });
+    });
+  });
 });

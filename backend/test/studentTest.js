@@ -93,4 +93,23 @@ describe('Student', () => {
         });
     });
   });
+  describe('GET /student/changepassword/:id', () => {
+    it('Change Password', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .put('/student/changepassword/test')
+        .send({ password: 'test' })
+        .set(
+          'Authorization',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QiLCJpYXQiOjE2MTg3MjQ1MDksImV4cCI6MTYyMTMxNjUwOX0.jB1PP4dWLzRNsHBK5_UeAs2fqaDcDSaMkLTF2xgg9qM'
+        )
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.message).to.be.an('string');
+          done();
+        });
+    });
+  });
 });
