@@ -115,4 +115,22 @@ describe('Admin', () => {
         });
     });
   });
+  describe('GET /admin/student/request/reject/:id', () => {
+    it('Reject gracemark request', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .get('/admin/student/request/reject/test')
+        .set(
+          'Authorization',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE4NzE4OTQ3LCJleHAiOjE2MjEzMTA5NDd9.kGhJE07OUixWkHobeLMdkuIY43mjJ_2c8k8e5CnD6Do'
+        )
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.students).to.be.an('Array');
+          done();
+        });
+    });
+  });
 });

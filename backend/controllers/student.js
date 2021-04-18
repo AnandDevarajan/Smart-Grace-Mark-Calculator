@@ -346,7 +346,7 @@ exports.rejectRequest = (req, res) => {
         });
       }
       if (result) {
-        con.query(`SELECT * FROM STUDENT'`, (err, result) => {
+        con.query(`SELECT * FROM STUDENT`, (err, result) => {
           if (err || result.length === 0) {
             return res.status(400).json({
               message: 'No students found',
