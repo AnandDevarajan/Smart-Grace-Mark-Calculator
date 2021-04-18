@@ -80,7 +80,7 @@ describe('Student', () => {
     });
   });
   describe('GET /course/student/marks/:id', () => {
-    it('View Students Performance', (done) => {
+    it('View Students Internals and Total Marks by admin,faculty,adviser', (done) => {
       chai
         .request('http://127.0.0.1:5000')
         .get('/course/student/marks/anand123')

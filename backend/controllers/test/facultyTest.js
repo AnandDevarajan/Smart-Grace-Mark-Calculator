@@ -108,4 +108,20 @@ describe('Faculty', () => {
         });
     });
   });
+
+  describe('PUT /course/mark/update/:id', () => {
+    it('Faculty allocating course marks and internals to students + edit', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .put('/course/mark/update/15CSE213')
+        .send({ id: 'anand123', marks: '70', internals: '30' })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.updatedMark).to.be.an('Array');
+          done();
+        });
+    });
+  });
 });
