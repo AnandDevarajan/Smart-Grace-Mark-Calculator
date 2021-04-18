@@ -88,10 +88,9 @@ exports.registerStudent = (req, res) => {
       ],
       (err, result) => {
         if (err) {
-          // return res.status(400).json({
-          //   message: 'Unable to create user',
-          // });
-          console.log(err.sqlMessage);
+          return res.status(400).json({
+            message: 'Unable to create user',
+          });
         }
         if (result) {
           con.query(

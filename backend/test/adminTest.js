@@ -36,10 +36,9 @@ describe('Admin', () => {
         })
         .end((err, res) => {
           if (err) done(err);
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(400);
           expect(res).to.be.an('object');
-          expect(res.body.result).to.be.an('object');
-          expect(res.body.token).to.be.a('string');
+          expect(res.body.message).to.be.a('string');
           done();
         });
     });
@@ -129,6 +128,22 @@ describe('Admin', () => {
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
           expect(res.body.students).to.be.an('Array');
+          done();
+        });
+    });
+  });
+
+  describe('PUT /admin/:id', () => {
+    it('Update admin profile', (done) => {
+      chai
+        .request('http://127.0.0.1:5000')
+        .put('/admin/6')
+        .send({ email: 'admin@207.com' })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.admin).to.be.an('Object');
           done();
         });
     });

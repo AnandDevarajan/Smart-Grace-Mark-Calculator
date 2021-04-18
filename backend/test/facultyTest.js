@@ -40,9 +40,9 @@ describe('Faculty', () => {
         })
         .end((err, res) => {
           if (err) done(err);
+          expect(res).to.have.status(400);
           expect(res).to.be.an('object');
-          expect(res.body.result).to.be.an('object');
-          expect(res.body.token).to.be.a('string');
+          expect(res.body.message).to.be.a('string');
           done();
         });
     });

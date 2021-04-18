@@ -57,6 +57,7 @@ exports.registerAdmin = (req, res) => {
     if (err) {
       console.log(err);
     }
+
     con.query(
       `INSERT INTO ADMINISTRATOR (Name,EmailID,PhoneNum,Address,DOB,Gender,Password) VALUES (?,?,?,?,?,?,?)`,
       [name, email, phone, address, dob, gender, hash],
