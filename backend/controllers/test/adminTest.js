@@ -3,13 +3,13 @@ const chaiHttp = require('chai-http');
 const { expect } = chai;
 chai.use(chaiHttp);
 
-describe('Student', () => {
-  describe('POST /student/login', () => {
-    it('Student Login', (done) => {
+describe('Admin', () => {
+  describe('POST /admin/login', () => {
+    it('Admin Login', (done) => {
       chai
         .request('http://127.0.0.1:5000')
-        .post('/student/login')
-        .send({ email: 'anand@123.com', password: 'anand123' })
+        .post('/admin/login')
+        .send({ email: 'admin@207.com', password: '207' })
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);
@@ -20,19 +20,15 @@ describe('Student', () => {
         });
     });
   });
-  // describe('POST /student/', () => {
-  //   it('Student Signup', (done) => {
+  // describe('POST /admin/', () => {
+  //   it('Admin Signup', (done) => {
   //     chai
   //       .request('http://127.0.0.1:5000')
-  //       .post('/student')
+  //       .post('/admin')
   //       .send({
-  //         name: 'test_student',
-  //         rollno: 'test5cxcxstuden',
-  //         email: 'student@test.com',
-  //         password: 'studenttest',
-  //         degree: 'BTech',
-  //         branch: 'CSE',
-  //         batch: 'C',
+  //         name: 'test_admin',
+  //         email: 'admin@test.com',
+  //         password: 'admintest',
   //         dob: '20/2/1999',
   //         gender: 'male',
   //         phone: '1234567890',
