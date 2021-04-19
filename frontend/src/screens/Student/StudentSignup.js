@@ -27,10 +27,11 @@ const StudentSignup = ({ location, history }) => {
   const studentSignup = useSelector((state) => state.studentSignup);
   const { error, studentInfo } = studentSignup;
 
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/student/profile';
+  // const redirect = location.search
+  //   ? location.search.split('=')[1]
+  //   : '/student/profile';
 
+  const redirect = '/student/profile';
   useEffect(() => {
     if (studentInfo) {
       history.push(redirect);

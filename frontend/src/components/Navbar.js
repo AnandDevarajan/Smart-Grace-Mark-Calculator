@@ -52,7 +52,7 @@ function Navbar() {
     dispatch(facultyLogout());
   };
   return (
-    <>
+    <div>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
@@ -65,7 +65,7 @@ function Navbar() {
           <h3 className='text-white ml-auto mr-auto'>
             Smart Grace Mark Calculator
           </h3>
-          <h7 className='text-white text'>{dt}</h7>
+          <h6 className='text-white text'>{dt}</h6>
         </div>
 
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -205,7 +205,7 @@ function Navbar() {
           )}
         </nav>
       </IconContext.Provider>
-    </>
+    </div>
   );
 }
 

@@ -69,7 +69,7 @@ const AdminSignup = ({ location, history }) => {
             </Button>
           </Link>
           <FormContainer className='signup_form'>
-            <h1 classname='signup_heading'>
+            <h1 className='signup_heading'>
               CREATE AN ADMIN ACCOUNT
             </h1>
             {message && <Message variant='danger'>{message}</Message>}

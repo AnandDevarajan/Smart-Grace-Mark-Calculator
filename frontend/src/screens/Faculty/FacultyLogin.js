@@ -16,10 +16,11 @@ const FacultyLogin = ({ location, history }) => {
   const facultySignin = useSelector((state) => state.facultySignin);
   const { error, facultyInfo } = facultySignin;
 
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/faculty/profile';
-
+  // const redirect = location.search
+  //   ? location.search.split('=')[1]
+  //   : '/faculty/profile';
+  
+  const redirect = '/faculty/profile';
   useEffect(() => {
     if (facultyInfo) {
       history.push(redirect);

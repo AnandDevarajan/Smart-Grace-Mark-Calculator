@@ -30,10 +30,12 @@ const FacultySignup = ({ location, history }) => {
 
   const courseList = useSelector((state) => state.courseList);
   const { courses } = courseList;
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : '/faculty/profile';
-
+  
+  // const redirect = location.search
+  //   ? location.search.split('=')[1]
+  //   : '/faculty/profile';
+    
+    const redirect = '/faculty/profile';
   useEffect(() => {
     if (facultyInfo) {
       history.push(redirect);

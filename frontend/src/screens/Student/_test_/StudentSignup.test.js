@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {shallow} from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Home from '../Home';
+import StudentSignup from '../StudentSignup';
+import { Provider } from 'react-redux';
+import store from '../../../store';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  const component = shallow(<Home></Home>);
-  console.log(component.debug());
-  const wrapper = component.find('.home');
-  expect(wrapper.length).toBe(1);
   ReactDOM.render(
     <Router>
-      <Home />
+      <Provider store={store}>
+        <StudentSignup />
+      </Provider>
     </Router>,
     div
-  );
-});
+  );});
