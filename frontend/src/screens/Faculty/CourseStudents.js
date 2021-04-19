@@ -11,7 +11,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../Home.css';
 import EditIcon from '@material-ui/icons/Edit';
 import axios from 'axios';
-
+import GradeIcon from '@material-ui/icons/Grade';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 const CourseStudents = ({ history, match }) => {
   const [message, setMessage] = useState(null);
   const [internals, setInternals] = useState('');
@@ -62,13 +63,13 @@ const CourseStudents = ({ history, match }) => {
   }, [dispatch, history, facultyInfo, edit, O, Ap, A, Bp, B, C, P, F]);
 
   console.log('count', count);
+
   const submitMarks = (id, internals, marks) => {
-    if (internals === ' ' || marks === '') {
-      setMessage(null);
+    if (internals === '' || marks === '') {
+      setMessage('');
       setMessage('Enter all the details');
     } else if (internals > 50 || marks > 50) {
-      setMessage(null);
-
+      setMessage('');
       setMessage('Invalid details');
     } else {
       dispatch(updateCoursemark(id, cid, internals, marks));
@@ -98,9 +99,10 @@ const CourseStudents = ({ history, match }) => {
       });
   };
 
+  console.log('message', message);
   return (
     <>
-      <div className='ml-5 align-items-center alllist_div'>
+      <div className='ml-4 align-items-center alllist_div'>
         <Link to='/faculty/profile' className='goback'>
           <Button variant='light'>
             <ArrowBackIcon /> Go Back
@@ -131,6 +133,7 @@ const CourseStudents = ({ history, match }) => {
               <th>Total </th>
               <th></th>
               <th>Grade</th>
+              <th>Set Grade</th>
             </tr>
           </thead>
           <tbody>
@@ -142,14 +145,20 @@ const CourseStudents = ({ history, match }) => {
                 <td>{student.Batch}</td>
                 <td>
                   {student.Internals === 'N/P' ? (
-                    <input onChange={(e) => setInternals(e.target.value)} />
+                    <input
+                      onChange={(e) => setInternals(e.target.value)}
+                      style={{ marginLeft: '5px', width: '40px' }}
+                    />
                   ) : (
                     <td>{student.Internals}</td>
                   )}
                 </td>
                 <td>
                   {student.Marks === 'N/P' ? (
-                    <input onChange={(e) => setMarks(e.target.value)} />
+                    <input
+                      onChange={(e) => setMarks(e.target.value)}
+                      style={{ marginLeft: '5px', width: '40px' }}
+                    />
                   ) : (
                     <td>{student.Marks}</td>
                   )}
@@ -183,15 +192,23 @@ const CourseStudents = ({ history, match }) => {
                     {student.Grade === 'O' && (
                       <Button
                         className='btn btn-sm'
-                        style={{ backgroundColor: '#289672', width: '46px' }}
+                        style={{
+                          backgroundColor: '#289672',
+                          width: '30px',
+                          padding: '2px',
+                        }}
                       >
                         O
                       </Button>
                     )}
                     {student.Grade === 'A+' && (
                       <Button
-                        className='btn btn-sm'
-                        style={{ backgroundColor: '#29bb89', width: '46px' }}
+                        className='btn btn-sm text-center'
+                        style={{
+                          backgroundColor: '#29bb89',
+                          width: '30px',
+                          padding: '2px',
+                        }}
                       >
                         A+
                       </Button>
@@ -199,7 +216,11 @@ const CourseStudents = ({ history, match }) => {
                     {student.Grade === 'A' && (
                       <Button
                         className='btn btn-sm'
-                        style={{ backgroundColor: '#29bb89', width: '46px' }}
+                        style={{
+                          backgroundColor: '#29bb89',
+                          width: '30px',
+                          padding: '2px',
+                        }}
                       >
                         A
                       </Button>
@@ -207,7 +228,7 @@ const CourseStudents = ({ history, match }) => {
                     {student.Grade === 'B+' && (
                       <Button
                         className='btn btn-sm btn-success'
-                        style={{ width: '46px' }}
+                        style={{ width: '30px', padding: '2px' }}
                       >
                         B+
                       </Button>
@@ -215,7 +236,7 @@ const CourseStudents = ({ history, match }) => {
                     {student.Grade === 'B' && (
                       <Button
                         className='btn btn-sm btn-success'
-                        style={{ width: '46px' }}
+                        style={{ width: '30px', padding: '2px' }}
                       >
                         B
                       </Button>
@@ -223,7 +244,7 @@ const CourseStudents = ({ history, match }) => {
                     {student.Grade === 'C' && (
                       <Button
                         className='btn btn-sm btn-warning'
-                        style={{ width: '46px' }}
+                        style={{ width: '30px', padding: '2px' }}
                       >
                         C
                       </Button>
@@ -231,7 +252,7 @@ const CourseStudents = ({ history, match }) => {
                     {student.Grade === 'P' && (
                       <Button
                         className='btn btn-sm btn-danger'
-                        style={{ width: '46px' }}
+                        style={{ width: '30px', padding: '2px' }}
                       >
                         P
                       </Button>
@@ -239,7 +260,11 @@ const CourseStudents = ({ history, match }) => {
                     {student.Grade === 'F' && (
                       <Button
                         className='btn btn-sm'
-                        style={{ backgroundColor: '#be0000', width: '46px' }}
+                        style={{
+                          backgroundColor: '#be0000',
+                          width: '30px',
+                          padding: '2px',
+                        }}
                       >
                         F
                       </Button>
@@ -248,25 +273,26 @@ const CourseStudents = ({ history, match }) => {
                 </td>
                 <td>
                   {student.Grade === 'N/P' && student.Total != 'N/P' ? (
-                    <Button
-                      className='btn-sm btn-success'
-                      onClick={() =>
-                        calculateGrade(
-                          student.RollNum,
-                          student.Total,
-                          O,
-                          Ap,
-                          A,
-                          Bp,
-                          B,
-                          C,
-                          P,
-                          F
-                        )
-                      }
-                    >
-                      Calculate Grade
-                    </Button>
+                    <td>
+                      <DoneAllIcon
+                        className='icon'
+                        style={{ color: 'green' }}
+                        onClick={() =>
+                          calculateGrade(
+                            student.RollNum,
+                            student.Total,
+                            O,
+                            Ap,
+                            A,
+                            Bp,
+                            B,
+                            C,
+                            P,
+                            F
+                          )
+                        }
+                      />
+                    </td>
                   ) : (
                     <></>
                   )}

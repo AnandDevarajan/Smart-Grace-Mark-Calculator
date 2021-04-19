@@ -9,7 +9,7 @@ describe('Faculty', () => {
       chai
         .request('http://127.0.0.1:5000')
         .post('/faculty/login')
-        .send({ email: 'faculty1@123.com', password: 'faculty' })
+        .send({ email: 'faculty1@sgmc.com', password: 'faculty' })
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);
@@ -27,7 +27,7 @@ describe('Faculty', () => {
         .post('/faculty')
         .send({
           name: 'test_faculty',
-          email: 'faculty2@test.com',
+          email: 'faculty1@sgmc.com',
           password: 'facultytest',
           department: 'CSE',
           courseId: '15CSE313',
@@ -51,7 +51,7 @@ describe('Faculty', () => {
     it('Get Faculty details', (done) => {
       chai
         .request('http://127.0.0.1:5000')
-        .get('/faculty/9')
+        .get('/faculty/43')
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);
@@ -65,8 +65,8 @@ describe('Faculty', () => {
     it('Update Faculty details', (done) => {
       chai
         .request('http://127.0.0.1:5000')
-        .put('/faculty/9')
-        .send({ email: 'Faculty1@123.com' })
+        .put('/faculty/43')
+        .send({ email: 'faculty1@sgmc.com' })
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);
@@ -94,10 +94,10 @@ describe('Faculty', () => {
     it('View Students by class adviser', (done) => {
       chai
         .request('http://127.0.0.1:5000')
-        .get('/faculty/adviser/students/B')
+        .get('/faculty/adviser/students/C')
         .set(
           'Authorization',
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjE4NzIwMDE5LCJleHAiOjE2MjEzMTIwMTl9.1Y3Ab5Zj44HNkU12w7zKtag1By_LWR-gcTozEGm3C3c'
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYxODg0ODQ0NSwiZXhwIjoxNjIxNDQwNDQ1fQ.uMY6fqmBkiYzi4EJonI9-W3rnRdAjdI9_p-nX4H1Eok'
         )
         .end((err, res) => {
           if (err) done(err);
@@ -129,8 +129,8 @@ describe('Faculty', () => {
     it('Update faculty profile', (done) => {
       chai
         .request('http://127.0.0.1:5000')
-        .put('/faculty/9')
-        .send({ email: 'faculty1@123.com' })
+        .put('/faculty/43')
+        .send({ email: 'faculty1@sgmc.com' })
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);
@@ -145,11 +145,11 @@ describe('Faculty', () => {
     it('Change Password', (done) => {
       chai
         .request('http://127.0.0.1:5000')
-        .put('/faculty/changepassword/9')
+        .put('/faculty/changepassword/43')
         .send({ password: 'faculty' })
         .set(
           'Authorization',
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QiLCJpYXQiOjE2MTg3MjQ1MDksImV4cCI6MTYyMTMxNjUwOX0.jB1PP4dWLzRNsHBK5_UeAs2fqaDcDSaMkLTF2xgg9qM'
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYxODg0ODQ0NSwiZXhwIjoxNjIxNDQwNDQ1fQ.uMY6fqmBkiYzi4EJonI9-W3rnRdAjdI9_p-nX4H1Eok'
         )
         .end((err, res) => {
           if (err) done(err);

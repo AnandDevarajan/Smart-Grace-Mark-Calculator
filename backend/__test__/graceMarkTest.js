@@ -50,7 +50,7 @@ describe('Gracemark', () => {
         .send({ request: 'Inter University Sports and Games Events 15' })
         .set(
           'Authorization',
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QiLCJpYXQiOjE2MTg3MjQ1MDksImV4cCI6MTYyMTMxNjUwOX0.jB1PP4dWLzRNsHBK5_UeAs2fqaDcDSaMkLTF2xgg9qM'
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QiLCJpYXQiOjE2MTg4NDg2NjMsImV4cCI6MTYyMTQ0MDY2M30.6UYNarL85kHNHlClUuqIu8tFFFlBzJBx2Jc8Q9F-XOg'
         )
         .end((err, res) => {
           if (err) done(err);
@@ -61,5 +61,5 @@ describe('Gracemark', () => {
           done();
         });
     });
-  });
+  }); 
 });

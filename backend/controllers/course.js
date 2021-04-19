@@ -113,7 +113,6 @@ exports.getACourseMark = (req, res) => {
 exports.updateCourseMarkDetails = (req, res) => {
   const cid = req.params.id;
   const { internals, marks, id } = req.body;
-  console.log(internals, marks);
   con.query(
     `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
     [cid, id],
@@ -129,7 +128,7 @@ exports.updateCourseMarkDetails = (req, res) => {
         result[0].Total =
           parseInt(result[0].Internals) + parseInt(result[0].Marks);
         con.query(
-          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=? WHERE CourseID=? AND RollNum=?;UPDATE GRADE_RANGE SET status ='N/P' WHERE CourseID=?`,
+          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=?,Grade='N/P' WHERE CourseID=? AND RollNum=?;UPDATE GRADE_RANGE SET status ='N/P' WHERE CourseID=?`,
           [result[0].Internals, result[0].Marks, result[0].Total, cid, id, cid],
           (err, result) => {
             if (err || result.length === 0) {

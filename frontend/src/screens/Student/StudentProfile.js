@@ -78,7 +78,7 @@ const StudentProfile = ({ history }) => {
       <Container className=' border border-left-0 border-right-0 border-dark'>
         <hr></hr>
         <Row className='mt-5'>
-          <Col md={2} sm={12}>
+          <Col md={2}>
             <Container
               className='border border-success mt-5 mr-5'
               style={{ width: '217px' }}
@@ -115,43 +115,35 @@ const StudentProfile = ({ history }) => {
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4 style={{ textTransform: 'capitalize' }}>
-                  <PersonIcon />
-                  :&nbsp;&nbsp;&nbsp;
-                  {name}
+                  <PersonIcon /> {name}
                 </h4>
               </ListGroup.Item>
               <ListGroup.Item
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4>
-                  <FormatListNumberedIcon />
-                  :&nbsp;&nbsp;&nbsp;
-                  {studentInfo.result.RollNum}
+                  <FormatListNumberedIcon /> {studentInfo.result.RollNum}
                 </h4>
               </ListGroup.Item>
               <ListGroup.Item
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
-                <h4 style={{ textTransform: 'lowercase' }}>
-                  <EmailIcon />
-                  :&nbsp;&nbsp;&nbsp;{email}
-                </h4>
+                <p style={{ textTransform: 'lowercase' }}>
+                  <EmailIcon /> {email}
+                </p>
               </ListGroup.Item>
               <ListGroup.Item
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4 style={{ textTransform: 'Capitalize' }}>
-                  <SchoolIcon />
-                  :&nbsp;&nbsp;&nbsp;{degree}&nbsp;&nbsp;{branch} - {batch}
+                  <SchoolIcon /> {degree}&nbsp;&nbsp;{branch} - {batch}
                 </h4>
               </ListGroup.Item>
               <ListGroup.Item
                 style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4>
-                  <PhoneIcon />
-                  :&nbsp;&nbsp;&nbsp;
-                  {phone}
+                  <PhoneIcon /> {phone}
                 </h4>
               </ListGroup.Item>
             </ListGroup>

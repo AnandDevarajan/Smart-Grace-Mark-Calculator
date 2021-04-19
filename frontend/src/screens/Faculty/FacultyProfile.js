@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import EmailIcon from "@material-ui/icons/Email";
-import PersonIcon from "@material-ui/icons/Person";
-import PhoneIcon from "@material-ui/icons/Phone";
-import HomeIcon from "@material-ui/icons/Home";
-import ClassIcon from "@material-ui/icons/Class";
-import PublishIcon from "@material-ui/icons/Publish";
-import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import EmailIcon from '@material-ui/icons/Email';
+import PersonIcon from '@material-ui/icons/Person';
+import PhoneIcon from '@material-ui/icons/Phone';
+import HomeIcon from '@material-ui/icons/Home';
+import ClassIcon from '@material-ui/icons/Class';
+import PublishIcon from '@material-ui/icons/Publish';
+import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import {
   Row,
   Col,
@@ -19,15 +19,15 @@ import {
   Button,
   Container,
   Form,
-} from "react-bootstrap";
-import axios from "axios";
+} from 'react-bootstrap';
+import axios from 'axios';
 
 const FacultyProfile = ({ history }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [department, setDepartment] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [department, setDepartment] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
 
   const [value, onChange] = useState(new Date());
   const facultySignin = useSelector((state) => state.facultySignin);
@@ -35,7 +35,7 @@ const FacultyProfile = ({ history }) => {
 
   useEffect(() => {
     if (!facultyInfo) {
-      history.push("/");
+      history.push('/');
     }
     axios
       .get(`/faculty/${facultyInfo.result.FacultyID}`)
@@ -52,92 +52,82 @@ const FacultyProfile = ({ history }) => {
   }, [facultyInfo, name, email, address, department, phone]);
 
   return (
-    <Container fluid="sm" className="themed-container">
-      <button className="btn btn-primary">Welcome</button>
-      <Container className="mt-5 border border-left-0 border-right-0 border-dark">
+    <Container fluid='sm' className='themed-container'>
+      <button className='btn btn-primary'>Welcome</button>
+      <Container className='mt-5 border border-left-0 border-right-0 border-dark'>
         <hr></hr>
-        <Row className="mt-5">
+        <Row className='mt-5'>
           <Col md={2} sm={12}>
             <Container
-              className="border border-info mt-5 mr-5"
-              style={{ width: "217px" }}
+              className='border border-info mt-5 mr-5'
+              style={{ width: '217px' }}
             >
               <Image
-                className="mt-5 "
-                src="https://static.thenounproject.com/png/2011000-200.png"
+                className='mt-5 '
+                src='https://static.thenounproject.com/png/2011000-200.png'
                 style={{
-                  height: "200px",
-                  width: "200px",
-                  objectFit: "contain",
+                  height: '200px',
+                  width: '200px',
+                  objectFit: 'contain',
                 }}
               />
             </Container>
           </Col>
-          <Col md={7} sm={12} style={{ marginTop: "-40px" }}>
-            <ListGroup className="mt-2 mb-4 ml-5">
-              <h4 className="text-center btn btn-block btn-info">
+          <Col md={7} sm={12} style={{ marginTop: '-40px' }}>
+            <ListGroup className='mt-2 mb-4 ml-5'>
+              <h4 className='text-center btn btn-block btn-info'>
                 Faculty Profile
               </h4>
               <ListGroup.Item
-                style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
-                <h4 style={{ textTransform: "capitalize" }}>
-                  <PersonIcon />
-                  :&nbsp;&nbsp;&nbsp;
-                  {name}
+                <h4 style={{ textTransform: 'capitalize' }}>
+                  <PersonIcon /> {name}
                 </h4>
               </ListGroup.Item>
               <ListGroup.Item
-                style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
-                <h4 style={{ textTransform: "lowercase" }}>
-                  <EmailIcon />
-                  :&nbsp;&nbsp;&nbsp;{email}
-                </h4>
+                <p style={{ textTransform: 'lowercase' }}>
+                  <EmailIcon /> {email}
+                </p>
               </ListGroup.Item>
               <ListGroup.Item
-                style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
-                {facultyInfo.result.ClassAdviser === "Yes" ? (
+                {facultyInfo.result.ClassAdviser === 'Yes' ? (
                   <h4>
-                    <ClassIcon />
-                    :&nbsp;&nbsp;&nbsp;
-                    {department}&nbsp;&nbsp;&nbsp;
-                    <Button className="btn btn-sm btn-success">
+                    <ClassIcon /> {department}&nbsp;&nbsp;&nbsp;
+                    <Button className='btn btn-sm btn-success'>
                       Adviser - {facultyInfo.result.Batch}
                     </Button>
                   </h4>
                 ) : (
                   <h4>
-                    <ClassIcon />
-                    :&nbsp;&nbsp;&nbsp;
-                    {department}
+                    <ClassIcon /> {department}
                   </h4>
                 )}
               </ListGroup.Item>
               <ListGroup.Item
-                style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
                 <h4>
-                  <PhoneIcon />
-                  :&nbsp;&nbsp;&nbsp;
-                  {phone}
+                  <PhoneIcon /> {phone}
                 </h4>
               </ListGroup.Item>
               <ListGroup.Item
-                style={{ backgroundColor: "#1e212d", color: "#eeeeee" }}
+                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
               >
-                <h4 style={{ textTransform: "capitalize" }}>
-                  <HomeIcon />
-                  :&nbsp;&nbsp;&nbsp;{address}
+                <h4 style={{ textTransform: 'capitalize' }}>
+                  <HomeIcon /> {address}
                 </h4>
               </ListGroup.Item>
             </ListGroup>
           </Col>
           <Col md={3} sm={12}>
-            <ListGroup className=" ml-2" style={{ marginTop: "75px" }}>
+            <ListGroup className=' ml-2' style={{ marginTop: '75px' }}>
               <ListGroup.Item>
-                <h6 className=" text-center text-white btn btn-sm btn-block btn-primary">
+                <h6 className=' text-center text-white btn btn-sm btn-block btn-primary'>
                   Actions
                 </h6>
               </ListGroup.Item>
@@ -145,7 +135,7 @@ const FacultyProfile = ({ history }) => {
                 <Link
                   to={`/faculty/edit/profile/${facultyInfo.result.FacultyID}`}
                 >
-                  <h6 style={{ textTransform: "Capitalize" }}>
+                  <h6 style={{ textTransform: 'Capitalize' }}>
                     <EditTwoToneIcon />
                     &nbsp;&nbsp;Edit Profile
                   </h6>

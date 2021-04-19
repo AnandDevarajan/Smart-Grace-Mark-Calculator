@@ -9,7 +9,7 @@ describe('Student', () => {
       chai
         .request('http://127.0.0.1:5000')
         .post('/student/login')
-        .send({ email: 'anand@123.com', password: 'anand123' })
+        .send({ email: 'ananddevarajan01@gmail.com', password: 'anand123' })
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);

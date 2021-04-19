@@ -27,7 +27,7 @@ describe('Admin', () => {
         .post('/admin')
         .send({
           name: 'test_admin',
-          email: 'admin@test.com',
+          email: 'admin@207.com',
           password: 'admintest',
           dob: '20/2/1999',
           gender: 'male',
@@ -114,6 +114,7 @@ describe('Admin', () => {
         });
     });
   });
+
   describe('GET /admin/student/request/reject/:id', () => {
     it('Reject gracemark request', (done) => {
       chai
