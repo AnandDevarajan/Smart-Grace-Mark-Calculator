@@ -7,13 +7,13 @@ import FormContainer from '../../components/FormContainer';
 import { facultyRegister } from '../../actions/facultyActions';
 import { listCourses } from '../../actions/courseActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import DatePicker from 'react-date-picker';
 const FacultySignup = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [dob, setDob] = useState('');
+  const [dob, setDob] = useState(new Date());
   const [gender, setGender] = useState('select');
   const [department, setDepartment] = useState('CSE');
   const [courseId, setCourseId] = useState('');
@@ -30,12 +30,12 @@ const FacultySignup = ({ location, history }) => {
 
   const courseList = useSelector((state) => state.courseList);
   const { courses } = courseList;
-  
+
   // const redirect = location.search
   //   ? location.search.split('=')[1]
   //   : '/faculty/profile';
-    
-    const redirect = '/faculty/profile';
+
+  const redirect = '/faculty/profile';
   useEffect(() => {
     if (facultyInfo) {
       history.push(redirect);
@@ -215,12 +215,15 @@ const FacultySignup = ({ location, history }) => {
                 <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
                   Date of Birth
                 </Form.Label>
-                <Form.Control
+                {/* <Form.Control
                   type='name'
                   placeholder='dd/mm/yyyy'
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
-                ></Form.Control>
+                ></Form.Control> */}{' '}
+                &nbsp;
+                <br />
+                <DatePicker onChange={setDob} value={dob} />
               </Form.Group>
               <Form.Group controlId='gender'>
                 <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>

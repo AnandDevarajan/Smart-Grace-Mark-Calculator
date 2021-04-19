@@ -67,7 +67,7 @@ describe('Student', () => {
       chai
         .request('http://127.0.0.1:5000')
         .get(
-          '/student/view/result/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFuYW5kMTIzIiwiaWF0IjoxNjE4NzE5MzY5LCJleHAiOjE2MjEzMTEzNjl9.zM0Y3TT4RMOXfBRbpU2fOeEcgorzUY1hGCbsC8ptZQk-anand123'
+          '/student/view/result/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkNCLkVOLlU0Q1NFMTgyMDciLCJpYXQiOjE2MTg4NjEyMjAsImV4cCI6MTYyMTQ1MzIyMH0.T4syKBOgFgT1HbfIVezdRylCICyKvkGHuHicHD9uBik-CB.EN.U4CSE18207'
         )
         .end((err, res) => {
           if (err) done(err);

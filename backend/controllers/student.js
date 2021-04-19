@@ -132,8 +132,8 @@ exports.registerStudent = (req, res) => {
 exports.resetPassword = (req, res) => {
   crypto.randomBytes(32, (err, buffer) => {
     const { email } = req.body;
-    if (err) {+
-      console.log(err);
+    if (err) {
+      +console.log(err);
     }
     const token = buffer.toString('hex');
     con.query(
@@ -475,8 +475,10 @@ exports.changePassword = (req, res) => {
 
 exports.getStudentGrade = (req, res) => {
   const id = req.params.id;
-  const token = id.substring(0, 149);
-  const roll = id.substring(150, id.length);
+  const token = id.substring(0, id.length-17);
+  const roll = id.substring(id.length-16, id.length);
+  console.log(token);
+  console.log(roll);
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   if (roll === decoded.id) {
     con.query(

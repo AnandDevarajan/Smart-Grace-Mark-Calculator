@@ -7,12 +7,14 @@ import FormContainer from '../../components/FormContainer';
 import { adminRegister } from '../../actions/adminActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './Admin.css';
+import DatePicker from 'react-date-picker';
+
 const AdminSignup = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [dob, setDob] = useState('');
+  const [dob, setDob] = useState(new Date());
   const [gender, setGender] = useState('select');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -69,9 +71,7 @@ const AdminSignup = ({ location, history }) => {
             </Button>
           </Link>
           <FormContainer className='signup_form'>
-            <h1 className='signup_heading'>
-              CREATE AN ADMIN ACCOUNT
-            </h1>
+            <h1 className='signup_heading'>CREATE AN ADMIN ACCOUNT</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             <Form onSubmit={submitHandler}>
@@ -124,12 +124,15 @@ const AdminSignup = ({ location, history }) => {
                 <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
                   Date of Birth
                 </Form.Label>
-                <Form.Control
+                {/* <Form.Control
                   type='name'
                   placeholder='dd/mm/yyyy'
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
-                ></Form.Control>
+                ></Form.Control>{' '} */}
+                &nbsp;
+                <br />
+                <DatePicker onChange={setDob} value={dob} />
               </Form.Group>
               <Form.Group controlId='gender'>
                 <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>

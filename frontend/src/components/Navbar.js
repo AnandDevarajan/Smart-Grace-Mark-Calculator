@@ -16,7 +16,9 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import BeenhereIcon from '@material-ui/icons/Beenhere';
 import ClassIcon from '@material-ui/icons/Class';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
+import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+
 import './Navbar.css';
 
 function Navbar() {
@@ -62,8 +64,8 @@ function Navbar() {
               onClick={showSidebar}
             />
           </Link>
-          <h3 className='text-white ml-auto mr-auto'>
-            Smart Grace Mark Calculator
+          <h3 className='text-white ml-auto mr-auto text-center main_head'>
+            <CollectionsBookmarkIcon /> Smart Grace Mark Calculator
           </h3>
           <h6 className='text-white text'>{dt}</h6>
         </div>

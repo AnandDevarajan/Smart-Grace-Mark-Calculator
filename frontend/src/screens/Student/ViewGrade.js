@@ -27,14 +27,13 @@ const ViewGrade = ({ match, history }) => {
       ])
       .then(
         axios.spread((response1, response2) => {
-          console.log(response1, response2);
           setMarks(response1.data.markList);
           setStatus(response2.data.status);
         })
       );
   }, [studentInfo, status]);
 
-  console.log(marks);
+  console.log(status);
   return (
     <>
       {status === 'Published' && (

@@ -6,19 +6,21 @@ import Message from '../../components/Message';
 import FormContainer from '../../components/FormContainer';
 import { studentRegister } from '../../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import DatePicker from 'react-date-picker';
 const StudentSignup = ({ location, history }) => {
   const [name, setName] = useState('');
+
   const [rollno, setRollNo] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [dob, setDob] = useState('');
+  const [dob, setDob] = useState(new Date());
   const [gender, setGender] = useState('select');
   const [branch, setBranch] = useState('CSE');
   const [batch, setBatch] = useState('[choose batch]');
   const [degree, setDegree] = useState('BTech');
   const [password, setPassword] = useState('');
+
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
 
@@ -38,7 +40,7 @@ const StudentSignup = ({ location, history }) => {
     }
   }, [history, studentInfo, redirect]);
 
-   const submitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     if (
       name === '' ||
@@ -57,6 +59,9 @@ const StudentSignup = ({ location, history }) => {
     } else if (password !== confirmPassword) {
       setMessage('');
       setMessage('Passwords do not match');
+    } else if (rollno.length != 16) {
+      setMessage('');
+      setMessage('Invalid Roll Number');
     } else if (phone.length != 10) {
       setMessage('');
       setMessage('Invalid phone number');
@@ -79,7 +84,7 @@ const StudentSignup = ({ location, history }) => {
       );
     }
   };
-
+  console.log(dob);
   return (
     <>
       {!studentInfo && (
@@ -194,12 +199,15 @@ const StudentSignup = ({ location, history }) => {
                 <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
                   Date of Birth
                 </Form.Label>
-                <Form.Control
+                {/* <Form.Control
                   type='name'
                   placeholder='dd/mm/yyyy'
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
-                ></Form.Control>
+                ></Form.Control> */}{' '}
+                &nbsp;
+                <br />
+                <DatePicker onChange={setDob} value={dob} />
               </Form.Group>
               <Form.Group controlId='gender'>
                 <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
