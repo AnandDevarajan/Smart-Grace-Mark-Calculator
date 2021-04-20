@@ -5,7 +5,7 @@ import FacultyLogin from '../FacultyLogin';
 import { Provider } from 'react-redux';
 import store from '../../../store';
 
-it('renders without crashing', () => {
+it('renders Faculty login component', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Router>

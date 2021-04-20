@@ -5,7 +5,7 @@ import StudentResetPassword from '../StudentResetPassword';
 import { Provider } from 'react-redux';
 import store from '../../../store';
 
-it('renders without crashing', () => {
+it('renders reset password component', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Router>

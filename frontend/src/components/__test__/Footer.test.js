@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import ReactDOM from 'react-dom';
 import Footer from '../Footer';
 
-it('renders without crashing', () => {
+it('renders footer component', () => {
   const div = document.createElement('div');
   const component = shallow(<Footer></Footer>);
   console.log(component.debug());
