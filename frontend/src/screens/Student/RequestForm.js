@@ -23,7 +23,7 @@ const RequestForm = ({ location, history }) => {
   const studentRequest = useSelector((state) => state.studentRequest);
   const { success, studentInfo: updatedStudent } = studentRequest;
 
-  const redirect ='/student/login';
+  const redirect = '/student/login';
 
   useEffect(() => {
     if (success) {
@@ -43,7 +43,7 @@ const RequestForm = ({ location, history }) => {
       history.push('/student/profile');
     }
   };
-
+  console.log(studentInfo);
   return (
     <>
       <Link to='/student/profile'>
