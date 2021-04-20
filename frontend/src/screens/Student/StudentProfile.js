@@ -80,6 +80,8 @@ const StudentProfile = ({ history }) => {
   const deleteMyAccount = (roll) => {
     if (window.confirm('Do you want to delete this account ?')) {
       axios.delete(`/student/delete/account/${roll}`);
+    } else {
+      return (window.location.pathname = '/student/profile');
     }
     localStorage.removeItem('studentInfo');
     window.location.pathname = '/';
