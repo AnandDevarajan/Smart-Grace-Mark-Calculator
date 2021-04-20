@@ -1,5 +1,5 @@
- body {
-  background-color: #f8f9fc;
+body {
+  background-color: whitesmoke;
 }
 main {
   min-height: 80vh;
@@ -22,11 +22,10 @@ h2 {
 tbody {
   font-weight: bold;
 }
-th{
+th {
   font-weight: bold;
   color: black;
 }
 td {
   font-weight: bold;
-} 
-
+}

@@ -11,10 +11,12 @@ import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
+import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import BeenhereIcon from '@material-ui/icons/Beenhere';
 import ClassIcon from '@material-ui/icons/Class';
+import FunctionsIcon from '@material-ui/icons/Functions';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
@@ -64,9 +66,11 @@ function Navbar() {
               onClick={showSidebar}
             />
           </Link>
-          <h3 className='text-white ml-auto mr-auto text-center main_head'>
-            <CollectionsBookmarkIcon /> Smart Grace Mark Calculator
-          </h3>
+
+          <h5 className='text-white ml-auto mr-auto text-center main_head app_icon'>
+            <FormatIndentIncreaseIcon className='app_icon' /> Smart Grace Mark
+            Calculator
+          </h5>
           <h6 className='text-white text'>{dt}</h6>
         </div>
 

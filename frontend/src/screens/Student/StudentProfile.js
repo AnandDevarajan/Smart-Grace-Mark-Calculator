@@ -7,10 +7,14 @@ import EmailIcon from '@material-ui/icons/Email';
 import PersonIcon from '@material-ui/icons/Person';
 import PhoneIcon from '@material-ui/icons/Phone';
 import HomeIcon from '@material-ui/icons/Home';
+import EditAttributesIcon from '@material-ui/icons/EditAttributes';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import ClassIcon from '@material-ui/icons/Class';
 import SchoolIcon from '@material-ui/icons/School';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SendIcon from '@material-ui/icons/Send';
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import PublishIcon from '@material-ui/icons/Publish';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
@@ -70,129 +74,97 @@ const StudentProfile = ({ history }) => {
   }, [status]);
 
   return (
-    <Container fluid='sm' className='themed-container'>
-      <button className='btn btn-primary mb-1'>Welcome</button>
-      {result === 'Published' && (
-        <Message variant='success'>Results Published</Message>
-      )}
-      <Container className=' border border-left-0 border-right-0 border-dark'>
-        <hr></hr>
-        <Row className='mt-5'>
-          <Col md={2}>
-            <Container
-              className='border border-success mt-5 mr-5'
-              style={{ width: '217px' }}
-            >
-              {studentInfo.result.Gender === 'Male' ? (
-                <Image
-                  className='mt-5 mr-5'
-                  src='https://www.pngitem.com/pimgs/m/235-2350916_student-netid-login-transparent-background-student-icon-hd.png'
-                  style={{
-                    height: '200px',
-                    width: '200px',
-                    objectFit: 'contain',
-                  }}
-                />
-              ) : (
-                <Image
-                  className='mt-5 mr-5'
-                  src='https://image.flaticon.com/icons/png/512/68/68170.png'
-                  style={{
-                    height: '200px',
-                    width: '200px',
-                    objectFit: 'contain',
-                  }}
-                />
-              )}
-            </Container>
-          </Col>
-          <Col md={7} sm={12}>
-            <ListGroup className=' mb-5 ml-5' style={{ marginTop: '-30px' }}>
-              <h4 className='text-center btn btn-block btn-success'>
-                Student Profile
-              </h4>
-              <ListGroup.Item
-                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
-              >
-                <h4 style={{ textTransform: 'capitalize' }}>
-                  <PersonIcon /> {name}
-                </h4>
-              </ListGroup.Item>
-              <ListGroup.Item
-                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
-              >
-                <h4>
-                  <FormatListNumberedIcon /> {studentInfo.result.RollNum}
-                </h4>
-              </ListGroup.Item>
-              <ListGroup.Item
-                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
-              >
-                <p style={{ textTransform: 'lowercase' }}>
-                  <EmailIcon /> {email}
-                </p>
-              </ListGroup.Item>
-              <ListGroup.Item
-                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
-              >
-                <h4 style={{ textTransform: 'Capitalize' }}>
-                  <SchoolIcon /> {degree}&nbsp;&nbsp;{branch} - {batch}
-                </h4>
-              </ListGroup.Item>
-              <ListGroup.Item
-                style={{ backgroundColor: '#1e212d', color: '#eeeeee' }}
-              >
-                <h4>
-                  <PhoneIcon /> {phone}
-                </h4>
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-          <Col md={3} sm={12}>
-            <ListGroup className=' ml-2' style={{ marginTop: '75px' }}>
-              <ListGroup.Item>
-                <h6 className=' text-center text-white btn btn-sm btn-block btn-primary'>
-                  Actions
-                </h6>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Link
-                  to={`/student/edit/profile/${studentInfo.result.RollNum}`}
-                >
-                  <h6 style={{ textTransform: 'Capitalize' }}>
-                    <EditTwoToneIcon />
-                    &nbsp;&nbsp;Edit Profile
-                  </h6>
-                </Link>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                {status === 'pending' ? (
-                  <h4>
-                    <AutorenewIcon />
-                    &nbsp;&nbsp;&nbsp;
-                    <Button className='btn-sm  btn-warning '> Pending</Button>
-                  </h4>
-                ) : status === 'accepted' ? (
-                  <h4>
-                    <DoneAllIcon />
-                    &nbsp;&nbsp;&nbsp;
-                    <Button className='btn btn-sm btn-success'>Accepted</Button>
-                  </h4>
-                ) : (
-                  <h4>
-                    <SendIcon /> &nbsp;&nbsp;&nbsp;
-                    <Link className='btn btn-sm btn-info' to='/student/request'>
-                      Request
-                    </Link>
-                  </h4>
-                )}
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-        </Row>
-        <hr></hr>
-      </Container>
-    </Container>
+    <div className='ml-5 px-3' style={{ backgroundColor: 'white' }}>
+      <h1 className='text-success'>Student Profile</h1>
+      <p className='lead mt-2'>
+        <AccountBoxIcon style={{ color: 'black', objectFit: 'contain' }} />{' '}
+        Welcome {name}
+      </p>
+      <Row className='mt-4'>
+        <Col>
+          <Link to={`/student/edit/profile/${studentInfo.result.RollNum}`}>
+            <EditTwoToneIcon />{' '}
+            <Button className='btn btn-sm'>Edit Profile</Button>
+          </Link>
+        </Col>
+        <Col>
+          {status === 'pending' ? (
+            <>
+              <AutorenewIcon />{' '}
+              <Button className='btn-sm  btn-warning '> Pending</Button>
+            </>
+          ) : status === 'accepted' ? (
+            <>
+              <DoneAllIcon />{' '}
+              <Button className='btn btn-sm btn-success'>Accepted</Button>
+            </>
+          ) : (
+            <>
+              <SendIcon />{' '}
+              <Link className='btn btn-sm btn-info' to='/student/request'>
+                Request for Grace Mark
+              </Link>
+            </>
+          )}
+        </Col>
+        <Col></Col>
+      </Row>
+      <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
+        <PersonIcon /> Student Details
+      </h2>
+      <table striped bordered hover responsive className='table table-sm'>
+        <thead>
+          <tr>
+            <th>
+              <FormatListNumberedIcon /> Roll Number
+            </th>
+            <th className='hide-sm'>
+              <SchoolIcon /> Branch
+            </th>
+            <th className='hide-sm'>
+              <ClassIcon /> Batch
+            </th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{roll}</td>
+            <td>
+              {degree} {branch}
+            </td>
+            <td>{batch}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
+        <ContactSupportIcon /> Contact Details
+      </h2>
+      <table striped bordered hover responsive className='table table-sm'>
+        <thead>
+          <tr>
+            <th>
+              <PhoneIcon /> Phone Number
+            </th>
+            <th className='hide-sm'>
+              {' '}
+              <EmailIcon /> Email
+            </th>
+            <th className='hide-sm'>
+              <HomeIcon /> Address
+            </th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>+91 {phone}</td>
+            <td>{email}</td>
+            <td>{address}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
