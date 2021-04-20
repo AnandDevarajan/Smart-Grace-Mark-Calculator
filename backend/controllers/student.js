@@ -475,8 +475,8 @@ exports.changePassword = (req, res) => {
 
 exports.getStudentGrade = (req, res) => {
   const id = req.params.id;
-  const token = id.substring(0, id.length-17);
-  const roll = id.substring(id.length-16, id.length);
+  const token = id.substring(0, id.length - 17);
+  const roll = id.substring(id.length - 16, id.length);
   console.log(token);
   console.log(roll);
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -496,4 +496,17 @@ exports.getStudentGrade = (req, res) => {
       }
     );
   }
+};
+
+exports.deleteAccount = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `DELETE FROM STUDENT WHERE RollNum=?;DELETE FROM COURSE_MARK WHERE RollNum=?`,
+    [id, id],
+    (err, res) => {
+      if (err) {
+        console.log(err.sqlMessage);
+      }
+    }
+  );
 };

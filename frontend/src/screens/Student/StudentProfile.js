@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { studentLogout } from '../../actions/studentActions';
 import EmailIcon from '@material-ui/icons/Email';
 import PersonIcon from '@material-ui/icons/Person';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -10,6 +11,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import EditAttributesIcon from '@material-ui/icons/EditAttributes';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import ClassIcon from '@material-ui/icons/Class';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SchoolIcon from '@material-ui/icons/School';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -44,6 +46,8 @@ const StudentProfile = ({ history }) => {
   const [result, setResult] = useState('');
   const [value, onChange] = useState(new Date());
 
+  const dispatch = useDispatch();
+
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
 
@@ -73,6 +77,14 @@ const StudentProfile = ({ history }) => {
       );
   }, [status]);
 
+  const deleteMyAccount = (roll) => {
+    if (window.confirm('Do you want to delete this account ?')) {
+      axios.delete(`/student/delete/account/${roll}`);
+    }
+    localStorage.removeItem('studentInfo');
+    window.location.pathname = '/';
+  };
+
   return (
     <div className='ml-5 px-3' style={{ backgroundColor: 'white' }}>
       <h1 className='text-success'>Student Profile</h1>
@@ -91,12 +103,16 @@ const StudentProfile = ({ history }) => {
           {status === 'pending' ? (
             <>
               <AutorenewIcon />{' '}
-              <Button className='btn-sm  btn-warning '> Pending</Button>
+              <Button className='btn-sm  btn-warning '>
+                Grace Mark Request Pending
+              </Button>
             </>
           ) : status === 'accepted' ? (
             <>
               <DoneAllIcon />{' '}
-              <Button className='btn btn-sm btn-success'>Accepted</Button>
+              <Button className='btn btn-sm btn-success'>
+                Grace Mark Request Accepted
+              </Button>
             </>
           ) : (
             <>
@@ -107,7 +123,15 @@ const StudentProfile = ({ history }) => {
             </>
           )}
         </Col>
-        <Col></Col>
+        <Col>
+          <DeleteForeverIcon />{' '}
+          <Button
+            className='btn btn-sm btn-danger'
+            onClick={() => deleteMyAccount(roll)}
+          >
+            Delete My Account
+          </Button>
+        </Col>
       </Row>
       <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
         <PersonIcon /> Student Details
@@ -129,11 +153,11 @@ const StudentProfile = ({ history }) => {
         </thead>
         <tbody>
           <tr>
-            <td>{roll}</td>
-            <td>
+            <td width='365px'>{roll}</td>
+            <td width='365px'>
               {degree} {branch}
             </td>
-            <td>{batch}</td>
+            <td width='365px'>{batch}</td>
           </tr>
         </tbody>
       </table>
@@ -144,11 +168,11 @@ const StudentProfile = ({ history }) => {
         <thead>
           <tr>
             <th>
-              <PhoneIcon /> Phone Number
-            </th>
-            <th className='hide-sm'>
               {' '}
               <EmailIcon /> Email
+            </th>
+            <th className='hide-sm'>
+              <PhoneIcon /> Phone Number
             </th>
             <th className='hide-sm'>
               <HomeIcon /> Address
@@ -158,9 +182,9 @@ const StudentProfile = ({ history }) => {
         </thead>
         <tbody>
           <tr>
-            <td>+91 {phone}</td>
-            <td>{email}</td>
-            <td>{address}</td>
+            <td width='365px'>{email}</td>
+            <td width='365px'>+91 {phone}</td>
+            <td width='365px'>{address}</td>
           </tr>
         </tbody>
       </table>
