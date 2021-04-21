@@ -74,7 +74,7 @@ exports.registerStudent = (req, res) => {
         email,
         phone,
         address,
-        dob,
+        dob.substring(0, 10),
         gender,
         branch,
         batch,

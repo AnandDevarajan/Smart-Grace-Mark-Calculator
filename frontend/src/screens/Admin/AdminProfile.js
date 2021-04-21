@@ -8,6 +8,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import PhoneIcon from '@material-ui/icons/Phone';
+import EventIcon from '@material-ui/icons/Event';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import HomeIcon from '@material-ui/icons/Home';
@@ -92,6 +93,17 @@ const AdminProfile = ({ history }) => {
       className='ml-5 px-3 alllist_div'
       style={{ backgroundColor: 'white', marginLeft: '140px' }}
     >
+      {status === 'Not Published' &&
+        message ===
+          'Unable to Publish Results now. Mark allocation is yet to be completed' && (
+          <Message variant='danger'>
+            Unable to Publish Results now. Grade allocation is yet to be
+            completed
+          </Message>
+        )}
+      {status === 'Published' && (
+        <Message variant='success'>Results published</Message>
+      )}
       <h1 className='text-success'>Admin Profile</h1>
       <p className='lead mt-2'>
         <AccountBoxIcon style={{ color: 'black', objectFit: 'contain' }} />{' '}
@@ -162,12 +174,15 @@ const AdminProfile = ({ history }) => {
               <FormatListNumberedIcon /> Admin ID
             </th>
 
-            <th />
+            <th>
+              <EventIcon /> DOB
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td width='365px'>ID {adminInfo.result.adminID}</td>
+            <td width='365px'>{adminInfo.result.DOB.substring(0, 10)}</td>
           </tr>
         </tbody>
       </table>

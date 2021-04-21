@@ -60,7 +60,7 @@ exports.registerAdmin = (req, res) => {
 
     con.query(
       `INSERT INTO ADMINISTRATOR (Name,EmailID,PhoneNum,Address,DOB,Gender,Password) VALUES (?,?,?,?,?,?,?)`,
-      [name, email, phone, address, dob, gender, hash],
+      [name, email, phone, address, dob.substring(0, 10), gender, hash],
       (err, result) => {
         if (err) {
           return res.status(400).json({

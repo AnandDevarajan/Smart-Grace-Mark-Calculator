@@ -75,7 +75,7 @@ exports.registerFaculty = (req, res) => {
         email,
         phone,
         address,
-        dob,
+        dob.substring(0, 10),
         gender,
         department,
         courseCode,

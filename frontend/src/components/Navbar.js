@@ -179,9 +179,9 @@ function Navbar() {
                 <NavLink
                   to='/admin/profile'
                   activeStyle={{
-                    color: 'black',
+                    color: 'white',
                     fontWeight: 'bold',
-                    backgroundColor: '#dadee2',
+                    backgroundColor: '#3f3f44',
                   }}
                 >
                   <AccountCircleIcon style={{ color: '#79d70f' }} />
@@ -192,9 +192,9 @@ function Navbar() {
               <li className='nav-text'>
                 <NavLink
                   activeStyle={{
-                    color: 'black',
+                    color: 'white',
                     fontWeight: 'bold',
-                    backgroundColor: '#dadee2',
+                    backgroundColor: '#3f3f44',
                   }}
                   to='/admin/students'
                 >
@@ -205,9 +205,9 @@ function Navbar() {
               <li className='nav-text'>
                 <NavLink
                   activeStyle={{
-                    color: 'black',
+                    color: 'white',
                     fontWeight: 'bold',
-                    backgroundColor: '#dadee2',
+                    backgroundColor: '#3f3f44',
                   }}
                   to='/admin/faculties'
                 >
@@ -219,9 +219,9 @@ function Navbar() {
                 <NavLink
                   to='/admin/course/report'
                   activeStyle={{
-                    color: 'black',
+                    color: 'white',
                     fontWeight: 'bold',
-                    backgroundColor: '#dadee2',
+                    backgroundColor: '#3f3f44',
                   }}
                 >
                   <ImportContactsIcon style={{ color: '#79d70f' }} />
@@ -232,9 +232,9 @@ function Navbar() {
                 <NavLink
                   to='/admin/gracemarklist'
                   activeStyle={{
-                    color: 'black',
+                    color: 'white',
                     fontWeight: 'bold',
-                    backgroundColor: '#dadee2',
+                    backgroundColor: '#3f3f44',
                   }}
                 >
                   <BeenhereIcon style={{ color: '#79d70f' }} />
