@@ -91,7 +91,7 @@ function Navbar() {
           {studentInfo ? (
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
-                <Link to='#' className='menu-bars'>
+                <NavLink to='#' className='menu-bars'>
                   <CloseIcon
                     className='close_icon'
                     style={{ color: 'white' }}
@@ -99,25 +99,40 @@ function Navbar() {
                       showSidebar(window.matchMedia('(max-width: 900px)'))
                     }
                   />
-                </Link>
+                </NavLink>
               </li>
               <li className='nav-text'>
-                <Link to='/student/profile'>
+                <NavLink
+                  activeStyle={{
+                    color: '#2196f3',
+                    fontWeight: 'bold',
+                    backgroundColor: '#3f3f44',
+                  }}
+                  to='/student/profile'
+                >
                   <AccountCircleIcon />
                   <span className='text'>Profile</span>
-                </Link>
+                </NavLink>
               </li>
 
               <li className='nav-text'>
-                <Link
+                <NavLink
+                  activeStyle={{
+                    color: '#2196f3',
+                    fontWeight: 'bold',
+                    backgroundColor: '#3f3f44',
+                  }}
                   to={`/student/grade/${studentInfo.token}-${studentInfo.result.RollNum}`}
                 >
                   <MenuBookIcon />
                   <span className='text'>Grades</span>
-                </Link>
+                </NavLink>
               </li>
               <li className='nav-text'>
-                <Link onClick={studentlogOutHandler}>
+                <Link
+                  onClick={studentlogOutHandler}
+                  style={{ color: '#d32626' }}
+                >
                   <ExitToAppIcon />
                   <span className='text'>Logout</span>
                 </Link>
@@ -159,7 +174,10 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link onClick={facultylogOutHandler}>
+                <Link
+                  onClick={facultylogOutHandler}
+                  style={{ color: '#d32626' }}
+                >
                   <ExitToAppIcon />
                   <span className='text'>Logout</span>
                 </Link>
@@ -242,8 +260,8 @@ function Navbar() {
                 </NavLink>
               </li>
               <li className='nav-text'>
-                <Link onClick={adminlogOutHandler}>
-                  <ExitToAppIcon className='text-danger' />
+                <Link onClick={adminlogOutHandler} style={{ color: '#d32626' }}>
+                  <ExitToAppIcon />
                   <span className='text'>Logout</span>
                 </Link>
               </li>
