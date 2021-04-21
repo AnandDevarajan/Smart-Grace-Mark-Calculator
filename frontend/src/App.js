@@ -59,7 +59,7 @@ function App() {
       />
       <main
         className='py-3 alllist_div'
-        style={{ backgroundColor: '#f7f7f8', marginLeft: '140px' }}
+        style={{ backgroundColor: '#f6f7f9', marginLeft: '140px' }}
       >
         <Container>
           {facultyInfo ? (

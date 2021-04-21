@@ -8,11 +8,14 @@ import EmailIcon from '@material-ui/icons/Email';
 import PersonIcon from '@material-ui/icons/Person';
 import PhoneIcon from '@material-ui/icons/Phone';
 import HomeIcon from '@material-ui/icons/Home';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 import EditAttributesIcon from '@material-ui/icons/EditAttributes';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import ClassIcon from '@material-ui/icons/Class';
+import BeenhereIcon from '@material-ui/icons/Beenhere';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SchoolIcon from '@material-ui/icons/School';
+import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SendIcon from '@material-ui/icons/Send';
@@ -39,6 +42,7 @@ const StudentProfile = ({ history }) => {
   const [roll, setRoll] = useState('');
   const [degree, setDegree] = useState('');
   const [branch, setBranch] = useState('');
+  const [grace, setGrace] = useState('');
   const [batch, setBatch] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
@@ -63,6 +67,7 @@ const StudentProfile = ({ history }) => {
       ])
       .then(
         axios.spread((response1, response2) => {
+          console.log(response1);
           setName(response1.data.student.Name);
           setRoll(response1.data.student.RollNum);
           setEmail(response1.data.student.EmailID);
@@ -71,12 +76,12 @@ const StudentProfile = ({ history }) => {
           setBatch(response1.data.student.Batch);
           setPhone(response1.data.student.PhoneNum);
           setAddress(response1.data.student.Address);
+          setGrace(response1.data.student.GraceDesc);
           setStatus(response1.data.student.Requested);
           setResult(response2.data.status);
         })
       );
   }, [status]);
-
   const deleteMyAccount = (roll) => {
     if (window.confirm('Do you want to delete this account ?')) {
       axios.delete(`/student/delete/account/${roll}`);
@@ -105,7 +110,16 @@ const StudentProfile = ({ history }) => {
           </Link>
         </Col>
         <Col>
-          {status === 'pending' ? (
+          {status === 'N/A' && (
+            <Link to='/student/request' style={{ textDecoration: 'None' }}>
+              <SendIcon />{' '}
+              <Button className='btn btn-sm btn-info'>
+                Request for Grace Mark
+              </Button>
+            </Link>
+          )}
+
+          {/* {status === 'pending' ? (
             <>
               <AutorenewIcon />{' '}
               <Button className='btn-sm  btn-warning '>
@@ -118,17 +132,7 @@ const StudentProfile = ({ history }) => {
               <Button className='btn btn-sm btn-success'>
                 Grace Mark Request Accepted
               </Button>
-            </>
-          ) : (
-            <>
-              <Link to='/student/request' style={{ textDecoration: 'None' }}>
-                <SendIcon />{' '}
-                <Button className='btn btn-sm btn-info'>
-                  Request for Grace Mark
-                </Button>
-              </Link>
-            </>
-          )}
+            </> */}
         </Col>
         <Col>
           <DeleteForeverIcon
@@ -158,7 +162,13 @@ const StudentProfile = ({ history }) => {
             <th className='hide-sm'>
               <ClassIcon /> Batch
             </th>
-            <th />
+            <th>
+              <BeenhereIcon />
+              Grace Mark
+            </th>
+            <th>
+              <EqualizerIcon /> status
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -168,6 +178,21 @@ const StudentProfile = ({ history }) => {
               {degree} {branch}
             </td>
             <td width='365px'>{batch}</td>
+            <td width='365px'>
+              {grace === 'N/A' ? <CloseIcon style={{ color: 'red' }} /> : grace}
+            </td>
+            {status === 'pending' && (
+              <td width='365px'>
+                <AutorenewIcon />{' '}
+                <Button className='btn-sm  btn-warning '>Pending</Button>
+              </td>
+            )}
+            {status === 'accepted' && (
+              <td width='365px'>
+                <DoneAllIcon />{' '}
+                <Button className='btn btn-sm btn-success'>Accepted</Button>
+              </td>
+            )}
           </tr>
         </tbody>
       </table>

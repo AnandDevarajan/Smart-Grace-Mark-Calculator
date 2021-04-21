@@ -179,12 +179,12 @@ function Navbar() {
                 <NavLink
                   to='/admin/profile'
                   activeStyle={{
-                    color: 'white',
+                    color: '#2196f3',
                     fontWeight: 'bold',
                     backgroundColor: '#3f3f44',
                   }}
                 >
-                  <AccountCircleIcon style={{ color: '#79d70f' }} />
+                  <AccountCircleIcon />
                   <span className='text'>{adminInfo.result.Name}</span>
                 </NavLink>
               </li>
@@ -192,26 +192,26 @@ function Navbar() {
               <li className='nav-text'>
                 <NavLink
                   activeStyle={{
-                    color: 'white',
+                    color: '#2196f3',
                     fontWeight: 'bold',
                     backgroundColor: '#3f3f44',
                   }}
                   to='/admin/students'
                 >
-                  <PeopleIcon style={{ color: '#79d70f' }} />
+                  <PeopleIcon />
                   <span className='text'>Students</span>
                 </NavLink>
               </li>
               <li className='nav-text'>
                 <NavLink
                   activeStyle={{
-                    color: 'white',
+                    color: '#2196f3',
                     fontWeight: 'bold',
                     backgroundColor: '#3f3f44',
                   }}
                   to='/admin/faculties'
                 >
-                  <PeopleOutlineIcon style={{ color: '#79d70f' }} />
+                  <PeopleOutlineIcon />
                   <span className='text'>Faculty</span>
                 </NavLink>
               </li>
@@ -219,12 +219,12 @@ function Navbar() {
                 <NavLink
                   to='/admin/course/report'
                   activeStyle={{
-                    color: 'white',
+                    color: '#2196f3',
                     fontWeight: 'bold',
                     backgroundColor: '#3f3f44',
                   }}
                 >
-                  <ImportContactsIcon style={{ color: '#79d70f' }} />
+                  <ImportContactsIcon />
                   <span className='text'>Courses</span>
                 </NavLink>
               </li>
@@ -232,18 +232,18 @@ function Navbar() {
                 <NavLink
                   to='/admin/gracemarklist'
                   activeStyle={{
-                    color: 'white',
+                    color: '#2196f3',
                     fontWeight: 'bold',
                     backgroundColor: '#3f3f44',
                   }}
                 >
-                  <BeenhereIcon style={{ color: '#79d70f' }} />
+                  <BeenhereIcon />
                   <span className='text'>Grace Mark</span>
                 </NavLink>
               </li>
               <li className='nav-text'>
                 <Link onClick={adminlogOutHandler}>
-                  <ExitToAppIcon style={{ color: '#d32626' }} />
+                  <ExitToAppIcon className='text-danger' />
                   <span className='text'>Logout</span>
                 </Link>
               </li>
@@ -262,12 +262,12 @@ function Navbar() {
                 <NavLink
                   to='/'
                   activeStyle={{
-                    color: 'black',
+                    color: '#2196f3',
                     fontWeight: 'bold',
-                    backgroundColor: '#dadee2',
+                    backgroundColor: '#3f3f44',
                   }}
                 >
-                  <HomeIcon style={{ color: '#79d70f' }} />
+                  <HomeIcon />
                   <span>Home</span>
                 </NavLink>
               </li>
