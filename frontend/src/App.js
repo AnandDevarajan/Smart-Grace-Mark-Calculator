@@ -39,7 +39,6 @@ import ViewGrade from './screens/Student/ViewGrade';
 import SetGrade from './screens/Admin/SetGrade';
 import CourseReport from './screens/Admin/CourseReport';
 
-
 function App() {
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
@@ -50,7 +49,18 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <main className='py-3'>
+      <hr
+        styel={{
+          height: '1px',
+          borderWidth: '1px',
+          color: '#0061a8',
+          backgroundColor: '0061a8',
+        }}
+      />
+      <main
+        className='py-3 alllist_div'
+        style={{ backgroundColor: '#f7f7f8', marginLeft: '140px' }}
+      >
         <Container>
           {facultyInfo ? (
             <Route exact path='/' component={FacultyProfile} />

@@ -96,7 +96,10 @@ const StudentProfile = ({ history }) => {
       </p>
       <Row className='mt-4'>
         <Col>
-          <Link to={`/student/edit/profile/${studentInfo.result.RollNum}`}>
+          <Link
+            to={`/student/edit/profile/${studentInfo.result.RollNum}`}
+            style={{ textDecoration: 'None' }}
+          >
             <EditTwoToneIcon />{' '}
             <Button className='btn btn-sm'>Edit Profile</Button>
           </Link>
@@ -118,15 +121,20 @@ const StudentProfile = ({ history }) => {
             </>
           ) : (
             <>
-              <SendIcon />{' '}
-              <Link className='btn btn-sm btn-info' to='/student/request'>
-                Request for Grace Mark
+              <Link to='/student/request' style={{ textDecoration: 'None' }}>
+                <SendIcon />{' '}
+                <Button className='btn btn-sm btn-info'>
+                  Request for Grace Mark
+                </Button>
               </Link>
             </>
           )}
         </Col>
         <Col>
-          <DeleteForeverIcon />{' '}
+          <DeleteForeverIcon
+            className='icon'
+            onClick={() => deleteMyAccount(roll)}
+          />{' '}
           <Button
             className='btn btn-sm btn-danger'
             onClick={() => deleteMyAccount(roll)}

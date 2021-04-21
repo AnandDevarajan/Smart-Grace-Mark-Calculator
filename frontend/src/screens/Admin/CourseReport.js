@@ -32,7 +32,10 @@ const CourseReport = ({ history }) => {
 
   console.log(reports);
   return (
-    <div className='ml-5 align-items-center alllist_div'>
+    <div
+      className='ml-5 align-items-center alllist_div'
+      style={{ backgroundColor: 'white' }}
+    >
       <Link to='/admin/profile' className='goback'>
         <Button variant='light'>
           <ArrowBackIcon /> Go Back

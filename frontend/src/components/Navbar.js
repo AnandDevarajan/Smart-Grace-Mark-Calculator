@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,8 +33,15 @@ function Navbar() {
     return () => clearInterval(secTimer);
   }, []);
 
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
+  const [sidebar, setSidebar] = useState(true);
+
+  const showSidebar = (x) => {
+    if (x.matches) {
+      setSidebar(!sidebar);
+    } else {
+      setSidebar(sidebar);
+    }
+  };
 
   const dispatch = useDispatch();
   const studentSignin = useSelector((state) => state.studentSignin);
@@ -62,16 +69,22 @@ function Navbar() {
           <Link to='#' className='menu-bars'>
             <MenuIcon
               style='menu_icon'
-              style={{ marginBottom: '25px', color: 'white' }}
-              onClick={showSidebar}
+              style={{ marginBottom: '25px', color: 'black' }}
+              onClick={() =>
+                showSidebar(window.matchMedia('(max-width: 900px)'))
+              }
             />
           </Link>
 
-          <h5 className='text-white ml-auto mr-auto text-center main_head app_icon'>
-            <FormatIndentIncreaseIcon className='app_icon' /> Smart Grace Mark
-            Calculator
-          </h5>
-          <h6 className='text-white text'>{dt}</h6>
+          <h3 className='ml-auto  mr-auto text-center main_head mt-4'>
+            <FormatIndentIncreaseIcon className='app_icon' />{' '}
+            <span style={{ color: '#3e4042' }}>
+              Smart Grace Mark Calculator
+            </span>
+          </h3>
+          <h6 className='text' style={{ marginLeft: '-180px' }}>
+            {dt}
+          </h6>
         </div>
 
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -80,8 +93,11 @@ function Navbar() {
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
                   <CloseIcon
-                    className='close-icon'
+                    className='close_icon'
                     style={{ color: 'white' }}
+                    onClick={() =>
+                      showSidebar(window.matchMedia('(max-width: 900px)'))
+                    }
                   />
                 </Link>
               </li>
@@ -111,7 +127,10 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                  <CloseIcon style={{ color: 'white' }} />
+                  <CloseIcon
+                    className='close_icon'
+                    style={{ color: 'white' }}
+                  />
                 </Link>
               </li>
               <li className='nav-text'>
@@ -157,39 +176,74 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link to='/admin/profile'>
-                  <AccountCircleIcon />
+                <NavLink
+                  to='/admin/profile'
+                  activeStyle={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    backgroundColor: '#dadee2',
+                  }}
+                >
+                  <AccountCircleIcon style={{ color: '#79d70f' }} />
                   <span className='text'>{adminInfo.result.Name}</span>
-                </Link>
+                </NavLink>
               </li>
 
               <li className='nav-text'>
-                <Link to='/admin/students'>
-                  <PeopleIcon />
+                <NavLink
+                  activeStyle={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    backgroundColor: '#dadee2',
+                  }}
+                  to='/admin/students'
+                >
+                  <PeopleIcon style={{ color: '#79d70f' }} />
                   <span className='text'>Students</span>
-                </Link>
+                </NavLink>
               </li>
               <li className='nav-text'>
-                <Link to='/admin/faculties'>
-                  <PeopleOutlineIcon />
+                <NavLink
+                  activeStyle={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    backgroundColor: '#dadee2',
+                  }}
+                  to='/admin/faculties'
+                >
+                  <PeopleOutlineIcon style={{ color: '#79d70f' }} />
                   <span className='text'>Faculty</span>
-                </Link>
+                </NavLink>
               </li>
               <li className='nav-text'>
-                <Link to='/admin/course/report'>
-                  <ImportContactsIcon />
+                <NavLink
+                  to='/admin/course/report'
+                  activeStyle={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    backgroundColor: '#dadee2',
+                  }}
+                >
+                  <ImportContactsIcon style={{ color: '#79d70f' }} />
                   <span className='text'>Courses</span>
-                </Link>
+                </NavLink>
               </li>
               <li className='nav-text'>
-                <Link to='/admin/gracemarklist'>
-                  <BeenhereIcon />
+                <NavLink
+                  to='/admin/gracemarklist'
+                  activeStyle={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    backgroundColor: '#dadee2',
+                  }}
+                >
+                  <BeenhereIcon style={{ color: '#79d70f' }} />
                   <span className='text'>Grace Mark</span>
-                </Link>
+                </NavLink>
               </li>
               <li className='nav-text'>
                 <Link onClick={adminlogOutHandler}>
-                  <ExitToAppIcon />
+                  <ExitToAppIcon style={{ color: '#d32626' }} />
                   <span className='text'>Logout</span>
                 </Link>
               </li>
@@ -198,14 +252,24 @@ function Navbar() {
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
-                  <CloseIcon style={{ color: 'white' }} />
+                  <CloseIcon
+                    className='close_icon'
+                    style={{ color: 'white' }}
+                  />
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link to='/'>
-                  <HomeIcon />
+                <NavLink
+                  to='/'
+                  activeStyle={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    backgroundColor: '#dadee2',
+                  }}
+                >
+                  <HomeIcon style={{ color: '#79d70f' }} />
                   <span>Home</span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           )}

@@ -1,10 +1,11 @@
 .navbar {
-  background-color: #005082;
-  height: 75px;
+  background-color: #79d70f;
+  height: 17px;
   display: flex;
   justify-content: start;
   align-items: center;
-  margin-bottom: 20px;
+  margin-top: -40px;
+  margin-bottom: 55px;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -13,23 +14,30 @@
   color: red;
 }
 .menu-bars {
+  margin-top: 40px;
   margin-left: 2rem;
   font-size: 2rem;
   background: none;
 }
-
+.admin_close-icon {
+  visibility: hidden;
+}
+.close_icon {
+  visibility: hidden;
+}
 .nav-menu {
   /* background-color: #1e212d; */
-  background-color: #474744;
-  width: 200px;
+  background-color: #1e212d;
+  width: 250px;
   height: 100vh;
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 0;
   left: -100%;
+  top: 0;
   transition: 200ms;
   z-index: 2;
+  border-right: 1px solid #0061a8;
 }
 
 .nav-menu.active {
@@ -40,14 +48,14 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 8px 0px 8px 0px;
+  padding: 8px 0px 8px 50px;
   list-style: none;
   height: 60px;
 }
 
 .nav-text a {
   text-decoration: none;
-  color: #f5f5f5;
+  color: grey;
   font-size: 18px;
   width: 95%;
   height: 100%;
@@ -58,10 +66,16 @@
 }
 
 .nav-text a:hover {
-  background-color: #0d2541;
+  background-color: #dadee2;
+  width: 100%;
 }
+
 .nav-text a:active {
-  background-color: #0d2541;
+  background-color: #dadee2;
+}
+
+.nav-text a:focus {
+  background-color: #dadee2;
 }
 
 .nav-menu-items {
@@ -69,7 +83,7 @@
 }
 
 .navbar-toggle {
-  background-color: #474744;
+  background-color: #1e212d;
   width: 100%;
   height: 80px;
   display: flex;
@@ -134,5 +148,6 @@ span {
   }
   .admin_close-icon {
     margin-left: 20px;
+    visibility: hidden;
   }
 }
