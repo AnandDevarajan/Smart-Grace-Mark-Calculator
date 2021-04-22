@@ -31,7 +31,7 @@ const StudentLogin = ({ location, history }) => {
   };
 
   return (
-    <>
+    <div style={{ backgroundColor: 'white' }}>
       {!studentInfo && (
         <>
           <Link to='/'>
@@ -73,7 +73,7 @@ const StudentLogin = ({ location, history }) => {
           </FormContainer>
         </>
       )}
-    </>
+    </div>
   );
 };
 

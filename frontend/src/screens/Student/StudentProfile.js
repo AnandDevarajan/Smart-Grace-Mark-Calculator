@@ -82,6 +82,13 @@ const StudentProfile = ({ history }) => {
         })
       );
   }, [status]);
+
+  const cancelRequest = (roll) => {
+    axios.put(`/student/cancel/request/${roll}`).then((response) => {
+      window.location.pathname = '/student/profile';
+    });
+  };
+
   const deleteMyAccount = (roll) => {
     if (window.confirm('Do you want to delete this account ?')) {
       axios.delete(`/student/delete/account/${roll}`);
@@ -93,11 +100,10 @@ const StudentProfile = ({ history }) => {
   };
 
   return (
-    <div className='ml-5 px-3' style={{ backgroundColor: 'white' }}>
+    <div className='ml-5 px-3 border' style={{ backgroundColor: 'white' }}>
       <h1 className='text-success'>Student Profile</h1>
       <p className='lead mt-2'>
-        <AccountBoxIcon style={{ color: 'black', objectFit: 'contain' }} />{' '}
-        Welcome {name}
+        <AccountBoxIcon style={{ color: '#2196f3' }} /> Welcome {name}
       </p>
       <Row className='mt-4'>
         <Col>
@@ -148,7 +154,7 @@ const StudentProfile = ({ history }) => {
         </Col>
       </Row>
       <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <PersonIcon /> Student Details
+        <PersonIcon style={{ color: '#2196f3' }} /> Student Details
       </h2>
       <table striped bordered hover responsive className='table table-sm'>
         <thead>
@@ -169,6 +175,7 @@ const StudentProfile = ({ history }) => {
             <th>
               <EqualizerIcon /> status
             </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -187,6 +194,16 @@ const StudentProfile = ({ history }) => {
                 <Button className='btn-sm  btn-warning '>Pending</Button>
               </td>
             )}
+            {status === 'pending' && (
+              <td
+                width='365px'
+                onClick={() => cancelRequest(roll)}
+                className='icon'
+              >
+                <CloseIcon style={{ color: 'red' }} />
+                Cancel
+              </td>
+            )}
             {status === 'accepted' && (
               <td width='365px'>
                 <DoneAllIcon />{' '}
@@ -197,7 +214,7 @@ const StudentProfile = ({ history }) => {
         </tbody>
       </table>
       <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <ContactSupportIcon /> Contact Details
+        <ContactSupportIcon style={{ color: '#2196f3' }} /> Contact Details
       </h2>
       <table striped bordered hover responsive className='table table-sm'>
         <thead>

@@ -54,12 +54,12 @@ function App() {
           height: '1px',
           borderWidth: '1px',
           color: '#0061a8',
-          backgroundColor: '0061a8',
+          backgroundColor: '#0061a8',
         }}
       />
       <main
         className='py-3 alllist_div'
-        style={{ backgroundColor: '#f6f7f9', marginLeft: '140px' }}
+        style={{ backgroundColor: '#fff', marginLeft: '140px' }}
       >
         <Container>
           {facultyInfo ? (

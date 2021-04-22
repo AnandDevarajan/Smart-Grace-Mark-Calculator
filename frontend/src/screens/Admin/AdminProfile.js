@@ -8,6 +8,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import PhoneIcon from '@material-ui/icons/Phone';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import EventIcon from '@material-ui/icons/Event';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -97,12 +98,14 @@ const AdminProfile = ({ history }) => {
         message ===
           'Unable to Publish Results now. Mark allocation is yet to be completed' && (
           <Message variant='danger'>
-            Unable to Publish Results now. Grade allocation is yet to be
-            completed
+            <NotificationsIcon /> Unable to Publish Results now. Grade
+            allocation is yet to be completed
           </Message>
         )}
       {status === 'Published' && (
-        <Message variant='success'>Results published</Message>
+        <Message variant='success'>
+          <NotificationsIcon /> Results published
+        </Message>
       )}
       <h1 className='text-success'>Admin Profile</h1>
       <p className='lead mt-2'>

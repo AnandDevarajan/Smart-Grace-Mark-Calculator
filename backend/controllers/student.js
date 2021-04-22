@@ -360,6 +360,27 @@ exports.rejectRequest = (req, res) => {
   );
 };
 
+exports.cancelRequest = (req, res) => {
+  let id = req.params.id;
+  let Requested = 'N/A';
+  let GraceDesc = 'N/A';
+  let GraceMark = 'N/A';
+  con.query(
+    `UPDATE STUDENT SET Requested=?,GraceDesc=?,GraceMark=? WHERE RollNum=?`,
+    [Requested, GraceDesc, GraceMark, id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.json({
+          message: 'Unable to cancel request',
+        });
+      }
+      return res.json({
+        message: 'Request canceled successfully',
+      });
+    }
+  );
+};
+
 exports.batchStudents = (req, res) => {
   const id = req.params.id;
   con.query(`SELECT * FROM STUDENT WHERE Batch=?`, [id], (err, result) => {

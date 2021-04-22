@@ -12,6 +12,7 @@ const {
   changePassword,
   getStudentGrade,
   deleteAccount,
+  cancelRequest,
 } = require('../controllers/student');
 const { verifyStudent } = require('../middlewares/auth');
 
@@ -23,6 +24,7 @@ router.get('/:id', getStudent);
 router.get('/view/result/:id', getStudentGrade);
 router.put('/:id', updateStudentProfile);
 router.put('/changepassword/:id', changePassword);
+router.put('/cancel/request/:id', cancelRequest);
 router.put('/request/:id', verifyStudent, addRequest);
 router.delete('/delete/account/:id', deleteAccount);
 

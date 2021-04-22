@@ -7,10 +7,12 @@ import FormContainer from '../../components/FormContainer';
 import { listGracemarks } from '../../actions/gracemarkActions';
 import { studentRequestGM, studentLogin } from '../../actions/studentActions';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from 'axios';
 
 const RequestForm = ({ location, history }) => {
   const [request, setRequest] = useState('');
   const [message, setMessage] = useState(null);
+  const [status, setStatus] = useState('');
 
   const dispatch = useDispatch();
 
@@ -30,6 +32,9 @@ const RequestForm = ({ location, history }) => {
       history.push('/student/profile');
     } else {
       dispatch(listGracemarks());
+      axios.get(`/student/${studentInfo.result.RollNum}`).then((response) => {
+        setStatus(response.data.student.Requested);
+      });
     }
   }, [history, redirect, success, updatedStudent]);
 
@@ -43,7 +48,7 @@ const RequestForm = ({ location, history }) => {
       history.push('/student/profile');
     }
   };
-  console.log(studentInfo);
+
   return (
     <>
       <Link to='/student/profile'>
@@ -51,7 +56,7 @@ const RequestForm = ({ location, history }) => {
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      {studentInfo.result.Requested === 'pending' ? (
+      {status === 'pending' ? (
         <FormContainer>
           <Message variant='warning'>
             Already requested for grace Mark{' '}
