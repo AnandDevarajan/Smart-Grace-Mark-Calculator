@@ -150,29 +150,48 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-text'>
-                <Link to='/faculty/profile'>
+                <NavLink
+                  to='/faculty/profile'
+                  activeStyle={{
+                    color: '#2196f3',
+                    fontWeight: 'bold',
+                    backgroundColor: '#3f3f44',
+                  }}
+                >
                   <AccountCircleIcon />
                   <span className='text'>Profile</span>
-                </Link>
+                </NavLink>
               </li>
 
               {facultyInfo.result.ClassAdviser === 'Yes' && (
                 <li className='nav-text'>
-                  <Link
+                  <NavLink
                     to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}
+                    activeStyle={{
+                      color: '#2196f3',
+                      fontWeight: 'bold',
+                      backgroundColor: '#3f3f44',
+                    }}
                   >
                     <ClassIcon />
                     <span className='text'>
                       {facultyInfo.result.Department}-{facultyInfo.result.Batch}
                     </span>
-                  </Link>
+                  </NavLink>
                 </li>
               )}
               <li className='nav-text'>
-                <Link to={`/faculty/students/${facultyInfo.result.Department}`}>
+                <NavLink
+                  to={`/faculty/students/${facultyInfo.result.Department}`}
+                  activeStyle={{
+                    color: '#2196f3',
+                    fontWeight: 'bold',
+                    backgroundColor: '#3f3f44',
+                  }}
+                >
                   <PeopleIcon />
                   <span className='text'>Students</span>
-                </Link>
+                </NavLink>
               </li>
               <li className='nav-text'>
                 <Link
