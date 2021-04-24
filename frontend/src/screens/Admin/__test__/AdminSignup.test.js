@@ -13,5 +13,5 @@ it('renders without crashing', () => {
         <AdminSignUp />
       </Provider>
     </Router>,
-    div
+
   );});

@@ -13,5 +13,5 @@ it('renders reset password component', () => {
         <StudentResetPassword />
       </Provider>
     </Router>,
-    div
+  
   );});

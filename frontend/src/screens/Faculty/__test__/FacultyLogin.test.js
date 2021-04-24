@@ -13,5 +13,5 @@ it('renders Faculty login component', () => {
         <FacultyLogin />
       </Provider>
     </Router>,
-    div
+
   );});

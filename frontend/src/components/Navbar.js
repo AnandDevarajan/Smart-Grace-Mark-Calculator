@@ -12,6 +12,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
+import GradeIcon from '@material-ui/icons/Grade';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import BeenhereIcon from '@material-ui/icons/Beenhere';
@@ -77,7 +78,7 @@ function Navbar() {
           </Link>
 
           <h3 className='ml-auto  mr-auto text-center main_head mt-4'>
-            <FormatIndentIncreaseIcon className='app_icon' />{' '}
+            <GradeIcon className='app_icon' />{' '}
             <span style={{ color: '#3e4042' }}>
               Smart Grace Mark Calculator
             </span>

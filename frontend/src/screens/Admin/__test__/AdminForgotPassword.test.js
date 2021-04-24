@@ -13,5 +13,5 @@ it('renders without crashing', () => {
         <AdminForgotPassword />
       </Provider>
     </Router>,
-    div
+
   );});

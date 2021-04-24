@@ -13,5 +13,5 @@ it('renders without crashing', () => {
         <StudentForgotPassword />
       </Provider>
     </Router>,
-    div
+
   );});

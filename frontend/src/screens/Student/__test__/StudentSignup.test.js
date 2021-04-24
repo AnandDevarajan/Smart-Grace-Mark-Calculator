@@ -13,5 +13,5 @@ it('renders student signup component', () => {
         <StudentSignup />
       </Provider>
     </Router>,
-    div
+
   );});

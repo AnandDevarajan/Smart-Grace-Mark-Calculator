@@ -13,5 +13,5 @@ it('renders without crashing', () => {
         <FacultyResetPassword />
       </Provider>
     </Router>,
-    div
+
   );});

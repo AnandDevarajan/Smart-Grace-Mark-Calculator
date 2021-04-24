@@ -12,6 +12,6 @@ it('renders without crashing', () => {
       <Provider store={store}>
         <AdminLogin />
       </Provider>
-    </Router>,
-    div
-  );});
+    </Router>
+  );
+});
