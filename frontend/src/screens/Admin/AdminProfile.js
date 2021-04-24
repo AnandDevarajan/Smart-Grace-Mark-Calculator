@@ -109,7 +109,7 @@ const AdminProfile = ({ history }) => {
       )}
       <h1 className='text-success'>Admin Profile</h1>
       <p className='lead mt-2'>
-        <AccountBoxIcon style={{ color: 'black', objectFit: 'contain' }} />{' '}
+        <AccountBoxIcon style={{ color: '#2196f3' }} />{' '}
         Welcome {name}
       </p>
       <Row className='mt-4'>
@@ -168,7 +168,7 @@ const AdminProfile = ({ history }) => {
         </Col>
       </Row>
       <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <PersonIcon /> Admin Details
+        <PersonIcon style={{ color: '#2196f3' }}/> Admin Details
       </h2>
       <table striped bordered hover responsive className='table table-sm'>
         <thead>
@@ -190,7 +190,7 @@ const AdminProfile = ({ history }) => {
         </tbody>
       </table>
       <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <ContactSupportIcon /> Contact Details
+        <ContactSupportIcon style={{ color: '#2196f3' }}/> Contact Details
       </h2>
       <table striped bordered hover responsive className='table table-sm'>
         <thead>
