@@ -41,56 +41,57 @@ const CourseReport = ({ history }) => {
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
+      <div className='card ml-5 px-3 overflow my_card'>
+        <h1 className='text-center list_heading text-info'>Course Report</h1>
 
-      <h1 className='text-center list_heading'>Course Report</h1>
-
-      <Table striped bordered hover responsive className='table-sm'>
-        <thead>
-          <tr>
-            <th>Course ID</th>
-            <th>Course Name</th>
-            <th>Min </th>
-            <th>Max</th>
-            <th>Average</th>
-            <th>Number of Students</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reports.map((report) => (
+        <Table striped bordered hover responsive className='table-sm'>
+          <thead>
             <tr>
-              <td>{report.CourseID}</td>
-              <td>{report.CourseName}</td>
-              <td>{report.Min}</td>
-              <td>{report.Max}</td>
-              <td>
-                {Number.isInteger(report.Average)
-                  ? report.Average
-                  : report.Average.toFixed(2)}
-              </td>
-              <td>{report.Num}</td>
-              <td>
-                {report.status === 'P' ? (
-                  <Link
-                    className='btn btn-sm btn-primary'
-                    to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
-                  >
-                    View Grade
-                  </Link>
-                ) : (
-                  <Link
-                    className='btn btn-sm btn-success'
-                    style={{ width: '108px' }}
-                    to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
-                  >
-                    Set Grade
-                  </Link>
-                )}
-              </td>
+              <th>Course ID</th>
+              <th>Course Name</th>
+              <th>Min </th>
+              <th>Max</th>
+              <th>Average</th>
+              <th>Number of Students</th>
+              <th>Grade</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {reports.map((report) => (
+              <tr>
+                <td>{report.CourseID}</td>
+                <td>{report.CourseName}</td>
+                <td>{report.Min}</td>
+                <td>{report.Max}</td>
+                <td>
+                  {Number.isInteger(report.Average)
+                    ? report.Average
+                    : report.Average.toFixed(2)}
+                </td>
+                <td>{report.Num}</td>
+                <td>
+                  {report.status === 'P' ? (
+                    <Link
+                      className='btn btn-sm btn-primary'
+                      to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
+                    >
+                      View Grade
+                    </Link>
+                  ) : (
+                    <Link
+                      className='btn btn-sm btn-success'
+                      style={{ width: '108px' }}
+                      to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
+                    >
+                      Set Grade
+                    </Link>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 };

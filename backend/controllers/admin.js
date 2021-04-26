@@ -347,6 +347,15 @@ exports.changePassword = (req, res) => {
   );
 };
 
+exports.adminDeleteAccount = (req, res) => {
+  const id = req.params.id;
+  con.query(`DELETE FROM ADMINISTRATOR WHERE adminID=?;`, [id], (err, res) => {
+    if (err) {
+      console.log(err.sqlMessage);
+    }
+  });
+};
+
 exports.getStatus = (req, res) => {
   con.query(`SELECT * from COURSE_MARK WHERE status='N/P'`, (error, result) => {
     if (result.length === 0) {

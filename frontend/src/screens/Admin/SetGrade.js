@@ -71,119 +71,121 @@ const SetGrade = ({ match, history }) => {
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <h2 className='text-center list_heading'>Grade Range</h2>
-          <Row className='align-items-center '>
-            <Col className='text-left'>
-              <Button style={{ width: '100%' }}>
-                {cid} - {cname}
-              </Button>
-            </Col>
-          </Row>
-          <Table striped bordered hover responsive className='table-sm'>
-            <thead>
-              <tr>
-                <th>Course ID</th>
-
-                <th>
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#289672', width: '46px' }}
-                  >
-                    O
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#29bb89', width: '46px' }}
-                  >
-                    A+
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#29bb89', width: '46px' }}
-                  >
-                    A
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-success'
-                    style={{ width: '46px' }}
-                  >
-                    B+
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-success'
-                    style={{ width: '46px' }}
-                  >
-                    B
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-warning'
-                    style={{ width: '46px' }}
-                  >
-                    C
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-danger'
-                    style={{ width: '46px' }}
-                  >
-                    P
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#be0000', width: '46px' }}
-                  >
-                    F
-                  </Button>
-                </th>
-                <th>Set Grade</th>
-              </tr>
-            </thead>
-            <tbody>
-              {grs.map((gr) => (
+          <div className='card ml-5 px-3 overflow my_card'>
+            <h2 className='text-center list_heading'>Grade Range</h2>
+            <Row className='align-items-center '>
+              <Col className='text-left'>
+                <Button style={{ width: '100%' }}>
+                  {cid} - {cname}
+                </Button>
+              </Col>
+            </Row>
+            <Table striped bordered hover responsive className='table-sm'>
+              <thead>
                 <tr>
-                  <td>{cid}</td>
-                  <td>{gr.O}</td>
-                  <td>{gr.Ap}</td>
-                  <td>{gr.A}</td>
-                  <td>{gr.Bp}</td>
-                  <td>{gr.B}</td>
-                  <td>{gr.C}</td>
-                  <td>{gr.P}</td>
-                  <td>{gr.F}</td>
-                  <td>
-                    <button
-                      className='btn btn-sm btn-warning'
-                      onClick={() => {
-                        setGradeRange(maxMark);
-                      }}
+                  <th>Course ID</th>
+
+                  <th>
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#289672', width: '46px' }}
                     >
-                      GENERATE
-                    </button>
-                  </td>
+                      O
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#29bb89', width: '46px' }}
+                    >
+                      A+
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#29bb89', width: '46px' }}
+                    >
+                      A
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-success'
+                      style={{ width: '46px' }}
+                    >
+                      B+
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-success'
+                      style={{ width: '46px' }}
+                    >
+                      B
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-warning'
+                      style={{ width: '46px' }}
+                    >
+                      C
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-danger'
+                      style={{ width: '46px' }}
+                    >
+                      P
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#be0000', width: '46px' }}
+                    >
+                      F
+                    </Button>
+                  </th>
+                  <th>Set Grade</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {grs.map((gr) => (
+                  <tr>
+                    <td>{cid}</td>
+                    <td>{gr.O}</td>
+                    <td>{gr.Ap}</td>
+                    <td>{gr.A}</td>
+                    <td>{gr.Bp}</td>
+                    <td>{gr.B}</td>
+                    <td>{gr.C}</td>
+                    <td>{gr.P}</td>
+                    <td>{gr.F}</td>
+                    <td>
+                      <button
+                        className='btn btn-sm btn-warning'
+                        onClick={() => {
+                          setGradeRange(maxMark);
+                        }}
+                      >
+                        GENERATE
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
         </div>
       )}
 
@@ -194,108 +196,108 @@ const SetGrade = ({ match, history }) => {
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <h2 className='text-center list_heading'>Grade Range</h2>
-          <Row className='align-items-center '>
-            <Col className='text-left'>
-              <Button style={{ width: '100%' }}>
-                {cid}
-              </Button>
-            </Col>
-          </Row>
+          <div className='card ml-5 px-3 overflow my_card'>
+            <h2 className='text-center list_heading'>Grade Range</h2>
+            <Row className='align-items-center '>
+              <Col className='text-left'>
+                <Button style={{ width: '100%' }}>{cid}</Button>
+              </Col>
+            </Row>
 
-          <Table striped bordered hover responsive className='table-sm'>
-            <thead>
-              <tr>
-                <th>Course ID</th>
-                <th>
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#289672', width: '46px' }}
-                  >
-                    O
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#29bb89', width: '46px' }}
-                  >
-                    A+
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#29bb89', width: '46px' }}
-                  >
-                    A
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-success'
-                    style={{ width: '46px' }}
-                  >
-                    B+
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-success'
-                    style={{ width: '46px' }}
-                  >
-                    B
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-warning'
-                    style={{ width: '46px' }}
-                  >
-                    C
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm btn-danger'
-                    style={{ width: '46px' }}
-                  >
-                    P
-                  </Button>
-                </th>
-                <th>
-                  {' '}
-                  <Button
-                    className='btn btn-sm'
-                    style={{ backgroundColor: '#be0000', width: '46px' }}
-                  >
-                    F
-                  </Button>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {grs.map((gr) => (
+            <Table striped bordered hover responsive className='table-sm'>
+              <thead>
                 <tr>
-                  <td>{cid}</td>
-                  <td>{gr.O}</td>
-                  <td>{gr.Ap}</td>
-                  <td>{gr.A}</td>
-                  <td>{gr.Bp}</td>
-                  <td>{gr.B}</td>
-                  <td>{gr.C}</td>
-                  <td>{gr.P}</td>
-                  <td>{gr.F}</td>
+                  <th>Course ID</th>
+                  <th>
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#289672', width: '46px' }}
+                    >
+                      O
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#29bb89', width: '46px' }}
+                    >
+                      A+
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#29bb89', width: '46px' }}
+                    >
+                      A
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-success'
+                      style={{ width: '46px' }}
+                    >
+                      B+
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-success'
+                      style={{ width: '46px' }}
+                    >
+                      B
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-warning'
+                      style={{ width: '46px' }}
+                    >
+                      C
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm btn-danger'
+                      style={{ width: '46px' }}
+                    >
+                      P
+                    </Button>
+                  </th>
+                  <th>
+                    {' '}
+                    <Button
+                      className='btn btn-sm'
+                      style={{ backgroundColor: '#be0000', width: '46px' }}
+                    >
+                      F
+                    </Button>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {grs.map((gr) => (
+                  <tr>
+                    <td>{cid}</td>
+                    <td>{gr.O}</td>
+                    <td>{gr.Ap}</td>
+                    <td>{gr.A}</td>
+                    <td>{gr.Bp}</td>
+                    <td>{gr.B}</td>
+                    <td>{gr.C}</td>
+                    <td>{gr.P}</td>
+                    <td>{gr.F}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
         </div>
       )}
       {facultyInfo && status === 'N/P' && (

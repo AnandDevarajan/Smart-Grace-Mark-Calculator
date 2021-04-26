@@ -47,40 +47,43 @@ const GraceMarkForm = ({ location, history }) => {
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
+
       <FormContainer>
-        <h2 className='text-center'>CREATE GRACE MARK</h2>
-        {message && <Message variant='warning'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && (
-          <Message variant='success'>
-            Grace Mark created successfully{' '}
-            <Link to='/admin/gracemarklist'> Go to Gracemark List</Link>
-          </Message>
-        )}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='description'>
-            <Form.Label>Description of Grace Mark</Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter description'
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId='name'>
-            <Form.Label>Marks Allotted</Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter marks'
-              value={mark}
-              onChange={(e) => setMark(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button type='submit' variant='success'>
-            Create
-          </Button>
-        </Form>
-        <Row className='py-3'></Row>
+        <div className='card ml-5 px-3 py-2 overflow my_card'>
+          <h2 className='text-center text-info'>CREATE GRACE MARK</h2>
+          {message && <Message variant='warning'>{message}</Message>}
+          {error && <Message variant='danger'>{error}</Message>}
+          {success && (
+            <Message variant='success'>
+              Grace Mark created successfully{' '}
+              <Link to='/admin/gracemarklist'> Go to Gracemark List</Link>
+            </Message>
+          )}
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId='description'>
+              <Form.Label>Description of Grace Mark</Form.Label>
+              <Form.Control
+                type='name'
+                placeholder='Enter description'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId='name'>
+              <Form.Label>Marks Allotted</Form.Label>
+              <Form.Control
+                type='name'
+                placeholder='Enter marks'
+                value={mark}
+                onChange={(e) => setMark(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Button type='submit' variant='success'>
+              Create
+            </Button>
+          </Form>
+          <Row className='py-3'></Row>
+        </div>
       </FormContainer>
     </>
   );

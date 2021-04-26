@@ -72,37 +72,39 @@ const GracemarkEdit = ({ match, history }) => {
       </Link>
 
       <FormContainer>
-        <h1 className='text-center'>EDIT ID - {gracemarkId}</h1>
-        {message && <Message variant='warning'>{message}</Message>}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-        {console.log('State', description)}
-        {error ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId='name'>
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type='name'
-                placeholder='Enter  Description'
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId='email'>
-              <Form.Label>Marks Allotted</Form.Label>
-              <Form.Control
-                type='name'
-                placeholder='Enter Marks'
-                value={marks}
-                onChange={(e) => setMarks(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Button type='submit' variant='primary'>
-              Update
-            </Button>
-          </Form>
-        )}
+        <div className='card ml-5 px-3 py-2 overflow my_card'>
+          <h1 className='text-center text-info'>EDIT ID - {gracemarkId}</h1>
+          {message && <Message variant='warning'>{message}</Message>}
+          {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+          {console.log('State', description)}
+          {error ? (
+            <Message variant='danger'>{error}</Message>
+          ) : (
+            <Form onSubmit={submitHandler}>
+              <Form.Group controlId='name'>
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  type='name'
+                  placeholder='Enter  Description'
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='email'>
+                <Form.Label>Marks Allotted</Form.Label>
+                <Form.Control
+                  type='name'
+                  placeholder='Enter Marks'
+                  value={marks}
+                  onChange={(e) => setMarks(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Button type='submit' variant='primary'>
+                Update
+              </Button>
+            </Form>
+          )}
+        </div>
       </FormContainer>
     </>
   );

@@ -87,7 +87,15 @@ const AdminProfile = ({ history }) => {
   console.log('stat', status);
   console.log('msg', message);
 
-  const deleteMyAccount = (id) => {};
+  const deleteMyAccount = (id) => {
+    if (window.confirm('Do you want to delete this account ?')) {
+      axios.delete(`/admin/delete/account/${id}`);
+    } else {
+      return (window.location.pathname = '/admin/profile');
+    }
+    localStorage.removeItem('adminInfo');
+    window.location.pathname = '/';
+  };
 
   return (
     <div className='container-fluid d-flex justify-content-center'>

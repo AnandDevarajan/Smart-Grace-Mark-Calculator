@@ -112,15 +112,9 @@ const AllStudentList = ({ history }) => {
                           Accepted
                         </span>
                       ) : student.Requested === 'rejected' ? (
-                        <td>
-                          <Button
-                            variant='danger'
-                            className='btn btn-sm'
-                            style={{ width: '100px' }}
-                          >
-                            Rejected
-                          </Button>
-                        </td>
+                        <span className='badge badge-pill badge-danger mr-3'>
+                          Rejected
+                        </span>
                       ) : (
                         <Link>-</Link>
                       )}

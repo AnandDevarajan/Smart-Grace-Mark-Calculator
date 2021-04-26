@@ -65,40 +65,41 @@ const ViewCourseMarks = ({ history, match }) => {
           </Button>
         </Link>
       )}
-
-      <h1 className='py-3 text-center'>Mark List</h1>
-      <h4>
-        {rollnum} - {branch} {batch}
-      </h4>
-      <h4></h4>
-      {error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
-        <Table striped bordered hover responsive className='table-sm'>
-          <thead>
-            <tr>
-              <th>Course ID</th>
-              <th>Course Name</th>
-              <th>Internals</th>
-              <th>Marks</th>
-              <th>Total</th>
-              <th>Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {marks.map((mark) => (
+      <div className='card ml-5 px-3 overflow my_card'>
+        <h1 className='py-3 text-center'>Mark List</h1>
+        <h4>
+          {rollnum} - {branch} {batch}
+        </h4>
+        <h4></h4>
+        {error ? (
+          <Message variant='danger'>{error}</Message>
+        ) : (
+          <Table striped bordered hover responsive className='table-sm'>
+            <thead>
               <tr>
-                <td>{mark.CourseID}</td>
-                <td> {mark.CourseName}</td>
-                <td>{mark.Internals}</td>
-                <td>{mark.Marks}</td>
-                <td>{mark.Total}</td>
-                <td>{mark.Grade}</td>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Internals</th>
+                <th>Marks</th>
+                <th>Total</th>
+                <th>Grade</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+            </thead>
+            <tbody>
+              {marks.map((mark) => (
+                <tr>
+                  <td>{mark.CourseID}</td>
+                  <td> {mark.CourseName}</td>
+                  <td>{mark.Internals}</td>
+                  <td>{mark.Marks}</td>
+                  <td>{mark.Total}</td>
+                  <td>{mark.Grade}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
+      </div>
     </div>
   );
 };
