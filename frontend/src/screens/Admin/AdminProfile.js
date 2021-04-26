@@ -90,132 +90,132 @@ const AdminProfile = ({ history }) => {
   const deleteMyAccount = (id) => {};
 
   return (
-    <div
-      className='ml-5 px-3 alllist_div'
-      style={{ backgroundColor: 'white', marginLeft: '140px' }}
-    >
-      {status === 'Not Published' &&
-        message ===
-          'Unable to Publish Results now. Mark allocation is yet to be completed' && (
-          <Message variant='danger'>
-            <NotificationsIcon /> Unable to Publish Results now. Grade
-            allocation is yet to be completed
-          </Message>
-        )}
-      {status === 'Published' && (
-        <Message variant='success'>
-          <NotificationsIcon /> Results published
-        </Message>
-      )}
-      <h1 className='text-success'>Admin Profile</h1>
-      <p className='lead mt-2'>
-        <AccountBoxIcon style={{ color: '#2196f3' }} />{' '}
-        Welcome {name}
-      </p>
-      <Row className='mt-4'>
-        <Col>
-          <Link
-            to={`/admin/edit/profile/${adminInfo.result.adminID}`}
-            style={{ textDecoration: 'None' }}
-          >
-            <EditTwoToneIcon />{' '}
-            <Button className='btn btn-sm'>Edit Profile</Button>
-          </Link>
-        </Col>
-        <Col>
-          {status === 'Not Published' && (
-            <>
-              <PublishIcon className='mr-2' />
-              <button
-                className='btn btn-sm btn-info'
-                onClick={publishResult}
-                style={{ width: '120px' }}
-              >
-                Publish Results
-              </button>
-            </>
-          )}
-
+    <div className='container-fluid d-flex justify-content-center'>
+      <div className='card ml-5 px-3 overflow my_card'>
+        <div className='overflow'>
+          {status === 'Not Published' &&
+            message ===
+              'Unable to Publish Results now. Mark allocation is yet to be completed' && (
+              <Message variant='danger'>
+                <NotificationsIcon /> Unable to Publish Results now. Grade
+                allocation is yet to be completed
+              </Message>
+            )}
           {status === 'Published' && (
-            <>
-              <PublishIcon className='mr-2' />
-              <button
-                className='btn btn-sm btn-warning mr-5'
-                onClick={publishResult}
-                style={{ width: '86px' }}
-              >
-                Published
-              </button>
-              <CloseIcon
-                className='icon'
-                style={{ color: 'red' }}
-                onClick={resetPublish}
-              />
-            </>
+            <Message variant='success'>
+              <NotificationsIcon /> Results published
+            </Message>
           )}
-        </Col>
-        <Col>
-          <DeleteForeverIcon
-            className='icon'
-            onClick={() => deleteMyAccount(adminInfo.result.adminID)}
-          />{' '}
-          <Button
-            className='btn btn-sm btn-danger'
-            onClick={() => deleteMyAccount(adminInfo.result.adminID)}
-          >
-            Delete My Account
-          </Button>
-        </Col>
-      </Row>
-      <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <PersonIcon style={{ color: '#2196f3' }}/> Admin Details
-      </h2>
-      <table striped bordered hover responsive className='table table-sm'>
-        <thead>
-          <tr>
-            <th>
-              <FormatListNumberedIcon /> Admin ID
-            </th>
+          <h1 className='text-success'>Admin Profile</h1>
+          <p className='lead mt-2'>
+            <AccountBoxIcon style={{ color: '#2196f3' }} /> Welcome {name}
+          </p>
+          <Row className='mt-4'>
+            <Col>
+              <Link
+                to={`/admin/edit/profile/${adminInfo.result.adminID}`}
+                style={{ textDecoration: 'None' }}
+              >
+                <EditTwoToneIcon />{' '}
+                <Button className='btn btn-sm'>Edit Profile</Button>
+              </Link>
+            </Col>
+            <Col>
+              {status === 'Not Published' && (
+                <>
+                  <PublishIcon className='mr-2' />
+                  <button
+                    className='btn btn-sm btn-info'
+                    onClick={publishResult}
+                    style={{ width: '120px' }}
+                  >
+                    Publish Results
+                  </button>
+                </>
+              )}
 
-            <th>
-              <EventIcon /> DOB
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width='365px'>ID {adminInfo.result.adminID}</td>
-            <td width='365px'>{adminInfo.result.DOB.substring(0, 10)}</td>
-          </tr>
-        </tbody>
-      </table>
-      <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <ContactSupportIcon style={{ color: '#2196f3' }}/> Contact Details
-      </h2>
-      <table striped bordered hover responsive className='table table-sm'>
-        <thead>
-          <tr>
-            <th>
-              {' '}
-              <EmailIcon /> Email
-            </th>
-            <th className='hide-sm'>
-              <PhoneIcon /> Phone Number
-            </th>
-            <th className='hide-sm'>
-              <HomeIcon /> Address
-            </th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width='365px'>{email}</td>
-            <td width='365px'>+91 {phone}</td>
-            <td width='365px'>{address}</td>
-          </tr>
-        </tbody>
-      </table>
+              {status === 'Published' && (
+                <>
+                  <PublishIcon className='mr-2' />
+                  <button
+                    className='btn btn-sm btn-warning mr-5'
+                    onClick={publishResult}
+                    style={{ width: '86px' }}
+                  >
+                    Published
+                  </button>
+                  <CloseIcon
+                    className='icon'
+                    style={{ color: 'red' }}
+                    onClick={resetPublish}
+                  />
+                </>
+              )}
+            </Col>
+            <Col>
+              <DeleteForeverIcon
+                className='icon'
+                onClick={() => deleteMyAccount(adminInfo.result.adminID)}
+              />{' '}
+              <Button
+                className='btn btn-sm btn-danger'
+                onClick={() => deleteMyAccount(adminInfo.result.adminID)}
+              >
+                Delete My Account
+              </Button>
+            </Col>
+          </Row>
+          <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
+            <PersonIcon style={{ color: '#2196f3' }} /> Admin Details
+          </h2>
+          <table striped bordered hover responsive className='table table-sm'>
+            <thead>
+              <tr>
+                <th>
+                  <FormatListNumberedIcon /> Admin ID
+                </th>
+
+                <th>
+                  <EventIcon /> DOB
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width='365px'>ID {adminInfo.result.adminID}</td>
+                <td width='365px'>{adminInfo.result.DOB.substring(0, 10)}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
+            <ContactSupportIcon style={{ color: '#2196f3' }} /> Contact Details
+          </h2>
+          <table striped bordered hover responsive className='table table-sm'>
+            <thead>
+              <tr>
+                <th>
+                  {' '}
+                  <EmailIcon /> Email
+                </th>
+                <th className='hide-sm'>
+                  <PhoneIcon /> Phone Number
+                </th>
+                <th className='hide-sm'>
+                  <HomeIcon /> Address
+                </th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width='365px'>{email}</td>
+                <td width='365px'>+91 {phone}</td>
+                <td width='365px'>{address}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

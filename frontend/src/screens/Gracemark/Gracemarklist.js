@@ -43,57 +43,65 @@ const GracemarkList = ({ history }) => {
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      <Row className='align-items-center'>
-        <Col>
-          <h1 className='text-center list_heading'>Grace Mark List</h1>
-        </Col>
-        <Col className='text-right'>
-          <Link to='/admin/addGraceMarkDetails' className='gracemark_create'>
-            <Button className='btn btn-sm'>
-              <AddBoxIcon /> Create Grace Mark
-            </Button>
-          </Link>
-        </Col>
-      </Row>
-      {error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
-        <Table striped bordered hover responsive className='table-sm'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Description</th>
-              <th>Marks Alloted</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {gracemarks.map((gracemark) => (
-              <tr key={gracemark.GraceMarkID}>
-                <td>{gracemark.GraceMarkID}</td>
-                <td>{gracemark.Description}</td>
-                <td>{gracemark.GraceMark}</td>
-                <td>
-                  <LinkContainer
-                    to={`/admin/gracemark/${gracemark.GraceMarkID}`}
-                  >
-                    <EditIcon className='icon' style={{ color: 'black' }} />
-                  </LinkContainer>
-                </td>
-                <td>
-                  <DeleteIcon
-                    className='icon'
-                    style={{ color: '#f05454' }}
-                    onClick={() => deleteHandler(gracemark.GraceMarkID)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
-    </div>
+        <div className='card ml-5 px-3 overflow my_card'>
+          <Row className='align-items-center'>
+            <Col>
+              <h1 className='text-center list_heading text-info'>
+                Grace Mark List
+              </h1>
+            </Col>
+            <Col className='text-right'>
+              <Link
+                to='/admin/addGraceMarkDetails'
+                className='gracemark_create'
+              >
+                <Button className='btn btn-sm'>
+                  <AddBoxIcon /> Create Grace Mark
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+          {error ? (
+            <Message variant='danger'>{error}</Message>
+          ) : (
+            <Table striped bordered hover responsive className='table-sm'>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Description</th>
+                  <th>Marks Alloted</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gracemarks.map((gracemark) => (
+                  <tr key={gracemark.GraceMarkID}>
+                    <td>{gracemark.GraceMarkID}</td>
+                    <td>{gracemark.Description}</td>
+                    <td>{gracemark.GraceMark}</td>
+                    <td>
+                      <LinkContainer
+                        to={`/admin/gracemark/${gracemark.GraceMarkID}`}
+                      >
+                        <EditIcon className='icon' style={{ color: 'black' }} />
+                      </LinkContainer>
+                    </td>
+                    <td>
+                      <DeleteIcon
+                        className='icon'
+                        style={{ color: '#f05454' }}
+                        onClick={() => deleteHandler(gracemark.GraceMarkID)}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </div>
+      </div>
+
   );
 };
 

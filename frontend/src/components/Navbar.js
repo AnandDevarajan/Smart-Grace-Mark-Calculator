@@ -8,11 +8,14 @@ import { adminLogout } from '../actions/adminActions';
 import { facultyLogout } from '../actions/facultyActions';
 import { IconContext } from 'react-icons';
 import HomeIcon from '@material-ui/icons/Home';
+import Gravatar from 'react-gravatar';
+import DoneAllSharpIcon from '@material-ui/icons/DoneAllSharp';
 import PeopleIcon from '@material-ui/icons/People';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 import GradeIcon from '@material-ui/icons/Grade';
+import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import BeenhereIcon from '@material-ui/icons/Beenhere';
@@ -66,7 +69,7 @@ function Navbar() {
   return (
     <div>
       <IconContext.Provider value={{ color: '#fff' }}>
-        <div className='navbar'>
+        {/* <div className='navbar'>
           <Link to='#' className='menu-bars'>
             <MenuIcon
               style='menu_icon'
@@ -76,21 +79,46 @@ function Navbar() {
               }
             />
           </Link>
-
-          <h3 className='ml-auto  mr-auto text-center main_head mt-4'>
-            <GradeIcon className='app_icon' />{' '}
-            <span style={{ color: '#3e4042' }}>
+          <h3 className='ml-auto  mr-auto text-center  main_head '>
+            <DoneAllSharpIcon className='app_icon' />{' '}
+            <span style={{ color: '#3e4042' }} className='text-white '>
               Smart Grace Mark Calculator
             </span>
           </h3>
           <h6 className='text' style={{ marginLeft: '-180px' }}>
             {dt}
           </h6>
-        </div>
+        </div> */}
+        <nav class='navbar navbar-expand-lg navbar-dark'>
+          <ul class='navbar-nav ml-auto'>
+            <li class='nav-item active mt-3'>
+              {studentInfo ? (
+                <p className='text-white'>
+                  {studentInfo.result.Name} <AccountCircleSharpIcon />
+                </p>
+              ) : adminInfo ? (
+                <p className='text-white'>
+                  {adminInfo.result.Name} <AccountCircleSharpIcon />
+                </p>
+              ) : facultyInfo ? (
+                <p className='text-white'>
+                  {facultyInfo.result.Name} <AccountCircleSharpIcon />
+                </p>
+              ) : (
+                <p className='text-white'>
+                  Login <AccountCircleSharpIcon />
+                </p>
+              )}
+            </li>
+          </ul>
+        </nav>
 
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           {studentInfo ? (
             <ul className='nav-menu-items' onClick={showSidebar}>
+              <h5 className='text-white mt-3'>
+                <DoneAllSharpIcon className='app_icon' /> C8-SGMC
+              </h5>
               <li className='navbar-toggle'>
                 <NavLink to='#' className='menu-bars'>
                   <CloseIcon
@@ -141,6 +169,9 @@ function Navbar() {
             </ul>
           ) : facultyInfo ? (
             <ul className='nav-menu-items' onClick={showSidebar}>
+              <h5 className='text-white mt-3'>
+                <DoneAllSharpIcon className='app_icon' /> C8-SGMC
+              </h5>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
                   <CloseIcon
@@ -205,6 +236,9 @@ function Navbar() {
             </ul>
           ) : adminInfo ? (
             <ul className='nav-menu-items' onClick={showSidebar}>
+              <h5 className='text-white mt-3'>
+                <DoneAllSharpIcon className='app_icon' /> C8-SGMC
+              </h5>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
                   <CloseIcon
@@ -288,6 +322,9 @@ function Navbar() {
             </ul>
           ) : (
             <ul className='nav-menu-items' onClick={showSidebar}>
+              <h5 className='text-white mt-3'>
+                <DoneAllSharpIcon className='app_icon' /> C8-SGMC
+              </h5>
               <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
                   <CloseIcon

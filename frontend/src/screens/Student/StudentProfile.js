@@ -100,146 +100,145 @@ const StudentProfile = ({ history }) => {
   };
 
   return (
-    <div className='ml-5 px-3 border' style={{ backgroundColor: 'white' }}>
-      <h1 className='text-success'>Student Profile</h1>
-      <p className='lead mt-2'>
-        <AccountBoxIcon style={{ color: '#2196f3' }} /> Welcome {name}
-      </p>
-      <Row className='mt-4'>
-        <Col>
-          <Link
-            to={`/student/edit/profile/${studentInfo.result.RollNum}`}
-            style={{ textDecoration: 'None' }}
-          >
-            <EditTwoToneIcon />{' '}
-            <Button className='btn btn-sm'>Edit Profile</Button>
-          </Link>
-        </Col>
-        <Col>
-          {status === 'N/A' && (
-            <Link to='/student/request' style={{ textDecoration: 'None' }}>
-              <SendIcon />{' '}
-              <Button className='btn btn-sm btn-info'>
-                Request for Grace Mark
-              </Button>
-            </Link>
-          )}
-
-          {/* {status === 'pending' ? (
-            <>
-              <AutorenewIcon />{' '}
-              <Button className='btn-sm  btn-warning '>
-                Grace Mark Request Pending
-              </Button>
-            </>
-          ) : status === 'accepted' ? (
-            <>
-              <DoneAllIcon />{' '}
-              <Button className='btn btn-sm btn-success'>
-                Grace Mark Request Accepted
-              </Button>
-            </> */}
-        </Col>
-        <Col>
-          <DeleteForeverIcon
-            className='icon'
-            onClick={() => deleteMyAccount(roll)}
-          />{' '}
-          <Button
-            className='btn btn-sm btn-danger'
-            onClick={() => deleteMyAccount(roll)}
-          >
-            Delete My Account
-          </Button>
-        </Col>
-      </Row>
-      <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <PersonIcon style={{ color: '#2196f3' }} /> Student Details
-      </h2>
-      <table striped bordered hover responsive className='table table-sm'>
-        <thead>
-          <tr>
-            <th>
-              <FormatListNumberedIcon /> Roll Number
-            </th>
-            <th className='hide-sm'>
-              <SchoolIcon /> Branch
-            </th>
-            <th className='hide-sm'>
-              <ClassIcon /> Batch
-            </th>
-            <th>
-              <BeenhereIcon />
-              Grace Mark
-            </th>
-            <th>
-              <EqualizerIcon /> status
-            </th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width='365px'>{roll}</td>
-            <td width='365px'>
-              {degree} {branch}
-            </td>
-            <td width='365px'>{batch}</td>
-            <td width='365px'>
-              {grace === 'N/A' ? <CloseIcon style={{ color: 'red' }} /> : grace}
-            </td>
-            {status === 'pending' && (
-              <td width='365px'>
-                <AutorenewIcon />{' '}
-                <Button className='btn-sm  btn-warning '>Pending</Button>
-              </td>
-            )}
-            {status === 'pending' && (
-              <td
-                width='365px'
-                onClick={() => cancelRequest(roll)}
-                className='icon'
+    <div className='container-fluid d-flex justify-content-center'>
+      <div className='card ml-5 px-3 overflow my_card'>
+        <div className='overflow'>
+          <h1 className='text-success'>Student Profile</h1>
+          <p className='lead mt-2'>
+            <AccountBoxIcon style={{ color: '#2196f3' }} /> Welcome{' '}
+            <span className='text-info'> {name}</span>
+          </p>
+          <Row className='mt-4'>
+            <Col>
+              <Link
+                to={`/student/edit/profile/${studentInfo.result.RollNum}`}
+                style={{ textDecoration: 'None' }}
               >
-                <CloseIcon style={{ color: 'red' }} />
-                Cancel
-              </td>
-            )}
-            {status === 'accepted' && (
-              <td width='365px'>
-                <DoneAllIcon />{' '}
-                <Button className='btn btn-sm btn-success'>Accepted</Button>
-              </td>
-            )}
-          </tr>
-        </tbody>
-      </table>
-      <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
-        <ContactSupportIcon style={{ color: '#2196f3' }} /> Contact Details
-      </h2>
-      <table striped bordered hover responsive className='table table-sm'>
-        <thead>
-          <tr>
-            <th>
-              {' '}
-              <EmailIcon /> Email
-            </th>
-            <th className='hide-sm'>
-              <PhoneIcon /> Phone Number
-            </th>
-            <th className='hide-sm'>
-              <HomeIcon /> Address
-            </th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width='365px'>{email}</td>
-            <td width='365px'>+91 {phone}</td>
-            <td width='365px'>{address}</td>
-          </tr>
-        </tbody>
-      </table>
+                <EditTwoToneIcon />{' '}
+                <Button className='btn btn-sm btn-primary'>Edit Profile</Button>
+              </Link>
+            </Col>
+            <Col>
+              {status === 'N/A' && (
+                <Link to='/student/request' style={{ textDecoration: 'None' }}>
+                  <SendIcon />{' '}
+                  <Button className='btn btn-sm btn-info'>
+                    Request for Grace Mark
+                  </Button>
+                </Link>
+              )}
+            </Col>
+            <Col>
+              <DeleteForeverIcon
+                className='icon'
+                onClick={() => deleteMyAccount(roll)}
+              />{' '}
+              <Button
+                className='btn btn-sm btn-danger'
+                onClick={() => deleteMyAccount(roll)}
+              >
+                Delete My Account
+              </Button>
+            </Col>
+          </Row>
+          <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
+            <PersonIcon style={{ color: '#2196f3' }} /> Student Details
+          </h2>
+          <table striped bordered hover responsive className='table table-sm'>
+            <thead>
+              <tr>
+                <th>
+                  <FormatListNumberedIcon /> Roll Number
+                </th>
+                <th className='hide-sm'>
+                  <SchoolIcon /> Branch
+                </th>
+                <th className='hide-sm'>
+                  <ClassIcon /> Batch
+                </th>
+                <th>
+                  <BeenhereIcon />
+                  Grace Mark
+                </th>
+                <th>
+                  <EqualizerIcon /> status
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width='365px'>{roll}</td>
+                <td width='365px'>
+                  {degree} {branch}
+                </td>
+                <td width='365px'>{batch}</td>
+                <td width='365px'>
+                  {grace === 'N/A' ? (
+                    <CloseIcon style={{ color: 'red' }} />
+                  ) : (
+                    grace
+                  )}
+                </td>
+                {status === 'pending' && (
+                  <td width='365px'>
+                    <AutorenewIcon />{' '}
+                    <span className='badge badge-pill badge-warning'>
+                      Pending
+                    </span>
+                  </td>
+                )}
+                {status === 'pending' && (
+                  <td
+                    width='365px'
+                    onClick={() => cancelRequest(roll)}
+                    className='icon'
+                  >
+                    <CloseIcon style={{ color: 'red' }} />
+                    Cancel
+                  </td>
+                )}
+                {status === 'accepted' && (
+                  <td width='365px'>
+                    <DoneAllIcon />{' '}
+                    <span className='badge badge-pill badge-success'>
+                      {' '}
+                      Accepted
+                    </span>
+                  </td>
+                )}
+              </tr>
+            </tbody>
+          </table>
+          <h2 className='mt-4' style={{ textTransform: 'Capitalize' }}>
+            <ContactSupportIcon style={{ color: '#2196f3' }} /> Contact Details
+          </h2>
+          <table striped bordered hover responsive className='table table-sm'>
+            <thead>
+              <tr>
+                <th>
+                  {' '}
+                  <EmailIcon /> Email
+                </th>
+                <th className='hide-sm'>
+                  <PhoneIcon /> Phone Number
+                </th>
+                <th className='hide-sm'>
+                  <HomeIcon /> Address
+                </th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width='365px'>{email}</td>
+                <td width='365px'>+91 {phone}</td>
+                <td width='365px'>{address}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

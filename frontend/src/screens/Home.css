@@ -23,6 +23,13 @@
   cursor: pointer;
 }
 
+.home_card {
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.2) !important;
+}
+.home_card:hover {
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.4) !important;
+}
+
 @media (max-width: 812px) {
   .home {
     margin-top: -10px;

@@ -1,3 +1,10 @@
+.my_card {
+}
+
+.my_card {
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.2) !important;
+}
+
 @media (max-width: 900px) {
   .result-table {
     margin-top: -50px !important;
