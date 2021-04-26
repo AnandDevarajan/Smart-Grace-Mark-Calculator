@@ -100,7 +100,10 @@ const StudentProfile = ({ history }) => {
   };
 
   return (
-    <div className='container-fluid d-flex justify-content-center'>
+    <div
+      className='ml-5 mt-3 align-items-center alllist_div'
+      style={{ backgroundColor: 'white' }}
+    >
       <div className='card ml-5 px-3 overflow my_card'>
         <div className='overflow'>
           <h1 className='text-success'>Student Profile</h1>
