@@ -65,31 +65,33 @@ const RequestForm = ({ location, history }) => {
         </FormContainer>
       ) : (
         <FormContainer>
-          <h1>Request for Grace mark</h1>
-          {message && <Message variant='danger'>{message}</Message>}
-          {error && <Message variant='danger'>{error}</Message>}
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId='gracemarkId'>
-              <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-                Grace mark
-              </Form.Label>
-              <Form.Control
-                as='select'
-                value={request}
-                onChange={(e) => setRequest(e.target.value)}
-              >
-                <option>select</option>
-                {gracemarks.map((gracemark) => (
-                  <option key={gracemark.GraceMarkID}>
-                    {gracemark.Description}-{gracemark.GraceMark}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-            <Button type='submit' variant='primary'>
-              Request
-            </Button>
-          </Form>
+          <div className='card ml-5 px-3 py-3 overflow my_card'>
+            <h1 className='text-info'>Request for Grace mark</h1>
+            {message && <Message variant='danger'>{message}</Message>}
+            {error && <Message variant='danger'>{error}</Message>}
+            <Form onSubmit={submitHandler}>
+              <Form.Group controlId='gracemarkId'>
+                <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                  Grace mark
+                </Form.Label>
+                <Form.Control
+                  as='select'
+                  value={request}
+                  onChange={(e) => setRequest(e.target.value)}
+                >
+                  <option>select</option>
+                  {gracemarks.map((gracemark) => (
+                    <option key={gracemark.GraceMarkID}>
+                      {gracemark.Description}-{gracemark.GraceMark}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+              <Button type='submit' variant='success'>
+                Request
+              </Button>
+            </Form>
+          </div>
         </FormContainer>
       )}
     </>

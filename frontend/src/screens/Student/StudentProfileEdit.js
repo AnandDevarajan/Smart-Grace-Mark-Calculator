@@ -71,55 +71,57 @@ const StudentProfileEdit = ({ location, history, match }) => {
         </Button>
       </Link>
       <FormContainer>
-        <h1>Edit Your Profile</h1>
+        <div className='card ml-5 px-3 py-3 overflow my_card'>
+          <h1 className='text-info'>Edit Your Profile</h1>
 
-        {message && <Message variant='warning'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId='email'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Email Address
-            </Form.Label>
-            <Form.Control
-              type='email'
-              placeholder='Enter email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+          {message && <Message variant='warning'>{message}</Message>}
+          {error && <Message variant='danger'>{error}</Message>}
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId='email'>
+              <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                Email Address
+              </Form.Label>
+              <Form.Control
+                type='email'
+                placeholder='Enter email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Form.Group controlId='phone'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Phone Number
-            </Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter phone number'
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+            <Form.Group controlId='phone'>
+              <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                Phone Number
+              </Form.Label>
+              <Form.Control
+                type='name'
+                placeholder='Enter phone number'
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Form.Group controlId='address'>
-            <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
-              Address
-            </Form.Label>
-            <Form.Control
-              type='name'
-              placeholder='Enter  Address'
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+            <Form.Group controlId='address'>
+              <Form.Label style={{ color: 'black', fontWeight: 'bold' }}>
+                Address
+              </Form.Label>
+              <Form.Control
+                type='name'
+                placeholder='Enter  Address'
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Link to={`/student/edit/profile/changepassword/${id}`}>
-            Change Password?{' '}
-          </Link>
-          <br />
-          <Button type='submit' variant='primary' className='mt-3'>
-            Save Changes
-          </Button>
-        </Form>
+            <Link to={`/student/edit/profile/changepassword/${id}`}>
+              Change Password?{' '}
+            </Link>
+            <br />
+            <Button type='submit' variant='primary' className='mt-3'>
+              Save Changes
+            </Button>
+          </Form>
+        </div>
       </FormContainer>
     </>
   );

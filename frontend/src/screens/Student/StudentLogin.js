@@ -62,7 +62,7 @@ const StudentLogin = ({ location, history }) => {
                     onChange={(e) => setPassword(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
-                <Button type='submit' variant='info' className='btn btn-sm'>
+                <Button type='submit' variant='info' >
                   Sign In
                 </Button>
               </Form>
