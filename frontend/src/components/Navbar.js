@@ -106,7 +106,7 @@ function Navbar() {
                 </p>
               ) : (
                 <p className='text-white'>
-                  Login <AccountCircleSharpIcon />
+                  Signed Out <AccountCircleSharpIcon />
                 </p>
               )}
             </li>
