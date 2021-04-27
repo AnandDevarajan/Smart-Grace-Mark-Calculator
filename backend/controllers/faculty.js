@@ -1,13 +1,13 @@
-const config = require('../config/db');
+const config = require("../config/db");
 const con = config.con;
-const { generateToken } = require('../utils/auth');
-const crypto = require('crypto');
-const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
-require('dotenv').config();
+const { generateToken } = require("../utils/auth");
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.EmailID,
     pass: process.env.Pass,
@@ -22,19 +22,19 @@ exports.authFaculty = (req, res) => {
   con.query(`SELECT * FROM FACULTY WHERE EmailID=?`, email, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'Invalid Email',
+        message: "Invalid Email",
       });
     }
     if (result.length > 0) {
       bcrypt.compare(password, result[0].Password, (err, hash) => {
         if (!hash) {
           return res.status(400).json({
-            message: 'Invalid Password',
+            message: "Invalid Password",
           });
         }
         if (err) {
           return res.status(400).json({
-            message: 'Invalid credentials',
+            message: "Invalid credentials",
           });
         }
         return res.json({
@@ -63,7 +63,7 @@ exports.registerFaculty = (req, res) => {
 
   const courseCode = courseId.substring(0, 8);
   let newBatch = batch;
-  adviser === 'No' ? (newBatch = 'N/A') : batch;
+  adviser === "No" ? (newBatch = "N/A") : batch;
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log(err);
@@ -86,7 +86,7 @@ exports.registerFaculty = (req, res) => {
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Unable to create user',
+            message: "Unable to create user",
           });
         }
         if (result) {
@@ -95,7 +95,7 @@ exports.registerFaculty = (req, res) => {
             (err, result) => {
               if (err) {
                 return res.status(400).json({
-                  message: 'No user found',
+                  message: "No user found",
                 });
               }
               res.json({
@@ -104,9 +104,9 @@ exports.registerFaculty = (req, res) => {
               });
               transporter.sendMail(
                 {
-                  from: 'c8.smartgracemarkcalculator@gmail.com',
+                  from: "c8.smartgracemarkcalculator@gmail.com",
                   to: result[0].EmailID,
-                  subject: 'Welcome to Smart Grace Mark Calculator',
+                  subject: "Welcome to Smart Grace Mark Calculator",
                   text: `Dear Faculty,
                        YOU HAVE SUCCESSFULLY CREATED AN ACCOUNT!`,
                 },
@@ -114,7 +114,7 @@ exports.registerFaculty = (req, res) => {
                   if (error) {
                     console.log(error);
                   } else {
-                    console.log('Email sent: ' + info.response);
+                    console.log("Email sent: " + info.response);
                   }
                 }
               );
@@ -130,7 +130,7 @@ exports.getAllFaculties = (req, res) => {
   con.query(`SELECT * FROM FACULTY`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No Faculty found',
+        message: "No Faculty found",
       });
     }
     return res.json({
@@ -145,21 +145,21 @@ exports.resetPassword = (req, res) => {
     if (err) {
       console.log(err);
     }
-    const token = buffer.toString('hex');
+    const token = buffer.toString("hex");
     con.query(
       `SELECT * FROM FACULTY WHERE EmailID=?`,
       [email],
       (err, result) => {
         if (result.length === 0 || err) {
           return res.status(400).json({
-            message: 'User not found',
+            message: "User not found",
           });
         }
         if (result.length > 0) {
           result[0].resettoken = token;
           result[0].expiresin = Date.now() + 3600000;
           con.query(
-            'UPDATE FACULTY SET resettoken=?, expiresin=? WHERE EmailID=?',
+            "UPDATE FACULTY SET resettoken=?, expiresin=? WHERE EmailID=?",
             [result[0].resettoken, result[0].expiresin, email],
             (err, result) => {
               if (err) {
@@ -172,14 +172,14 @@ exports.resetPassword = (req, res) => {
                   (err, result) => {
                     if (err) {
                       return res.status(400).json({
-                        message: 'No user found',
+                        message: "No user found",
                       });
                     }
                     transporter.sendMail(
                       {
-                        from: 'c8.smartgracemarkcalculator@gmail.com',
+                        from: "c8.smartgracemarkcalculator@gmail.com",
                         to: result[0].EmailID,
-                        subject: 'Reset Password',
+                        subject: "Reset Password",
                         html: `
                         <p>You requested for password reset </p>
                         <h3>Click on this <a href="http://localhost:3000/faculty/reset/${token}">link</a> to reset password</h3>
@@ -189,9 +189,9 @@ exports.resetPassword = (req, res) => {
                         if (error) {
                           console.log(error);
                         } else {
-                          console.log('Email sent: ' + info.response);
+                          console.log("Email sent: " + info.response);
                           res.json({
-                            message: 'Check your email',
+                            message: "Check your email",
                           });
                         }
                       }
@@ -216,7 +216,7 @@ exports.newPassword = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(422).json({
-          message: 'Session Expired',
+          message: "Session Expired",
         });
       }
       bcrypt.hash(password, 10, (err, hash) => {
@@ -224,17 +224,17 @@ exports.newPassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          'UPDATE fACULTY SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?',
-          [hash, 'N/A', 'N/A', token],
+          "UPDATE fACULTY SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
+          [hash, "N/A", "N/A", token],
           (err, result) => {
             if (err) {
               return res.status(400).json({
-                message: 'Unable to reset password',
+                message: "Unable to reset password",
               });
             }
             if (result) {
               res.json({
-                message: 'Password updated successfully',
+                message: "Password updated successfully",
               });
             }
           }
@@ -249,7 +249,7 @@ exports.getFaculty = (req, res) => {
   con.query(`SELECT * FROM Faculty WHERE FacultyID=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No faculty found',
+        message: "No faculty found",
       });
     }
     return res.json({
@@ -263,7 +263,7 @@ exports.updateFacultyProfile = (req, res) => {
   con.query(`SELECT * FROM FACULTY WHERE FacultyID=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
-        message: 'No faculty Found',
+        message: "No faculty Found",
       });
     }
     if (result) {
@@ -277,7 +277,7 @@ exports.updateFacultyProfile = (req, res) => {
         (err, result) => {
           if (err || result.length === 0) {
             return res.status(400).json({
-              message: 'Failed to update',
+              message: "Failed to update",
             });
           }
           return res.json({
@@ -295,7 +295,7 @@ exports.changePassword = (req, res) => {
   con.query(`SELECT * FROM Faculty WHERE FacultyID=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
-        message: 'No faculty found',
+        message: "No faculty found",
       });
     }
 
@@ -304,21 +304,30 @@ exports.changePassword = (req, res) => {
         return console.log(err);
       }
       con.query(
-        'UPDATE FACULTY SET Password=? WHERE FacultyID=?',
+        "UPDATE FACULTY SET Password=? WHERE FacultyID=?",
         [hash, id],
         (err, result) => {
           if (err) {
             return res.status(400).json({
-              message: 'Unable to reset password',
+              message: "Unable to reset password",
             });
           }
           if (result) {
             res.json({
-              message: 'Password updated successfully',
+              message: "Password updated successfully",
             });
           }
         }
       );
     });
+  });
+};
+
+exports.facultyDeleteAccount = (req, res) => {
+  const id = req.params.id;
+  con.query(`DELETE FROM Faculty WHERE FacultyID=?`, [id], (err, res) => {
+    if (err) {
+      console.log(err.sqlMessage);
+    }
   });
 };

@@ -99,7 +99,7 @@ const AdminProfile = ({ history }) => {
 
   return (
     <div
-      className='ml-5 mt-5 align-items-center alllist_div'
+      className='ml-5 mt-3 align-items-center alllist_div'
       style={{ backgroundColor: 'white' }}
     >
       <div className='card ml-5 px-3 overflow my_card'>
