@@ -1,11 +1,11 @@
-const config = require('../config/db');
+const config = require("../config/db");
 const con = config.con;
 
 exports.getAllCourses = (req, res) => {
   con.query(`SELECT * FROM COURSE`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No Courses found',
+        message: "No Courses found",
       });
     }
     return res.json({
@@ -22,7 +22,7 @@ exports.getAllDeptCourses = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No Courses found',
+          message: "No Courses found",
         });
       }
       return res.json({
@@ -41,11 +41,11 @@ exports.addCourseMarks = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
-          message: 'Unable to Update Marks',
+          message: "Unable to Update Marks",
         });
       }
       return res.json({
-        message: 'Successfully Updated',
+        message: "Successfully Updated",
       });
     }
   );
@@ -59,7 +59,7 @@ exports.getCourseMark = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No Courses found',
+          message: "No Courses found",
         });
       }
       return res.json({
@@ -77,7 +77,7 @@ exports.getCourseMarkOfStudent = (req, res) => {
     (err, result) => {
       if (err) {
         return res.status(400).json({
-          message: 'No marks found',
+          message: "No marks found",
         });
       }
       return res.json({
@@ -100,7 +100,7 @@ exports.getACourseMark = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No Marks found',
+          message: "No Marks found",
         });
       }
       return res.json({
@@ -119,7 +119,7 @@ exports.updateCourseMarkDetails = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: 'No course marks Found',
+          message: "No course marks Found",
         });
       }
       if (result) {
@@ -133,7 +133,7 @@ exports.updateCourseMarkDetails = (req, res) => {
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({
-                message: 'Failed to update',
+                message: "Failed to update",
               });
             }
             return res.json({
@@ -152,7 +152,7 @@ exports.getCourseReport = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No report found',
+          message: "No report found",
         });
       }
       return res.json({
@@ -170,7 +170,7 @@ exports.getACourseReport = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No report found',
+          message: "No report found",
         });
       }
       return res.json({
@@ -184,7 +184,7 @@ exports.getAllGradeRange = (req, res) => {
   con.query(`SELECT * FROM GRADE_RANGE`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No report found',
+        message: "No report found",
       });
     }
     return res.json({
@@ -201,7 +201,7 @@ exports.getGradeRange = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No report found',
+          message: "No report found",
         });
       }
       return res.json({
@@ -233,11 +233,11 @@ exports.updateGradeRange = (req, res) => {
     let newF = F.substring(F.length - 2, F.length);
     con.query(
       `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
-      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      [O, Ap, A, Bp, B, C, P, F, "P", id],
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         con.query(
@@ -253,7 +253,7 @@ exports.updateGradeRange = (req, res) => {
               (err, result2) => {
                 if (result2.length === 0 || err) {
                   return res.status(400).json({
-                    message: 'No grade found',
+                    message: "No grade found",
                   });
                 }
                 return res.json({
@@ -285,11 +285,11 @@ exports.updateGradeRange = (req, res) => {
 
     con.query(
       `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
-      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      [O, Ap, A, Bp, B, C, P, F, "P", id],
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         con.query(
@@ -305,7 +305,7 @@ exports.updateGradeRange = (req, res) => {
               (err, result2) => {
                 if (result2.length === 0 || err) {
                   return res.status(400).json({
-                    message: 'No grade found',
+                    message: "No grade found",
                   });
                 }
                 return res.json({
@@ -337,11 +337,11 @@ exports.updateGradeRange = (req, res) => {
 
     con.query(
       `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
-      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      [O, Ap, A, Bp, B, C, P, F, "P", id],
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         con.query(
@@ -357,7 +357,7 @@ exports.updateGradeRange = (req, res) => {
               (err, result2) => {
                 if (result2.length === 0 || err) {
                   return res.status(400).json({
-                    message: 'No grade found',
+                    message: "No grade found",
                   });
                 }
                 return res.json({
@@ -389,11 +389,11 @@ exports.updateGradeRange = (req, res) => {
 
     con.query(
       `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
-      [O, Ap, A, Bp, B, C, P, F, 'P', id],
+      [O, Ap, A, Bp, B, C, P, F, "P", id],
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         con.query(
@@ -409,7 +409,7 @@ exports.updateGradeRange = (req, res) => {
               (err, result2) => {
                 if (result2.length === 0 || err) {
                   return res.status(400).json({
-                    message: 'No grade found',
+                    message: "No grade found",
                   });
                 }
                 return res.json({
@@ -432,7 +432,7 @@ exports.getRangeDetails = (req, res) => {
     (err, result) => {
       if (err) {
         return res.status(400).json({
-          message: 'No report found',
+          message: "No report found",
         });
       }
       return res.json({
@@ -446,42 +446,42 @@ exports.updateGrade = (req, res) => {
   const cid = req.params.id;
   const { id, O, Ap, A, Bp, B, C, P, F, total } = req.body;
   if (parseInt(total) >= parseInt(O)) {
-    let grade = 'O';
-    console.log('Grade =', grade);
+    let grade = "O";
+    console.log("Grade =", grade);
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
       [grade, cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   } else if (parseInt(total) < parseInt(O) && parseInt(total) >= parseInt(Ap)) {
-    let grade = 'A+';
-    console.log('Grade =', grade);
+    let grade = "A+";
+    console.log("Grade =", grade);
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
       [grade, cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   } else if (parseInt(total) < parseInt(Ap) && parseInt(total) >= parseInt(A)) {
-    let grade = 'A';
-    console.log('Grade =', grade);
+    let grade = "A";
+    console.log("Grade =", grade);
 
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
@@ -489,17 +489,17 @@ exports.updateGrade = (req, res) => {
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   } else if (parseInt(total) < parseInt(A) && parseInt(total) >= parseInt(Bp)) {
-    let grade = 'B+';
-    console.log('Grade =', grade);
+    let grade = "B+";
+    console.log("Grade =", grade);
 
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
@@ -507,51 +507,51 @@ exports.updateGrade = (req, res) => {
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   } else if (parseInt(total) < parseInt(Bp) && parseInt(total) >= parseInt(B)) {
-    let grade = 'B';
-    console.log('Grade =', grade);
+    let grade = "B";
+    console.log("Grade =", grade);
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
       [grade, cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   } else if (parseInt(total) < parseInt(B) && parseInt(total) >= parseInt(C)) {
-    let grade = 'C';
-    console.log('Grade =', grade);
+    let grade = "C";
+    console.log("Grade =", grade);
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
       [grade, cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   } else if (parseInt(total) < parseInt(C) && parseInt(total) >= parseInt(P)) {
-    let grade = 'P';
-    console.log('Grade =', grade);
+    let grade = "P";
+    console.log("Grade =", grade);
 
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
@@ -559,17 +559,17 @@ exports.updateGrade = (req, res) => {
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   } else if (parseInt(total) < parseInt(P)) {
-    let grade = 'F';
-    console.log('Grade =', grade);
+    let grade = "F";
+    console.log("Grade =", grade);
 
     con.query(
       `UPDATE COURSE_MARK SET Grade=? WHERE CourseID=? AND RollNum=?`,
@@ -577,13 +577,83 @@ exports.updateGrade = (req, res) => {
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
-            message: 'Failed to update',
+            message: "Failed to update",
           });
         }
         return res.json({
-          message: 'Updated Successfully',
+          message: "Updated Successfully",
         });
       }
     );
   }
+};
+
+exports.editGradeRange = (req, res) => {
+  const cid = req.params.id;
+  console.log(cid);
+
+  const { O, Ap, A, Bp, B, C, P, F } = req.body;
+  console.log(O, Ap, A, Bp, B, C, P, F);
+  let newO = O.substring(O.length - 2, O.length);
+  let newAp = Ap.substring(Ap.length - 2, Ap.length);
+  let newA = A.substring(A.length - 2, A.length);
+  let newBp = Bp.substring(Bp.length - 2, Bp.length);
+  let newB = B.substring(B.length - 2, B.length);
+  let newC = C.substring(C.length - 2, C.length);
+  let newP = P.substring(P.length - 2, P.length);
+  let newF = F.substring(F.length - 2, F.length);
+  con.query(
+    `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+    [cid],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(400).json({
+          message: "No course Found",
+        });
+      }
+      if (result) {
+        result[0].O = O || result[0].O;
+        result[0].Ap = Ap || result[0].Ap;
+        result[0].A = A || result[0].A;
+        result[0].Bp = Bp || result[0].Bp;
+        result[0].B = B || result[0].B;
+        result[0].C = C || result[0].C;
+        result[0].P = P || result[0].P;
+        result[0].F = F || result[0].F;
+        con.query(
+          `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?;UPDATE Grace_marks.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+          [
+            result[0].O,
+            result[0].Ap,
+            result[0].A,
+            result[0].Bp,
+            result[0].B,
+            result[0].C,
+            result[0].P,
+            result[0].F,
+            cid,
+            newO,
+            newAp,
+            newA,
+            newBp,
+            newB,
+            newC,
+            newP,
+            newF,
+            cid,
+          ],
+          (err, result) => {
+            if (err || result.length === 0) {
+              return res.status(400).json({
+                message: "Failed to update",
+              });
+            }
+            return res.json({
+              EditedGradeRange: result,
+            });
+          }
+        );
+      }
+    }
+  );
 };

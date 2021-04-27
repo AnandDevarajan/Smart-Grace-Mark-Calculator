@@ -96,7 +96,9 @@ const AdminProfile = ({ history }) => {
     localStorage.removeItem("adminInfo");
     window.location.pathname = "/";
   };
-
+  
+  
+  
   return (
     <div
       className="ml-5 mt-3 align-items-center alllist_div"
