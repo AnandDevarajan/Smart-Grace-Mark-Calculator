@@ -78,7 +78,8 @@ const FacultyProfile = ({ history }) => {
         <div className="overflow">
           <h1 className="text-success">Faculty Profile</h1>
           <p className="lead mt-2">
-            <AccountBoxIcon style={{ color: "#2196f3" }} /> Welcome {name}
+            <AccountBoxIcon style={{ color: "#2196f3" }} /> Welcome{" "}
+            <span className="text-info"> {name}</span>
           </p>
           <Row className="mt-4">
             <Col>
