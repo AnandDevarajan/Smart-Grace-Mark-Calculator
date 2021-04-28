@@ -1,4 +1,4 @@
-const config = require('../config/db');
+const config = require("../config/db");
 const con = config.con;
 
 exports.createGraceMark = (req, res) => {
@@ -10,7 +10,7 @@ exports.createGraceMark = (req, res) => {
     (err, result) => {
       if (err) {
         return res.status(400).json({
-          message: 'Unable to create Grace Mark details',
+          message: "Unable to create Grace Mark details",
         });
       }
       if (result) {
@@ -19,7 +19,7 @@ exports.createGraceMark = (req, res) => {
           (err, result) => {
             if (err) {
               return res.status(400).json({
-                message: 'No Grace Mark Details found',
+                message: "No Grace Mark Details found",
               });
             }
             res.json({
@@ -36,7 +36,7 @@ exports.getAllGraceMarks = (req, res) => {
   con.query(`SELECT * FROM GRACEMARK`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No Gracemarks found',
+        message: "No Gracemarks found",
       });
     }
     return res.json({
@@ -53,7 +53,7 @@ exports.getGraceMarkDetails = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: 'No Gracemark Found',
+          message: "No Gracemark Found",
         });
       }
       return res.json({
@@ -71,7 +71,7 @@ exports.updateGraceMarkDetails = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: 'No Gracemark Found',
+          message: "No Gracemark Found",
         });
       }
       if (result) {
@@ -89,7 +89,7 @@ exports.updateGraceMarkDetails = (req, res) => {
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({
-                message: 'Failed to update',
+                message: "Failed to update",
               });
             }
             return res.json({
@@ -104,14 +104,18 @@ exports.updateGraceMarkDetails = (req, res) => {
 
 exports.deleteGraceMarkDetails = (req, res) => {
   const id = req.params.id;
-  con.query(`DELETE  FROM GRACEMARK WHERE GraceMarkID=${id}`, (err, result) => {
-    if (err) {
+  con.query(
+    `DELETE  FROM GRACEMARK WHERE GraceMarkID=?`,
+    [id],
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Unable to delete",
+        });
+      }
       return res.status(400).json({
-        message: 'Unable to delete',
+        messag: "Successfully deleted",
       });
     }
-    return res.status(400).json({
-      messag: 'Successfully deleted',
-    });
-  });
+  );
 };
