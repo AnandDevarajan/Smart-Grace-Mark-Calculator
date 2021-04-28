@@ -14,8 +14,8 @@ import {
   GRACEMARK_DETAILS_REQUEST,
   GRACEMARK_DETAILS_SUCCESS,
   GRACEMARK_DETAILS_FAIL,
-} from '../constants/gracemarkConstants';
-import axios from 'axios';
+} from "../constants/gracemarkConstants";
+import axios from "axios";
 
 export const createGracemark = (description, mark) => async (
   dispatch,
@@ -32,13 +32,13 @@ export const createGracemark = (description, mark) => async (
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };
 
     const { data } = await axios.post(
-      '/gracemark',
+      "/gracemark",
       {
         description,
         mark,
@@ -66,7 +66,7 @@ export const listGracemarks = () => async (dispatch) => {
     dispatch({
       type: GRACEMARK_LIST_REQUEST,
     });
-    const { data } = await axios.get('/gracemark');
+    const { data } = await axios.get("/gracemark");
     dispatch({
       type: GRACEMARK_LIST_SUCCESS,
       payload: data,
@@ -130,7 +130,7 @@ export const updateGracemark = (gracemark) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };
