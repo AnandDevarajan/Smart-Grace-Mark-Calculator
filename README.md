@@ -1,1 +1,0 @@
-(http://localhost:9000/api/project_badges/measure?project=GraceMark&metric=reliability_rating)
