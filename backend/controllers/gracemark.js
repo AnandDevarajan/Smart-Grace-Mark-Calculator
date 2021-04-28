@@ -114,7 +114,7 @@ exports.deleteGraceMarkDetails = (req, res) => {
         });
       }
       return res.status(400).json({
-        messag: "Successfully deleted",
+        message: "Successfully deleted",
       });
     }
   );
