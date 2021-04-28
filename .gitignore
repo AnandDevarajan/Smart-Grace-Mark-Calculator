@@ -7,7 +7,7 @@ node_modules/
 .pnp.js
 /.scannerwork
 .scannerwork/
-sonar-project.properties
+
 .scannerwork/
 # testing
 /coverage
