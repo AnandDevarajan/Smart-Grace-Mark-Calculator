@@ -133,7 +133,7 @@ exports.resetPassword = (req, res) => {
   crypto.randomBytes(32, (err, buffer) => {
     const { email } = req.body;
     if (err) {
-      +console.log(err);
+      console.log(err);
     }
     const token = buffer.toString('hex');
     con.query(
