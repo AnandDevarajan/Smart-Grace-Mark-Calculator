@@ -110,7 +110,7 @@ exports.deleteGraceMarkDetails = (req, res) => {
     (err, result) => {
       if (err) {
         return res.status(400).json({
-          message: "Unable to delete",
+          error: "Unable to delete",
         });
       }
       return res.status(400).json({
