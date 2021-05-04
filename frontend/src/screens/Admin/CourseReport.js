@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
-import { allGradeRangeDetails } from '../../actions/courseActions';
-import { Table, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { Link } from "react-router-dom";
+import { allGradeRangeDetails } from "../../actions/courseActions";
+import { Table, Button } from "react-bootstrap";
 const CourseReport = ({ history }) => {
   const [reports, setReports] = useState([]);
 
@@ -17,11 +17,11 @@ const CourseReport = ({ history }) => {
 
   useEffect(() => {
     if (!adminInfo) {
-      history.push('/');
+      history.push("/");
     }
     dispatch(allGradeRangeDetails());
     axios
-      .get('/course/report')
+      .get("/course/report")
       .then((response) => {
         setReports(response.data.report);
       })
@@ -33,18 +33,18 @@ const CourseReport = ({ history }) => {
   console.log(reports);
   return (
     <div
-      className='ml-5 align-items-center alllist_div'
-      style={{ backgroundColor: 'white' }}
+      className="ml-5 align-items-center alllist_div"
+      style={{ backgroundColor: "white" }}
     >
-      <Link to='/admin/profile' className='goback'>
-        <Button variant='light'>
+      <Link to="/admin/profile" className="goback">
+        <Button variant="light">
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
-      <div className='card ml-5 px-3 overflow my_card'>
-        <h1 className='text-center list_heading text-info'>Course Report</h1>
+      <div className="card ml-5 px-3 overflow my_card">
+        <h1 className="text-center list_heading text-info">Course Report</h1>
 
-        <Table striped bordered hover responsive className='table-sm'>
+        <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
               <th>Course ID</th>
@@ -70,17 +70,17 @@ const CourseReport = ({ history }) => {
                 </td>
                 <td>{report.Num}</td>
                 <td>
-                  {report.status === 'P' ? (
+                  {report.status === "P" ? (
                     <Link
-                      className='btn btn-sm btn-primary'
+                      className="btn btn-sm btn-primary"
                       to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
                     >
                       View Grade
                     </Link>
                   ) : (
                     <Link
-                      className='btn btn-sm btn-success'
-                      style={{ width: '108px' }}
+                      className="btn btn-sm btn-success"
+                      style={{ width: "108px" }}
                       to={`/admin/set/grade/${report.CourseID}-${report.CourseName}`}
                     >
                       Set Grade

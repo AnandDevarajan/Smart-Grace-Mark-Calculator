@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import Message from '../../components/Message';
+import React, { useEffect, useState } from "react";
+import { LinkContainer } from "react-router-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "../../components/Message";
 
-import { Link } from 'react-router-dom';
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import '../Home.css';
-import axios from 'axios';
+import { Link } from "react-router-dom";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import "../Home.css";
+import axios from "axios";
 
 const ViewCourseMarks = ({ history, match }) => {
   const str = match.params.id;
@@ -45,36 +45,36 @@ const ViewCourseMarks = ({ history, match }) => {
           console.log(err);
         });
     } else {
-      history.push('/');
+      history.push("/");
     }
   }, [dispatch, history, adminInfo]);
 
   console.log(marks);
   return (
-    <div className='ml-5 align-items-center'>
+    <div className="ml-5 align-items-center">
       {adminInfo ? (
-        <Link to='/admin/students'>
-          <Button variant='light'>
+        <Link to="/admin/students">
+          <Button variant="light">
             <ArrowBackIcon /> Go Back
           </Button>
         </Link>
       ) : (
         <Link to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}>
-          <Button variant='light'>
+          <Button variant="light">
             <ArrowBackIcon /> Go Back
           </Button>
         </Link>
       )}
-      <div className='card ml-5 px-3 overflow my_card'>
-        <h1 className='py-3 text-center'>Mark List</h1>
+      <div className="card ml-5 px-3 overflow my_card">
+        <h1 className="py-3 text-center">Mark List</h1>
         <h4>
           {rollnum} - {branch} {batch}
         </h4>
         <h4></h4>
         {error ? (
-          <Message variant='danger'>{error}</Message>
+          <Message variant="danger">{error}</Message>
         ) : (
-          <Table striped bordered hover responsive className='table-sm'>
+          <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
                 <th>Course ID</th>
@@ -93,7 +93,89 @@ const ViewCourseMarks = ({ history, match }) => {
                   <td>{mark.Internals}</td>
                   <td>{mark.Marks}</td>
                   <td>{mark.Total}</td>
-                  <td>{mark.Grade}</td>
+                  <td>
+                    {" "}
+                    {mark.Grade === "O" && (
+                      <Button
+                        className="btn btn-sm"
+                        style={{
+                          backgroundColor: "#289672",
+                          width: "30px",
+                          padding: "2px",
+                        }}
+                      >
+                        O
+                      </Button>
+                    )}
+                    {mark.Grade === "A+" && (
+                      <Button
+                        className="btn btn-sm text-center"
+                        style={{
+                          backgroundColor: "#29bb89",
+                          width: "30px",
+                          padding: "2px",
+                        }}
+                      >
+                        A+
+                      </Button>
+                    )}
+                    {mark.Grade === "A" && (
+                      <Button
+                        className="btn btn-sm"
+                        style={{
+                          backgroundColor: "#29bb89",
+                          width: "30px",
+                          padding: "2px",
+                        }}
+                      >
+                        A
+                      </Button>
+                    )}
+                    {mark.Grade === "B+" && (
+                      <Button
+                        className="btn btn-sm btn-success"
+                        style={{ width: "30px", padding: "2px" }}
+                      >
+                        B+
+                      </Button>
+                    )}
+                    {mark.Grade === "B" && (
+                      <Button
+                        className="btn btn-sm btn-success"
+                        style={{ width: "30px", padding: "2px" }}
+                      >
+                        B
+                      </Button>
+                    )}
+                    {mark.Grade === "C" && (
+                      <Button
+                        className="btn btn-sm btn-warning"
+                        style={{ width: "30px", padding: "2px" }}
+                      >
+                        C
+                      </Button>
+                    )}
+                    {mark.Grade === "P" && (
+                      <Button
+                        className="btn btn-sm btn-danger"
+                        style={{ width: "30px", padding: "2px" }}
+                      >
+                        P
+                      </Button>
+                    )}
+                    {mark.Grade === "F" && (
+                      <Button
+                        className="btn btn-sm"
+                        style={{
+                          backgroundColor: "#be0000",
+                          width: "30px",
+                          padding: "2px",
+                        }}
+                      >
+                        F
+                      </Button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
