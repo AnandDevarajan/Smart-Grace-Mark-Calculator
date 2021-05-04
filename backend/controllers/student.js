@@ -1,15 +1,15 @@
-const config = require('../config/db');
+const config = require("../config/db");
 const con = config.con;
-const { generateToken } = require('../utils/auth');
-const crypto = require('crypto');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
-const { stringify } = require('querystring');
-require('dotenv').config();
+const { generateToken } = require("../utils/auth");
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+const { stringify } = require("querystring");
+require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.EmailID,
     pass: process.env.Pass,
@@ -24,19 +24,19 @@ exports.authStudent = (req, res) => {
   con.query(`SELECT * FROM STUDENT WHERE EmailID=?`, email, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'Invalid Email',
+        message: "Invalid Email",
       });
     }
     if (result.length > 0) {
       bcrypt.compare(password, result[0].Password, (err, hash) => {
         if (!hash) {
           return res.status(400).json({
-            message: 'Invalid Password',
+            message: "Invalid Password",
           });
         }
         if (err) {
           return res.status(400).json({
-            message: 'Invalid credentials',
+            message: "Invalid credentials",
           });
         }
         return res.json({
@@ -89,7 +89,7 @@ exports.registerStudent = (req, res) => {
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Unable to create user',
+            message: "Unable to create user",
           });
         }
         if (result) {
@@ -98,7 +98,7 @@ exports.registerStudent = (req, res) => {
             (err, result) => {
               if (err) {
                 return res.status(400).json({
-                  message: 'No user found',
+                  message: "No user found",
                 });
               }
               res.json({
@@ -107,9 +107,9 @@ exports.registerStudent = (req, res) => {
               });
               transporter.sendMail(
                 {
-                  from: 'c8.smartgracemarkcalculator@gmail.com',
+                  from: "c8.smartgracemarkcalculator@gmail.com",
                   to: result[0].EmailID,
-                  subject: 'Welcome to Smart Grace Mark Calculator',
+                  subject: "Welcome to Smart Grace Mark Calculator",
                   text: `Dear Student,
                        YOU HAVE SUCCESSFULLY CREATED AN ACCOUNT!`,
                 },
@@ -117,7 +117,7 @@ exports.registerStudent = (req, res) => {
                   if (error) {
                     console.log(error);
                   } else {
-                    console.log('Email sent: ' + info.response);
+                    console.log("Email sent: " + info.response);
                   }
                 }
               );
@@ -135,21 +135,21 @@ exports.resetPassword = (req, res) => {
     if (err) {
       console.log(err);
     }
-    const token = buffer.toString('hex');
+    const token = buffer.toString("hex");
     con.query(
       `SELECT * FROM STUDENT WHERE EmailID=?`,
       [email],
       (err, result) => {
         if (result.length === 0 || err) {
           return res.status(400).json({
-            message: 'User not found',
+            message: "User not found",
           });
         }
         if (result.length > 0) {
           result[0].resettoken = token;
           result[0].expiresin = Date.now() + 3600000;
           con.query(
-            'UPDATE STUDENT SET resettoken=?, expiresin=? WHERE EmailID=?',
+            "UPDATE STUDENT SET resettoken=?, expiresin=? WHERE EmailID=?",
             [result[0].resettoken, result[0].expiresin, email],
             (err, result) => {
               if (err) {
@@ -162,14 +162,14 @@ exports.resetPassword = (req, res) => {
                   (err, result) => {
                     if (err) {
                       return res.status(400).json({
-                        message: 'No user found',
+                        message: "No user found",
                       });
                     }
                     transporter.sendMail(
                       {
-                        from: 'c8.smartgracemarkcalculator@gmail.com',
+                        from: "c8.smartgracemarkcalculator@gmail.com",
                         to: result[0].EmailID,
-                        subject: 'Reset Password',
+                        subject: "Reset Password",
                         html: `
                         <p>You requested for password reset </p>
                         <h3>Click on this <a href="http://localhost:3000/student/reset/${token}">link</a> to reset password</h3>
@@ -179,9 +179,9 @@ exports.resetPassword = (req, res) => {
                         if (error) {
                           console.log(error);
                         } else {
-                          console.log('Email sent: ' + info.response);
+                          console.log("Email sent: " + info.response);
                           res.json({
-                            message: 'Check your email',
+                            message: "Check your email",
                           });
                         }
                       }
@@ -206,7 +206,7 @@ exports.newPassword = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(422).json({
-          message: 'Session Expired',
+          message: "Session Expired",
         });
       }
       bcrypt.hash(password, 10, (err, hash) => {
@@ -214,17 +214,17 @@ exports.newPassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          'UPDATE STUDENT SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?',
-          [hash, 'N/A', 'N/A', token],
+          "UPDATE STUDENT SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
+          [hash, "N/A", "N/A", token],
           (err, result) => {
             if (err) {
               return res.status(400).json({
-                message: 'Unable to reset password',
+                message: "Unable to reset password",
               });
             }
             if (result) {
               res.json({
-                message: 'Password updated successfully',
+                message: "Password updated successfully",
               });
             }
           }
@@ -238,7 +238,7 @@ exports.getAllStudents = (req, res) => {
   con.query(`SELECT * FROM STUDENT`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No students found',
+        message: "No students found",
       });
     }
     return res.json({
@@ -252,7 +252,7 @@ exports.getStudent = (req, res) => {
   con.query(`SELECT * FROM STUDENT WHERE RollNum=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No students found',
+        message: "No students found",
       });
     }
     return res.json({
@@ -268,15 +268,15 @@ exports.addRequest = (req, res) => {
   let desc = request.substring(0, length - 3);
   let mark = request.substring(length - 2, length);
   console.log(request);
-  if (request !== 'select' || request.length > 0) {
-    let Requested = 'pending';
+  if (request !== "select" || request.length > 0) {
+    let Requested = "pending";
     con.query(
       `UPDATE STUDENT SET Requested=?, GraceDesc=?,GraceMark=? WHERE RollNum=?`,
       [Requested, desc, mark, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.json({
-            message: 'Unable to request grace mark',
+            message: "Unable to request grace mark",
           });
         }
         if (result) {
@@ -285,7 +285,7 @@ exports.addRequest = (req, res) => {
             (err, result) => {
               if (err) {
                 return res.status(400).json({
-                  message: 'No user found',
+                  message: "No user found",
                 });
               }
               return res.json({
@@ -299,28 +299,28 @@ exports.addRequest = (req, res) => {
     );
   } else {
     return res.json({
-      message: 'Unable to request for grace marks',
+      message: "Unable to request for grace marks",
     });
   }
 };
 
 exports.acceptRequest = (req, res) => {
   let id = req.params.id;
-  let Requested = 'accepted';
+  let Requested = "accepted";
   con.query(
     `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,
     [Requested, id],
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
-          message: 'Unable to update request',
+          message: "Unable to update request",
         });
       }
       if (result) {
         con.query(`SELECT * FROM STUDENT`, (err, result) => {
           if (err || result.length === 0) {
             return res.status(200).json({
-              message: 'No students found',
+              message: "No students found",
             });
           }
           return res.json({
@@ -334,21 +334,21 @@ exports.acceptRequest = (req, res) => {
 
 exports.rejectRequest = (req, res) => {
   let id = req.params.id;
-  let Requested = 'rejected';
+  let Requested = "rejected";
   con.query(
     `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,
     [Requested, id],
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
-          message: 'Unable to update request',
+          message: "Unable to update request",
         });
       }
       if (result) {
         con.query(`SELECT * FROM STUDENT`, (err, result) => {
           if (err || result.length === 0) {
             return res.status(400).json({
-              message: 'No students found',
+              message: "No students found",
             });
           }
           return res.json({
@@ -362,20 +362,20 @@ exports.rejectRequest = (req, res) => {
 
 exports.cancelRequest = (req, res) => {
   let id = req.params.id;
-  let Requested = 'N/A';
-  let GraceDesc = 'N/A';
-  let GraceMark = 'N/A';
+  let Requested = "N/A";
+  let GraceDesc = "N/A";
+  let GraceMark = "N/A";
   con.query(
     `UPDATE STUDENT SET Requested=?,GraceDesc=?,GraceMark=? WHERE RollNum=?`,
     [Requested, GraceDesc, GraceMark, id],
     (err, result) => {
       if (err || result.length === 0) {
         return res.json({
-          message: 'Unable to cancel request',
+          message: "Unable to cancel request",
         });
       }
       return res.json({
-        message: 'Request canceled successfully',
+        message: "Request canceled successfully",
       });
     }
   );
@@ -386,7 +386,7 @@ exports.batchStudents = (req, res) => {
   con.query(`SELECT * FROM STUDENT WHERE Batch=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No students found',
+        message: "No students found",
       });
     }
     return res.json({
@@ -401,7 +401,7 @@ exports.courseStudents = (req, res) => {
   con.query(`SELECT * FROM STUDENT WHERE Branch=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
-        message: 'No students found',
+        message: "No students found",
       });
     }
     return res.json({
@@ -419,7 +419,7 @@ exports.courseStudentsMarks = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No students found',
+          message: "No students found",
         });
       }
       return res.json({
@@ -434,7 +434,7 @@ exports.updateStudentProfile = (req, res) => {
   con.query(`SELECT * FROM STUDENT WHERE RollNum=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
-        message: 'No studentFound',
+        message: "No studentFound",
       });
     }
     if (result) {
@@ -448,7 +448,7 @@ exports.updateStudentProfile = (req, res) => {
         (err, result) => {
           if (err || result.length === 0) {
             return res.status(400).json({
-              message: 'Failed to update',
+              message: "Failed to update",
             });
           }
           return res.json({
@@ -466,7 +466,7 @@ exports.changePassword = (req, res) => {
   con.query(`SELECT * FROM STUDENT WHERE RollNum=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
-        message: 'No studentFound',
+        message: "No studentFound",
       });
     }
 
@@ -475,17 +475,17 @@ exports.changePassword = (req, res) => {
         return console.log(err);
       }
       con.query(
-        'UPDATE STUDENT SET Password=? WHERE RollNum=?',
+        "UPDATE STUDENT SET Password=? WHERE RollNum=?",
         [hash, id],
         (err, result) => {
           if (err) {
             return res.status(400).json({
-              message: 'Unable to reset password',
+              message: "Unable to reset password",
             });
           }
           if (result) {
             res.json({
-              message: 'Password updated successfully',
+              message: "Password updated successfully",
             });
           }
         }
@@ -508,7 +508,7 @@ exports.getStudentGrade = (req, res) => {
       (err, result) => {
         if (result.length === 0 || err) {
           return res.status(400).json({
-            message: 'No marks found',
+            message: "No marks found",
           });
         }
         return res.json({

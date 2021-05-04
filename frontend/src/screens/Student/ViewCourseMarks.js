@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
-
+import { getAStudent } from "../../actions/studentActions";
 import { Link } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -18,6 +18,7 @@ const ViewCourseMarks = ({ history, match }) => {
   let branch = str.substring(n - 5, n - 2);
   let batch = str.substring(n - 1, n);
   const [marks, setMarks] = useState([]);
+  const [graceAccepted, setGraceAccepted] = useState("");
 
   const dispatch = useDispatch();
 
@@ -36,22 +37,30 @@ const ViewCourseMarks = ({ history, match }) => {
   useEffect(() => {
     if (adminInfo || facultyInfo || studentInfo) {
       axios
-        .get(`/course/student/marks/${rollnum}`)
-        .then((response) => {
-          console.log(response.data);
-          setMarks(response.data.markList);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .all([
+          axios.get(`/course/student/marks/${rollnum}`),
+          axios.get(`/student/${rollnum}`),
+        ])
+        .then(
+          axios.spread((response1, response2) => {
+            console.log(response1, response2);
+            setMarks(response1.data.markList);
+            setGraceAccepted(response2.data.student.Requested);
+          })
+        );
     } else {
       history.push("/");
     }
   }, [dispatch, history, adminInfo]);
 
+  const studentGet = useSelector((state) => state.studentGet);
+  const { student } = studentGet;
+
+  console.log("students sss", student);
   console.log(marks);
+
   return (
-    <div className="ml-5 align-items-center">
+    <div className="ml-5 mt-3 align-items-center">
       {adminInfo ? (
         <Link to="/admin/students">
           <Button variant="light">
@@ -59,11 +68,20 @@ const ViewCourseMarks = ({ history, match }) => {
           </Button>
         </Link>
       ) : (
-        <Link to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}>
-          <Button variant="light">
-            <ArrowBackIcon /> Go Back
-          </Button>
-        </Link>
+        <Row>
+          <Col>
+            <Link to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}>
+              <Button variant="light">
+                <ArrowBackIcon /> Go Back
+              </Button>
+            </Link>
+          </Col>
+          {graceAccepted === "accepted" && (
+            <Col className="text-right">
+              <Button variant="info">Calculate Grade Mark</Button>
+            </Col>
+          )}
+        </Row>
       )}
       <div className="card ml-5 px-3 overflow my_card">
         <h1 className="py-3 text-center">Mark List</h1>
@@ -83,6 +101,7 @@ const ViewCourseMarks = ({ history, match }) => {
                 <th>Marks</th>
                 <th>Total</th>
                 <th>Grade</th>
+                <th>Credits</th>
               </tr>
             </thead>
             <tbody>
@@ -176,6 +195,7 @@ const ViewCourseMarks = ({ history, match }) => {
                       </Button>
                     )}
                   </td>
+                  <td>{mark.credits}</td>
                 </tr>
               ))}
             </tbody>

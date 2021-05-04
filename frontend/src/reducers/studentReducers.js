@@ -29,7 +29,10 @@ import {
   STUDENT_PROFILE_UPDATE_SUCCESS,
   STUDENT_PROFILE_UPDATE_FAIL,
   STUDENT_PROFILE_UPDATE_RESET,
-} from '../constants/studentConstants';
+  STUDENT_GET_FAIL,
+  STUDENT_GET_SUCCESS,
+  STUDENT_GET_REQUEST,
+} from "../constants/studentConstants";
 
 export const studentRegisterReducer = (state = {}, action) => {
   switch (action.type) {
@@ -69,6 +72,22 @@ export const studentListReducer = (state = { students: [] }, action) => {
         students: action.payload.students,
       };
     case STUDENT_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const studentGetReducer = (state = { student: [] }, action) => {
+  switch (action.type) {
+    case STUDENT_GET_REQUEST:
+      return { loading: true, student: [] };
+    case STUDENT_GET_SUCCESS:
+      return {
+        loading: false,
+        student: action.payload.student,
+      };
+    case STUDENT_GET_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

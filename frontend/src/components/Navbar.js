@@ -95,7 +95,11 @@ function Navbar() {
               <Link to="#" className="menu-bars">
                 <MenuIcon
                   style="menu_icon"
-                  style={{ marginBottom: "25px",marginRight:"750px", color: "white" }}
+                  style={{
+                    marginBottom: "25px",
+                    marginRight: "750px",
+                    color: "white",
+                  }}
                   onClick={() =>
                     showSidebar(window.matchMedia("(max-width: 900px)"))
                   }
@@ -133,6 +137,7 @@ function Navbar() {
               <h5 className="text-white mt-3">
                 <DoneAllSharpIcon className="app_icon" /> C8-SGMC
               </h5>
+
               <li className="navbar-toggle">
                 <NavLink to="#" className="menu-bars">
                   <CloseIcon
@@ -250,9 +255,10 @@ function Navbar() {
             </ul>
           ) : adminInfo ? (
             <ul className="nav-menu-items" onClick={showSidebar}>
-              <h5 className="text-white mt-3">
+              <h5 className="text-white  mt-3">
                 <DoneAllSharpIcon className="app_icon" /> C8-SGMC
               </h5>
+
               <li className="navbar-toggle">
                 <Link to="#" className="menu-bars">
                   <CloseIcon

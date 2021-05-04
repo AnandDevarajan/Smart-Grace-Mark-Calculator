@@ -27,6 +27,9 @@ import {
   STUDENT_PROFILE_UPDATE_REQUEST,
   STUDENT_PROFILE_UPDATE_SUCCESS,
   STUDENT_PROFILE_UPDATE_FAIL,
+  STUDENT_GET_REQUEST,
+  STUDENT_GET_SUCCESS,
+  STUDENT_GET_FAIL,
 } from "../constants/studentConstants";
 import axios from "axios";
 
@@ -158,6 +161,29 @@ export const listStudents = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: STUDENT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getAStudent = (rollnum) => async (dispatch) => {
+  try {
+    dispatch({
+      type: STUDENT_GET_REQUEST,
+    });
+
+    const { data } = await axios.get(`/students/${rollnum}`);
+
+    dispatch({
+      type: STUDENT_GET_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: STUDENT_GET_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

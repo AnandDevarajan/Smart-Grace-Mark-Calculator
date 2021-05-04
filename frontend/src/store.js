@@ -1,6 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import {
   studentRegisterReducer,
@@ -12,19 +12,20 @@ import {
   courseStudentListReducer,
   courseStudentMarkListReducer,
   studentProfileUpdateReducer,
-} from './reducers/studentReducers';
+  studentGetReducer,
+} from "./reducers/studentReducers";
 import {
   adminRegisterReducer,
   adminLoginReducer,
   adminProfileUpdateReducer,
-} from './reducers/adminReducers';
+} from "./reducers/adminReducers";
 import {
   facultyRegisterReducer,
   facultyLoginReducer,
   facultyListReducer,
   adviserStudentListReducer,
   facultyProfileUpdateReducer,
-} from './reducers/facultyReducers';
+} from "./reducers/facultyReducers";
 
 import {
   gracemarkCreateReducer,
@@ -32,7 +33,7 @@ import {
   gracemarkDeleteReducer,
   gracemarkUpdateReducer,
   gracemarkDetailsReducer,
-} from './reducers/gracemarkReducers';
+} from "./reducers/gracemarkReducers";
 import {
   courseListReducer,
   courseAddMarkListReducer,
@@ -44,12 +45,13 @@ import {
   gradeRangeUpdateReducer,
   allGradeRangeReducer,
   rangeReducer,
-} from './reducers/courseReducers';
+} from "./reducers/courseReducers";
 
 const reducer = combineReducers({
   studentSignup: studentRegisterReducer,
   studentSignin: studentLoginReducer,
   studentList: studentListReducer,
+  studentGet: studentGetReducer,
   courseStudentList: courseStudentListReducer,
   studentRequest: studentRequestReducer,
   requestAccept: requestAcceptReducer,
@@ -83,16 +85,16 @@ const reducer = combineReducers({
 
 const middleware = [thunk];
 
-const studentInfoFromStorage = localStorage.getItem('studentInfo')
-  ? JSON.parse(localStorage.getItem('studentInfo'))
+const studentInfoFromStorage = localStorage.getItem("studentInfo")
+  ? JSON.parse(localStorage.getItem("studentInfo"))
   : null;
 
-const adminInfoFromStorage = localStorage.getItem('adminInfo')
-  ? JSON.parse(localStorage.getItem('adminInfo'))
+const adminInfoFromStorage = localStorage.getItem("adminInfo")
+  ? JSON.parse(localStorage.getItem("adminInfo"))
   : null;
 
-const facultyInfoFromStorage = localStorage.getItem('facultyInfo')
-  ? JSON.parse(localStorage.getItem('facultyInfo'))
+const facultyInfoFromStorage = localStorage.getItem("facultyInfo")
+  ? JSON.parse(localStorage.getItem("facultyInfo"))
   : null;
 
 const initialState = {
