@@ -19,6 +19,7 @@ const ViewCourseMarks = ({ history, match }) => {
   let batch = str.substring(n - 1, n);
   const [marks, setMarks] = useState([]);
   const [graceAccepted, setGraceAccepted] = useState("");
+  const [grace, setGrace] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -40,12 +41,14 @@ const ViewCourseMarks = ({ history, match }) => {
         .all([
           axios.get(`/course/student/marks/${rollnum}`),
           axios.get(`/student/${rollnum}`),
+          axios.get(`/student/grace/info/${rollnum}`),
         ])
         .then(
-          axios.spread((response1, response2) => {
-            console.log(response1, response2);
+          axios.spread((response1, response2, response3) => {
+            console.log(response1, response2, response3);
             setMarks(response1.data.markList);
             setGraceAccepted(response2.data.student.Requested);
+            setGrace(response3.data.GraceInfo);
           })
         );
     } else {
@@ -53,11 +56,14 @@ const ViewCourseMarks = ({ history, match }) => {
     }
   }, [dispatch, history, adminInfo]);
 
+  const calculateNewGrade = (grace) => {
+    axios
+      .put(`/student/caluclate/new/grade/${rollnum}`, { grace })
+      .then((response) => {});
+  };
+
   const studentGet = useSelector((state) => state.studentGet);
   const { student } = studentGet;
-
-  console.log("students sss", student);
-  console.log(marks);
 
   return (
     <div className="ml-5 mt-3 align-items-center">
@@ -78,7 +84,9 @@ const ViewCourseMarks = ({ history, match }) => {
           </Col>
           {graceAccepted === "accepted" && (
             <Col className="text-right">
-              <Button variant="info">Calculate Grade Mark</Button>
+              <Button variant="info" onClick={() => calculateNewGrade(grace)}>
+                Calculate Grade Mark
+              </Button>
             </Col>
           )}
         </Row>

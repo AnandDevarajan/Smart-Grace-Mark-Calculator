@@ -531,3 +531,44 @@ exports.deleteAccount = (req, res) => {
     }
   );
 };
+
+exports.getGraceInfo = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT c.CourseID,c.Total,c.Grade,s.credits,g.O,g.Ap,g.A,g.Bp,g.B,g.C,g.P from grace_marks.course_mark c inner join grace_marks.course s on c.CourseID=s.CourseID inner join grace_marks.range g on c.CourseID=g.CourseID and c.RollNum =? order by c.Total`,
+    [id],
+    (err, result) => {
+      if (result.length === 0 || err) {
+        return res.status(400).json({
+          message: "Something went wrong",
+        });
+      }
+      return res.json({
+        GraceInfo: result,
+      });
+    }
+  );
+};
+
+exports.calculateNewGrade = (req, res) => {
+  const id = req.params.id;
+  const { grace } = req.body;
+  // for (let info of grace) {
+  //   const pass = info.P;
+  //   console.log(info.Total);
+  //   if (info.Total < pass) {
+  //     console.log(
+  //       "Failed",
+  //       info.CourseID,
+  //       "Pass mark = ",
+  //       info.P,
+  //       "Marks you got =",
+  //       info.Total
+  //     );
+  //   } else {
+  //     console.log("Passed");
+  //   }
+  // }
+
+  //TODO: Algorithm here
+};
