@@ -148,7 +148,7 @@ exports.updateCourseMarkDetails = (req, res) => {
 
 exports.getCourseReport = (req, res) => {
   con.query(
-    `SELECT c.CourseID,s.CourseName,avg(c.total) as Average,max(c.total) as Max,min(c.total) as Min ,count(c.CourseID) as Num ,g.status FROM grace_marks.course_mark c  inner join grace_marks.course s on c.CourseID=s.CourseID inner join grace_marks.grade_range g on c.CourseID=g.CourseID group by c.CourseID order by c.CourseID`,
+    `SELECT c.CourseID,s.CourseName,avg(c.total) as Average,max(c.total) as Max,min(c.total) as Min ,count(c.CourseID) as Num ,g.status,s.credits FROM grace_marks.course_mark c  inner join grace_marks.course s on c.CourseID=s.CourseID inner join grace_marks.grade_range g on c.CourseID=g.CourseID group by c.CourseID order by c.CourseID`,
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({

@@ -49,6 +49,7 @@ const CourseReport = ({ history }) => {
             <tr>
               <th>Course ID</th>
               <th>Course Name</th>
+              <th>Credits</th>
               <th>Min </th>
               <th>Max</th>
               <th>Average</th>
@@ -61,6 +62,7 @@ const CourseReport = ({ history }) => {
               <tr>
                 <td>{report.CourseID}</td>
                 <td>{report.CourseName}</td>
+                <td>{report.credits}</td>
                 <td>{report.Min}</td>
                 <td>{report.Max}</td>
                 <td>
