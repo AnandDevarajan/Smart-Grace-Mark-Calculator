@@ -20,6 +20,7 @@ const ViewCourseMarks = ({ history, match }) => {
   const [marks, setMarks] = useState([]);
   const [graceAccepted, setGraceAccepted] = useState("");
   const [grace, setGrace] = useState([]);
+  const [gm, setGm] = useState("");
 
   const dispatch = useDispatch();
 
@@ -48,6 +49,7 @@ const ViewCourseMarks = ({ history, match }) => {
             console.log(response1, response2, response3);
             setMarks(response1.data.markList);
             setGraceAccepted(response2.data.student.Requested);
+            setGm(response2.data.student.GraceMark);
             setGrace(response3.data.GraceInfo);
           })
         );
@@ -58,7 +60,7 @@ const ViewCourseMarks = ({ history, match }) => {
 
   const calculateNewGrade = (grace) => {
     axios
-      .put(`/student/caluclate/new/grade/${rollnum}`, { grace })
+      .put(`/student/caluclate/new/grade/${rollnum}`, { grace, gm })
       .then((response) => {});
   };
 

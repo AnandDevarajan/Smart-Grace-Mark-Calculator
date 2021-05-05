@@ -552,7 +552,8 @@ exports.getGraceInfo = (req, res) => {
 
 exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
-  const { grace } = req.body;
+  const { grace, gm } = req.body;
+  console.log(gm);
   // for (let info of grace) {
   //   const pass = info.P;
   //   console.log(info.Total);
