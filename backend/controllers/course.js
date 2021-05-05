@@ -72,7 +72,7 @@ exports.getCourseMark = (req, res) => {
 exports.getCourseMarkOfStudent = (req, res) => {
   const id = req.params.id;
   con.query(
-    `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.Total,s.CourseName,s.credits,c.Grade,s1.Requested from grace_marks.course_mark c inner join grace_marks.student s1 on c.RollNum LIKE ?  inner  join grace_marks.course s on s.CourseID = c.CourseID and c.RollNum LIKE ? group by c.CourseID`,
+    `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.Total,s.CourseName,s.credits,c.Grade,c.Final_Grade,s1.Requested from grace_marks.course_mark c inner join grace_marks.student s1 on c.RollNum LIKE ?  inner  join grace_marks.course s on s.CourseID = c.CourseID and c.RollNum LIKE ? group by c.CourseID`,
     [id, id],
     (err, result) => {
       if (err) {

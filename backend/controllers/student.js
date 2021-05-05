@@ -573,3 +573,7 @@ exports.calculateNewGrade = (req, res) => {
 
   //TODO: Algorithm here
 };
+
+
+
+// SELECT count(c.Final_Grade) from grace_marks.course_mark c  inner join grace_marks.student s on c.RollNum = s.RollNum where s.Requested ='accepted' AND c.Final_Grade='N/P';

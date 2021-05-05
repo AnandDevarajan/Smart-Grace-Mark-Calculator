@@ -111,7 +111,8 @@ const ViewCourseMarks = ({ history, match }) => {
                 <th>Marks</th>
                 <th>Total</th>
                 <th>Grade</th>
-                <th>Credits</th>
+
+                {graceAccepted === "accepted" && <th>Final Grade</th>}
               </tr>
             </thead>
             <tbody>
@@ -205,7 +206,92 @@ const ViewCourseMarks = ({ history, match }) => {
                       </Button>
                     )}
                   </td>
-                  <td>{mark.credits}</td>
+
+                  {graceAccepted === "accepted" && (
+                    <td>
+                      {" "}
+                      {mark.Final_Grade === "O" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{
+                            backgroundColor: "#289672",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          O
+                        </Button>
+                      )}
+                      {mark.Final_Grade === "A+" && (
+                        <Button
+                          className="btn btn-sm text-center"
+                          style={{
+                            backgroundColor: "#29bb89",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          A+
+                        </Button>
+                      )}
+                      {mark.Final_Grade === "A" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{
+                            backgroundColor: "#29bb89",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          A
+                        </Button>
+                      )}
+                      {mark.Final_Grade === "B+" && (
+                        <Button
+                          className="btn btn-sm btn-success"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          B+
+                        </Button>
+                      )}
+                      {mark.Final_Grade === "B" && (
+                        <Button
+                          className="btn btn-sm btn-success"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          B
+                        </Button>
+                      )}
+                      {mark.Final_Grade === "C" && (
+                        <Button
+                          className="btn btn-sm btn-warning"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          C
+                        </Button>
+                      )}
+                      {mark.Final_Grade === "P" && (
+                        <Button
+                          className="btn btn-sm btn-danger"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          P
+                        </Button>
+                      )}
+                      {mark.Final_Grade === "F" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{
+                            backgroundColor: "#be0000",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          F
+                        </Button>
+                      )}
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
