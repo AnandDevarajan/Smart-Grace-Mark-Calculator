@@ -20,6 +20,9 @@ const ViewCourseMarks = ({ history, match }) => {
   const [marks, setMarks] = useState([]);
   const [graceAccepted, setGraceAccepted] = useState("");
   const [grace, setGrace] = useState([]);
+  const [finalStatus, setFinalStatus] = useState("");
+  const [cgpa, setCgpa] = useState("");
+  const [finalCgpa, setFinalCgpa] = useState("");
   const [gm, setGm] = useState("");
 
   const dispatch = useDispatch();
@@ -49,6 +52,7 @@ const ViewCourseMarks = ({ history, match }) => {
             console.log(response1, response2, response3);
             setMarks(response1.data.markList);
             setGraceAccepted(response2.data.student.Requested);
+            setFinalStatus(response1.data.markList[0].Final_status);
             setGm(response2.data.student.GraceMark);
             setGrace(response3.data.GraceInfo);
           })
@@ -62,6 +66,7 @@ const ViewCourseMarks = ({ history, match }) => {
     axios
       .put(`/student/caluclate/new/grade/${rollnum}`, { grace, gm })
       .then((response) => {});
+    window.location.pathname = `/student/view/marklist/${str}`;
   };
 
   const studentGet = useSelector((state) => state.studentGet);
@@ -84,7 +89,7 @@ const ViewCourseMarks = ({ history, match }) => {
               </Button>
             </Link>
           </Col>
-          {graceAccepted === "accepted" && (
+          {graceAccepted === "accepted" && finalStatus === "N/P" && (
             <Col className="text-right">
               <Button variant="info" onClick={() => calculateNewGrade(grace)}>
                 Calculate Grade Mark
@@ -95,10 +100,17 @@ const ViewCourseMarks = ({ history, match }) => {
       )}
       <div className="card ml-5 px-3 overflow my_card">
         <h1 className="py-3 text-center">Mark List</h1>
-        <h4>
-          {rollnum} - {branch} {batch}
-        </h4>
-        <h4></h4>
+        <Row>
+          <Col>
+            <h4>
+              {rollnum} - {branch} {batch}
+            </h4>
+          </Col>
+          <Col>
+            <h4 className="ml-5 text-left">Cgpa:</h4>
+          </Col>
+        </Row>
+
         {error ? (
           <Message variant="danger">{error}</Message>
         ) : (
@@ -111,7 +123,6 @@ const ViewCourseMarks = ({ history, match }) => {
                 <th>Marks</th>
                 <th>Total</th>
                 <th>Grade</th>
-
                 {graceAccepted === "accepted" && <th>Final Grade</th>}
               </tr>
             </thead>
@@ -207,7 +218,7 @@ const ViewCourseMarks = ({ history, match }) => {
                     )}
                   </td>
 
-                  {graceAccepted === "accepted" && (
+                  {graceAccepted === "accepted" && mark.final_status === "P" && (
                     <td>
                       {" "}
                       {mark.Final_Grade === "O" && (

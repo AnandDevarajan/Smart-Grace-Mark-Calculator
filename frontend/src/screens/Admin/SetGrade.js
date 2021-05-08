@@ -110,7 +110,6 @@ const SetGrade = ({ match, history }) => {
               <thead>
                 <tr>
                   <th>Course ID</th>
-
                   <th>
                     <Button
                       className="btn btn-sm"

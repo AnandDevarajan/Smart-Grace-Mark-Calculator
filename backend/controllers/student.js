@@ -553,27 +553,120 @@ exports.getGraceInfo = (req, res) => {
 exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
   const { grace, gm } = req.body;
-  console.log(gm);
-  // for (let info of grace) {
-  //   const pass = info.P;
-  //   console.log(info.Total);
-  //   if (info.Total < pass) {
-  //     console.log(
-  //       "Failed",
-  //       info.CourseID,
-  //       "Pass mark = ",
-  //       info.P,
-  //       "Marks you got =",
-  //       info.Total
-  //     );
-  //   } else {
-  //     console.log("Passed");
-  //   }
-  // }
+  let maxCredits = 0;
 
-  //TODO: Algorithm here
+  // If the person has failed in any subject one or more
+  for (let info of grace) {
+    if (
+      parseInt(info.Total) < parseInt(info.P) &&
+      parseInt(info.Total) + parseInt(gm) >= parseInt(info.P)
+    ) {
+      maxCredits = Math.max(maxCredits, info.credits);
+    }
+  }
+  // The student has failed and if we add grace mark he will pass
+  if (maxCredits != 0) {
+    for (let info of grace) {
+      if (info.Total < info.P && info.credits == maxCredits) {
+        info.Total = parseInt(info.Total) + parseInt(gm);
+        let cid = info.CourseID;
+        //Grade to P
+        con.query(
+          "UPDATE COURSE_MARK SET Total=?,Grade=?,WHERE CourseID=? AND RollNum=?;UPDATE STUDENT SET Requested=? WHERE RollNum=?",
+          [info.Total, "P", cid, id, "Grace Added", id],
+          (err, result) => {
+            if (err) {
+              return res.status(400).json({
+                message: "Unable to Update",
+              });
+            }
+            return res.json({
+              message: "Total Marks Updated",
+            });
+          }
+        );
+        break;
+      }
+    }
+  }
+  //If the student has not failed
+  else {
+    let passMaxCredits = 0;
+    for (let info of grace) {
+      let index = 0;
+      let range = []; // minimum marks for each grade(in grade change)
+      let gradeChange = []; // To handle A+ to O and A to A+
+      if (info.Grade != "O") {
+        range.push(parseInt(info.P));
+        gradeChange.push(1);
+        range.push(parseInt(info.C));
+        gradeChange.push(1);
+        range.push(parseInt(info.B));
+        gradeChange.push(1);
+        range.push(parseInt(info.Bp));
+        gradeChange.push(1);
+        range.push(parseInt(info.A));
+        gradeChange.push(0.5);
+        range.push(parseInt(info.Ap));
+        gradeChange.push(0.5);
+        range.push(parseInt(info.O));
+        // Next grade that the student might get if we add grace marks (Index)
+        while (range[index] < parseInt(info.Total)) {
+          index++;
+        }
+        // Maximum Grade change for the available grace marks
+        if (parseInt(info.Total) + parseInt(gm) >= range[index]) {
+          passMaxCredits = Math.max(
+            passMaxCredits,
+            gradeChange[index] * parseInt(info.credits)
+          );
+        }
+      }
+    }
+    let changeValue = 0;
+    let FinalGrade = "";
+    for (let info of grace) {
+      if (info.Grade == "A" || info.Grade == "A+") {
+        changeValue = 0.5;
+      } else {
+        changeValue = 1;
+      }
+
+      //assigning to maximum grade change
+      if (
+        info.Grade != "O" &&
+        changeValue * parseInt(info.credits) == passMaxCredits
+      ) {
+        // Before change to After Grade change
+        if (info.Grade == "P") {
+          FinalGrade = "C";
+        } else if (info.Grade == "C") {
+          FinalGrade = "B";
+        } else if (info.Grade == "B") {
+          FinalGrade = "B+";
+        } else if (info.Grade == "B+") {
+          FinalGrade = "A";
+        } else if (info.Grade == "A") {
+          FinalGrade = "A+";
+        } else {
+          FinalGrade = "O";
+        }
+        //Update your Final Grade into data base both grade and marks reflected in database
+        con.query(
+          "UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?",
+          [
+            parseInt(info.Total) + parseInt(gm),
+            FinalGrade,
+            id,
+            info.CourseID,
+            "P",
+            id,
+          ]
+        );
+        break;
+      }
+    }
+  }
 };
-
-
 
 // SELECT count(c.Final_Grade) from grace_marks.course_mark c  inner join grace_marks.student s on c.RollNum = s.RollNum where s.Requested ='accepted' AND c.Final_Grade='N/P';

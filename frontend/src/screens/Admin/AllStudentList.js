@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import Message from '../../components/Message';
-import './Admin.css';
+import React, { useEffect } from "react";
+import { LinkContainer } from "react-router-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "../../components/Message";
+import "./Admin.css";
 
 import {
   listStudents,
   requestAccept,
   requestReject,
-} from '../../actions/studentActions';
-import { Link } from 'react-router-dom';
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import '../Home.css';
+} from "../../actions/studentActions";
+import { Link } from "react-router-dom";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import "../Home.css";
 
 const AllStudentList = ({ history }) => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const AllStudentList = ({ history }) => {
     if (adminInfo) {
       dispatch(listStudents());
     } else {
-      history.push('/');
+      history.push("/");
     }
   }, [dispatch, history, adminInfo]);
 
@@ -44,22 +44,22 @@ const AllStudentList = ({ history }) => {
   };
 
   return (
-    <div className='container-fluid d-flex justify-content-center'>
+    <div className="container-fluid d-flex justify-content-center">
       <div
-        className='ml-5 align-items-center alllist_div'
-        style={{ backgroundColor: 'white' }}
+        className="ml-5 align-items-center alllist_div"
+        style={{ backgroundColor: "white" }}
       >
-        <Link to='/admin/profile' className='goback'>
-          <Button variant='light' className='ml-5'>
+        <Link to="/admin/profile" className="goback">
+          <Button variant="light" className="ml-5">
             Go Back
           </Button>
         </Link>
-        <div className='card ml-5 px-3 overflow my_card'>
-          <h1 className='text-center list_heading text-info'>STUDENT LIST</h1>
+        <div className="card ml-5 px-3 overflow my_card">
+          <h1 className="text-center list_heading text-info">STUDENT LIST</h1>
           {error ? (
-            <Message variant='danger'>{error}</Message>
+            <Message variant="danger">{error}</Message>
           ) : (
-            <Table striped bordered hover responsive className='table-sm'>
+            <Table striped bordered hover responsive className="table-sm">
               <thead>
                 <tr>
                   <th>Roll No</th>
@@ -85,54 +85,58 @@ const AllStudentList = ({ history }) => {
                     </td>
                     <td>{student.Branch}</td>
                     <td>{student.Batch}</td>
-                    <td className='text-center'>
+                    <td className="text-center">
                       <LinkContainer
                         to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
                       >
-                        <Button className='btn btn-sm btn-info'>View</Button>
+                        <Button className="btn btn-sm btn-info">View</Button>
                       </LinkContainer>
                     </td>
-                    {student.GraceDesc === 'N/A' ? (
+                    {student.GraceDesc === "N/A" ? (
                       <td>-</td>
                     ) : (
                       <td>{student.GraceDesc}</td>
                     )}
-                    {student.Requested === 'accepted' ? (
+                    {student.Requested === "accepted" ? (
                       <td>{student.GraceMark}</td>
                     ) : (
                       <td>-</td>
                     )}
                     <td>
-                      {student.Requested === 'pending' ? (
-                        <span className='badge badge-pill badge-warning mr-3'>
+                      {student.Requested === "pending" ? (
+                        <span className="badge badge-pill badge-warning mr-3">
                           Pending
                         </span>
-                      ) : student.Requested === 'accepted' ? (
-                        <span className='badge badge-pill badge-success mr-3'>
+                      ) : student.Requested === "accepted" ? (
+                        <span className="badge badge-pill badge-success mr-3">
                           Accepted
                         </span>
-                      ) : student.Requested === 'rejected' ? (
-                        <span className='badge badge-pill badge-danger mr-3'>
+                      ) : student.Requested === "rejected" ? (
+                        <span className="badge badge-pill badge-danger mr-3">
                           Rejected
+                        </span>
+                      ) : student.Requested === "Grace Added" ? (
+                        <span className="badge badge-pill badge-success mr-3">
+                          Grace Added
                         </span>
                       ) : (
                         <Link>-</Link>
                       )}
                     </td>
-                    {student.Requested === 'pending' && (
+                    {student.Requested === "pending" && (
                       <td>
                         <CheckIcon
-                          className='icon'
-                          style={{ color: 'green' }}
+                          className="icon"
+                          style={{ color: "green" }}
                           onClick={() => acceptHandler(student.RollNum)}
                         />
                       </td>
                     )}
-                    {student.Requested === 'pending' && (
+                    {student.Requested === "pending" && (
                       <td>
                         <ClearIcon
-                          className='icon'
-                          style={{ color: 'red' }}
+                          className="icon"
+                          style={{ color: "red" }}
                           onClick={() => rejectHandler(student.RollNum)}
                         />
                       </td>

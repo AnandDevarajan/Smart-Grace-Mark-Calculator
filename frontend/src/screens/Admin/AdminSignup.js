@@ -9,7 +9,6 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./Admin.css";
 import DatePicker from "react-date-picker";
 
-
 const AdminSignup = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
