@@ -1,14 +1,14 @@
-const config = require('../config/db');
+const config = require("../config/db");
 const con = config.con;
-const { generateToken } = require('../utils/auth');
-const crypto = require('crypto');
-const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
-const { error } = require('console');
-require('dotenv').config();
+const { generateToken } = require("../utils/auth");
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+const { error } = require("console");
+require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.EmailID,
     pass: process.env.Pass,
@@ -26,19 +26,19 @@ exports.authAdmin = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'Invalid Email',
+          message: "Invalid Email",
         });
       }
       if (result.length > 0) {
         bcrypt.compare(password, result[0].Password, (err, hash) => {
           if (!hash) {
             return res.status(400).json({
-              message: 'Invalid Password',
+              message: "Invalid Password",
             });
           }
           if (err) {
             return res.status(400).json({
-              message: 'Invalid credentials',
+              message: "Invalid credentials",
             });
           }
           return res.json({
@@ -64,7 +64,7 @@ exports.registerAdmin = (req, res) => {
       (err, result) => {
         if (err) {
           return res.status(400).json({
-            message: 'Unable to create Admin',
+            message: "Unable to create Admin",
           });
         }
         if (result) {
@@ -73,7 +73,7 @@ exports.registerAdmin = (req, res) => {
             (err, result) => {
               if (result.length === 0 || err) {
                 return res.status(400).json({
-                  message: 'No user found',
+                  message: "No user found",
                 });
               }
               res.json({
@@ -82,9 +82,9 @@ exports.registerAdmin = (req, res) => {
               });
               transporter.sendMail(
                 {
-                  from: 'c8.smartgracemarkcalculator@gmail.com',
+                  from: "c8.smartgracemarkcalculator@gmail.com",
                   to: result[0].EmailID,
-                  subject: 'Welcome to Smart Grace Mark Calculator',
+                  subject: "Welcome to Smart Grace Mark Calculator",
                   text: `Dear User,
                        YOU HAVE SUCCESSFULLY CREATED AN ACCOUNT!`,
                 },
@@ -92,7 +92,7 @@ exports.registerAdmin = (req, res) => {
                   if (error) {
                     console.log(error);
                   } else {
-                    console.log('Email sent: ' + info.response);
+                    console.log("Email sent: " + info.response);
                   }
                 }
               );
@@ -110,21 +110,21 @@ exports.resetPassword = (req, res) => {
     if (err) {
       console.log(err);
     }
-    const token = buffer.toString('hex');
+    const token = buffer.toString("hex");
     con.query(
       `SELECT * FROM ADMINISTRATOR WHERE EmailID=?`,
       [email],
       (err, result) => {
         if (result.length === 0 || err) {
           return res.status(400).json({
-            message: 'User not found',
+            message: "User not found",
           });
         }
         if (result.length > 0) {
           result[0].resettoken = token;
           result[0].expiresin = Date.now() + 3600000;
           con.query(
-            'UPDATE ADMINISTRATOR SET resettoken=?, expiresin=? WHERE EmailID=?',
+            "UPDATE ADMINISTRATOR SET resettoken=?, expiresin=? WHERE EmailID=?",
             [result[0].resettoken, result[0].expiresin, email],
             (err, result) => {
               if (err) {
@@ -137,14 +137,14 @@ exports.resetPassword = (req, res) => {
                   (err, result) => {
                     if (err) {
                       return res.status(400).json({
-                        message: 'No user found',
+                        message: "No user found",
                       });
                     }
                     transporter.sendMail(
                       {
-                        from: 'c8.smartgracemarkcalculator@gmail.com',
+                        from: "c8.smartgracemarkcalculator@gmail.com",
                         to: result[0].EmailID,
-                        subject: 'Reset Password',
+                        subject: "Reset Password",
                         html: `
                         <p>You requested for password reset </p>
                         <h3>Click on this <a href="http://localhost:3000/admin/reset/${token}">link</a> to reset password</h3>
@@ -154,9 +154,9 @@ exports.resetPassword = (req, res) => {
                         if (error) {
                           console.log(error);
                         } else {
-                          console.log('Email sent: ' + info.response);
+                          console.log("Email sent: " + info.response);
                           res.json({
-                            message: 'Check your email',
+                            message: "Check your email",
                           });
                         }
                       }
@@ -181,7 +181,7 @@ exports.newPassword = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(422).json({
-          message: 'Session Expired',
+          message: "Session Expired",
         });
       }
       bcrypt.hash(password, 10, (err, hash) => {
@@ -189,17 +189,17 @@ exports.newPassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          'UPDATE ADMINISTRATOR SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?',
-          [hash, 'N/A', 'N/A', token],
+          "UPDATE ADMINISTRATOR SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
+          [hash, "N/A", "N/A", token],
           (err, result) => {
             if (err) {
               return res.status(400).json({
-                message: 'Unable to reset password',
+                message: "Unable to reset password",
               });
             }
             if (result) {
               res.json({
-                message: 'Password updated successfully',
+                message: "Password updated successfully",
               });
             }
           }
@@ -210,50 +210,47 @@ exports.newPassword = (req, res) => {
 };
 
 exports.publishResults = (req, res) => {
-  con.query(
-    `SELECT GRADE from COURSE_MARK WHERE GRADE='N/P'`,
-    (err, result) => {
-      if (result.length === 0) {
-        con.query(`SELECT EmailID from STUDENT`, (err, result) => {
-          if (err || result.length === 0) {
-            return res.status(422).json({
-              message: 'No Email Found',
+  con.query(`SELECT * from STUDENT WHERE final_status='N/P'`, (err, result) => {
+    if (result.length === 0) {
+      con.query(`SELECT EmailID from STUDENT`, (err, result) => {
+        if (err || result.length === 0) {
+          return res.status(422).json({
+            message: "No Email Found",
+          });
+        }
+        res.json({
+          Emails: result,
+        });
+        con.query(`UPDATE COURSE_MARK SET status='P'`, (error, field) => {
+          if (err || field.length == 0) {
+            return res.status(400).json({
+              message: "Failed to update",
             });
           }
-          res.json({
-            Emails: result,
-          });
-          con.query(`UPDATE COURSE_MARK SET status='P'`, (error, field) => {
-            if (err || field.length == 0) {
-              return res.status(400).json({
-                message: 'Failed to update',
-              });
-            }
-          });
-          let mailOptions = {
-            from: 'c8.smartgracemarkcalculator@gmail.com',
-            to: JSON.stringify(result),
-            subject: 'Results published',
-            html: ` 
+        });
+        let mailOptions = {
+          from: "c8.smartgracemarkcalculator@gmail.com",
+          to: JSON.stringify(result),
+          subject: "Results published",
+          html: ` 
             <h3>Dear student , The results for current semester has been published .
             Click on this <a href="http://localhost:3000/student/login/$">link</a> to view results</h3>`,
-          };
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log(`Email sent:${info.response}`);
-            }
-          });
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(`Email sent:${info.response}`);
+          }
         });
-      } else {
-        return res.json({
-          message:
-            'Unable to Publish Results now. Mark allocation is yet to be completed',
-        });
-      }
+      });
+    } else {
+      return res.json({
+        message:
+          "Unable to Publish Results now. Mark allocation is yet to be completed",
+      });
     }
-  );
+  });
 };
 
 exports.getAdmin = (req, res) => {
@@ -264,7 +261,7 @@ exports.getAdmin = (req, res) => {
     (err, result) => {
       if (result.length === 0 || err) {
         return res.status(400).json({
-          message: 'No admin found',
+          message: "No admin found",
         });
       }
       return res.json({
@@ -282,7 +279,7 @@ exports.updateAdminProfile = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: 'No admin Found',
+          message: "No admin Found",
         });
       }
       if (result) {
@@ -296,7 +293,7 @@ exports.updateAdminProfile = (req, res) => {
           (err, result) => {
             if (err || result.length === 0) {
               return res.status(400).json({
-                message: 'Failed to update',
+                message: "Failed to update",
               });
             }
             return res.json({
@@ -318,7 +315,7 @@ exports.changePassword = (req, res) => {
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(400).json({
-          message: 'No admin found',
+          message: "No admin found",
         });
       }
 
@@ -327,17 +324,17 @@ exports.changePassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          'UPDATE ADMINISTRATOR SET Password=? WHERE adminID=?',
+          "UPDATE ADMINISTRATOR SET Password=? WHERE adminID=?",
           [hash, id],
           (err, result) => {
             if (err) {
               return res.status(400).json({
-                message: 'Unable to reset password',
+                message: "Unable to reset password",
               });
             }
             if (result) {
               res.json({
-                message: 'Password updated successfully',
+                message: "Password updated successfully",
               });
             }
           }
@@ -360,11 +357,11 @@ exports.getStatus = (req, res) => {
   con.query(`SELECT * from COURSE_MARK WHERE status='N/P'`, (error, result) => {
     if (result.length === 0) {
       return res.json({
-        status: 'Published',
+        status: "Published",
       });
     }
     return res.json({
-      status: 'Not Published',
+      status: "Not Published",
     });
   });
 };
@@ -379,11 +376,11 @@ exports.resetPublish = (req, res) => {
         (error, result) => {
           if (result.length === 0) {
             return res.json({
-              status: 'Published',
+              status: "Published",
             });
           }
           return res.json({
-            status: 'Not Published',
+            status: "Not Published",
           });
         }
       );

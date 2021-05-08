@@ -96,9 +96,7 @@ const AdminProfile = ({ history }) => {
     localStorage.removeItem("adminInfo");
     window.location.pathname = "/";
   };
-  
-  
-  
+
   return (
     <div
       className="ml-5 mt-3 align-items-center alllist_div"
@@ -154,7 +152,7 @@ const AdminProfile = ({ history }) => {
                   <button
                     className="btn btn-sm btn-warning mr-5"
                     onClick={publishResult}
-                    style={{ width: "86px" }}
+                    style={{ width: "120px" }}
                   >
                     Published
                   </button>

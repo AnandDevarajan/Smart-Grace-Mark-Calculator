@@ -669,4 +669,33 @@ exports.calculateNewGrade = (req, res) => {
   }
 };
 
-// SELECT count(c.Final_Grade) from grace_marks.course_mark c  inner join grace_marks.student s on c.RollNum = s.RollNum where s.Requested ='accepted' AND c.Final_Grade='N/P';
+exports.calculateCGPA = (req, res) => {
+  const id = req.params.id;
+  const { marks } = req.body;
+  console.log(marks);
+  let cgpa = 0;
+  let denominator = 0;
+  let numerator = 0;
+
+  let gradePoints = {
+    O: 10,
+    "A+": 9.5,
+    A: 9,
+    "B+": 8,
+    B: 7,
+    C: 6,
+    P: 5,
+    F: 4,
+  };
+  for (let student of marks) {
+    numerator += gradePoints[student.Final_Grade] * parseInt(student.credits);
+    denominator += parseInt(student.credits);
+  }
+  cgpa = (numerator / denominator).toFixed(2);
+  if (cgpa <= 10 && cgpa >= 0) {
+    con.query(
+      "UPDATE student SET cgpa =? ,final_cgpa=?,cgpa_status=?,final_status=? WHERE RollNum=?",
+      [cgpa, "P", "P", "P", id]
+    );
+  }
+};

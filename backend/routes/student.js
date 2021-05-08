@@ -15,6 +15,7 @@ const {
   cancelRequest,
   getGraceInfo,
   calculateNewGrade,
+  calculateCGPA,
 } = require("../controllers/student");
 const { verifyStudent } = require("../middlewares/auth");
 
@@ -30,6 +31,7 @@ router.put("/changepassword/:id", changePassword);
 router.put("/cancel/request/:id", cancelRequest);
 router.put("/request/:id", verifyStudent, addRequest);
 router.put("/caluclate/new/grade/:id", calculateNewGrade);
+router.put("/caluclate/cgpa/:id", calculateCGPA);
 router.delete("/delete/account/:id", deleteAccount);
 
 module.exports = router;

@@ -22,7 +22,7 @@ const ViewCourseMarks = ({ history, match }) => {
   const [grace, setGrace] = useState([]);
   const [finalStatus, setFinalStatus] = useState("");
   const [cgpa, setCgpa] = useState("");
-  const [finalCgpa, setFinalCgpa] = useState("");
+  const [cgpaStatus, setCgpaStatus] = useState("");
   const [gm, setGm] = useState("");
 
   const dispatch = useDispatch();
@@ -49,10 +49,12 @@ const ViewCourseMarks = ({ history, match }) => {
         ])
         .then(
           axios.spread((response1, response2, response3) => {
-            console.log(response1, response2, response3);
+            console.log(response1);
             setMarks(response1.data.markList);
             setGraceAccepted(response2.data.student.Requested);
-            setFinalStatus(response1.data.markList[0].Final_status);
+            setCgpa(response2.data.student.cgpa);
+            setCgpaStatus(response2.data.student.final_status);
+            setFinalStatus(response1.data.markList[0].final_status);
             setGm(response2.data.student.GraceMark);
             setGrace(response3.data.GraceInfo);
           })
@@ -68,18 +70,37 @@ const ViewCourseMarks = ({ history, match }) => {
       .then((response) => {});
     window.location.pathname = `/student/view/marklist/${str}`;
   };
+  console.log(cgpa);
+  const calculateCGPA = (marks) => {
+    axios
+      .put(`/student/caluclate/cgpa/${rollnum}`, { marks })
+      .then((response) => {});
+    window.location.pathname = `/student/view/marklist/${str}`;
+  };
 
   const studentGet = useSelector((state) => state.studentGet);
   const { student } = studentGet;
-
   return (
     <div className="ml-5 mt-3 align-items-center">
       {adminInfo ? (
-        <Link to="/admin/students">
-          <Button variant="light">
-            <ArrowBackIcon /> Go Back
-          </Button>
-        </Link>
+        <Row>
+          <Col>
+            <Link to="/admin/students">
+              <Button variant="light">
+                <ArrowBackIcon /> Go Back
+              </Button>
+            </Link>
+          </Col>
+
+          <Col className="text-right">
+            {setCgpaStatus === "N/P" ||
+              (cgpa == "NaN" && (
+                <Button variant="success" onClick={() => calculateCGPA(marks)}>
+                  Calculate CGPA
+                </Button>
+              ))}
+          </Col>
+        </Row>
       ) : (
         <Row>
           <Col>
@@ -92,7 +113,7 @@ const ViewCourseMarks = ({ history, match }) => {
           {graceAccepted === "accepted" && finalStatus === "N/P" && (
             <Col className="text-right">
               <Button variant="info" onClick={() => calculateNewGrade(grace)}>
-                Calculate Grade Mark
+                Calculate Grace Mark
               </Button>
             </Col>
           )}
@@ -107,7 +128,7 @@ const ViewCourseMarks = ({ history, match }) => {
             </h4>
           </Col>
           <Col>
-            <h4 className="ml-5 text-left">Cgpa:</h4>
+            <h4 className="ml-5 text-left text-info">Cgpa: {cgpa}</h4>
           </Col>
         </Row>
 
