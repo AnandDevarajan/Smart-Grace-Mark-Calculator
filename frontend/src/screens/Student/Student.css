@@ -25,12 +25,19 @@
 
   .profile_card {
     width: 820px !important;
-    margin-top: 80px;
+    margin-top: 80px !important;
   }
   .result-text {
     margin-top: 50px !important;
   }
   .signup_card {
     margin-top: 50px !important;
+  }
+  .list_card {
+    padding: 0 !important;
+    font-size: 0.7rem !important;
+  }
+  .main_card {
+    flex: none;
   }
 }

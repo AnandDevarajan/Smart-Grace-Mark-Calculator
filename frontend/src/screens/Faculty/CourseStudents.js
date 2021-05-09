@@ -26,6 +26,7 @@ const CourseStudents = ({ history, match }) => {
   const [C, setC] = useState("");
   const [P, setP] = useState("");
   const [F, setF] = useState("");
+  const [status, setStatus] = useState("");
   const [count, setCount] = useState(0);
   const [grade, setGrade] = useState("");
   const dispatch = useDispatch("");
@@ -46,16 +47,25 @@ const CourseStudents = ({ history, match }) => {
   useEffect(() => {
     if (facultyInfo) {
       dispatch(courseStudentMark(cid));
-      axios.get(`/course/range/details/${cid}`).then((response) => {
-        setO(response.data.range[0].O);
-        setAp(response.data.range[0].Ap);
-        setA(response.data.range[0].A);
-        setBp(response.data.range[0].Bp);
-        setB(response.data.range[0].B);
-        setC(response.data.range[0].C);
-        setP(response.data.range[0].P);
-        setF(response.data.range[0].F);
-      });
+      axios
+        .all([
+          axios.get(`/course/range/details/${cid}`),
+          axios.get(`/course/graderange/${cid}`),
+        ])
+        .then(
+          axios.spread((response, response1) => {
+            setO(response.data.range[0].O);
+            setAp(response.data.range[0].Ap);
+            setA(response.data.range[0].A);
+            setBp(response.data.range[0].Bp);
+            setB(response.data.range[0].B);
+            setC(response.data.range[0].C);
+            setP(response.data.range[0].P);
+            setF(response.data.range[0].F);
+            setStatus(response1.data.grade[0].status);
+          })
+        );
+
       // dispatch(rangeDetails(cid));
     } else {
       history.push("/");
@@ -102,211 +112,211 @@ const CourseStudents = ({ history, match }) => {
   console.log("message", message);
   return (
     <>
-      <div className="container-fluid d-flex justify-content-center">
-        <div
-          className="ml-5 align-items-center alllist_div"
-          style={{ backgroundColor: "white" }}
-        >
-          <Link to="/faculty/profile" className="goback">
-            <Button variant="light">
-              <ArrowBackIcon /> Go Back
-            </Button>
-          </Link>
-          <div className="card ml-5 px-3 overflow my_card">
-            <Row className="align-items-center">
-              <Col>
-                <h1 className="list_heading text-info">
-                  STUDENT LIST - {facultyInfo.result.CourseID}
-                </h1>
-              </Col>
-              <Col className="text-right">
-                <Link to={`/admin/set/grade/${facultyInfo.result.CourseID}`}>
-                  <Button className="btn btn-sm">View Grade Ranges</Button>
-                </Link>
-              </Col>
-            </Row>
-            {message && <Message variant="info">{message}</Message>}
-            <Table striped bordered hover responsive className="table-sm">
-              <thead>
-                <tr style={{ color: "black" }}>
-                  <th>Roll No</th>
-                  <th>Name</th>
-                  <th>Branch</th>
-                  <th>Batch</th>
-                  <th>Internals</th>
-                  <th>Marks</th>
-                  <th>Total </th>
-                  <th></th>
-                  <th>Grade</th>
-                  <th>Set Grade</th>
-                </tr>
-              </thead>
-              <tbody>
-                {students.map((student) => (
-                  <tr key={student.RollNum}>
-                    <td>{student.RollNum}</td>
-                    <td>{student.Name}</td>
-                    <td>{student.Branch}</td>
-                    <td>{student.Batch}</td>
+      <div
+        className="ml-5 align-items-center alllist_div"
+        style={{ backgroundColor: "white" }}
+      >
+        <Link to="/faculty/profile" className="goback">
+          <Button variant="light">
+            <ArrowBackIcon /> Go Back
+          </Button>
+        </Link>
+        <div className="card ml-5 px-3 overflow my_card">
+          <Row className="align-items-center">
+            <Col>
+              <h1 className="list_heading text-info">
+                STUDENT LIST - {facultyInfo.result.CourseID}
+              </h1>
+            </Col>
+            <Col className="text-right">
+              <Link to={`/admin/set/grade/${facultyInfo.result.CourseID}`}>
+                <Button className="btn btn-sm">View Grade Ranges</Button>
+              </Link>
+            </Col>
+          </Row>
+          {message && <Message variant="info">{message}</Message>}
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr style={{ color: "black" }}>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Batch</th>
+                <th>Internals</th>
+                <th>Marks</th>
+                <th>Total </th>
+                <th></th>
+                <th>Grade</th>
+                <th>Set Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((student) => (
+                <tr key={student.RollNum}>
+                  <td>{student.RollNum}</td>
+                  <td>{student.Name}</td>
+                  <td>{student.Branch}</td>
+                  <td>{student.Batch}</td>
+                  <td>
+                    {student.Internals === "N/P" ? (
+                      <input
+                        onChange={(e) => setInternals(e.target.value)}
+                        style={{ marginLeft: "5px", width: "40px" }}
+                      />
+                    ) : (
+                      <td>{student.Internals}</td>
+                    )}
+                  </td>
+                  <td>
+                    {student.Marks === "N/P" ? (
+                      <input
+                        onChange={(e) => setMarks(e.target.value)}
+                        style={{ marginLeft: "5px", width: "40px" }}
+                      />
+                    ) : (
+                      <td>{student.Marks}</td>
+                    )}
+                  </td>
+                  <td>
+                    <td>{student.Total}</td>
+                  </td>
+                  {student.Total === "N/P" ? (
                     <td>
-                      {student.Internals === "N/P" ? (
-                        <input
-                          onChange={(e) => setInternals(e.target.value)}
-                          style={{ marginLeft: "5px", width: "40px" }}
-                        />
-                      ) : (
-                        <td>{student.Internals}</td>
+                      <CheckBoxIcon
+                        className="icon"
+                        style={{ color: "green" }}
+                        onClick={() => {
+                          submitMarks(student.RollNum, internals, marks);
+                        }}
+                      />
+                    </td>
+                  ) : (
+                    <td>
+                      {" "}
+                      <LinkContainer
+                        to={`/faculty/course/mark/edit/${student.RollNum}`}
+                      >
+                        <EditIcon className="icon" />
+                      </LinkContainer>
+                    </td>
+                  )}
+                  <td>
+                    <td>
+                      {" "}
+                      {student.Grade === "O" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{
+                            backgroundColor: "#289672",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          O
+                        </Button>
+                      )}
+                      {student.Grade === "A+" && (
+                        <Button
+                          className="btn btn-sm text-center"
+                          style={{
+                            backgroundColor: "#29bb89",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          A+
+                        </Button>
+                      )}
+                      {student.Grade === "A" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{
+                            backgroundColor: "#29bb89",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          A
+                        </Button>
+                      )}
+                      {student.Grade === "B+" && (
+                        <Button
+                          className="btn btn-sm btn-success"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          B+
+                        </Button>
+                      )}
+                      {student.Grade === "B" && (
+                        <Button
+                          className="btn btn-sm btn-success"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          B
+                        </Button>
+                      )}
+                      {student.Grade === "C" && (
+                        <Button
+                          className="btn btn-sm btn-warning"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          C
+                        </Button>
+                      )}
+                      {student.Grade === "P" && (
+                        <Button
+                          className="btn btn-sm btn-danger"
+                          style={{ width: "30px", padding: "2px" }}
+                        >
+                          P
+                        </Button>
+                      )}
+                      {student.Grade === "F" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{
+                            backgroundColor: "#be0000",
+                            width: "30px",
+                            padding: "2px",
+                          }}
+                        >
+                          F
+                        </Button>
                       )}
                     </td>
-                    <td>
-                      {student.Marks === "N/P" ? (
-                        <input
-                          onChange={(e) => setMarks(e.target.value)}
-                          style={{ marginLeft: "5px", width: "40px" }}
-                        />
-                      ) : (
-                        <td>{student.Marks}</td>
-                      )}
-                    </td>
-                    <td>
-                      <td>{student.Total}</td>
-                    </td>
-                    {student.Total === "N/P" ? (
+                  </td>
+                  <td>
+                    {student.Grade === "N/P" &&
+                    student.Total != "N/P" &&
+                    status === "P" ? (
                       <td>
-                        <CheckBoxIcon
+                        <DoneAllIcon
                           className="icon"
                           style={{ color: "green" }}
-                          onClick={() => {
-                            submitMarks(student.RollNum, internals, marks);
-                          }}
+                          onClick={() =>
+                            calculateGrade(
+                              student.RollNum,
+                              student.Total,
+                              O,
+                              Ap,
+                              A,
+                              Bp,
+                              B,
+                              C,
+                              P,
+                              F
+                            )
+                          }
                         />
                       </td>
                     ) : (
-                      <td>
-                        {" "}
-                        <LinkContainer
-                          to={`/faculty/course/mark/edit/${student.RollNum}`}
-                        >
-                          <EditIcon className="icon" />
-                        </LinkContainer>
-                      </td>
+                      <></>
                     )}
-                    <td>
-                      <td>
-                        {" "}
-                        {student.Grade === "O" && (
-                          <Button
-                            className="btn btn-sm"
-                            style={{
-                              backgroundColor: "#289672",
-                              width: "30px",
-                              padding: "2px",
-                            }}
-                          >
-                            O
-                          </Button>
-                        )}
-                        {student.Grade === "A+" && (
-                          <Button
-                            className="btn btn-sm text-center"
-                            style={{
-                              backgroundColor: "#29bb89",
-                              width: "30px",
-                              padding: "2px",
-                            }}
-                          >
-                            A+
-                          </Button>
-                        )}
-                        {student.Grade === "A" && (
-                          <Button
-                            className="btn btn-sm"
-                            style={{
-                              backgroundColor: "#29bb89",
-                              width: "30px",
-                              padding: "2px",
-                            }}
-                          >
-                            A
-                          </Button>
-                        )}
-                        {student.Grade === "B+" && (
-                          <Button
-                            className="btn btn-sm btn-success"
-                            style={{ width: "30px", padding: "2px" }}
-                          >
-                            B+
-                          </Button>
-                        )}
-                        {student.Grade === "B" && (
-                          <Button
-                            className="btn btn-sm btn-success"
-                            style={{ width: "30px", padding: "2px" }}
-                          >
-                            B
-                          </Button>
-                        )}
-                        {student.Grade === "C" && (
-                          <Button
-                            className="btn btn-sm btn-warning"
-                            style={{ width: "30px", padding: "2px" }}
-                          >
-                            C
-                          </Button>
-                        )}
-                        {student.Grade === "P" && (
-                          <Button
-                            className="btn btn-sm btn-danger"
-                            style={{ width: "30px", padding: "2px" }}
-                          >
-                            P
-                          </Button>
-                        )}
-                        {student.Grade === "F" && (
-                          <Button
-                            className="btn btn-sm"
-                            style={{
-                              backgroundColor: "#be0000",
-                              width: "30px",
-                              padding: "2px",
-                            }}
-                          >
-                            F
-                          </Button>
-                        )}
-                      </td>
-                    </td>
-                    <td>
-                      {student.Grade === "N/P" && student.Total != "N/P" ? (
-                        <td>
-                          <DoneAllIcon
-                            className="icon"
-                            style={{ color: "green" }}
-                            onClick={() =>
-                              calculateGrade(
-                                student.RollNum,
-                                student.Total,
-                                O,
-                                Ap,
-                                A,
-                                Bp,
-                                B,
-                                C,
-                                P,
-                                F
-                              )
-                            }
-                          />
-                        </td>
-                      ) : (
-                        <></>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </div>
       </div>
     </>

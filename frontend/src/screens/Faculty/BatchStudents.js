@@ -26,7 +26,7 @@ const BatchStudents = ({ history, match }) => {
   }, [dispatch, history, facultyInfo]);
 
   return (
-    <div className="container-fluid d-flex justify-content-center">
+    <div className="container-fluid d-flex justify-content-center main_card">
       <div
         className="ml-5 align-items-center alllist_div"
         style={{ backgroundColor: "white" }}
@@ -36,7 +36,7 @@ const BatchStudents = ({ history, match }) => {
             <ArrowBackIcon /> Go Back
           </Button>
         </Link>
-        <div className="card ml-5 px-3 overflow my_card">
+        <div className="card ml-5 px-3 overflow my_card list_card">
           <h1 className="list_heading text-center text-info">
             {facultyInfo.result.Department}-{batch}
           </h1>

@@ -83,11 +83,11 @@ const ViewCourseMarks = ({ history, match }) => {
   const studentGet = useSelector((state) => state.studentGet);
   const { student } = studentGet;
   return (
-    <div className="ml-5 mt-3 align-items-center">
+    <div className="ml-5 mt-3 align-items-center alllist_div">
       {adminInfo ? (
         <Row>
           <Col>
-            <Link to="/admin/students">
+            <Link to="/admin/students" className="goback">
               <Button variant="light">
                 <ArrowBackIcon /> Go Back
               </Button>
@@ -106,7 +106,10 @@ const ViewCourseMarks = ({ history, match }) => {
       ) : (
         <Row>
           <Col>
-            <Link to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}>
+            <Link
+              to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}
+              className="goback"
+            >
               <Button variant="light">
                 <ArrowBackIcon /> Go Back
               </Button>
@@ -122,7 +125,7 @@ const ViewCourseMarks = ({ history, match }) => {
         </Row>
       )}
       <div className="card ml-5 px-3 overflow my_card">
-        <h1 className="py-3 text-center">Mark List</h1>
+        <h1 className="py-3 text-center text-info">Mark List</h1>
         <Row>
           <Col>
             <h4>{rollnum}</h4>
@@ -131,9 +134,8 @@ const ViewCourseMarks = ({ history, match }) => {
           {finalcgpa === cgpa ? (
             <>
               <Col></Col>
-              <Col></Col>
               <Col>
-                <h5 className="ml-5 text-left text-info">Cgpa: {cgpa}</h5>
+                <Button>cgpa: {cgpa}</Button>
               </Col>
             </>
           ) : (
@@ -141,11 +143,8 @@ const ViewCourseMarks = ({ history, match }) => {
               <Col></Col>
 
               <Col>
-                <h5 className=" ml-5 mr-0 text-left text-info">cgpa: {cgpa}</h5>
-
-                <h5 className="ml-5 text-left text-info">
-                  Final cgpa: {finalcgpa}
-                </h5>
+                <Button>cgpa: {cgpa}</Button>
+                <Button> Final cgpa: {finalcgpa}</Button>
               </Col>
             </>
           )}
