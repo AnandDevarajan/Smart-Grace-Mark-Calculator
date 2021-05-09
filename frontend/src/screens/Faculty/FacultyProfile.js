@@ -36,6 +36,7 @@ const FacultyProfile = ({ history }) => {
   const [department, setDepartment] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [status, setStatus] = useState("");
 
   const [value, onChange] = useState(new Date());
   const facultySignin = useSelector((state) => state.facultySignin);
@@ -45,18 +46,22 @@ const FacultyProfile = ({ history }) => {
     if (!facultyInfo) {
       history.push("/");
     }
+
     axios
-      .get(`/faculty/${facultyInfo.result.FacultyID}`)
-      .then((response) => {
-        setName(response.data.faculty.Name);
-        setEmail(response.data.faculty.EmailID);
-        setDepartment(response.data.faculty.Department);
-        setPhone(response.data.faculty.PhoneNum);
-        setAddress(response.data.faculty.Address);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .all([
+        axios.get(`/faculty/${facultyInfo.result.FacultyID}`),
+        axios.get(`/faculty/status/${facultyInfo.result.FacultyID}`),
+      ])
+      .then(
+        axios.spread((response1, response2) => {
+          setName(response1.data.faculty.Name);
+          setEmail(response1.data.faculty.EmailID);
+          setDepartment(response1.data.faculty.Department);
+          setPhone(response1.data.faculty.PhoneNum);
+          setAddress(response1.data.faculty.Address);
+          setStatus(response1.data.faculty.status);
+        })
+      );
   }, [facultyInfo, name, email, address, department, phone]);
 
   const deleteMyAccount = (id) => {
@@ -91,7 +96,13 @@ const FacultyProfile = ({ history }) => {
                 <Button className="btn btn-sm">Edit Profile</Button>
               </Link>
             </Col>
-            <Col></Col>
+            <Col>
+              {status === "P" && (
+                <Button className="btn btn-sm btn-success">
+                  Mark as Completed
+                </Button>
+              )}
+            </Col>
             <Col>
               <DeleteForeverIcon
                 className="icon"

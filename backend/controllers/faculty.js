@@ -331,3 +331,39 @@ exports.facultyDeleteAccount = (req, res) => {
     }
   });
 };
+
+exports.facultyStatus = (req, res) => {
+  const id = req.params.id;
+
+  con.query(`SELECT * from Faculty where FacultyID=? `, [id], (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(400).json({
+        error: "No faculty found",
+      });
+    }
+    if (result[0].ClassAdviser === "Yes") {
+    } else if (result[0].ClassAdviser === "No") {
+      con.query(
+        "SELECT count(Grade) as count FROM grace_marks.course_mark WHERE CourseID=? AND Grade=?",
+        [result[0].CourseID, "N/P"],
+        (err, result) => {
+          console.log(result[0].count);
+          if (result[0].count === 0) {
+            con.query(
+              "UPDATE Faculty set status=? where FacultyID=?",
+              ["P", id],
+              (err, result) => {
+                if (err) {
+                  console.log(err.sqlMessage);
+                }
+                return res.json({
+                  message: "Completion updated",
+                });
+              }
+            );
+          }
+        }
+      );
+    }
+  });
+};

@@ -128,7 +128,7 @@ exports.updateCourseMarkDetails = (req, res) => {
         result[0].Total =
           parseInt(result[0].Internals) + parseInt(result[0].Marks);
         con.query(
-          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=?,Grade='N/P' WHERE CourseID=? AND RollNum=?;UPDATE GRADE_RANGE SET status ='N/P' WHERE CourseID=?`,
+          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=?,Grade='N/P',status='N/P' WHERE CourseID=? AND RollNum=?;UPDATE GRADE_RANGE SET status ='N/P' WHERE CourseID=?`,
           [result[0].Internals, result[0].Marks, result[0].Total, cid, id, cid],
           (err, result) => {
             if (err || result.length === 0) {
@@ -449,8 +449,8 @@ exports.updateGrade = (req, res) => {
     let grade = "O";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
@@ -466,8 +466,8 @@ exports.updateGrade = (req, res) => {
     let grade = "A+";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
@@ -484,8 +484,8 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
@@ -502,8 +502,8 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
@@ -519,8 +519,8 @@ exports.updateGrade = (req, res) => {
     let grade = "B";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
@@ -536,8 +536,8 @@ exports.updateGrade = (req, res) => {
     let grade = "C";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
@@ -554,8 +554,8 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
@@ -572,8 +572,8 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=? WHERE CourseID=? AND RollNum=?`,
-      [grade, grade, cid, id],
+      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
           return res.status(400).json({
