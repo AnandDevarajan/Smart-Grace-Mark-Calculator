@@ -31,7 +31,7 @@ const StudentLogin = ({ location, history }) => {
   };
 
   return (
-    <div style={{ backgroundColor: "white" }} className="mt-5">
+    <div style={{ backgroundColor: "white" }}>
       {!studentInfo && (
         <>
           <Link to="/" className="goback">
@@ -40,7 +40,7 @@ const StudentLogin = ({ location, history }) => {
             </Button>
           </Link>
           <FormContainer>
-            <div className="card ml-5 px-3 overflow my_card">
+            <div className="card ml-5 px-3 overflow my_card signup_card">
               <h1 className="text-info">Student Login</h1>
               {error && <Message variant="danger">{error}</Message>}
               <Form onSubmit={submitHandler}>

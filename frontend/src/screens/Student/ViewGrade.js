@@ -46,15 +46,16 @@ const ViewGrade = ({ match, history }) => {
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <h1 className="text-center">Result</h1>
+          <h1 className="text-center text-info result-text">Result</h1>
           <Row className="align-items-center ">
             <Col className="text-left">
-              <Button>{studentInfo.result.RollNum}</Button>
+              <Button className="btn btn-light">
+                {studentInfo.result.RollNum}
+              </Button>
             </Col>
             <Col></Col>
-            <Col></Col>
             <Col>
-              <h4 className="text-info">CGPA : {cgpa}</h4>
+              <Button className="btn">Cgpa:{cgpa}</Button>
             </Col>
           </Row>
 

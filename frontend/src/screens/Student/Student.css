@@ -22,4 +22,15 @@
     margin-left: auto !important;
     margin-right: auto !important;
   }
+
+  .profile_card {
+    width: 820px !important;
+    margin-top: 80px;
+  }
+  .result-text {
+    margin-top: 50px !important;
+  }
+  .signup_card {
+    margin-top: 50px !important;
+  }
 }

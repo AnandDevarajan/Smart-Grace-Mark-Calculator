@@ -71,7 +71,7 @@ const AdminSignup = ({ location, history }) => {
             </Button>
           </Link>
           <FormContainer className="signup_form">
-            <div className="card ml-5 px-3 overflow my_card mb-5 mt-5">
+            <div className="card ml-5 px-3 overflow my_card mb-5 signup_card">
               <h1 className="text-info">CREATE AN ADMIN ACCOUNT</h1>
               {message && <Message variant="danger">{message}</Message>}
               {error && <Message variant="danger">{error}</Message>}

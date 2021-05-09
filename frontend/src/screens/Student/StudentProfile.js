@@ -102,10 +102,10 @@ const StudentProfile = ({ history }) => {
   console.log(result);
   return (
     <div
-      className="ml-5 mt-3 align-items-center alllist_div"
+      className="ml-5  align-items-center alllist_div profile_card"
       style={{ backgroundColor: "white" }}
     >
-      <div className="card ml-5 px-3 overflow my_card">
+      <div className="card ml-5 px-3 overflow my_card profile_card">
         <div className="overflow">
           {result === "Published" && (
             <Message variant="success">
@@ -124,14 +124,16 @@ const StudentProfile = ({ history }) => {
                 style={{ textDecoration: "None" }}
               >
                 <EditTwoToneIcon />{" "}
-                <Button className="btn btn-sm btn-primary">Edit Profile</Button>
+                <Button className="btn btn-sm btn-primary apply">
+                  Edit Profile
+                </Button>
               </Link>
             </Col>
             <Col>
               {status === "N/A" && (
                 <Link to="/student/request" style={{ textDecoration: "None" }}>
                   <SendIcon />{" "}
-                  <Button className="btn btn-sm btn-info">
+                  <Button className="btn btn-sm btn-info apply">
                     Request for Grace Mark
                   </Button>
                 </Link>
@@ -143,7 +145,7 @@ const StudentProfile = ({ history }) => {
                 onClick={() => deleteMyAccount(roll)}
               />{" "}
               <Button
-                className="btn btn-sm btn-danger"
+                className="btn btn-sm btn-danger apply"
                 onClick={() => deleteMyAccount(roll)}
               >
                 Delete My Account

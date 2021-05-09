@@ -42,7 +42,7 @@ const FacultyLogin = ({ location, history }) => {
             </Button>
           </Link>
           <FormContainer>
-            <div className="card ml-5 px-3 overflow my_card mt-5">
+            <div className="card ml-5 px-3 overflow my_card signup_card">
               <h2 className="text-info">Faculty Login</h2>
               {error && <Message variant="danger">{error}</Message>}
               <Form onSubmit={submitHandler}>
