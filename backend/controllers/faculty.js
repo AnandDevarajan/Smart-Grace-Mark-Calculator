@@ -396,3 +396,8 @@ exports.facultyStatus = (req, res) => {
     }
   });
 };
+
+exports.updateComplete = (req, res) => {
+  const id = req.params.id;
+  con.query("UPDATE FACULTY SET completion=? WHERE FacultyID=?", ["Yes", id]);
+};

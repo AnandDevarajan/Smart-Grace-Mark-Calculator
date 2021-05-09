@@ -15,6 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import PhoneIcon from "@material-ui/icons/Phone";
 import HomeIcon from "@material-ui/icons/Home";
 import SchoolIcon from "@material-ui/icons/School";
+import DoneAllIcon from "@material-ui/icons/DoneAll";
 import ClassIcon from "@material-ui/icons/Class";
 import PublishIcon from "@material-ui/icons/Publish";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
@@ -37,7 +38,7 @@ const FacultyProfile = ({ history }) => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [status, setStatus] = useState("");
-
+  const [complete, setComplete] = useState("");
   const [value, onChange] = useState(new Date());
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
@@ -60,6 +61,7 @@ const FacultyProfile = ({ history }) => {
           setPhone(response1.data.faculty.PhoneNum);
           setAddress(response1.data.faculty.Address);
           setStatus(response1.data.faculty.status);
+          setComplete(response1.data.faculty.completion);
         })
       );
   }, [facultyInfo, name, email, address, department, phone, status]);
@@ -72,6 +74,11 @@ const FacultyProfile = ({ history }) => {
     }
     localStorage.removeItem("facultyInfo");
     window.location.pathname = "/";
+  };
+
+  const markAsCompleted = (id) => {
+    axios.put(`/faculty/complete/${id}`).then((response) => {});
+    window.location.pathname = "/faculty/profile";
   };
 
   return (
@@ -97,10 +104,19 @@ const FacultyProfile = ({ history }) => {
               </Link>
             </Col>
             <Col>
-              {status === "P" && (
-                <Button className="btn btn-sm btn-success">
+              {status === "P" && complete != "Yes" && (
+                <Button
+                  className="btn btn-sm btn-success"
+                  onClick={() => markAsCompleted(facultyInfo.result.FacultyID)}
+                >
                   Mark as Completed
                 </Button>
+              )}
+              {complete === "Yes" && (
+                <span>
+                  <DoneAllIcon className="icon" style={{ color: "green" }} />{" "}
+                  Completed
+                </span>
               )}
             </Col>
             <Col>

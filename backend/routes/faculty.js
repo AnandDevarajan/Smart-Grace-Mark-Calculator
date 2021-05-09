@@ -10,6 +10,7 @@ const {
   changePassword,
   facultyDeleteAccount,
   facultyStatus,
+  updateComplete
 } = require("../controllers/faculty");
 const {
   batchStudents,
@@ -29,5 +30,6 @@ router.get("/:id", getFaculty);
 router.get("/status/:id", facultyStatus);
 router.put("/:id", updateFacultyProfile);
 router.put("/changepassword/:id", changePassword);
+router.put("/complete/:id", updateComplete);
 router.delete("/delete/account/:id", facultyDeleteAccount);
 module.exports = router;
