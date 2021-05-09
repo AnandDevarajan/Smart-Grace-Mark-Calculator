@@ -6,6 +6,7 @@ import "react-calendar/dist/Calendar.css";
 import { studentLogout } from "../../actions/studentActions";
 import EmailIcon from "@material-ui/icons/Email";
 import PersonIcon from "@material-ui/icons/Person";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import PhoneIcon from "@material-ui/icons/Phone";
 import HomeIcon from "@material-ui/icons/Home";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
@@ -98,7 +99,7 @@ const StudentProfile = ({ history }) => {
     localStorage.removeItem("studentInfo");
     window.location.pathname = "/";
   };
-
+  console.log(result);
   return (
     <div
       className="ml-5 mt-3 align-items-center alllist_div"
@@ -106,6 +107,11 @@ const StudentProfile = ({ history }) => {
     >
       <div className="card ml-5 px-3 overflow my_card">
         <div className="overflow">
+          {result === "Published" && (
+            <Message variant="success">
+              <NotificationsIcon /> Results published
+            </Message>
+          )}
           <h1 className="text-success">Student Profile</h1>
           <p className="lead mt-2">
             <AccountBoxIcon style={{ color: "#2196f3" }} /> Welcome{" "}
