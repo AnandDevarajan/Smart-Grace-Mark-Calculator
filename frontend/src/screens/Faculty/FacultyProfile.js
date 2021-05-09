@@ -62,7 +62,7 @@ const FacultyProfile = ({ history }) => {
           setStatus(response1.data.faculty.status);
         })
       );
-  }, [facultyInfo, name, email, address, department, phone]);
+  }, [facultyInfo, name, email, address, department, phone, status]);
 
   const deleteMyAccount = (id) => {
     if (window.confirm("Do you want to delete this account ?")) {

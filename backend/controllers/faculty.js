@@ -342,6 +342,35 @@ exports.facultyStatus = (req, res) => {
       });
     }
     if (result[0].ClassAdviser === "Yes") {
+      con.query(
+        "SELECT count(Grade) as count FROM grace_marks.course_mark WHERE CourseID=? AND Grade=?",
+        [result[0].CourseID, "N/P"],
+        (err, result) => {
+          console.log(result[0].count);
+          if (result[0].count === 0) {
+            con.query(
+              "SELECT count(final_status) as fcount from course_mark where CourseID=? AND final_status=?",
+              [result[0].CourseID, "N/P"],
+              (err, result) => {
+                if (result[0].fcount === 0) {
+                  con.query(
+                    "UPDATE Faculty set status=? where FacultyID=?",
+                    ["P", id],
+                    (err, result) => {
+                      if (err) {
+                        console.log(err.sqlMessage);
+                      }
+                      return res.json({
+                        message: "Completion updated",
+                      });
+                    }
+                  );
+                }
+              }
+            );
+          }
+        }
+      );
     } else if (result[0].ClassAdviser === "No") {
       con.query(
         "SELECT count(Grade) as count FROM grace_marks.course_mark WHERE CourseID=? AND Grade=?",
