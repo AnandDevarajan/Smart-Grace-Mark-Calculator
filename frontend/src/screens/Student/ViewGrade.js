@@ -40,7 +40,7 @@ const ViewGrade = ({ match, history }) => {
   return (
     <>
       {status === "Published" && (
-        <div className="ml-5 align-items-center result-table">
+        <div className="ml-5 align-items-center result-table result_card">
           <Link to="/student/profile">
             <Button variant="light go-back">
               <ArrowBackIcon /> Go Back
@@ -59,7 +59,7 @@ const ViewGrade = ({ match, history }) => {
             </Col>
           </Row>
 
-          <Table striped bordered hover responsive className="table-sm  ">
+          <Table striped bordered hover responsive className="table-sm ">
             <thead>
               <tr>
                 <th>Course ID</th>
@@ -145,7 +145,7 @@ const ViewGrade = ({ match, history }) => {
         </div>
       )}
       {status === "Not Published" && (
-        <div>
+        <div className="result_card">
           <h1 className="text-center">Results Not Published</h1>
         </div>
       )}

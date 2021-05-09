@@ -24,19 +24,53 @@
   }
 
   .profile_card {
-    width: 820px !important;
-    margin-top: 80px !important;
+    padding: 0px !important;
+    margin-top: 60px !important;
   }
+  .profile_card span {
+    position: absolute;
+    z-index: 12;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+  }
+
+  .apply {
+    position: absolute;
+    z-index: 12;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+  }
+
   .result-text {
     margin-top: 50px !important;
   }
   .signup_card {
     margin-top: 50px !important;
+    overflow-x: hidden !important;
   }
+
   .list_card {
     padding: 0 !important;
   }
+
+  .result_card {
+    overflow-x: hidden !important;
+  }
+
   .main_card {
     flex: none;
+  }
+  .delete_icon {
+    color: "red";
+  }
+
+  .np {
+    position: absolute;
+    z-index: 12;
+    bottom: 0;
+    right: 0;
+    visibility: hidden;
   }
 }

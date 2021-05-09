@@ -45,7 +45,7 @@ const FacultyChangePassword = ({ history, match }) => {
         </Button>
       </Link>
       <FormContainer>
-        <div className="card ml-5 px-3 py-3 overflow my_card">
+        <div className="card ml-5 px-3 py-3 overflow my_card signup_card">
           <Form onSubmit={submitHandler}>
             <h1 className="text-info">Change Password</h1>
             {message && <Message variant="warning">{message}</Message>}

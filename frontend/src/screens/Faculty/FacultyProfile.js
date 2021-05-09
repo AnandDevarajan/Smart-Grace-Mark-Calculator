@@ -83,15 +83,15 @@ const FacultyProfile = ({ history }) => {
 
   return (
     <div
-      className="ml-5 mt-3 align-items-center alllist_div profile_card"
+      className="ml-5 mt-3 align-items-center alllist_div "
       style={{ backgroundColor: "white" }}
     >
-      <div className="card ml-5 px-3 overflow my_card">
+      <div className="card ml-5 px-3 overflow my_card profile_card">
         <div className="overflow">
           <h1 className="text-success">Faculty Profile</h1>
           <p className="lead mt-2">
             <AccountBoxIcon style={{ color: "#2196f3" }} /> Welcome{" "}
-            <span className="text-info"> {name}</span>
+            <strong className="text-info"> {name}</strong>
           </p>
           <Row className="mt-4">
             <Col>
@@ -99,8 +99,8 @@ const FacultyProfile = ({ history }) => {
                 to={`/faculty/edit/profile/${facultyInfo.result.FacultyID}`}
                 style={{ textDecoration: "None" }}
               >
-                <EditTwoToneIcon />{" "}
-                <Button className="btn btn-sm">Edit Profile</Button>
+                <EditTwoToneIcon className="icon edit_icon" />{" "}
+                <Button className="btn btn-sm apply">Edit Profile</Button>
               </Link>
             </Col>
             <Col>
@@ -113,19 +113,19 @@ const FacultyProfile = ({ history }) => {
                 </Button>
               )}
               {complete === "Yes" && (
-                <span>
+                <>
                   <DoneAllIcon className="icon" style={{ color: "green" }} />{" "}
                   Completed
-                </span>
+                </>
               )}
             </Col>
             <Col>
               <DeleteForeverIcon
-                className="icon"
+                className="icon delete_icon "
                 onClick={() => deleteMyAccount(facultyInfo.result.FacultyID)}
               />{" "}
               <Button
-                className="btn btn-sm btn-danger"
+                className="btn btn-sm btn-danger apply"
                 onClick={() => deleteMyAccount(facultyInfo.result.FacultyID)}
               >
                 Delete My Account
@@ -139,17 +139,19 @@ const FacultyProfile = ({ history }) => {
             <thead>
               <tr>
                 <th>
-                  <FormatListNumberedIcon /> Faculty ID
+                  <FormatListNumberedIcon />
+                  <span> Faculty ID</span>
                 </th>
 
                 <th>
-                  <SchoolIcon /> Department
+                  <SchoolIcon /> <span>Department</span>
                 </th>
                 <th>
-                  <ImportContactsIcon /> Course ID
+                  <ImportContactsIcon />
+                  <span>Course ID</span>
                 </th>
                 <th>
-                  <ClassIcon /> Advisor
+                  <ClassIcon /> <span>Advisor</span>
                 </th>
               </tr>
             </thead>
@@ -179,13 +181,16 @@ const FacultyProfile = ({ history }) => {
               <tr>
                 <th>
                   {" "}
-                  <EmailIcon /> Email
+                  <EmailIcon />
+                  <span>Email</span>
                 </th>
                 <th className="hide-sm">
-                  <PhoneIcon /> Phone Number
+                  <PhoneIcon />
+                  <span>Phone Number</span>
                 </th>
                 <th className="hide-sm">
-                  <HomeIcon /> Address
+                  <HomeIcon />
+                  <span>Address</span>
                 </th>
                 <th />
               </tr>

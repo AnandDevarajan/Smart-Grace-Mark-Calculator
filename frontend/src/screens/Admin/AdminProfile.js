@@ -129,28 +129,27 @@ const AdminProfile = ({ history }) => {
                 style={{ textDecoration: "None" }}
               >
                 <EditTwoToneIcon />{" "}
-                <Button className="btn btn-sm">Edit Profile</Button>
+                <Button className="btn btn-sm apply">Edit Profile</Button>
               </Link>
             </Col>
             <Col>
               {status === "Not Published" && (
-                <>
+                <Link onClick={publishResult}>
                   <PublishIcon className="mr-2" />
                   <button
-                    className="btn btn-sm btn-info"
-                    onClick={publishResult}
+                    className="btn btn-sm btn-info apply"
                     style={{ width: "120px" }}
                   >
                     Publish Results
                   </button>
-                </>
+                </Link>
               )}
 
               {status === "Published" && (
                 <>
                   <PublishIcon className="mr-2" />
                   <button
-                    className="btn btn-sm btn-warning mr-5"
+                    className="btn btn-sm btn-warning mr-5 apply"
                     onClick={publishResult}
                     style={{ width: "120px" }}
                   >
@@ -170,7 +169,7 @@ const AdminProfile = ({ history }) => {
                 onClick={() => deleteMyAccount(adminInfo.result.adminID)}
               />{" "}
               <Button
-                className="btn btn-sm btn-danger"
+                className="btn btn-sm btn-danger apply"
                 onClick={() => deleteMyAccount(adminInfo.result.adminID)}
               >
                 Delete My Account
@@ -207,13 +206,15 @@ const AdminProfile = ({ history }) => {
               <tr>
                 <th>
                   {" "}
-                  <EmailIcon /> Email
+                  <EmailIcon />
+                  <span>Email</span>
                 </th>
                 <th className="hide-sm">
-                  <PhoneIcon /> Phone Number
+                  <PhoneIcon /> <span>Phone Number</span>
                 </th>
-                <th className="hide-sm">
-                  <HomeIcon /> Address
+                <th className="hide-sm np">
+                  <HomeIcon />
+                  <span>Address</span>
                 </th>
                 <th />
               </tr>
@@ -222,7 +223,9 @@ const AdminProfile = ({ history }) => {
               <tr>
                 <td width="365px">{email}</td>
                 <td width="365px">+91 {phone}</td>
-                <td width="365px">{address}</td>
+                <td width="365px" className="np">
+                  {address}
+                </td>
               </tr>
             </tbody>
           </table>

@@ -89,22 +89,10 @@ function Navbar() {
             {dt}
           </h6>
         </div> */}
-        <nav class="navbar navbar-expand-lg navbar-dark nav_main">
+        <nav class="navbar navbar-expand-lg navbar-dark nav_main ">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active mt-3">
-              <Link to="#" className="menu-bars">
-                <MenuIcon
-                  style="menu_icon"
-                  style={{
-                    marginBottom: "25px",
-                    marginRight: "750px",
-                    color: "white",
-                  }}
-                  onClick={() =>
-                    showSidebar(window.matchMedia("(max-width: 900px)"))
-                  }
-                />
-              </Link>
+              <Link to="#" className="menu-bars"></Link>
             </li>
           </ul>
 
@@ -135,7 +123,7 @@ function Navbar() {
           {studentInfo ? (
             <ul className="nav-menu-items" onClick={showSidebar}>
               <h5 className="text-white mt-3">
-                <DoneAllSharpIcon className="app_icon" /> C8-SGMC
+                <DoneAllSharpIcon className="app_icon" /> C8 SGMC
               </h5>
 
               <li className="navbar-toggle">
@@ -189,7 +177,7 @@ function Navbar() {
           ) : facultyInfo ? (
             <ul className="nav-menu-items" onClick={showSidebar}>
               <h5 className="text-white mt-3">
-                <DoneAllSharpIcon className="app_icon" /> C8-SGMC
+                <DoneAllSharpIcon className="app_icon" /> C8 SGMC
               </h5>
               <li className="navbar-toggle">
                 <Link to="#" className="menu-bars">
@@ -255,17 +243,20 @@ function Navbar() {
             </ul>
           ) : adminInfo ? (
             <ul className="nav-menu-items" onClick={showSidebar}>
-              <h5 className="text-white  mt-3">
-                <DoneAllSharpIcon className="app_icon" /> C8-SGMC
+              <h5 className="text-white mt-3 np">
+                <DoneAllSharpIcon className="app_icon " /> C8 SGMC
               </h5>
 
               <li className="navbar-toggle">
-                <Link to="#" className="menu-bars">
+                <NavLink to="#" className="menu-bars">
                   <CloseIcon
-                    className="admin_close-icon"
+                    className="close_icon"
                     style={{ color: "white" }}
+                    onClick={() =>
+                      showSidebar(window.matchMedia("(max-width: 900px)"))
+                    }
                   />
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-text">
                 <NavLink
@@ -343,7 +334,7 @@ function Navbar() {
           ) : (
             <ul className="nav-menu-items" onClick={showSidebar}>
               <h5 className="text-white mt-3">
-                <DoneAllSharpIcon className="app_icon" /> C8-SGMC
+                <DoneAllSharpIcon className="app_icon" /> C8 SGMC
               </h5>
               <li className="navbar-toggle">
                 <Link to="#" className="menu-bars">
@@ -353,7 +344,7 @@ function Navbar() {
                   />
                 </Link>
               </li>
-              <li className="nav-text">
+              <li className="nav-text ">
                 <NavLink
                   to="/"
                   activeStyle={{

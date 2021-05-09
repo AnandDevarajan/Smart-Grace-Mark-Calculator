@@ -5,9 +5,9 @@ import { Container, Button, Image, Card } from "react-bootstrap";
 
 const Home = () => {
   return (
-    <div className="home  mt-5">
+    <div className="home  mt-5 " >
       <div className="home__student border  border-left-0 border-right-0 ">
-        <div className="card ml-5 px-3 py-3 overflow home_card mb-5">
+        <div className="card ml-5 px-3 py-3  home_card mb-5">
           <Image
             className="student_image"
             src="https://static.thenounproject.com/png/35785-200.png"
@@ -44,7 +44,7 @@ const Home = () => {
       </div>
 
       <div className="home__faculty border border-left-0 border-right-0">
-        <div className="card ml-5 px-3 py-3 overflow home_card mb-5">
+        <div className="card ml-5 px-3 py-3  home_card mb-5">
           <Image
             className="faculty_image"
             src="https://static.thenounproject.com/png/2011000-200.png"
@@ -80,7 +80,7 @@ const Home = () => {
       </div>
 
       <div className="home__admin border  border-left-0 border-right-0">
-        <div className="card ml-5 px-3 py-3 overflow home_card mb-5">
+        <div className="card ml-5 px-3 py-3  home_card mb-5">
           <Image
             className="admin_image"
             src="https://static.thenounproject.com/png/371299-200.png"

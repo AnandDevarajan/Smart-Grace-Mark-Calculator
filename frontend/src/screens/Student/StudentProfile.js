@@ -99,14 +99,15 @@ const StudentProfile = ({ history }) => {
     localStorage.removeItem("studentInfo");
     window.location.pathname = "/";
   };
+
   console.log(result);
   return (
     <div
-      className="ml-5  align-items-center alllist_div profile_card"
+      className="ml-5  align-items-center alllist_div"
       style={{ backgroundColor: "white" }}
     >
       <div className="card ml-5 px-3 overflow my_card profile_card">
-        <div className="overflow">
+        <div>
           {result === "Published" && (
             <Message variant="success">
               <NotificationsIcon /> Results published
@@ -115,7 +116,7 @@ const StudentProfile = ({ history }) => {
           <h1 className="text-success">Student Profile</h1>
           <p className="lead mt-2">
             <AccountBoxIcon style={{ color: "#2196f3" }} /> Welcome{" "}
-            <span className="text-info"> {name}</span>
+            <strong className="text-info"> {name}</strong>
           </p>
           <Row className="mt-4">
             <Col>
@@ -159,20 +160,23 @@ const StudentProfile = ({ history }) => {
             <thead>
               <tr>
                 <th>
-                  <FormatListNumberedIcon /> Roll Number
+                  <FormatListNumberedIcon /> <span>Roll Number</span>
+                </th>
+                <th className="hide-sm np">
+                  <SchoolIcon />
+                  <span>Branch</span>
                 </th>
                 <th className="hide-sm">
-                  <SchoolIcon /> Branch
-                </th>
-                <th className="hide-sm">
-                  <ClassIcon /> Batch
+                  <ClassIcon />
+                  <span>Batch</span>
                 </th>
                 <th>
                   <BeenhereIcon />
-                  Grace Mark
+                  <span>Grace Mark</span>
                 </th>
                 <th>
-                  <EqualizerIcon /> status
+                  <EqualizerIcon />
+                  <span>status</span>
                 </th>
                 <th></th>
               </tr>
@@ -180,10 +184,12 @@ const StudentProfile = ({ history }) => {
             <tbody>
               <tr>
                 <td width="365px">{roll}</td>
-                <td width="365px">
+                <td width="365px" className="np">
                   {degree} {branch}
                 </td>
-                <td width="365px">{batch}</td>
+                <td width="365px" className="">
+                  {batch}
+                </td>
                 <td width="365px">
                   {grace === "N/A" ? (
                     <CloseIcon style={{ color: "red" }} />
@@ -229,13 +235,14 @@ const StudentProfile = ({ history }) => {
               <tr>
                 <th>
                   {" "}
-                  <EmailIcon /> Email
+                  <EmailIcon /> <span>Email</span>
                 </th>
                 <th className="hide-sm">
-                  <PhoneIcon /> Phone Number
+                  <PhoneIcon />
+                  <span>Phone Number</span>
                 </th>
-                <th className="hide-sm">
-                  <HomeIcon /> Address
+                <th className="hide-sm np">
+                  <HomeIcon /> <span>Address</span>
                 </th>
                 <th />
               </tr>
@@ -244,7 +251,9 @@ const StudentProfile = ({ history }) => {
               <tr>
                 <td width="365px">{email}</td>
                 <td width="365px">+91 {phone}</td>
-                <td width="365px">{address}</td>
+                <td width="365px" className="np">
+                  {address}
+                </td>
               </tr>
             </tbody>
           </table>

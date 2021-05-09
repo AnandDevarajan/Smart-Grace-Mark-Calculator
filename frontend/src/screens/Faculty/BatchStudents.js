@@ -27,7 +27,7 @@ const BatchStudents = ({ history, match }) => {
 
   return (
     <div
-      className="ml-5 align-items-center alllist_div"
+      className="ml-5 align-items-center alllist_div signup_card"
       style={{ backgroundColor: "white" }}
     >
       <Link to="/faculty/profile" className="goback">

@@ -98,7 +98,9 @@ const SetGrade = ({ match, history }) => {
             </Button>
           </Link>
           <div className="card ml-5 px-3 overflow my_card">
-            <h2 className="text-center list_heading text-info py-4">Grade Range</h2>
+            <h2 className="text-center list_heading text-info py-4">
+              Grade Range
+            </h2>
             <Row className="align-items-center ">
               <Col className="text-left">
                 <Button style={{ width: "100%" }}>
@@ -419,7 +421,7 @@ const SetGrade = ({ match, history }) => {
       )}
       {facultyInfo && status === "N/P" && (
         <div>
-          <Link to={`/faculty/students/CSE`}>
+          <Link to={`/faculty/students/CSE`} className="goback">
             <Button variant="light">
               <ArrowBackIcon /> Go Back
             </Button>

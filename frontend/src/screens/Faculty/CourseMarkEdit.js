@@ -69,13 +69,13 @@ const CourseMarkEdit = ({ match, history }) => {
     <>
       <Link
         to={`/faculty/students/${facultyInfo.result.Department}`}
-        className="btn btn-light my-3"
+        className="btn btn-light my-3 goback"
       >
         Go Back
       </Link>
 
       <FormContainer>
-        <div className="card ml-5 px-3 py-3 overflow my_card">
+        <div className="card ml-5 px-3 py-3 overflow my_card ">
           <h1 className="text-info">EDIT MARK {cid} </h1>
           <p>Roll Number : {id}</p>
           {message && <Message variant="danger">{message}</Message>}
