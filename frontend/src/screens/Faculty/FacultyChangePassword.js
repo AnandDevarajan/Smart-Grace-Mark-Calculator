@@ -36,7 +36,10 @@ const FacultyChangePassword = ({ history, match }) => {
 
   return (
     <>
-      <Link to={`/faculty/edit/profile/${facultyInfo.result.FacultyID}`}>
+      <Link
+        to={`/faculty/edit/profile/${facultyInfo.result.FacultyID}`}
+        className="goback"
+      >
         <Button variant="light">
           <ArrowBackIcon /> Go Back
         </Button>

@@ -109,7 +109,7 @@ function Navbar() {
           </ul>
 
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active mt-3">
+            <li class="nav-item active mt-3 thename">
               {studentInfo ? (
                 <p className="text-white">
                   Hello, {studentInfo.result.Name} <AccountCircleSharpIcon />

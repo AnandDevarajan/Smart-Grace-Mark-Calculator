@@ -1,3 +1,7 @@
+* {
+  margin: 0px;
+}
+
 body {
   background-color: #fff !important;
 }
@@ -25,7 +29,4 @@ tbody {
 th {
   font-weight: bold;
   color: black;
-}
-td {
-
 }

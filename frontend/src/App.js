@@ -50,7 +50,7 @@ function App() {
     <Router>
       <Navbar />
       <main
-        className="py-3 alllist_div"
+        className="py-3 alllist_div main"
         style={{ backgroundColor: "#fff", marginLeft: "140px" }}
       >
         <Container>

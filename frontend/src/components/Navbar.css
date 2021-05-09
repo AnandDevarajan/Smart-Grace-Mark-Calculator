@@ -143,7 +143,7 @@ span {
   .nav-menu-items {
     display: flex;
     justify-content: start;
-    margin-right: 150px;
+    margin-right: 500px;
   }
   .nav-text {
     display: flex;
@@ -157,5 +157,11 @@ span {
   .text {
     visibility: hidden;
   }
-
+  .thename {
+    visibility: hidden;
+  }
+  .footer {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }

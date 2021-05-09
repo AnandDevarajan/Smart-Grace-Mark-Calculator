@@ -98,7 +98,7 @@ const FacultySignup = ({ location, history }) => {
             </Button>
           </Link>
           <FormContainer>
-            <div className="card ml-5 px-3 overflow my_card mb-5">
+            <div className="card ml-5 px-3 overflow my_card mb-5 mt-5">
               <h1 className="text-info">CREATE A FACULTY ACCOUNT</h1>
               {message && <Message variant="danger">{message}</Message>}
               {error && <Message variant="danger">{error}</Message>}

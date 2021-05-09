@@ -1,7 +1,4 @@
 .my_card {
-}
-
-.my_card {
   box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -19,5 +16,10 @@
   }
   .go-back {
     visibility: hidden;
+  }
+  .my_card {
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.2) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
