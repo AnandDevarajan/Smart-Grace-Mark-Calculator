@@ -3,6 +3,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
+import PageviewIcon from "@material-ui/icons/Pageview";
 import "./Admin.css";
 
 import {
@@ -44,109 +45,108 @@ const AllStudentList = ({ history }) => {
   };
 
   return (
-    <div className="container-fluid d-flex justify-content-center">
-      <div
-        className="ml-5 align-items-center alllist_div"
-        style={{ backgroundColor: "white" }}
-      >
-        <Link to="/admin/profile" className="goback">
-          <Button variant="light" className="ml-5">
-            Go Back
-          </Button>
-        </Link>
-        <div className="card ml-5 px-3 overflow my_card">
-          <h1 className="text-center list_heading text-info">STUDENT LIST</h1>
-          {error ? (
-            <Message variant="danger">{error}</Message>
-          ) : (
-            <Table striped bordered hover responsive className="table-sm">
-              <thead>
-                <tr>
-                  <th>Roll No</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Branch</th>
-                  <th>Batch</th>
-                  <th>Course Marks</th>
-                  <th>Reason</th>
-                  <th>Grace</th>
-                  <th>Request</th>
+    <div
+      className="ml-5 align-items-center alllist_div"
+      style={{ backgroundColor: "white" }}
+    >
+      <Link to="/admin/profile" className="goback">
+        <Button variant="light" className="ml-5">
+          Go Back
+        </Button>
+      </Link>
+      <div className="card  overflow my_card">
+        <h1 className="text-center list_heading text-info">STUDENT LIST</h1>
+        {error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Branch</th>
+                <th>Batch</th>
+                <th>Marks</th>
+                <th>Reason</th>
+                <th>Grace</th>
+                <th>Request</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((student) => (
+                <tr key={student.RollNum}>
+                  <td>{student.RollNum}</td>
+                  <td>{student.Name}</td>
+                  <td>
+                    <a href={`mailto:${student.EmailID}`}>{student.EmailID}</a>
+                  </td>
+                  <td>{student.Branch}</td>
+                  <td>{student.Batch}</td>
+                  <td className="text-center">
+                    <LinkContainer
+                      to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
+                    >
+                      <PageviewIcon
+                        className="icon"
+                        style={{ color: "blue" }}
+                      />
+                    </LinkContainer>
+                  </td>
+                  {student.GraceDesc === "N/A" ? (
+                    <td>-</td>
+                  ) : (
+                    <td>{student.GraceDesc}</td>
+                  )}
+                  {student.Requested === "accepted" ? (
+                    <td>{student.GraceMark}</td>
+                  ) : (
+                    <td>-</td>
+                  )}
+                  <td>
+                    {student.Requested === "pending" ? (
+                      <span className="badge badge-pill badge-warning mr-3">
+                        Pending
+                      </span>
+                    ) : student.Requested === "accepted" ? (
+                      <span className="badge badge-pill badge-success mr-3">
+                        Accepted
+                      </span>
+                    ) : student.Requested === "rejected" ? (
+                      <span className="badge badge-pill badge-danger mr-3">
+                        Rejected
+                      </span>
+                    ) : student.Requested === "Grace Added" ? (
+                      <span className="badge badge-pill badge-success mr-3">
+                        Grace Added
+                      </span>
+                    ) : (
+                      <Link>-</Link>
+                    )}
+                  </td>
+                  {student.Requested === "pending" && (
+                    <td>
+                      <CheckIcon
+                        className="icon"
+                        style={{ color: "green" }}
+                        onClick={() => acceptHandler(student.RollNum)}
+                      />
+                    </td>
+                  )}
+                  {student.Requested === "pending" && (
+                    <td>
+                      <ClearIcon
+                        className="icon"
+                        style={{ color: "red" }}
+                        onClick={() => rejectHandler(student.RollNum)}
+                      />
+                    </td>
+                  )}
                 </tr>
-              </thead>
-              <tbody>
-                {students.map((student) => (
-                  <tr key={student.RollNum}>
-                    <td>{student.RollNum}</td>
-                    <td>{student.Name}</td>
-                    <td>
-                      <a href={`mailto:${student.EmailID}`}>
-                        {student.EmailID}
-                      </a>
-                    </td>
-                    <td>{student.Branch}</td>
-                    <td>{student.Batch}</td>
-                    <td className="text-center">
-                      <LinkContainer
-                        to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
-                      >
-                        <Button className="btn btn-sm btn-info">View</Button>
-                      </LinkContainer>
-                    </td>
-                    {student.GraceDesc === "N/A" ? (
-                      <td>-</td>
-                    ) : (
-                      <td>{student.GraceDesc}</td>
-                    )}
-                    {student.Requested === "accepted" ? (
-                      <td>{student.GraceMark}</td>
-                    ) : (
-                      <td>-</td>
-                    )}
-                    <td>
-                      {student.Requested === "pending" ? (
-                        <span className="badge badge-pill badge-warning mr-3">
-                          Pending
-                        </span>
-                      ) : student.Requested === "accepted" ? (
-                        <span className="badge badge-pill badge-success mr-3">
-                          Accepted
-                        </span>
-                      ) : student.Requested === "rejected" ? (
-                        <span className="badge badge-pill badge-danger mr-3">
-                          Rejected
-                        </span>
-                      ) : student.Requested === "Grace Added" ? (
-                        <span className="badge badge-pill badge-success mr-3">
-                          Grace Added
-                        </span>
-                      ) : (
-                        <Link>-</Link>
-                      )}
-                    </td>
-                    {student.Requested === "pending" && (
-                      <td>
-                        <CheckIcon
-                          className="icon"
-                          style={{ color: "green" }}
-                          onClick={() => acceptHandler(student.RollNum)}
-                        />
-                      </td>
-                    )}
-                    {student.Requested === "pending" && (
-                      <td>
-                        <ClearIcon
-                          className="icon"
-                          style={{ color: "red" }}
-                          onClick={() => rejectHandler(student.RollNum)}
-                        />
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          )}
-        </div>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </div>
     </div>
   );
