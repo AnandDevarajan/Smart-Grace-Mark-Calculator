@@ -286,9 +286,9 @@ const CourseStudents = ({ history, match }) => {
                     </td>
                   </td>
                   <td>
-                    {student.Grade === "N/P" &&
-                    student.Total != "N/P" &&
-                    status === "P" ? (
+                    {/* &&
+                    status === "P" */}
+                    {student.Grade === "N/P" && student.Total != "N/P" ? (
                       <td>
                         <DoneAllIcon
                           className="icon"

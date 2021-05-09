@@ -66,13 +66,13 @@ const FacultyProfileEdit = ({ location, history, match }) => {
 
   return (
     <>
-      <Link to="/faculty/profile">
+      <Link to="/faculty/profile" className="goback">
         <Button variant="light">
           <ArrowBackIcon /> Go Back
         </Button>
       </Link>
       <FormContainer>
-        <div className="card ml-5 px-3 py-3 overflow my_card">
+        <div className="card ml-5 px-3 py-3 overflow my_card signup_card">
           <h1 className="text-info">Edit Your Profile</h1>
 
           {message && <Message variant="warning">{message}</Message>}
