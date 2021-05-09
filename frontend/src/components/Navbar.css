@@ -126,7 +126,9 @@ span {
   .app_icon {
     color: rgb(255, 68, 0);
   }
-
+  .nav_main {
+    visibility: hidden;
+  }
   .navbar-toggle {
     background-color: #1e212d;
     width: 100%;
@@ -143,7 +145,6 @@ span {
   .nav-menu-items {
     display: flex;
     justify-content: start;
-    margin-right: 500px;
   }
   .nav-text {
     display: flex;

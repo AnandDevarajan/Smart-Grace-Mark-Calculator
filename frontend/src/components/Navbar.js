@@ -89,7 +89,7 @@ function Navbar() {
             {dt}
           </h6>
         </div> */}
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark nav_main">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active mt-3">
               <Link to="#" className="menu-bars">

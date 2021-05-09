@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import Message from '../../components/Message';
-import FormContainer from '../../components/FormContainer';
+import React, { useState, useEffect } from "react";
+import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "../../components/Message";
+import FormContainer from "../../components/FormContainer";
 import {
   getGracemarkDetails,
   updateGracemark,
-} from '../../actions/gracemarkActions';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { GRACEMARK_UPDATE_RESET } from '../../constants/gracemarkConstants';
-import axios from 'axios';
+} from "../../actions/gracemarkActions";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { GRACEMARK_UPDATE_RESET } from "../../constants/gracemarkConstants";
+import axios from "axios";
 
 const GracemarkEdit = ({ match, history }) => {
   const gracemarkId = match.params.id;
@@ -25,8 +25,8 @@ const GracemarkEdit = ({ match, history }) => {
   const gracemarkUpdate = useSelector((state) => state.gracemarkUpdate);
   const { error: errorUpdate, success: successUpdate } = gracemarkUpdate;
 
-  const [description, setDescription] = useState('');
-  const [marks, setMarks] = useState('');
+  const [description, setDescription] = useState("");
+  const [marks, setMarks] = useState("");
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const GracemarkEdit = ({ match, history }) => {
       dispatch({
         type: GRACEMARK_UPDATE_RESET,
       });
-      history.push('/admin/gracemarklist');
+      history.push("/admin/gracemarklist");
     } else {
       if (adminInfo) {
         axios
@@ -48,7 +48,7 @@ const GracemarkEdit = ({ match, history }) => {
             console.log(err);
           });
       } else {
-        history.push('/admin/login');
+        history.push("/admin/login");
       }
     }
   }, [successUpdate]);
@@ -56,50 +56,50 @@ const GracemarkEdit = ({ match, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (description !== '' && marks !== '') {
-      setMessage('');
+    if (description !== "" && marks !== "") {
+      setMessage("");
       dispatch(updateGracemark({ id: gracemarkId, description, marks }));
     } else {
-      setMessage('Enter all details');
+      setMessage("Enter all details");
     }
   };
 
   return (
     <>
-      <Link to='/admin/gracemarklist' className='btn btn-light my-3 goback'>
+      <Link to="/admin/gracemarklist" className="btn btn-light my-3 goback">
         <ArrowBackIcon />
         Go Back
       </Link>
 
       <FormContainer>
-        <div className='card ml-5 px-3 py-2 overflow my_card'>
-          <h1 className='text-center text-info'>EDIT ID - {gracemarkId}</h1>
-          {message && <Message variant='warning'>{message}</Message>}
-          {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-          {console.log('State', description)}
+        <div className="card ml-5 px-3 py-2 overflow my_card signup_card">
+          <h1 className="text-center text-info">EDIT ID - {gracemarkId}</h1>
+          {message && <Message variant="warning">{message}</Message>}
+          {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
+          {console.log("State", description)}
           {error ? (
-            <Message variant='danger'>{error}</Message>
+            <Message variant="danger">{error}</Message>
           ) : (
             <Form onSubmit={submitHandler}>
-              <Form.Group controlId='name'>
+              <Form.Group controlId="name">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
-                  type='name'
-                  placeholder='Enter  Description'
+                  type="name"
+                  placeholder="Enter  Description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              <Form.Group controlId='email'>
+              <Form.Group controlId="email">
                 <Form.Label>Marks Allotted</Form.Label>
                 <Form.Control
-                  type='name'
-                  placeholder='Enter Marks'
+                  type="name"
+                  placeholder="Enter Marks"
                   value={marks}
                   onChange={(e) => setMarks(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              <Button type='submit' variant='primary'>
+              <Button type="submit" variant="primary">
                 Update
               </Button>
             </Form>
