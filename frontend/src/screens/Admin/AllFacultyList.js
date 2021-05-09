@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
@@ -10,7 +10,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import CloseIcon from "@material-ui/icons/Close";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
+import axios from "axios";
 const AllFacultyList = ({ history }) => {
+  const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
 
   const facultyList = useSelector((state) => state.facultyList);
@@ -28,6 +30,15 @@ const AllFacultyList = ({ history }) => {
   }, [dispatch, history, adminInfo]);
 
   console.log(faculties);
+
+  const notifyFaculty = (id) => {
+    setMessage(`Notification send to Faculty ID : ${id}`);
+    const config = {
+      headers: { Authorization: `Bearer ${adminInfo.token}` },
+    };
+    axios.get(`/admin/notify/faculty/${id}`, config).then((response) => {});
+  };
+
   return (
     <div className="container-fluid d-flex justify-content-center">
       <div
@@ -41,6 +52,7 @@ const AllFacultyList = ({ history }) => {
         </Link>
 
         <div className="card ml-5 px-3 overflow my_card">
+          {message != null && <Message variant="success">{message}</Message>}
           <h1 className="text-center list_heading text-info">Faculty LIST</h1>
           {error ? (
             <Message variant="danger">{error}</Message>

@@ -210,7 +210,7 @@ exports.newPassword = (req, res) => {
 };
 
 exports.publishResults = (req, res) => {
-  con.query(`SELECT * from STUDENT WHERE final_status='N/P'`, (err, result) => {
+  con.query(`SELECT * from Faculty WHERE completion!="Yes"`, (err, result) => {
     if (result.length === 0) {
       con.query(`SELECT EmailID from STUDENT`, (err, result) => {
         if (err || result.length === 0) {
@@ -386,4 +386,33 @@ exports.resetPublish = (req, res) => {
       );
     }
   });
+};
+
+exports.notifyFaculty = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    `SELECT EmailID from Faculty where FacultyID=?`,
+    [id],
+    (err, result) => {
+      if (err || result.length === 0) {
+        return res.status(422).json({
+          message: "No Email Found",
+        });
+      }
+      let mailOptions = {
+        from: "c8.smartgracemarkcalculator@gmail.com",
+        to: result[0].EmailID,
+        subject: "Complete Grade Allocation",
+        html: ` 
+        <h3>Dear Faculty , Please complete your grade allocation as soon as possible</h3>`,
+      };
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`Email sent:${info.response}`);
+        }
+      });
+    }
+  );
 };
