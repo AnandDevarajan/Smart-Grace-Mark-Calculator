@@ -22,6 +22,7 @@ const ViewCourseMarks = ({ history, match }) => {
   const [grace, setGrace] = useState([]);
   const [finalStatus, setFinalStatus] = useState("");
   const [cgpa, setCgpa] = useState("");
+  const [finalcgpa, setFinalCgpa] = useState("");
   const [cgpaStatus, setCgpaStatus] = useState("");
   const [gm, setGm] = useState("");
 
@@ -53,6 +54,7 @@ const ViewCourseMarks = ({ history, match }) => {
             setMarks(response1.data.markList);
             setGraceAccepted(response2.data.student.Requested);
             setCgpa(response2.data.student.cgpa);
+            setFinalCgpa(response2.data.student.final_cgpa);
             setCgpaStatus(response2.data.student.final_status);
             setFinalStatus(response1.data.markList[0].final_status);
             setGm(response2.data.student.GraceMark);
@@ -123,13 +125,30 @@ const ViewCourseMarks = ({ history, match }) => {
         <h1 className="py-3 text-center">Mark List</h1>
         <Row>
           <Col>
-            <h4>
-              {rollnum} - {branch} {batch}
-            </h4>
+            <h4>{rollnum}</h4>
           </Col>
-          <Col>
-            <h4 className="ml-5 text-left text-info">Cgpa: {cgpa}</h4>
-          </Col>
+
+          {finalcgpa === cgpa ? (
+            <>
+              <Col></Col>
+              <Col></Col>
+              <Col>
+                <h5 className="ml-5 text-left text-info">Cgpa: {cgpa}</h5>
+              </Col>
+            </>
+          ) : (
+            <>
+              <Col></Col>
+
+              <Col>
+                <h5 className=" ml-5 mr-0 text-left text-info">cgpa: {cgpa}</h5>
+
+                <h5 className="ml-5 text-left text-info">
+                  Final cgpa: {finalcgpa}
+                </h5>
+              </Col>
+            </>
+          )}
         </Row>
 
         {error ? (
