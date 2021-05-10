@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import { listAdviserBatch } from "../../actions/facultyActions";
 import { Link } from "react-router-dom";
+import AutorenewIcon from "@material-ui/icons/Autorenew";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PageviewIcon from "@material-ui/icons/Pageview";
 import "../Home.css";
@@ -105,14 +106,24 @@ const BatchStudents = ({ history, match }) => {
                         </td>
                       )}
                       <td className="text-center">
-                        <LinkContainer
-                          to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
-                        >
-                          <PageviewIcon
+                        {student.grace_status === "N/P" &&
+                        student.Requested === "accepted" ? (
+                          <AutorenewIcon
+                            onClick={() =>
+                              (window.location.pathname = `/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`)
+                            }
                             className="icon"
-                            style={{ color: "blue" }}
+                            style={{ color: "#ffc93c" }}
                           />
-                        </LinkContainer>
+                        ) : (
+                          <PageviewIcon
+                            onClick={() =>
+                              (window.location.pathname = `/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`)
+                            }
+                            className="icon"
+                            style={{ color: "#1597bb" }}
+                          />
+                        )}
                       </td>
                     </tr>
                   )

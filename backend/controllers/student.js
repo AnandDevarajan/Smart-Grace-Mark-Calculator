@@ -581,8 +581,8 @@ exports.calculateNewGrade = (req, res) => {
         let cid = info.CourseID;
         //Grade to P
         con.query(
-          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?`,
-          [info.Total, "P", cid, id, "P", id],
+          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET grace_status=? WHERE RollNum=?`,
+          [info.Total, "P", cid, id, "P", id, "P", id],
           (err, result) => {
             if (err) {
               return res.status(400).json({
@@ -632,7 +632,7 @@ exports.calculateNewGrade = (req, res) => {
         }
       }
     }
-    
+
     let changeValue = 0;
     let FinalGrade = "";
     for (let info of grace) {
@@ -663,12 +663,14 @@ exports.calculateNewGrade = (req, res) => {
         }
         //Update your Final Grade into data base both grade and marks reflected in database
         con.query(
-          "UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?",
+          "UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET grace_status=? WHERE RollNum=?",
           [
             parseInt(info.Total) + parseInt(gm),
             FinalGrade,
             id,
             info.CourseID,
+            "P",
+            id,
             "P",
             id,
           ],
