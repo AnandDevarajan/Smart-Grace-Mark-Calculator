@@ -129,7 +129,7 @@ const ViewCourseMarks = ({ history, match }) => {
             <>
               <Col></Col>
               <Col>
-                <Button>cgpa: {cgpa}</Button>
+                <Button>cgpa {cgpa}</Button>
               </Col>
             </>
           ) : (
@@ -137,8 +137,15 @@ const ViewCourseMarks = ({ history, match }) => {
               <Col></Col>
 
               <Col>
-                <Button>cgpa: {cgpa}</Button>
-                <Button> Final cgpa: {finalcgpa}</Button>
+                <Button className="btn-warning np">cgpa {cgpa}</Button>
+              </Col>
+              <Col>
+                <Button className="np"> Final cgpa {finalcgpa}</Button>
+              </Col>
+
+              <Col>
+                <Button className="btn-warning bp">cgpa {cgpa}</Button>
+                <Button className="bp"> Final cgpa {finalcgpa}</Button>
               </Col>
             </>
           )}

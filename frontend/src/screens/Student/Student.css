@@ -1,6 +1,15 @@
 .my_card {
   box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.2) !important;
 }
+@media (min-width: 900px) {
+  .bp {
+    position: absolute;
+    z-index: 12;
+    bottom: 0;
+    right: 0;
+    visibility: hidden;
+  }
+}
 
 @media (max-width: 900px) {
   .result-table {

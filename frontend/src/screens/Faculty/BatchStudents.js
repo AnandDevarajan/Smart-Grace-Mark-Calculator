@@ -6,6 +6,7 @@ import Message from "../../components/Message";
 import { listAdviserBatch } from "../../actions/facultyActions";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import PageviewIcon from "@material-ui/icons/Pageview";
 import "../Home.css";
 
 const BatchStudents = ({ history, match }) => {
@@ -51,7 +52,7 @@ const BatchStudents = ({ history, match }) => {
                 <th>Reason</th>
                 <th>Status</th>
                 <th>Grace</th>
-                <th>Performance</th>
+                <th>Marks</th>
               </tr>
             </thead>
             <tbody>
@@ -103,13 +104,14 @@ const BatchStudents = ({ history, match }) => {
                           <Link>-</Link>
                         </td>
                       )}
-                      <td>
+                      <td className="text-center">
                         <LinkContainer
                           to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
                         >
-                          <Button variant="info" className="btn btn-sm">
-                            View
-                          </Button>
+                          <PageviewIcon
+                            className="icon"
+                            style={{ color: "blue" }}
+                          />
                         </LinkContainer>
                       </td>
                     </tr>
