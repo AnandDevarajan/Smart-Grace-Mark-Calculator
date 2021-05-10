@@ -42,7 +42,7 @@ CREATE TABLE `course_mark` (
 
 LOCK TABLES `course_mark` WRITE;
 /*!40000 ALTER TABLE `course_mark` DISABLE KEYS */;
-INSERT INTO `course_mark` VALUES ('akshay1237564732','15CSE201','34','40','74','P','O','O','P'),('akshay1237564732','15CSE213','43','32','79','P','A+','O','P'),('akshay1237564732','15CSE302','30','33','63','P','B+','B+','P'),('akshay1237564732','15CSE312','33','40','73','P','A+','A+','P'),('akshay1237564732','15CSE313','34','30','64','P','A','A','P'),('CB.EN.U4CSE18207','15CSE201','32','12','44','P','B','B','N/P'),('CB.EN.U4CSE18207','15CSE213','12','32','44','P','B','B','N/P'),('CB.EN.U4CSE18207','15CSE302','43','32','75','P','A+','A+','N/P'),('CB.EN.U4CSE18207','15CSE312','34','32','66','P','A','A','N/P'),('CB.EN.U4CSE18207','15CSE313','32','43','75','P','O','O','N/P'),('test1','15CSE201','34','32','66','P','A','A','N/P'),('test1','15CSE213','43','45','88','P','O','O','N/P'),('test1','15CSE302','45','43','88','P','O','O','N/P'),('test1','15CSE312','34','50','84','P','O','O','N/P'),('test1','15CSE313','34','45','79','P','O','O','N/P'),('test2','15CSE201','45','34','79','P','O','O','P'),('test2','15CSE213','32','32','64','P','B+','B+','P'),('test2','15CSE302','34','32','27','P','F','P','P'),('test2','15CSE312','23','45','68','P','A','A','P'),('test2','15CSE313','32','43','78','P','O','O','P');
+INSERT INTO `course_mark` VALUES ('CB.EN.U4CSE18207','15CSE201','32','12','44','P','B','B','N/P'),('CB.EN.U4CSE18207','15CSE213','12','32','44','P','B','B','N/P'),('CB.EN.U4CSE18207','15CSE302','43','32','75','P','A+','A+','N/P'),('CB.EN.U4CSE18207','15CSE312','34','32','66','P','A','A','N/P'),('CB.EN.U4CSE18207','15CSE313','32','43','75','P','O','O','N/P'),('test1','15CSE201','34','32','66','P','A','A','N/P'),('test1','15CSE213','43','45','88','P','O','O','N/P'),('test1','15CSE302','45','43','88','P','O','O','N/P'),('test1','15CSE312','34','50','84','P','O','O','N/P'),('test1','15CSE313','34','45','79','P','O','O','N/P'),('test2','15CSE201','45','34','79','P','O','O','P'),('test2','15CSE213','32','32','64','P','B+','B+','P'),('test2','15CSE302','34','32','27','P','F','P','P'),('test2','15CSE312','23','45','68','P','A','A','P'),('test2','15CSE313','32','43','78','P','O','O','P');
 /*!40000 ALTER TABLE `course_mark` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-10 21:36:53
+-- Dump completed on 2021-05-10 21:39:03
