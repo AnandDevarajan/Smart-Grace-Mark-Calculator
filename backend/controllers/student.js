@@ -560,6 +560,7 @@ exports.getGraceInfo = (req, res) => {
 
 exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
+  console.log(id);
   const { grace, gm } = req.body;
   let maxCredits = 0;
 
@@ -580,13 +581,14 @@ exports.calculateNewGrade = (req, res) => {
         let cid = info.CourseID;
         //Grade to P
         con.query(
-          "UPDATE COURSE_MARK SET Total=?,Grade=?,WHERE CourseID=? AND RollNum=?;UPDATE STUDENT SET Requested=? WHERE RollNum=?",
-          [info.Total, "P", cid, id, "Grace Added", id],
+          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?`,
+          [info.Total, "P", cid, id, "P", id],
           (err, result) => {
             if (err) {
-              return res.status(400).json({
-                message: "Unable to Update",
-              });
+              // return res.status(400).json({
+              //   message: "Unable to Update",
+              // });
+              console.log(err.sqlMessage);
             }
             return res.json({
               message: "Total Marks Updated",

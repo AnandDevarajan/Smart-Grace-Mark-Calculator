@@ -16,6 +16,7 @@ const {
   getRangeDetails,
   updateGrade,
   editGradeRange,
+  getGradeCount,
 } = require("../controllers/course");
 const { verifyFaculty, faculty, verifyAdmin } = require("../middlewares/auth");
 router.get("/", getAllCourses);
@@ -24,6 +25,7 @@ router.get("/all/graderange", getAllGradeRange);
 router.get("/get/report/:id", getACourseReport);
 router.get("/graderange/:id", getGradeRange);
 router.get("/:id", getAllDeptCourses);
+router.get("/count/grade/:id", getGradeCount);
 router.get("/range/details/:id", getRangeDetails);
 router.get("/student/marks/:id", getCourseMarkOfStudent);
 router.get("/markList/:id", verifyFaculty, faculty, getCourseMark);

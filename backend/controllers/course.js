@@ -500,3 +500,27 @@ exports.updateGradeRange = (req, res) => {
     }
   );
 };
+
+exports.getGradeCount = (req, res) => {
+  const id = req.params.id;
+  con.query(
+    "SELECT * FROM course_mark WHERE Grade=? and RollNum=?",
+    ["N/P", id],
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: "No grade found",
+        });
+      }
+      if (result.length === 0) {
+        return res.json({
+          gradeCount: "P",
+        });
+      } else {
+        return res.json({
+          gradeCount: "N/P",
+        });
+      }
+    }
+  );
+};

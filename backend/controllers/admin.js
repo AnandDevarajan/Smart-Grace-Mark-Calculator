@@ -210,7 +210,7 @@ exports.newPassword = (req, res) => {
 };
 
 exports.publishResults = (req, res) => {
-  con.query(`SELECT * from Faculty WHERE completion!="Yes"`, (err, result) => {
+  con.query(`SELECT * from Faculty WHERE completion="No"`, (err, result) => {
     if (result.length === 0) {
       con.query(`SELECT EmailID from STUDENT`, (err, result) => {
         if (err || result.length === 0) {

@@ -64,8 +64,11 @@ const FacultyProfile = ({ history }) => {
   };
 
   const markAsCompleted = (id) => {
-    axios.put(`/faculty/complete/${id}`).then((response) => {});
-    window.location.pathname = "/faculty/profile";
+    axios.put(`/faculty/complete/${id}`).then((response) => {
+      if (response.data) {
+        window.location.pathname = `/faculty/profile`;
+      }
+    });
   };
 
   return (
@@ -122,7 +125,7 @@ const FacultyProfile = ({ history }) => {
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <PersonIcon style={{ color: "#2196f3" }} /> Faculty Details
           </h2>
-          <Table  hover responsive className="table table-sm">
+          <Table hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>
@@ -163,7 +166,7 @@ const FacultyProfile = ({ history }) => {
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <ContactSupportIcon style={{ color: "#2196f3" }} /> Contact Details
           </h2>
-          <Table  hover responsive className="table table-sm">
+          <Table hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>

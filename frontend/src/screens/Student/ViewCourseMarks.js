@@ -17,6 +17,7 @@ const ViewCourseMarks = ({ history, match }) => {
   const [finalStatus, setFinalStatus] = useState("");
   const [cgpa, setCgpa] = useState("");
   const [finalcgpa, setFinalCgpa] = useState("");
+  const [gradeCountStatus, setGradeCountStatus] = useState("");
   const [cgpaStatus, setCgpaStatus] = useState("");
   const [gm, setGm] = useState("");
 
@@ -41,9 +42,10 @@ const ViewCourseMarks = ({ history, match }) => {
           axios.get(`/course/student/marks/${rollnum}`),
           axios.get(`/student/${rollnum}`),
           axios.get(`/student/grace/info/${rollnum}`),
+          axios.get(`/course/count/grade/${rollnum}`),
         ])
         .then(
-          axios.spread((response1, response2, response3) => {
+          axios.spread((response1, response2, response3, response4) => {
             console.log(response1);
             setMarks(response1.data.markList);
             setGraceAccepted(response2.data.student.Requested);
@@ -53,6 +55,7 @@ const ViewCourseMarks = ({ history, match }) => {
             setFinalStatus(response1.data.markList[0].final_status);
             setGm(response2.data.student.GraceMark);
             setGrace(response3.data.GraceInfo);
+            setGradeCountStatus(response4.data.gradeCount);
           })
         );
     } else {
@@ -63,8 +66,9 @@ const ViewCourseMarks = ({ history, match }) => {
   const calculateNewGrade = (grace) => {
     axios
       .put(`/student/caluclate/new/grade/${rollnum}`, { grace, gm })
-      .then((response) => {});
-    window.location.pathname = `/student/view/marklist/${str}`;
+      .then((response) => {
+        console.log(response);
+      });
   };
   console.log(cgpa);
   const calculateCGPA = (marks) => {
@@ -108,13 +112,15 @@ const ViewCourseMarks = ({ history, match }) => {
               </Button>
             </Link>
           </Col>
-          {graceAccepted === "accepted" && finalStatus === "N/P" && (
-            <Col className="text-right">
-              <Button variant="info" onClick={() => calculateNewGrade(grace)}>
-                Calculate Grace Mark
-              </Button>
-            </Col>
-          )}
+          {graceAccepted === "accepted" &&
+            finalStatus === "N/P" &&
+            gradeCountStatus === "P" && (
+              <Col className="text-right">
+                <Button variant="info" onClick={() => calculateNewGrade(grace)}>
+                  Calculate Grace Mark
+                </Button>
+              </Col>
+            )}
         </Row>
       )}
       <div className="card ml-5 px-3 overflow my_card">

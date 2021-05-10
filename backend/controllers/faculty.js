@@ -399,5 +399,18 @@ exports.facultyStatus = (req, res) => {
 
 exports.updateComplete = (req, res) => {
   const id = req.params.id;
-  con.query("UPDATE FACULTY SET completion=? WHERE FacultyID=?", ["Yes", id]);
+  con.query(
+    "UPDATE FACULTY SET completion=? WHERE FacultyID=?",
+    ["Yes", id],
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Something went wront",
+        });
+      }
+      return res.json({
+        message: "Updated successfully",
+      });
+    }
+  );
 };
