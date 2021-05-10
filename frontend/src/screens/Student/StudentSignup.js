@@ -52,6 +52,9 @@ const StudentSignup = ({ history }) => {
     ) {
       setMessage("");
       setMessage("Enter all the details");
+    } else if (password.length < 6) {
+      setMessage("");
+      setMessage("Passwords should be atleast 6 characters");
     } else if (password !== confirmPassword) {
       setMessage("");
       setMessage("Passwords do not match");

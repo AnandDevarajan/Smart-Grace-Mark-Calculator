@@ -8,7 +8,7 @@ import { facultyRegister } from "../../actions/facultyActions";
 import { listCourses } from "../../actions/courseActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DatePicker from "react-date-picker";
-const FacultySignup = ({history }) => {
+const FacultySignup = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -30,7 +30,6 @@ const FacultySignup = ({history }) => {
 
   const courseList = useSelector((state) => state.courseList);
   const { courses } = courseList;
-
 
   const redirect = "/faculty/profile";
   useEffect(() => {
@@ -59,6 +58,9 @@ const FacultySignup = ({history }) => {
     ) {
       setMessage("");
       setMessage("Enter all the details");
+    } else if (password.length < 6) {
+      setMessage("");
+      setMessage("Passwords should be atleast 6 characters");
     } else if (password !== confirmPassword) {
       setMessage("");
       setMessage("Passwords do not match");
