@@ -58,95 +58,98 @@ const ViewGrade = ({ match, history }) => {
               <Button className="btn">Cgpa:{cgpa}</Button>
             </Col>
           </Row>
-
-          <Table striped bordered hover responsive className="table-sm ">
-            <thead>
-              <tr>
-                <th>Course ID</th>
-                <th>Course Name</th>
-                <th>Grade</th>
-              </tr>
-            </thead>
-            <tbody>
-              {marks.map((mark) => (
+          <div className="card ml-5  overflow my_card">
+            <Table striped bordered hover responsive className="table-sm ">
+              <thead>
                 <tr>
-                  <td>{mark.CourseID}</td>
-                  <td> {mark.CourseName}</td>
-                  <td className="text-center">
-                    {mark.Grade === "O" && (
-                      <Button
-                        className="btn btn-sm"
-                        style={{ backgroundColor: "#289672", width: "46px" }}
-                      >
-                        O
-                      </Button>
-                    )}
-                    {mark.Grade === "A+" && (
-                      <Button
-                        className="btn btn-sm"
-                        style={{ backgroundColor: "#29bb89", width: "46px" }}
-                      >
-                        A+
-                      </Button>
-                    )}
-                    {mark.Grade === "A" && (
-                      <Button
-                        className="btn btn-sm"
-                        style={{ backgroundColor: "#29bb89", width: "46px" }}
-                      >
-                        A
-                      </Button>
-                    )}
-                    {mark.Grade === "B+" && (
-                      <Button
-                        className="btn btn-sm btn-success"
-                        style={{ width: "46px" }}
-                      >
-                        B+
-                      </Button>
-                    )}
-                    {mark.Grade === "B" && (
-                      <Button
-                        className="btn btn-sm btn-success"
-                        style={{ width: "46px" }}
-                      >
-                        B
-                      </Button>
-                    )}
-                    {mark.Grade === "C" && (
-                      <Button
-                        className="btn btn-sm btn-warning"
-                        style={{ width: "46px" }}
-                      >
-                        C
-                      </Button>
-                    )}
-                    {mark.Grade === "P" && (
-                      <Button
-                        className="btn btn-sm btn-danger"
-                        style={{ width: "46px" }}
-                      >
-                        P
-                      </Button>
-                    )}
-                    {mark.Grade === "F" && (
-                      <Button
-                        className="btn btn-sm"
-                        style={{ backgroundColor: "#be0000", width: "46px" }}
-                      >
-                        F
-                      </Button>
-                    )}
-                  </td>
+                  <th>Course ID</th>
+                  <th>Course Name</th>
+                  <th>Grade</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {marks.map((mark) => (
+                  <tr>
+                    <td>{mark.CourseID}</td>
+                    <td> {mark.CourseName}</td>
+                    <td className="text-center">
+                      {mark.Grade === "O" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{ backgroundColor: "#289672", width: "46px" }}
+                        >
+                          O
+                        </Button>
+                      )}
+                      {mark.Grade === "A+" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{ backgroundColor: "#29bb89", width: "46px" }}
+                        >
+                          A+
+                        </Button>
+                      )}
+                      {mark.Grade === "A" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{ backgroundColor: "#29bb89", width: "46px" }}
+                        >
+                          A
+                        </Button>
+                      )}
+                      {mark.Grade === "B+" && (
+                        <Button
+                          className="btn btn-sm btn-success"
+                          style={{ width: "46px" }}
+                        >
+                          B+
+                        </Button>
+                      )}
+                      {mark.Grade === "B" && (
+                        <Button
+                          className="btn btn-sm btn-success"
+                          style={{ width: "46px" }}
+                        >
+                          B
+                        </Button>
+                      )}
+                      {mark.Grade === "C" && (
+                        <Button
+                          className="btn btn-sm btn-warning"
+                          style={{ width: "46px" }}
+                        >
+                          C
+                        </Button>
+                      )}
+                      {mark.Grade === "P" && (
+                        <Button
+                          className="btn btn-sm btn-danger"
+                          style={{ width: "46px" }}
+                        >
+                          P
+                        </Button>
+                      )}
+                      {mark.Grade === "F" && (
+                        <Button
+                          className="btn btn-sm"
+                          style={{ backgroundColor: "#be0000", width: "46px" }}
+                        >
+                          F
+                        </Button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
         </div>
       )}
       {status === "Not Published" && (
         <div className="result_card">
-          <h1 className="text-center">Results Not Published</h1>
+          <h1 className="text-center signup_card text-info">
+            Results Not Published
+          </h1>
         </div>
       )}
     </>

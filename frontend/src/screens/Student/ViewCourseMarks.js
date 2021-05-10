@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
-import { getAStudent } from "../../actions/studentActions";
 import { Link } from "react-router-dom";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "../Home.css";
 import axios from "axios";
@@ -15,8 +11,6 @@ const ViewCourseMarks = ({ history, match }) => {
   const str = match.params.id;
   let n = str.length;
   let rollnum = str.substring(0, n - 6);
-  let branch = str.substring(n - 5, n - 2);
-  let batch = str.substring(n - 1, n);
   const [marks, setMarks] = useState([]);
   const [graceAccepted, setGraceAccepted] = useState("");
   const [grace, setGrace] = useState([]);
@@ -29,7 +23,7 @@ const ViewCourseMarks = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const studentList = useSelector((state) => state.studentList);
-  const { error, students } = studentList;
+  const { error } = studentList;
 
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
@@ -95,7 +89,7 @@ const ViewCourseMarks = ({ history, match }) => {
           </Col>
 
           <Col className="text-right">
-            {setCgpaStatus === "N/P" ||
+            {cgpaStatus === "N/P" ||
               (cgpa == "NaN" && (
                 <Button variant="success" onClick={() => calculateCGPA(marks)}>
                   Calculate CGPA

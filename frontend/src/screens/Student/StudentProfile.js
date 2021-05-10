@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import { studentLogout } from "../../actions/studentActions";
 import EmailIcon from "@material-ui/icons/Email";
 import PersonIcon from "@material-ui/icons/Person";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import PhoneIcon from "@material-ui/icons/Phone";
 import HomeIcon from "@material-ui/icons/Home";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
-import EditAttributesIcon from "@material-ui/icons/EditAttributes";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import ClassIcon from "@material-ui/icons/Class";
 import BeenhereIcon from "@material-ui/icons/Beenhere";
@@ -18,22 +14,12 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import SchoolIcon from "@material-ui/icons/School";
 import CloseIcon from "@material-ui/icons/Close";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SendIcon from "@material-ui/icons/Send";
 import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import AutorenewIcon from "@material-ui/icons/Autorenew";
-import PublishIcon from "@material-ui/icons/Publish";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Card,
-  Button,
-  Container,
-} from "react-bootstrap";
+import { Row, Col, Button, Table } from "react-bootstrap";
 import axios from "axios";
 import Message from "../../components/Message";
 
@@ -50,8 +36,6 @@ const StudentProfile = ({ history }) => {
   const [status, setStatus] = useState("");
   const [result, setResult] = useState("");
   const [value, onChange] = useState(new Date());
-
-  const dispatch = useDispatch();
 
   const studentSignin = useSelector((state) => state.studentSignin);
   const { studentInfo } = studentSignin;
@@ -156,7 +140,7 @@ const StudentProfile = ({ history }) => {
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <PersonIcon style={{ color: "#2196f3" }} /> Student Details
           </h2>
-          <table striped bordered hover responsive className="table table-sm">
+          <Table hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>
@@ -226,11 +210,11 @@ const StudentProfile = ({ history }) => {
                 )}
               </tr>
             </tbody>
-          </table>
+          </Table>
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <ContactSupportIcon style={{ color: "#2196f3" }} /> Contact Details
           </h2>
-          <table striped bordered hover responsive className="table table-sm">
+          <Table  hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>
@@ -256,7 +240,7 @@ const StudentProfile = ({ history }) => {
                 </td>
               </tr>
             </tbody>
-          </table>
+          </Table>
         </div>
       </div>
     </div>

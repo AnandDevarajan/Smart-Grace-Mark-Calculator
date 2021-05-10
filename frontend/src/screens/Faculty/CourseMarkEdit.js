@@ -18,7 +18,7 @@ const CourseMarkEdit = ({ match, history }) => {
   const [cid, setCid] = useState(facultyInfo.result.CourseID);
 
   const courseDetails = useSelector((state) => state.courseDetails);
-  const { error, markList } = courseDetails;
+  const { error } = courseDetails;
 
   const coursemarkUpdate = useSelector((state) => state.coursemarkUpdate);
   const { error: errorUpdate, success: successUpdate } = coursemarkUpdate;

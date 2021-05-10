@@ -4,14 +4,13 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import { courseStudentMark } from "../../actions/studentActions";
-import { updateCoursemark, rangeDetails } from "../../actions/courseActions";
+import { updateCoursemark } from "../../actions/courseActions";
 import { Link } from "react-router-dom";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "../Home.css";
 import EditIcon from "@material-ui/icons/Edit";
 import axios from "axios";
-import GradeIcon from "@material-ui/icons/Grade";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 const CourseStudents = ({ history, match }) => {
   const [message, setMessage] = useState(null);
@@ -28,14 +27,10 @@ const CourseStudents = ({ history, match }) => {
   const [F, setF] = useState("");
   const [status, setStatus] = useState("");
   const [count, setCount] = useState(0);
-  const [grade, setGrade] = useState("");
   const dispatch = useDispatch("");
 
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
-
-  const courseDetails = useSelector((state) => state.courseDetails);
-  const { error, markList } = courseDetails;
 
   const courseStudentMarkList = useSelector(
     (state) => state.courseStudentMarkList
@@ -65,8 +60,6 @@ const CourseStudents = ({ history, match }) => {
             setStatus(response1.data.grade[0].status);
           })
         );
-
-      // dispatch(rangeDetails(cid));
     } else {
       history.push("/");
     }

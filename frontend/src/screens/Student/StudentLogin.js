@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Message from "../../components/Message";
-import { Form, Button, Row, Col, Card } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../../components/FormContainer";
 import { studentLogin } from "../../actions/studentActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -15,9 +15,6 @@ const StudentLogin = ({ location, history }) => {
   const studentSignin = useSelector((state) => state.studentSignin);
   const { error, studentInfo } = studentSignin;
 
-  // const redirect = location.search
-  //   ? location.search.split('=')[1]
-  //   : '/student/profile';
   const redirect = "/student/profile";
   useEffect(() => {
     if (studentInfo) {

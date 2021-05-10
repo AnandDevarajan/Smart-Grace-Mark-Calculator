@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import EmailIcon from "@material-ui/icons/Email";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
@@ -17,18 +15,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import SchoolIcon from "@material-ui/icons/School";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import ClassIcon from "@material-ui/icons/Class";
-import PublishIcon from "@material-ui/icons/Publish";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Card,
-  Button,
-  Container,
-  Form,
-} from "react-bootstrap";
+import { Row, Col, Button, Table } from "react-bootstrap";
 import axios from "axios";
 
 const FacultyProfile = ({ history }) => {
@@ -39,7 +27,6 @@ const FacultyProfile = ({ history }) => {
   const [address, setAddress] = useState("");
   const [status, setStatus] = useState("");
   const [complete, setComplete] = useState("");
-  const [value, onChange] = useState(new Date());
   const facultySignin = useSelector((state) => state.facultySignin);
   const { facultyInfo } = facultySignin;
 
@@ -135,7 +122,7 @@ const FacultyProfile = ({ history }) => {
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <PersonIcon style={{ color: "#2196f3" }} /> Faculty Details
           </h2>
-          <table striped bordered hover responsive className="table table-sm">
+          <Table striped bordered hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>
@@ -172,11 +159,11 @@ const FacultyProfile = ({ history }) => {
                 )}
               </tr>
             </tbody>
-          </table>
+          </Table>
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <ContactSupportIcon style={{ color: "#2196f3" }} /> Contact Details
           </h2>
-          <table striped bordered hover responsive className="table table-sm">
+          <Table striped bordered hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>
@@ -188,7 +175,7 @@ const FacultyProfile = ({ history }) => {
                   <PhoneIcon />
                   <span>Phone Number</span>
                 </th>
-                <th className="hide-sm">
+                <th className="hide-sm np">
                   <HomeIcon />
                   <span>Address</span>
                 </th>
@@ -199,10 +186,12 @@ const FacultyProfile = ({ history }) => {
               <tr>
                 <td width="365px">{email}</td>
                 <td width="365px">+91 {phone}</td>
-                <td width="365px">{address}</td>
+                <td width="365px" className="np">
+                  {address}
+                </td>
               </tr>
             </tbody>
-          </table>
+          </Table>
         </div>
       </div>
     </div>

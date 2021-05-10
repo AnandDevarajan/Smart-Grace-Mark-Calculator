@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import {
-  gradeRangeDetails,
-  updateGradeRange,
-} from "../../actions/courseActions";
+import { updateGradeRange } from "../../actions/courseActions";
 import { GRADE_RANGE_UPDATE_RESET } from "../../constants/courseConstants";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from "@material-ui/icons/Check";
 import axios from "axios";
 
-const SetGrade = ({ match, history }) => {
+const SetGrade = ({ match }) => {
   let id = match.params.id;
   let cid = id.substring(0, 8);
   let cname = id.substring(9, id.length);

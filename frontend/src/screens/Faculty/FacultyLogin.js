@@ -7,7 +7,7 @@ import FormContainer from "../../components/FormContainer";
 import { facultyLogin } from "../../actions/facultyActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-const FacultyLogin = ({ location, history }) => {
+const FacultyLogin = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,10 +15,6 @@ const FacultyLogin = ({ location, history }) => {
 
   const facultySignin = useSelector((state) => state.facultySignin);
   const { error, facultyInfo } = facultySignin;
-
-  // const redirect = location.search
-  //   ? location.search.split('=')[1]
-  //   : '/faculty/profile';
 
   const redirect = "/faculty/profile";
   useEffect(() => {

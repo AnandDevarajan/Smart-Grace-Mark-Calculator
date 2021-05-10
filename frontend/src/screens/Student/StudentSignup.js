@@ -7,7 +7,7 @@ import FormContainer from "../../components/FormContainer";
 import { studentRegister } from "../../actions/studentActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DatePicker from "react-date-picker";
-const StudentSignup = ({ location, history }) => {
+const StudentSignup = ({ history }) => {
   const [name, setName] = useState("");
 
   const [rollno, setRollNo] = useState("");
@@ -28,10 +28,6 @@ const StudentSignup = ({ location, history }) => {
 
   const studentSignup = useSelector((state) => state.studentSignup);
   const { error, studentInfo } = studentSignup;
-
-  // const redirect = location.search
-  //   ? location.search.split('=')[1]
-  //   : '/student/profile';
 
   const redirect = "/student/profile";
   useEffect(() => {

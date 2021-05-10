@@ -5,7 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import FormContainer from "../../components/FormContainer";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import axios from "axios";
-const FacultyForgotPassword = ({ location, history }) => {
+const FacultyForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
 

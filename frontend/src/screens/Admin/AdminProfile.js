@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import EmailIcon from "@material-ui/icons/Email";
 import PersonIcon from "@material-ui/icons/Person";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
@@ -17,7 +15,7 @@ import PublishIcon from "@material-ui/icons/Publish";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import CloseIcon from "@material-ui/icons/Close";
 import Message from "../../components/Message";
-import { Row, Col, ListGroup, Image, Container, Button } from "react-bootstrap";
+import { Row, Col, Button, Table } from "react-bootstrap";
 import axios from "axios";
 import "./Admin.css";
 
@@ -179,7 +177,7 @@ const AdminProfile = ({ history }) => {
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <PersonIcon style={{ color: "#2196f3" }} /> Admin Details
           </h2>
-          <table striped bordered hover responsive className="table table-sm">
+          <Table hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>
@@ -197,11 +195,11 @@ const AdminProfile = ({ history }) => {
                 <td width="365px">{adminInfo.result.DOB.substring(0, 10)}</td>
               </tr>
             </tbody>
-          </table>
+          </Table>
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <ContactSupportIcon style={{ color: "#2196f3" }} /> Contact Details
           </h2>
-          <table striped bordered hover responsive className="table table-sm">
+          <Table  hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>
@@ -228,7 +226,7 @@ const AdminProfile = ({ history }) => {
                 </td>
               </tr>
             </tbody>
-          </table>
+          </Table>
         </div>
       </div>
     </div>

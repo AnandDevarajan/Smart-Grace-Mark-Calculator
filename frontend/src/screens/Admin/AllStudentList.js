@@ -14,7 +14,6 @@ import {
 import { Link } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "../Home.css";
 
 const AllStudentList = ({ history }) => {

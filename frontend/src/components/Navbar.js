@@ -242,7 +242,10 @@ function Navbar() {
               </li>
             </ul>
           ) : adminInfo ? (
-            <ul className="nav-menu-items" onClick={showSidebar}>
+            <ul
+              className="nav-menu-items admin-nav-items"
+              onClick={showSidebar}
+            >
               <h5 className="text-white mt-3 np">
                 <DoneAllSharpIcon className="app_icon " /> C8 SGMC
               </h5>

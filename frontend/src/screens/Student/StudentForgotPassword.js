@@ -6,7 +6,7 @@ import FormContainer from "../../components/FormContainer";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import axios from "axios";
 import "./Student.css";
-const StudentForgotPassword = ({ location, history }) => {
+const StudentForgotPassword = () => {
   const [email, setEmail] = useState("");
 
   const [message, setMessage] = useState(null);

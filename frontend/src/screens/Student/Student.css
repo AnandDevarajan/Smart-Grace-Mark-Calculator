@@ -26,6 +26,7 @@
   .profile_card {
     padding: 0px !important;
     margin-top: 60px !important;
+    overflow-x: hidden;
   }
   .profile_card span {
     position: absolute;

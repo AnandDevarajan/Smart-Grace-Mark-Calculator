@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import FormContainer from "../../components/FormContainer";
@@ -23,7 +23,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
   const studentProfileUpdate = useSelector(
     (state) => state.studentProfileUpdate
   );
-  const { error: errorUpdate, success: successUpdate } = studentProfileUpdate;
+  const { success: successUpdate } = studentProfileUpdate;
 
   const redirect = location.search
     ? location.search.split("=")[1]
@@ -71,7 +71,7 @@ const StudentProfileEdit = ({ location, history, match }) => {
         </Button>
       </Link>
       <FormContainer>
-        <div className="card ml-5 px-3 py-3 overflow my_card mt-5">
+        <div className="card ml-5 px-3 py-3 overflow my_card signup_card">
           <h1 className="text-info">Edit Your Profile</h1>
 
           {message && <Message variant="warning">{message}</Message>}

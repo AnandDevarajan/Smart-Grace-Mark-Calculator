@@ -8,7 +8,7 @@ import { facultyRegister } from "../../actions/facultyActions";
 import { listCourses } from "../../actions/courseActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DatePicker from "react-date-picker";
-const FacultySignup = ({ location, history }) => {
+const FacultySignup = ({history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -31,9 +31,6 @@ const FacultySignup = ({ location, history }) => {
   const courseList = useSelector((state) => state.courseList);
   const { courses } = courseList;
 
-  // const redirect = location.search
-  //   ? location.search.split('=')[1]
-  //   : '/faculty/profile';
 
   const redirect = "/faculty/profile";
   useEffect(() => {

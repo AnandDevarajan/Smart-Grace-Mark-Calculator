@@ -7,7 +7,7 @@ import FormContainer from "../../components/FormContainer";
 import { adminLogin } from "../../actions/adminActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./Admin.css";
-const AdminLogin = ({ location, history }) => {
+const AdminLogin = ({  history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,9 +15,6 @@ const AdminLogin = ({ location, history }) => {
   const adminSignin = useSelector((state) => state.adminSignin);
   const { error, adminInfo } = adminSignin;
 
-  // const redirect = location.search
-  //   ? location.search.split('=')[1]
-  //   : '/admin/profile';
   const redirect = "/admin/profile";
   useEffect(() => {
     if (adminInfo) {

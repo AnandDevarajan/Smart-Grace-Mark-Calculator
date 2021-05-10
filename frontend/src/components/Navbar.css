@@ -149,7 +149,8 @@ span {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding: 8px 0px 8px 16px;
+    padding: 8px 8px 0px 0px;
+
     list-style: none;
     height: 70px;
     width: 50px;
@@ -163,5 +164,11 @@ span {
   .footer {
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+  .admin-nav-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+    margin-left: 0px !important;
   }
 }
