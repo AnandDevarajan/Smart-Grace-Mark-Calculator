@@ -43,7 +43,7 @@ CREATE TABLE `grade_range` (
 
 LOCK TABLES `grade_range` WRITE;
 /*!40000 ALTER TABLE `grade_range` DISABLE KEYS */;
-INSERT INTO `grade_range` VALUES ('15CSE201','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE213','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE302','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE312','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE313','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P');
+INSERT INTO `grade_range` VALUES ('15CSE201','79-74','73 - 67',' 66- 59','58-51','50-39','38-31','30 - 23 ','22 - 0 ','P'),('15CSE213','88-82','81 - 75',' 74- 66','65-57','56-44','43-35','34 - 26 ','25 - 0 ','P'),('15CSE302','88-82','81 - 75',' 74- 66','65-57','56-44','43-35','34 - 26 ','25 - 0 ','P'),('15CSE312','84-78','77 - 72',' 71- 63','62-54','53-42','41-33','32 - 25 ','24 - 0 ','P'),('15CSE313','79-74','73 - 67',' 66- 59','58-51','50-39','38-31','30 - 23 ','22 - 0 ','P');
 /*!40000 ALTER TABLE `grade_range` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-10 13:23:26
+-- Dump completed on 2021-05-10 16:17:42

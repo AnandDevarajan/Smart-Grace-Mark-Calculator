@@ -42,7 +42,7 @@ CREATE TABLE `range` (
 
 LOCK TABLES `range` WRITE;
 /*!40000 ALTER TABLE `range` DISABLE KEYS */;
-INSERT INTO `range` VALUES ('15CSE201','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE213','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE302','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE312','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P'),('15CSE313','N/P','N/P','N/P','N/P','N/P','N/P','N/P','N/P');
+INSERT INTO `range` VALUES ('15CSE201','74','67','59','51','39','31','23','0'),('15CSE213','82','75','66','57','44','35','26','0'),('15CSE302','82','75','66','57','44','35','26','0'),('15CSE312','78','72','63','54','42','33','25','0'),('15CSE313','74','67','59','51','39','31','23','0');
 /*!40000 ALTER TABLE `range` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-10 13:23:26
+-- Dump completed on 2021-05-10 16:17:42

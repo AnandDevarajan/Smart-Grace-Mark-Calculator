@@ -56,7 +56,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('CB.EN.U4CSE18207','Anand Devarajan','ananddevarajan01@gmail.com','9207251675','India','2021-05-03','Male','CSE','C','BTech','$2b$10$9aEg/0..ne37AOLSziK5l.lA.QOC0a6Wf8xjEmx9IWbjjYLbdyu.W',1,'N/P','N/P','N/P','N/A','N/A','N/P','N/P','N/P','N/P');
+INSERT INTO `student` VALUES ('CB.EN.U4CSE18207','Anand Devarajan','ananddevarajan01@gmail.com','9207251675','India','2021-05-03','Male','CSE','C','BTech','$2b$10$9aEg/0..ne37AOLSziK5l.lA.QOC0a6Wf8xjEmx9IWbjjYLbdyu.W',1,'N/A','N/A','N/A','N/A','N/A','8.04','P','NaN','P'),('test1','test2','test1@sgmc.com','aaaaaaaaaa','a','2021-05-10','Male','CSE','C','BTech','$2b$10$A2wy/LO76GdSACF2R0r5F.Y6qjP7rBcspXED12DwOsZbv211cCwqa',1,'N/A','N/A','N/A','N/A','N/A','9.71','P','NaN','P'),('test2','test2','test2@sgmc.com','sdsdsdssds','s','2021-05-10','Female','CSE','C','BTech','$2b$10$Acicy1Y.0gLc5mu9X9/HOeUxVDW1oky1JOnThZGGb66Fi76qh7qFe',1,'accepted','Inter University Sports and Games Events','3','N/A','N/A','8.79','P','8.86','P');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -69,4 +69,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-10 13:23:26
+-- Dump completed on 2021-05-10 16:17:42
