@@ -632,6 +632,7 @@ exports.calculateNewGrade = (req, res) => {
         }
       }
     }
+    
     let changeValue = 0;
     let FinalGrade = "";
     for (let info of grace) {

@@ -4,9 +4,8 @@ import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import PageviewIcon from "@material-ui/icons/Pageview";
+import AutorenewIcon from "@material-ui/icons/Autorenew";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import "./Admin.css";
-
 import {
   listStudents,
   requestAccept,
@@ -43,6 +42,7 @@ const AllStudentList = ({ history }) => {
     dispatch(requestReject(id));
     dispatch(listStudents());
   };
+  console.log(students);
 
   return (
     <div
@@ -84,14 +84,23 @@ const AllStudentList = ({ history }) => {
                   <td>{student.Branch}</td>
                   <td>{student.Batch}</td>
                   <td className="text-center">
-                    <LinkContainer
-                      to={`/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`}
-                    >
-                      <PageviewIcon
+                    {student.cgpa_status === "N/P" ? (
+                      <AutorenewIcon
+                        onClick={() =>
+                          (window.location.pathname = `/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`)
+                        }
                         className="icon"
-                        style={{ color: "blue" }}
+                        style={{ color: "#ffc93c" }}
                       />
-                    </LinkContainer>
+                    ) : (
+                      <PageviewIcon
+                        onClick={() =>
+                          (window.location.pathname = `/student/view/marklist/${student.RollNum}-${student.Branch}-${student.Batch}`)
+                        }
+                        className="icon"
+                        style={{ color: "#1597bb" }}
+                      />
+                    )}
                   </td>
                   {student.GraceDesc === "N/A" ? (
                     <td>-</td>
