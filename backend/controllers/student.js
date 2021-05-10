@@ -264,37 +264,45 @@ exports.getStudent = (req, res) => {
 exports.addRequest = (req, res) => {
   let id = req.params.id;
   const { request } = req.body;
-  let length = request.length;
-  let desc = request.substring(0, length - 3);
-  let mark = request.substring(length - 2, length);
   console.log(request);
   if (request !== "select" || request.length > 0) {
     let Requested = "pending";
     con.query(
-      `UPDATE STUDENT SET Requested=?, GraceDesc=?,GraceMark=? WHERE RollNum=?`,
-      [Requested, desc, mark, id],
+      "SELECT GraceMark from gracemark Where Description =?",
+      [request],
       (err, result) => {
         if (err || result.length === 0) {
-          return res.json({
-            message: "Unable to request grace mark",
+          return res.status(400).json({
+            message: "Gracemark not found",
           });
         }
-        if (result) {
-          con.query(
-            `SELECT * FROM STUDENT WHERE RollNum='${id}'`,
-            (err, result) => {
-              if (err) {
-                return res.status(400).json({
-                  message: "No user found",
-                });
-              }
+        con.query(
+          `UPDATE STUDENT SET Requested=?, GraceDesc=?,GraceMark=? WHERE RollNum=?`,
+          [Requested, request, result[0].GraceMark, id],
+          (err, result) => {
+            if (err || result.length === 0) {
               return res.json({
-                result: result[0],
-                token: generateToken(result[0].RollNum),
+                message: "Unable to request grace mark",
               });
             }
-          );
-        }
+            if (result) {
+              con.query(
+                `SELECT * FROM STUDENT WHERE RollNum='${id}'`,
+                (err, result) => {
+                  if (err) {
+                    return res.status(400).json({
+                      message: "No user found",
+                    });
+                  }
+                  return res.json({
+                    result: result[0],
+                    token: generateToken(result[0].RollNum),
+                  });
+                }
+              );
+            }
+          }
+        );
       }
     );
   } else {

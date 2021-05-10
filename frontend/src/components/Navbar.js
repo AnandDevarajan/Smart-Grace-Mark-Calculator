@@ -246,7 +246,6 @@ function Navbar() {
               <h5 className="text-white mt-3 icon_size">
                 <DoneAllSharpIcon className="app_icon icon_size" /> C8 SGMC
               </h5>
-              <DoneAllSharpIcon className="app_icon mt-4" />
               <li className="navbar-toggle">
                 <NavLink to="#" className="menu-bars">
                   <CloseIcon
