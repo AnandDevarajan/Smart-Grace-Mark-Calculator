@@ -67,17 +67,24 @@ const AdminProfile = ({ history }) => {
   console.log(calcStatus, cgpaStatus);
 
   const publishResult = () => {
-    const config = {
-      headers: { Authorization: `Bearer ${adminInfo.token}` },
-    };
-    axios
-      .get("/admin/publish/result", config)
-      .then((response) => {
-        setMessage(response.data.message);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (calcStatus === "P" && cgpaStatus === "P" && graceStatus === "P") {
+      const config = {
+        headers: { Authorization: `Bearer ${adminInfo.token}` },
+      };
+      axios
+        .get("/admin/publish/result", config)
+        .then((response) => {
+          setMessage(response.data.message);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setStatus("Not Published");
+      setMessage(
+        "Unable to Publish Results now. Mark allocation is yet to be completed"
+      );
+    }
   };
 
   const resetPublish = () => {
@@ -203,7 +210,7 @@ const AdminProfile = ({ history }) => {
                 </th>
                 <th>
                   <NotificationsIcon />
-                  <span>Work</span>
+                  <span>Status</span>
                 </th>
               </tr>
             </thead>
