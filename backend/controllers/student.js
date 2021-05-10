@@ -731,7 +731,6 @@ exports.calculateCGPA = (req, res) => {
 };
 
 exports.getCgpaCount = (req, res) => {
-  console.log("J");
   con.query(
     `SELECT count(RollNum) as count FROM STUDENT Where cgpa= ?`,
     ["N/P"],
@@ -741,7 +740,6 @@ exports.getCgpaCount = (req, res) => {
           message: "Something went wrong",
         });
       }
-      console.log(result);
       if (result[0].count === 0) {
         return res.json({
           cgpaStatus: "P",
@@ -749,6 +747,27 @@ exports.getCgpaCount = (req, res) => {
       }
       return res.json({
         cgpaStatus: "N/P",
+      });
+    }
+  );
+};
+
+exports.getGraceStatus = (req, res) => {
+  con.query(
+    'SELECT count(c.RollNum) as count From course_Mark c  Inner Join student s on c.RollNum=s.RollNum Where s.Requested="accepted" and c.final_status="N/P"',
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          message: "No Students found",
+        });
+      }
+      if (result[0].count === 0) {
+        return res.json({
+          graceStatus: "P",
+        });
+      }
+      return res.json({
+        graceStatus: "N/P",
       });
     }
   );

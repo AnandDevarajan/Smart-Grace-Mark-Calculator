@@ -28,6 +28,7 @@ const AdminProfile = ({ history }) => {
   const [status, setStatus] = useState("");
   const [calcStatus, setCalcStatus] = useState("");
   const [cgpaStatus, setCgpaStatus] = useState("");
+  const [graceStatus, setGraceStatus] = useState("");
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
   const { success, error } = gracemarkCreate;
 
@@ -44,18 +45,22 @@ const AdminProfile = ({ history }) => {
         axios.get(`/admin/status`),
         axios.get(`/faculty/status/`),
         axios.get(`/student/cgpa/count/`),
+        axios.get(`/student/grace/status`),
       ])
       .then(
-        axios.spread((response1, response2, response3, response4) => {
-          console.log(response1);
-          setName(response1.data.admin.Name);
-          setEmail(response1.data.admin.EmailID);
-          setPhone(response1.data.admin.PhoneNum);
-          setAddress(response1.data.admin.Address);
-          setStatus(response2.data.status);
-          setCalcStatus(response3.data.calcStatus);
-          setCgpaStatus(response4.data.cgpaStatus);
-        })
+        axios.spread(
+          (response1, response2, response3, response4, response5) => {
+            console.log(response1);
+            setName(response1.data.admin.Name);
+            setEmail(response1.data.admin.EmailID);
+            setPhone(response1.data.admin.PhoneNum);
+            setAddress(response1.data.admin.Address);
+            setStatus(response2.data.status);
+            setCalcStatus(response3.data.calcStatus);
+            setCgpaStatus(response4.data.cgpaStatus);
+            setGraceStatus(response5.data.graceStatus);
+          }
+        )
       );
   }, [adminInfo, name, email, address, phone.replace, status, message]);
 
@@ -101,7 +106,7 @@ const AdminProfile = ({ history }) => {
     localStorage.removeItem("adminInfo");
     window.location.pathname = "/";
   };
-
+  console.log(calcStatus, cgpaStatus, graceStatus);
   return (
     <div
       className="ml-5 mt-3 align-items-center alllist_div profile_card"
@@ -209,12 +214,15 @@ const AdminProfile = ({ history }) => {
                 {calcStatus === "P" && cgpaStatus === "N/P" && (
                   <td className="badge badge-info">Calculate Cgpa</td>
                 )}
-                {calcStatus === "P" && cgpaStatus === "P" && (
-                  <td className="badge badge-success">Cgpa calculated</td>
-                )}
-                {calcStatus === "N/P" && cgpaStatus === "N/P" && (
-                  <td className="badge badge-warning">waiting</td>
-                )}
+                {calcStatus === "P" &&
+                  cgpaStatus === "P" &&
+                  graceStatus === "P" && (
+                    <td className="badge badge-success">Cgpa calculated</td>
+                  )}
+                {(calcStatus === "N/P" && cgpaStatus === "N/P") ||
+                  (graceStatus === "N/P" && (
+                    <td className="badge badge-warning">waiting</td>
+                  ))}
               </tr>
             </tbody>
           </Table>
