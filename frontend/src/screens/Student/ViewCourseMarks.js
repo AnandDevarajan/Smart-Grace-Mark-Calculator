@@ -89,12 +89,11 @@ const ViewCourseMarks = ({ history, match }) => {
           </Col>
 
           <Col className="text-right">
-            {cgpaStatus === "N/P" ||
-              (cgpa == "NaN" && (
-                <Button variant="success" onClick={() => calculateCGPA(marks)}>
-                  Calculate CGPA
-                </Button>
-              ))}
+            {cgpaStatus === "N/P" && (
+              <Button variant="success" onClick={() => calculateCGPA(marks)}>
+                Calculate CGPA
+              </Button>
+            )}
           </Col>
         </Row>
       ) : (
@@ -125,7 +124,7 @@ const ViewCourseMarks = ({ history, match }) => {
             <h4>{rollnum}</h4>
           </Col>
         </Row>
-        {finalcgpa === cgpa ? (
+        {finalcgpa === cgpa || finalcgpa === "NaN" ? (
           <Row>
             <Col>
               <Button>cgpa {cgpa}</Button>
@@ -157,7 +156,9 @@ const ViewCourseMarks = ({ history, match }) => {
                 <th>Marks</th>
                 <th>Total</th>
                 <th>Grade</th>
-                {graceAccepted === "accepted" && <th>Final Grade</th>}
+                {graceAccepted === "accepted" && finalStatus === "P" && (
+                  <th>Final Grade</th>
+                )}
               </tr>
             </thead>
             <tbody>
