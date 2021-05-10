@@ -67,7 +67,7 @@ exports.registerStudent = (req, res) => {
       console.log(err);
     }
     con.query(
-      `INSERT INTO STUDENT (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Batch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?);INSERT INTO COURSE_MARK (RollNum,CourseID) VALUES(?,'15CSE201'),(?,'15CSE213'),(?,'15CSE302'),(?,'15CSE312'),(?,'15CSE313')`,
+      `INSERT INTO STUDENT (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Batch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?);INSERT INTO COURSE_MARK (RollNum,CourseID) VALUES(?,'15CSE201'),(?,'15CSE213'),(?,'15CSE302'),(?,'15CSE312'),(?,'15CSE313');UPDATE FACULTY SET completion ="No";`,
       [
         rollno,
         name,

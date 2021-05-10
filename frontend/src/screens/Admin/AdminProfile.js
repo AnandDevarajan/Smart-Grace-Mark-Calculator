@@ -59,6 +59,8 @@ const AdminProfile = ({ history }) => {
       );
   }, [adminInfo, name, email, address, phone.replace, status, message]);
 
+  console.log(calcStatus, cgpaStatus);
+
   const publishResult = () => {
     const config = {
       headers: { Authorization: `Bearer ${adminInfo.token}` },
@@ -123,7 +125,7 @@ const AdminProfile = ({ history }) => {
           <h1 className="text-success">Admin Profile</h1>
           <p className="lead mt-2">
             <AccountBoxIcon style={{ color: "#2196f3" }} /> Welcome{" "}
-            <span className="text-info"> {name}</span>
+            <strong className="text-info"> {name}</strong>
           </p>
           <Row className="mt-4">
             <Col>
@@ -205,10 +207,13 @@ const AdminProfile = ({ history }) => {
                 <td width="365px">ID {adminInfo.result.adminID}</td>
                 <td width="365px">{adminInfo.result.DOB.substring(0, 10)}</td>
                 {calcStatus === "P" && cgpaStatus === "N/P" && (
-                  <td className="badge badge-warning">Calculate Cgpa</td>
+                  <td className="badge badge-info">Calculate Cgpa</td>
                 )}
                 {calcStatus === "P" && cgpaStatus === "P" && (
                   <td className="badge badge-success">Cgpa calculated</td>
+                )}
+                {calcStatus === "N/P" && cgpaStatus === "N/P" && (
+                  <td className="badge badge-warning">waiting</td>
                 )}
               </tr>
             </tbody>

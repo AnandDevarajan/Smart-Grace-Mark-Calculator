@@ -417,7 +417,7 @@ exports.updateComplete = (req, res) => {
 
 exports.getAllFacultyStatus = (req, res) => {
   con.query(
-    `SELECT count(FacultyID) as count FROM Faculty where completion !=?`,
+    `SELECT count(FacultyID) as count FROM Faculty where completion !=?;`,
     ["Yes"],
     (err, result) => {
       if (err) {
