@@ -16,11 +16,13 @@ const {
   getGraceInfo,
   calculateNewGrade,
   calculateCGPA,
+  getCgpaCount,
 } = require("../controllers/student");
 const { verifyStudent } = require("../middlewares/auth");
 
 router.post("/", registerStudent);
 router.post("/login", authStudent);
+router.get("/cgpa/count", getCgpaCount);
 router.post("/resetpassword", resetPassword);
 router.post("/newpassword", newPassword);
 router.get("/:id", getStudent);

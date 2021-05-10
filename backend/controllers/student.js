@@ -729,3 +729,27 @@ exports.calculateCGPA = (req, res) => {
     });
   }
 };
+
+exports.getCgpaCount = (req, res) => {
+  console.log("J");
+  con.query(
+    `SELECT count(RollNum) as count FROM STUDENT Where cgpa= ?`,
+    ["N/P"],
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Something went wrong",
+        });
+      }
+      console.log(result);
+      if (result[0].count === 0) {
+        return res.json({
+          cgpaStatus: "P",
+        });
+      }
+      return res.json({
+        cgpaStatus: "N/P",
+      });
+    }
+  );
+};

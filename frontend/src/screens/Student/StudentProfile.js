@@ -214,7 +214,7 @@ const StudentProfile = ({ history }) => {
           <h2 className="mt-4" style={{ textTransform: "Capitalize" }}>
             <ContactSupportIcon style={{ color: "#2196f3" }} /> Contact Details
           </h2>
-          <Table  hover responsive className="table table-sm">
+          <Table hover responsive className="table table-sm">
             <thead>
               <tr>
                 <th>

@@ -27,7 +27,7 @@ const AdminProfile = ({ history }) => {
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState("");
   const [calcStatus, setCalcStatus] = useState("");
-
+  const [cgpaStatus, setCgpaStatus] = useState("");
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
   const { success, error } = gracemarkCreate;
 
@@ -43,16 +43,18 @@ const AdminProfile = ({ history }) => {
         axios.get(`/admin/${adminInfo.result.adminID}`),
         axios.get(`/admin/status`),
         axios.get(`/faculty/status/`),
+        axios.get(`/student/cgpa/count/`),
       ])
       .then(
-        axios.spread((response1, response2, response3) => {
-          console.log(response2.data.status);
+        axios.spread((response1, response2, response3, response4) => {
+          console.log(response1);
           setName(response1.data.admin.Name);
           setEmail(response1.data.admin.EmailID);
           setPhone(response1.data.admin.PhoneNum);
           setAddress(response1.data.admin.Address);
           setStatus(response2.data.status);
           setCalcStatus(response3.data.calcStatus);
+          setCgpaStatus(response4.data.cgpaStatus);
         })
       );
   }, [adminInfo, name, email, address, phone.replace, status, message]);
@@ -184,15 +186,17 @@ const AdminProfile = ({ history }) => {
             <thead>
               <tr>
                 <th>
-                  <FormatListNumberedIcon /> Admin ID
+                  <FormatListNumberedIcon />
+                  <span>Admin ID</span>
                 </th>
 
                 <th>
-                  <EventIcon /> DOB
+                  <EventIcon />
+                  <span>DOB</span>
                 </th>
                 <th>
                   <NotificationsIcon />
-                  <span>Grade</span>
+                  <span>Work</span>
                 </th>
               </tr>
             </thead>
@@ -200,6 +204,12 @@ const AdminProfile = ({ history }) => {
               <tr>
                 <td width="365px">ID {adminInfo.result.adminID}</td>
                 <td width="365px">{adminInfo.result.DOB.substring(0, 10)}</td>
+                {calcStatus === "P" && cgpaStatus === "N/P" && (
+                  <td className="badge badge-warning">Calculate Cgpa</td>
+                )}
+                {calcStatus === "P" && cgpaStatus === "P" && (
+                  <td className="badge badge-success">Cgpa calculated</td>
+                )}
               </tr>
             </tbody>
           </Table>
