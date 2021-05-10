@@ -124,32 +124,26 @@ const ViewCourseMarks = ({ history, match }) => {
           <Col>
             <h4>{rollnum}</h4>
           </Col>
-
-          {finalcgpa === cgpa ? (
-            <>
-              <Col></Col>
-              <Col>
-                <Button>cgpa {cgpa}</Button>
-              </Col>
-            </>
-          ) : (
-            <>
-              <Col></Col>
-
-              <Col>
-                <Button className="btn-warning np">cgpa {cgpa}</Button>
-              </Col>
-              <Col>
-                <Button className="np"> Final cgpa {finalcgpa}</Button>
-              </Col>
-
-              <Col>
-                <Button className="btn-warning bp">cgpa {cgpa}</Button>
-                <Button className="bp"> Final cgpa {finalcgpa}</Button>
-              </Col>
-            </>
-          )}
         </Row>
+        {finalcgpa === cgpa ? (
+          <Row>
+            <Col>
+              <Button>cgpa {cgpa}</Button>
+            </Col>
+          </Row>
+        ) : (
+          <Row>
+            <Col>
+              <Button className="btn-warning">cgpa {cgpa}</Button>
+            </Col>
+            <Col>
+              <Button className=""> Final cgpa {finalcgpa}</Button>
+            </Col>
+            <Col className="np"></Col>
+            <Col className="np"></Col>
+            <Col className="np"></Col>
+          </Row>
+        )}
 
         {error ? (
           <Message variant="danger">{error}</Message>

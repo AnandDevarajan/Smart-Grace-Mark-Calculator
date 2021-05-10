@@ -242,14 +242,11 @@ function Navbar() {
               </li>
             </ul>
           ) : adminInfo ? (
-            <ul
-              className="nav-menu-items admin-nav-items"
-              onClick={showSidebar}
-            >
-              <h5 className="text-white mt-3 np">
-                <DoneAllSharpIcon className="app_icon " /> C8 SGMC
+            <ul className="admin_nav-menu-items" onClick={showSidebar}>
+              <h5 className="text-white mt-3 icon_size">
+                <DoneAllSharpIcon className="app_icon icon_size" /> C8 SGMC
               </h5>
-
+              <DoneAllSharpIcon className="app_icon mt-4" />
               <li className="navbar-toggle">
                 <NavLink to="#" className="menu-bars">
                   <CloseIcon
@@ -261,7 +258,7 @@ function Navbar() {
                   />
                 </NavLink>
               </li>
-              <li className="nav-text">
+              <li className="admin_nav-text">
                 <NavLink
                   to="/admin/profile"
                   activeStyle={{
@@ -274,8 +271,7 @@ function Navbar() {
                   <span className="text">{adminInfo.result.Name}</span>
                 </NavLink>
               </li>
-
-              <li className="nav-text">
+              <li className="admin_nav-text">
                 <NavLink
                   activeStyle={{
                     color: "#2196f3",
@@ -288,7 +284,7 @@ function Navbar() {
                   <span className="text">Students</span>
                 </NavLink>
               </li>
-              <li className="nav-text">
+              <li className="admin_nav-text">
                 <NavLink
                   activeStyle={{
                     color: "#2196f3",
@@ -301,7 +297,7 @@ function Navbar() {
                   <span className="text">Faculty</span>
                 </NavLink>
               </li>
-              <li className="nav-text">
+              <li className="admin_nav-text">
                 <NavLink
                   to="/admin/course/report"
                   activeStyle={{
@@ -314,7 +310,7 @@ function Navbar() {
                   <span className="text">Courses</span>
                 </NavLink>
               </li>
-              <li className="nav-text">
+              <li className="admin_nav-text">
                 <NavLink
                   to="/admin/gracemarklist"
                   activeStyle={{
@@ -357,7 +353,7 @@ function Navbar() {
                   }}
                 >
                   <HomeIcon />
-                  <span>Home</span>
+                  <span className="text">Home</span>
                 </NavLink>
               </li>
             </ul>

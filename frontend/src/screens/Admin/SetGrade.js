@@ -93,7 +93,7 @@ const SetGrade = ({ match }) => {
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <div className="card ml-5 px-3 overflow my_card">
+          <div className="card ml-5 overflow my_card">
             <h2 className="text-center list_heading text-info py-4">
               Grade Range
             </h2>
@@ -309,7 +309,7 @@ const SetGrade = ({ match }) => {
               <ArrowBackIcon /> Go Back
             </Button>
           </Link>
-          <div className="card ml-5 px-3 overflow my_card">
+          <div className="card ml-5 overflow my_card">
             <h2 className="text-center list_heading text-info py-4">
               Grade Range
             </h2>

@@ -55,7 +55,7 @@ const ViewGrade = ({ match, history }) => {
             </Col>
             <Col></Col>
             <Col>
-              <Button className="btn">Cgpa:{cgpa}</Button>
+              <Button className="btn">Cgpa {cgpa}</Button>
             </Col>
           </Row>
           <div className="card ml-5  overflow my_card">
