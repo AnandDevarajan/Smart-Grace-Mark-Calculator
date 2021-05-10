@@ -585,10 +585,9 @@ exports.calculateNewGrade = (req, res) => {
           [info.Total, "P", cid, id, "P", id],
           (err, result) => {
             if (err) {
-              // return res.status(400).json({
-              //   message: "Unable to Update",
-              // });
-              console.log(err.sqlMessage);
+              return res.status(400).json({
+                message: "Unable to Update",
+              });
             }
             return res.json({
               message: "Total Marks Updated",
@@ -671,7 +670,17 @@ exports.calculateNewGrade = (req, res) => {
             info.CourseID,
             "P",
             id,
-          ]
+          ],
+          (err, result) => {
+            if (err) {
+              return res.status(400).json({
+                message: "Unable to update Grades",
+              });
+            }
+            return res.json({
+              message: "Grades updated",
+            });
+          }
         );
         break;
       }

@@ -19,6 +19,7 @@ const ViewCourseMarks = ({ history, match }) => {
   const [finalcgpa, setFinalCgpa] = useState("");
   const [gradeCountStatus, setGradeCountStatus] = useState("");
   const [cgpaStatus, setCgpaStatus] = useState("");
+  const [calcStatus, setCalcStatus] = useState("");
   const [gm, setGm] = useState("");
 
   const dispatch = useDispatch();
@@ -43,20 +44,24 @@ const ViewCourseMarks = ({ history, match }) => {
           axios.get(`/student/${rollnum}`),
           axios.get(`/student/grace/info/${rollnum}`),
           axios.get(`/course/count/grade/${rollnum}`),
+          axios.get(`/faculty/status/`),
         ])
         .then(
-          axios.spread((response1, response2, response3, response4) => {
-            console.log(response1);
-            setMarks(response1.data.markList);
-            setGraceAccepted(response2.data.student.Requested);
-            setCgpa(response2.data.student.cgpa);
-            setFinalCgpa(response2.data.student.final_cgpa);
-            setCgpaStatus(response2.data.student.final_status);
-            setFinalStatus(response1.data.markList[0].final_status);
-            setGm(response2.data.student.GraceMark);
-            setGrace(response3.data.GraceInfo);
-            setGradeCountStatus(response4.data.gradeCount);
-          })
+          axios.spread(
+            (response1, response2, response3, response4, response5) => {
+              console.log(response1);
+              setMarks(response1.data.markList);
+              setGraceAccepted(response2.data.student.Requested);
+              setCgpa(response2.data.student.cgpa);
+              setFinalCgpa(response2.data.student.final_cgpa);
+              setCgpaStatus(response2.data.student.final_status);
+              setFinalStatus(response1.data.markList[0].final_status);
+              setGm(response2.data.student.GraceMark);
+              setGrace(response3.data.GraceInfo);
+              setGradeCountStatus(response4.data.gradeCount);
+              setCalcStatus(response5.data.calcStatus);
+            }
+          )
         );
     } else {
       history.push("/");
@@ -67,7 +72,9 @@ const ViewCourseMarks = ({ history, match }) => {
     axios
       .put(`/student/caluclate/new/grade/${rollnum}`, { grace, gm })
       .then((response) => {
-        console.log(response);
+        if (response.data) {
+          window.location.pathname = `/student/view/marklist/${str}`;
+        }
       });
   };
   console.log(cgpa);
@@ -93,11 +100,15 @@ const ViewCourseMarks = ({ history, match }) => {
           </Col>
 
           <Col className="text-right">
-            {cgpaStatus === "N/P" && (
+            {/* {cgpaStatus === "N/P" ||
+              (finalStatus === "P" && ( */}
+            {calcStatus === "P" && cgpaStatus === "N/P" && (
               <Button variant="success" onClick={() => calculateCGPA(marks)}>
                 Calculate CGPA
               </Button>
             )}
+
+            {/* ))} */}
           </Col>
         </Row>
       ) : (

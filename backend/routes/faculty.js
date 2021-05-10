@@ -10,7 +10,8 @@ const {
   changePassword,
   facultyDeleteAccount,
   facultyStatus,
-  updateComplete
+  updateComplete,
+  getAllFacultyStatus,
 } = require("../controllers/faculty");
 const {
   batchStudents,
@@ -22,6 +23,7 @@ const { verifyFaculty, faculty } = require("../middlewares/auth");
 router.post("/", registerFaculty);
 router.post("/resetpassword", resetPassword);
 router.post("/newpassword", newPassword);
+router.get("/status", getAllFacultyStatus);
 router.post("/login", authFaculty);
 router.get("/students/:id", verifyFaculty, faculty, courseStudents);
 router.get("/course/mark/:id", courseStudentsMarks);

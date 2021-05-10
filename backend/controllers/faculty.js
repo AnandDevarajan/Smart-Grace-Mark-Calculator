@@ -405,12 +405,35 @@ exports.updateComplete = (req, res) => {
     (err, result) => {
       if (err) {
         return res.status(400).json({
-          message: "Something went wront",
+          message: "Something went wrong",
         });
       }
       return res.json({
         message: "Updated successfully",
       });
+    }
+  );
+};
+
+exports.getAllFacultyStatus = (req, res) => {
+  con.query(
+    `SELECT count(FacultyID) as count FROM Faculty where completion !=?`,
+    ["Yes"],
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Something went wrong",
+        });
+      }
+      if (result[0].count === 0) {
+        return res.json({
+          calcStatus: "P",
+        });
+      } else {
+        return res.json({
+          calcStatus: "N/P",
+        });
+      }
     }
   );
 };

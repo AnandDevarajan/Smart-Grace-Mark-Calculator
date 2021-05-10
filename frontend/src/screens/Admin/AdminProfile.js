@@ -26,6 +26,7 @@ const AdminProfile = ({ history }) => {
   const [address, setAddress] = useState("");
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState("");
+  const [calcStatus, setCalcStatus] = useState("");
 
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
   const { success, error } = gracemarkCreate;
@@ -41,15 +42,17 @@ const AdminProfile = ({ history }) => {
       .all([
         axios.get(`/admin/${adminInfo.result.adminID}`),
         axios.get(`/admin/status`),
+        axios.get(`/faculty/status/`),
       ])
       .then(
-        axios.spread((response1, response2) => {
+        axios.spread((response1, response2, response3) => {
           console.log(response2.data.status);
           setName(response1.data.admin.Name);
           setEmail(response1.data.admin.EmailID);
           setPhone(response1.data.admin.PhoneNum);
           setAddress(response1.data.admin.Address);
           setStatus(response2.data.status);
+          setCalcStatus(response3.data.calcStatus);
         })
       );
   }, [adminInfo, name, email, address, phone.replace, status, message]);
@@ -186,6 +189,10 @@ const AdminProfile = ({ history }) => {
 
                 <th>
                   <EventIcon /> DOB
+                </th>
+                <th>
+                  <NotificationsIcon />
+                  <span>Grade</span>
                 </th>
               </tr>
             </thead>

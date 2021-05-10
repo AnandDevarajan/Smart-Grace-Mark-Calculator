@@ -4,6 +4,7 @@ import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import PageviewIcon from "@material-ui/icons/Pageview";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./Admin.css";
 
 import {
@@ -50,7 +51,7 @@ const AllStudentList = ({ history }) => {
     >
       <Link to="/admin/profile" className="goback">
         <Button variant="light" className="ml-5">
-          Go Back
+          <ArrowBackIcon /> Go Back
         </Button>
       </Link>
       <div className="card  overflow my_card">
