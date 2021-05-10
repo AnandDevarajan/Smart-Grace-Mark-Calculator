@@ -224,12 +224,17 @@ const AdminProfile = ({ history }) => {
                 {calcStatus === "P" &&
                   cgpaStatus === "P" &&
                   graceStatus === "P" && (
-                    <td className="badge badge-success">Cgpa calculated</td>
+                    <td className="badge badge-success">completed</td>
                   )}
                 {(calcStatus === "N/P" && cgpaStatus === "N/P") ||
                   (graceStatus === "N/P" && (
                     <td className="badge badge-warning">waiting</td>
                   ))}
+                {calcStatus === "N/P" &&
+                  cgpaStatus === "N/P" &&
+                  graceStatus === "P" && (
+                    <td className="badge badge-warning">waiting</td>
+                  )}
               </tr>
             </tbody>
           </Table>
