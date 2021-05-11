@@ -29,6 +29,7 @@ const AdminProfile = ({ history }) => {
   const [calcStatus, setCalcStatus] = useState("");
   const [cgpaStatus, setCgpaStatus] = useState("");
   const [graceStatus, setGraceStatus] = useState("");
+  const [pending, setPending] = useState("");
   const gracemarkCreate = useSelector((state) => state.gracemarkCreate);
   const { success, error } = gracemarkCreate;
 
@@ -46,10 +47,18 @@ const AdminProfile = ({ history }) => {
         axios.get(`/faculty/status/`),
         axios.get(`/student/cgpa/count/`),
         axios.get(`/student/grace/status`),
+        axios.get(`/student/pending/count`),
       ])
       .then(
         axios.spread(
-          (response1, response2, response3, response4, response5) => {
+          (
+            response1,
+            response2,
+            response3,
+            response4,
+            response5,
+            response6
+          ) => {
             console.log(response1);
             setName(response1.data.admin.Name);
             setEmail(response1.data.admin.EmailID);
@@ -59,11 +68,12 @@ const AdminProfile = ({ history }) => {
             setCalcStatus(response3.data.calcStatus);
             setCgpaStatus(response4.data.cgpaStatus);
             setGraceStatus(response5.data.graceStatus);
+            setPending(response6.data.pending);
           }
         )
       );
   }, [adminInfo, name, email, address, phone.replace, status, message]);
-
+  console.log(pending);
   console.log(calcStatus, cgpaStatus);
 
   const publishResult = () => {
@@ -116,7 +126,7 @@ const AdminProfile = ({ history }) => {
   console.log(calcStatus, cgpaStatus, graceStatus);
   return (
     <div
-      className="ml-5 mt-3 align-items-center alllist_div profile_card"
+      className="ml-5 mt-3 align-items-center  alllist_div profile_card"
       style={{ backgroundColor: "white" }}
     >
       <div className="card ml-5 px-3 overflow my_card">
@@ -218,21 +228,28 @@ const AdminProfile = ({ history }) => {
               <tr>
                 <td width="365px">ID {adminInfo.result.adminID}</td>
                 <td width="365px">{adminInfo.result.DOB.substring(0, 10)}</td>
-                {calcStatus === "P" && cgpaStatus === "N/P" && (
-                  <td className="badge badge-info">Calculate Cgpa</td>
+                {pending > 0 && (
+                  <td className="badge badge-warning">{pending} Request</td>
                 )}
                 {calcStatus === "P" &&
+                  cgpaStatus === "N/P" &&
+                  pending === 0 && (
+                    <td className="badge badge-info">Calculate Cgpa</td>
+                  )}
+                {calcStatus === "P" &&
                   cgpaStatus === "P" &&
-                  graceStatus === "P" && (
+                  graceStatus === "P" &&
+                  pending === 0 && (
                     <td className="badge badge-success">completed</td>
                   )}
                 {(calcStatus === "N/P" && cgpaStatus === "N/P") ||
-                  (graceStatus === "N/P" && (
+                  (graceStatus === "N/P" && pending === 0 && (
                     <td className="badge badge-warning">waiting</td>
                   ))}
                 {calcStatus === "N/P" &&
                   cgpaStatus === "N/P" &&
-                  graceStatus === "P" && (
+                  graceStatus === "P" &&
+                  pending === 0 && (
                     <td className="badge badge-warning">waiting</td>
                   )}
               </tr>

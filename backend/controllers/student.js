@@ -775,3 +775,19 @@ exports.getGraceStatus = (req, res) => {
     }
   );
 };
+
+exports.getPendingCount = (req, res) => {
+  con.query(
+    'SELECT count(RollNum) as count From Student Where Requested ="pending"',
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Something went wrong",
+        });
+      }
+      return res.json({
+        pending: result[0].count,
+      });
+    }
+  );
+};
