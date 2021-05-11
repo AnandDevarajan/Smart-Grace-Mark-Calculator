@@ -73,7 +73,7 @@ const ViewGrade = ({ match, history }) => {
                     <td>{mark.CourseID}</td>
                     <td> {mark.CourseName}</td>
                     <td className="text-center">
-                      {mark.Grade === "O" && (
+                      {mark.Final_Grade === "O" && (
                         <Button
                           className="btn btn-sm"
                           style={{ backgroundColor: "#289672", width: "46px" }}
@@ -81,7 +81,7 @@ const ViewGrade = ({ match, history }) => {
                           O
                         </Button>
                       )}
-                      {mark.Grade === "A+" && (
+                      {mark.Final_Grade === "A+" && (
                         <Button
                           className="btn btn-sm"
                           style={{ backgroundColor: "#29bb89", width: "46px" }}
@@ -89,7 +89,7 @@ const ViewGrade = ({ match, history }) => {
                           A+
                         </Button>
                       )}
-                      {mark.Grade === "A" && (
+                      {mark.Final_Grade === "A" && (
                         <Button
                           className="btn btn-sm"
                           style={{ backgroundColor: "#29bb89", width: "46px" }}
@@ -97,7 +97,7 @@ const ViewGrade = ({ match, history }) => {
                           A
                         </Button>
                       )}
-                      {mark.Grade === "B+" && (
+                      {mark.Final_Grade === "B+" && (
                         <Button
                           className="btn btn-sm btn-success"
                           style={{ width: "46px" }}
@@ -105,7 +105,7 @@ const ViewGrade = ({ match, history }) => {
                           B+
                         </Button>
                       )}
-                      {mark.Grade === "B" && (
+                      {mark.Final_Grade === "B" && (
                         <Button
                           className="btn btn-sm btn-success"
                           style={{ width: "46px" }}
@@ -113,7 +113,7 @@ const ViewGrade = ({ match, history }) => {
                           B
                         </Button>
                       )}
-                      {mark.Grade === "C" && (
+                      {mark.Final_Grade === "C" && (
                         <Button
                           className="btn btn-sm btn-warning"
                           style={{ width: "46px" }}
@@ -121,7 +121,7 @@ const ViewGrade = ({ match, history }) => {
                           C
                         </Button>
                       )}
-                      {mark.Grade === "P" && (
+                      {mark.Final_Grade === "P" && (
                         <Button
                           className="btn btn-sm btn-danger"
                           style={{ width: "46px" }}
@@ -129,7 +129,7 @@ const ViewGrade = ({ match, history }) => {
                           P
                         </Button>
                       )}
-                      {mark.Grade === "F" && (
+                      {mark.Final_Grade === "F" && (
                         <Button
                           className="btn btn-sm"
                           style={{ backgroundColor: "#be0000", width: "46px" }}

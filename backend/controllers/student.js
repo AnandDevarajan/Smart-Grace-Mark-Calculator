@@ -522,7 +522,7 @@ exports.getStudentGrade = (req, res) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   if (roll === decoded.id) {
     con.query(
-      `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.Total,s.CourseName ,c.Grade from course_mark c inner  join course s on s.CourseID = c.CourseID and c.RollNum LIKE ?`,
+      `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.Total,s.CourseName ,c.Final_Grade from course_mark c inner  join course s on s.CourseID = c.CourseID and c.RollNum LIKE ?`,
       [roll],
       (err, result) => {
         if (result.length === 0 || err) {
