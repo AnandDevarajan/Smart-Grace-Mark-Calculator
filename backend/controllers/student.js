@@ -581,13 +581,13 @@ exports.calculateNewGrade = (req, res) => {
         let cid = info.CourseID;
         //Grade to P
         con.query(
-          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET grace_status=? WHERE RollNum=?`,
-          [info.Total, "P", cid, id, "P", id, "P", id],
+          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET cgpa_status=?,grace_status=? WHERE RollNum=?`,
+          [info.Total, "P", cid, id, "P", id, "N/P", "P", id],
           (err, result) => {
             if (err) {
               return res.status(400).json({
                 message: "Unable to Update",
-              });
+              }); 
             }
             return res.json({
               message: "Total Marks Updated",
@@ -663,7 +663,7 @@ exports.calculateNewGrade = (req, res) => {
         }
         //Update your Final Grade into data base both grade and marks reflected in database
         con.query(
-          "UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET grace_status=? WHERE RollNum=?",
+          "UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET cgpa_status=?,grace_status=? WHERE RollNum=?",
           [
             parseInt(info.Total) + parseInt(gm),
             FinalGrade,
@@ -671,6 +671,7 @@ exports.calculateNewGrade = (req, res) => {
             info.CourseID,
             "P",
             id,
+            "N/P",
             "P",
             id,
           ],
