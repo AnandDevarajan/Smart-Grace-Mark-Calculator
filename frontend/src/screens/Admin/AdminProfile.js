@@ -74,10 +74,15 @@ const AdminProfile = ({ history }) => {
       );
   }, [adminInfo, name, email, address, phone.replace, status, message]);
   console.log(pending);
-  console.log(calcStatus, cgpaStatus);
+  console.log(calcStatus, cgpaStatus, graceStatus);
 
   const publishResult = () => {
-    if (calcStatus === "P" && cgpaStatus === "P" && graceStatus === "P") {
+    if (
+      calcStatus === "P" &&
+      cgpaStatus === "P" &&
+      graceStatus === "P" &&
+      pending === 0
+    ) {
       const config = {
         headers: { Authorization: `Bearer ${adminInfo.token}` },
       };

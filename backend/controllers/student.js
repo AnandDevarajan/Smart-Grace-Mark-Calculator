@@ -316,26 +316,37 @@ exports.acceptRequest = (req, res) => {
   let id = req.params.id;
   let Requested = "accepted";
   con.query(
-    `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,
-    [Requested, id],
+    `SELECT Batch From STUDENT WHERE RollNum =?`,
+    [id],
     (err, result) => {
       if (err || result.length === 0) {
-        return res.json({
-          message: "Unable to update request",
+        return res.status(400).json({
+          message: "No Student Found",
         });
       }
-      if (result) {
-        con.query(`SELECT * FROM STUDENT`, (err, result) => {
+      con.query(
+        `UPDATE STUDENT SET Requested=?,grace_status="N/P" WHERE RollNum=?;UPDATE FACULTY SET completion = ?,status="N/P" Where Batch =?;`,
+        [Requested, id, "No", result[0].Batch],
+        (err, result) => {
           if (err || result.length === 0) {
-            return res.status(200).json({
-              message: "No students found",
+            return res.json({
+              message: "Unable to update request",
             });
           }
-          return res.json({
-            students: result,
-          });
-        });
-      }
+          if (result) {
+            con.query(`SELECT * FROM STUDENT`, (err, result) => {
+              if (err || result.length === 0) {
+                return res.status(200).json({
+                  message: "No students found",
+                });
+              }
+              return res.json({
+                students: result,
+              });
+            });
+          }
+        }
+      );
     }
   );
 };
@@ -581,13 +592,13 @@ exports.calculateNewGrade = (req, res) => {
         let cid = info.CourseID;
         //Grade to P
         con.query(
-          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET cgpa_status=?,grace_status=? WHERE RollNum=?`,
+          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET final_status="N/P" ,cgpa_status=?,grace_status=? WHERE RollNum=?`,
           [info.Total, "P", cid, id, "P", id, "N/P", "P", id],
           (err, result) => {
             if (err) {
               return res.status(400).json({
                 message: "Unable to Update",
-              }); 
+              });
             }
             return res.json({
               message: "Total Marks Updated",
@@ -663,7 +674,7 @@ exports.calculateNewGrade = (req, res) => {
         }
         //Update your Final Grade into data base both grade and marks reflected in database
         con.query(
-          "UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET cgpa_status=?,grace_status=? WHERE RollNum=?",
+          `UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET final_status="N/P", cgpa_status=?,grace_status=? WHERE RollNum=?`,
           [
             parseInt(info.Total) + parseInt(gm),
             FinalGrade,
@@ -736,7 +747,7 @@ exports.calculateCGPA = (req, res) => {
 
 exports.getCgpaCount = (req, res) => {
   con.query(
-    `SELECT count(RollNum) as count FROM STUDENT Where cgpa= ?`,
+    `SELECT count(RollNum) as count FROM STUDENT Where cgpa_status= ?`,
     ["N/P"],
     (err, result) => {
       if (err) {

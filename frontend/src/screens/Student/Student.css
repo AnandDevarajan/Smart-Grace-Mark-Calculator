@@ -83,4 +83,7 @@
     right: 0;
     visibility: hidden;
   }
+  .down {
+    margin-top: 20px;
+  }
 }

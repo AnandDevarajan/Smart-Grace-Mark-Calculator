@@ -103,7 +103,11 @@ const ViewCourseMarks = ({ history, match }) => {
             {/* {cgpaStatus === "N/P" ||
               (finalStatus === "P" && ( */}
             {calcStatus === "P" && cgpaStatus === "N/P" && (
-              <Button variant="success" onClick={() => calculateCGPA(marks)}>
+              <Button
+                variant="success"
+                className="down"
+                onClick={() => calculateCGPA(marks)}
+              >
                 Calculate CGPA
               </Button>
             )}
@@ -126,7 +130,7 @@ const ViewCourseMarks = ({ history, match }) => {
           {graceAccepted === "accepted" &&
             finalStatus === "N/P" &&
             gradeCountStatus === "P" && (
-              <Col className="text-right">
+              <Col className="text-right down">
                 <Button variant="info" onClick={() => calculateNewGrade(grace)}>
                   Calculate Grace Mark
                 </Button>

@@ -349,7 +349,7 @@ exports.facultyStatus = (req, res) => {
           console.log(result[0].count);
           if (result[0].count === 0) {
             con.query(
-              "SELECT count(final_status) as fcount from course_mark where CourseID=? AND final_status=?",
+              `SELECT count(c.final_status) as fcount from course_mark c  inner Join student s on s.RollNum=c.RollNum Where s.Requested="accepted" AND c.CourseID=? AND c.final_status=?`,
               [result[0].CourseID, "N/P"],
               (err, result) => {
                 if (result[0].fcount === 0) {
