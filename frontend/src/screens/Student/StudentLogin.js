@@ -6,7 +6,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../../components/FormContainer";
 import { studentLogin } from "../../actions/studentActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-const StudentLogin = ({ location, history }) => {
+const StudentLogin = ({  history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
