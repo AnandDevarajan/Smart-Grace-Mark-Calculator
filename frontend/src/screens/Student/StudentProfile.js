@@ -84,7 +84,7 @@ const StudentProfile = ({ history }) => {
     window.location.pathname = "/";
   };
 
-  console.log(result);
+  console.log(status);
   return (
     <div
       className="ml-5  align-items-center alllist_div"
@@ -115,14 +115,18 @@ const StudentProfile = ({ history }) => {
               </Link>
             </Col>
             <Col>
-              {status === "N/A" && result != "Published" && (
-                <Link to="/student/request" style={{ textDecoration: "None" }}>
-                  <SendIcon />{" "}
-                  <Button className="btn btn-sm btn-info apply">
-                    Request for Grace Mark
-                  </Button>
-                </Link>
-              )}
+              {(status === "N/A" || status === "rejected") &&
+                result != "Published" && (
+                  <Link
+                    to="/student/request"
+                    style={{ textDecoration: "None" }}
+                  >
+                    <SendIcon />{" "}
+                    <Button className="btn btn-sm btn-info apply">
+                      Request for Grace Mark
+                    </Button>
+                  </Link>
+                )}
             </Col>
             <Col>
               <DeleteForeverIcon
@@ -205,6 +209,15 @@ const StudentProfile = ({ history }) => {
                     <span className="badge badge-pill badge-success">
                       {" "}
                       Accepted
+                    </span>
+                  </td>
+                )}
+                {status === "rejected" && (
+                  <td width="365px">
+                    <CloseIcon style={{ color: "red" }} />
+                    <span className="badge badge-pill badge-danger">
+                      {" "}
+                      rejected
                     </span>
                   </td>
                 )}

@@ -45,7 +45,7 @@ const RequestForm = ({ location, history }) => {
     } else {
       setMessage("");
       dispatch(studentRequestGM(request));
-      history.push("/student/profile");
+      window.location.pathname = "/student/profile";
     }
   };
 
