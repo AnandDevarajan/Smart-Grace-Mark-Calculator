@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import "./Home.css";
-import { Link } from "react-router-dom";
-import {
-  Container,
-  Button,
-  Image,
-  Card,
-  Form,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Button, Form, Row } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import InfoIcon from "@material-ui/icons/Info";
 import Message from "../components/Message";
@@ -45,10 +36,7 @@ const Home = ({ history }) => {
             <span>{message}</span>
           </Message>
         )}
-        <h1
-          className="text-primary text-center "
-          style={{ textTransform: "capitalize" }}
-        >
+        <h1 className="text-primary text-center ">
           <span className="text-info">Smart Grace Mark Calculator</span>
         </h1>
         <Form>
