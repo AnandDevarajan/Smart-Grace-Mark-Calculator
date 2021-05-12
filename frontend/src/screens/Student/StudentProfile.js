@@ -115,7 +115,7 @@ const StudentProfile = ({ history }) => {
               </Link>
             </Col>
             <Col>
-              {status === "N/A" && (
+              {status === "N/A" && result != "Published" && (
                 <Link to="/student/request" style={{ textDecoration: "None" }}>
                   <SendIcon />{" "}
                   <Button className="btn btn-sm btn-info apply">
