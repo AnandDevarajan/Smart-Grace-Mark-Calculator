@@ -61,6 +61,10 @@
     overflow-x: hidden !important;
   }
 
+  .home_card {
+    margin-top: 130px !important;
+  }
+
   .list_card {
     padding: 0 !important;
   }

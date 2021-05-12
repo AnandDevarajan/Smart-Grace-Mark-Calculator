@@ -67,7 +67,7 @@ const CourseStudents = ({ history, match }) => {
 
   console.log("count", count);
 
-  const submitMarks = (id, internals, marks) => {
+   const submitMarks = (id, internals, marks) => {
     if (internals === "" || marks === "") {
       setMessage("");
       setMessage("Enter all the details");

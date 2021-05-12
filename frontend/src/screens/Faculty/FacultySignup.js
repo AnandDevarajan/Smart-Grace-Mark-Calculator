@@ -8,6 +8,7 @@ import { facultyRegister } from "../../actions/facultyActions";
 import { listCourses } from "../../actions/courseActions";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DatePicker from "react-date-picker";
+
 const FacultySignup = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

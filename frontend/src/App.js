@@ -65,7 +65,7 @@ function App() {
           )}
 
           <Route path="/admin/login" component={AdminLogin} />
-          <Route path="/admin/signup" component={AdminSignup} />
+          {/* <Route path="/admin/signup" component={AdminSignup} /> */}
           <Route path="/admin/profile" component={AdminProfile} />
           <Route path="/admin/forgotpassword" component={AdminForgotPassword} />
           <Route path="/admin/reset/:token" component={AdminResetPassword} />

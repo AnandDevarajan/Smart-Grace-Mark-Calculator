@@ -1,122 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
-import { Container, Button, Image, Card } from "react-bootstrap";
+import {
+  Container,
+  Button,
+  Image,
+  Card,
+  Form,
+  Row,
+  Col,
+} from "react-bootstrap";
+import FormContainer from "../components/FormContainer";
+import InfoIcon from "@material-ui/icons/Info";
+import Message from "../components/Message";
 
-const Home = () => {
+const Home = ({ history }) => {
+  const [user, setUser] = useState("[select user]");
+  const [message, setMessage] = useState(null);
+
+  const signInHandler = (user) => {
+    if (user != "[select user]") {
+      history.push(`/${user}/login`);
+    } else {
+      setMessage(null);
+      setMessage("select an user");
+    }
+  };
+
+  const signUpHandler = (user) => {
+    if (user != "[select user]") {
+      history.push(`/${user}/signup`);
+    } else {
+      setMessage(null);
+      setMessage("select an user");
+    }
+  };
+
   return (
-    <div className="home  mt-5 " >
-      <div className="home__student border  border-left-0 border-right-0 ">
-        <div className="card ml-5 px-3 py-3  home_card mb-5">
-          <Image
-            className="student_image"
-            src="https://static.thenounproject.com/png/35785-200.png"
-            style={{ objectFit: "contain" }}
-          />
-          <Link
-            to="/student/login"
-            style={{ textDecoration: "none" }}
-            className="text-white"
-          >
+    <FormContainer>
+      <div className="card ml-3 px-3 py-3 overflow my_card mt-4 home_card">
+        {message != null && (
+          <Message variant="info">
+            <InfoIcon />
+            <span>{message}</span>
+          </Message>
+        )}
+        <h1
+          className="text-primary text-center "
+          style={{ textTransform: "capitalize" }}
+        >
+          <span className="text-info">Smart Grace Mark Calculator</span>
+        </h1>
+        <Form>
+          <Form.Group controlId="user">
+            <Form.Label
+              style={{ color: "black", fontWeight: "bold" }}
+            ></Form.Label>
+            <Form.Control
+              as="select"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+            >
+              <option>[select user]</option>
+              <option>student</option>
+              <option>faculty</option>
+              <option>admin</option>
+            </Form.Control>
+          </Form.Group>
+          <Row>
             <Button
               variant="info"
-              className="mt-3 text-white student_button"
+              className="mt-3 admin_button ml-auto mr-auto"
               style={{ width: "218px" }}
+              onClick={() => signInHandler(user)}
             >
-              {" "}
-              Sign in as student
+              Sign In
             </Button>
-          </Link>
-          <Link
-            to="/student/signup"
-            style={{ textDecoration: "none" }}
-            className="text-white"
-          >
-            <Button
-              variant="success"
-              className="mt-3 student_button"
-              style={{ width: "218px" }}
-            >
-              create student account
-            </Button>
-          </Link>
-        </div>
+          </Row>
+          <Row>
+            {user != "admin" && (
+              <Button
+                variant="success"
+                className="mt-3 admin_button ml-auto mr-auto"
+                style={{ width: "218px" }}
+                onClick={() => signUpHandler(user)}
+              >
+                Create an account
+              </Button>
+            )}
+          </Row>
+        </Form>
       </div>
-
-      <div className="home__faculty border border-left-0 border-right-0">
-        <div className="card ml-5 px-3 py-3  home_card mb-5">
-          <Image
-            className="faculty_image"
-            src="https://static.thenounproject.com/png/2011000-200.png"
-            style={{ objectFit: "cover" }}
-          />
-          <Link
-            to="/faculty/login"
-            style={{ textDecoration: "none" }}
-            className="text-white "
-          >
-            <Button
-              variant="info"
-              className="mt-3 faculty_button"
-              style={{ width: "218px" }}
-            >
-              Sign in as Faculty
-            </Button>
-          </Link>
-          <Link
-            to="/faculty/signup"
-            style={{ textDecoration: "none" }}
-            className="text-white"
-          >
-            <Button
-              variant="success"
-              className="mt-3 faculty_button"
-              style={{ width: "218px" }}
-            >
-              create Faculty account
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="home__admin border  border-left-0 border-right-0">
-        <div className="card ml-5 px-3 py-3  home_card mb-5">
-          <Image
-            className="admin_image"
-            src="https://static.thenounproject.com/png/371299-200.png"
-            style={{ objectFit: "contain" }}
-          />
-          <Link
-            to="/admin/login"
-            style={{ textDecoration: "none" }}
-            className="text-white"
-          >
-            <Button
-              variant="info"
-              className="mt-3 admin_button"
-              style={{ width: "218px" }}
-            >
-              {" "}
-              Sign in as Admin
-            </Button>
-          </Link>
-          <Link
-            to="/admin/signup"
-            style={{ textDecoration: "none" }}
-            className="text-white"
-          >
-            <Button
-              variant="success"
-              className="mt-3 admin_button"
-              style={{ width: "218px" }}
-            >
-              {" "}
-              create Admin account
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </div>
+    </FormContainer>
   );
 };
 
