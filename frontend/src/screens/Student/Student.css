@@ -23,6 +23,11 @@
   .result-table h1 {
     margin-top: 0px;
   }
+
+  .cgpa_btn {
+    margin-left: 0px !important;
+  }
+
   .go-back {
     visibility: hidden;
   }

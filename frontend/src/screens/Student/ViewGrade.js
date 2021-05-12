@@ -4,7 +4,6 @@ import axios from "axios";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
-import "./Student.css";
 
 const ViewGrade = ({ match, history }) => {
   let id = match.params.id;
@@ -47,18 +46,14 @@ const ViewGrade = ({ match, history }) => {
             </Button>
           </Link>
           <h1 className="text-center text-info result-text">Result</h1>
-          <Row className="align-items-center ">
-            <Col className="text-left">
-              <Button className="btn btn-light">
+          <div className="card ml-5  overflow my_card">
+            <Row>
+              <Button className="mr-auto  ml-3 btn-light btn-outline-secondary">
                 {studentInfo.result.RollNum}
               </Button>
-            </Col>
-            <Col></Col>
-            <Col>
-              <Button className="btn">Cgpa {cgpa}</Button>
-            </Col>
-          </Row>
-          <div className="card ml-5  overflow my_card">
+              <Button className="ml-auto cgpa_btn mr-3"> Cgpa {cgpa}</Button>
+            </Row>
+
             <Table striped bordered hover responsive className="table-sm ">
               <thead>
                 <tr>
@@ -140,6 +135,7 @@ const ViewGrade = ({ match, history }) => {
                     </td>
                   </tr>
                 ))}
+                <tr></tr>
               </tbody>
             </Table>
           </div>
