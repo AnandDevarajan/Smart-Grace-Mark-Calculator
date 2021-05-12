@@ -257,6 +257,12 @@ const AdminProfile = ({ history }) => {
                   pending === 0 && (
                     <td className="badge badge-warning">waiting</td>
                   )}
+                {calcStatus === "N/P" &&
+                  cgpaStatus === "P" &&
+                  graceStatus === "P" &&
+                  pending === 0 && (
+                    <td className="badge badge-warning">waiting</td>
+                  )}
               </tr>
             </tbody>
           </Table>
