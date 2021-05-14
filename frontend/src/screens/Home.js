@@ -66,7 +66,7 @@ const Home = ({ history }) => {
             </Button>
           </Row>
           <Row>
-            {user != "admin" && (
+            {user != "admin" && user != "faculty" && (
               <Button
                 variant="success"
                 className="mt-3 admin_button ml-auto mr-auto"

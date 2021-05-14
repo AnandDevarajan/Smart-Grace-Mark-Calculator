@@ -20,7 +20,7 @@ const {
 } = require("../controllers/student");
 const { verifyFaculty, faculty } = require("../middlewares/auth");
 
-router.post("/", registerFaculty);
+// router.post("/", registerFaculty);
 router.post("/resetpassword", resetPassword);
 router.post("/newpassword", newPassword);
 router.get("/status", getAllFacultyStatus);

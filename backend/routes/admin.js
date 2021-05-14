@@ -22,7 +22,7 @@ const {
 } = require("../controllers/student");
 const { getAllFaculties } = require("../controllers/faculty");
 
-router.post("/", registerAdmin);
+// router.post("/", registerAdmin);
 router.post("/login", authAdmin);
 router.get("/status", getStatus);
 router.get("/students", verifyAdmin, admin, getAllStudents);

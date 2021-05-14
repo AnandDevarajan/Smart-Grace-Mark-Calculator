@@ -114,7 +114,7 @@ function App() {
             component={StudentChangePassword}
           />
           <Route path="/faculty/login" component={FacultyLogin} />
-          <Route path="/faculty/signup" component={FacultySignup} />
+          {/* <Route path="/faculty/signup" component={FacultySignup} /> */}
           <Route path="/faculty/profile" component={FacultyProfile} />
           <Route
             exact
