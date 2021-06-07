@@ -39,5 +39,4 @@ router.put("/request/:id", verifyStudent, addRequest);
 router.put("/caluclate/new/grade/:id", calculateNewGrade);
 router.put("/caluclate/cgpa/:id", calculateCGPA);
 router.delete("/delete/account/:id", deleteAccount);
-
 module.exports = router;

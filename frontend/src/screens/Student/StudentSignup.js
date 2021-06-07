@@ -270,6 +270,7 @@ const StudentSignup = ({ history }) => {
       )}
     </>
   );
+
 };
 
 export default StudentSignup;

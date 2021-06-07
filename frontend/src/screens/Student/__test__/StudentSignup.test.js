@@ -1,17 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import StudentSignup from '../StudentSignup';
-import { Provider } from 'react-redux';
-import store from '../../../store';
-
-it('renders student signup component', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(
-    <Router>
-      <Provider store={store}>
-        <StudentSignup />
-      </Provider>
-    </Router>,
-
-  );});
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import StudentLogin from "../StudentLogin";
+describe("SignUp", () => {
+  describe("with valid inputs", () => {
+    it("calls the onSubmit function", async () => {
+      const mockOnSubmit = jest.fn();
+      const { getByLabelText, getByRole } = render(
+        <StudentLogin submitHandler={mockOnSubmit} />
+      );
+      await act(async () => {
+        fireEvent.change(getByLabelText("email"), {
+          target: { value: "test@123.com" },
+        });
+        fireEvent.change(getByLabelText("password"), {
+          target: { value: "test@123.com" },
+        });
+      });
+      await act(async () => {
+        fireEvent.click(getByRole("button"));
+      });
+      expect(mockOnSubmit).toHaveBeenCall;
+    });
+  });
+});

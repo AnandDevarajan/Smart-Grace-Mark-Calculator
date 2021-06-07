@@ -113,6 +113,11 @@ exports.getACourseMark = (req, res) => {
 exports.updateCourseMarkDetails = (req, res) => {
   const cid = req.params.id;
   const { internals, marks, id } = req.body;
+  if (marks > 50 || marks < 0 || internals > 50 || internals < 0) {
+    return res.status(400).json({
+      message: "Failed to update",
+    });
+  }
   con.query(
     `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
     [cid, id],
@@ -232,6 +237,11 @@ exports.getRangeDetails = (req, res) => {
 exports.updateGrade = (req, res) => {
   const cid = req.params.id;
   const { id, O, Ap, A, Bp, B, C, P, F, total } = req.body;
+  if (total > 100 || total < 0) {
+    return res.status(400).json({
+      message: "Invalid total",
+    });
+  }
   if (parseInt(total) >= parseInt(O)) {
     let grade = "O";
     console.log("Grade =", grade);
@@ -246,6 +256,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );
@@ -263,6 +274,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );
@@ -281,6 +293,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );
@@ -299,6 +312,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );
@@ -316,6 +330,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );
@@ -333,6 +348,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );
@@ -351,6 +367,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );
@@ -369,6 +386,7 @@ exports.updateGrade = (req, res) => {
         }
         return res.json({
           message: "Updated Successfully",
+          grade,
         });
       }
     );

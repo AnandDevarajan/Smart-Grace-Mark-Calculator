@@ -4,7 +4,7 @@
 .signup_form {
   margin-top: -25px;
 }
-@media (max-width: 765px) {
+@media (max-width: 800px) {
   .box {
     margin-top: -10px;
     display: table;

@@ -49,6 +49,7 @@ const CourseStudents = ({ history, match }) => {
         ])
         .then(
           axios.spread((response, response1) => {
+            console.log(response);
             setO(response.data.range[0].O);
             setAp(response.data.range[0].Ap);
             setA(response.data.range[0].A);
@@ -64,10 +65,9 @@ const CourseStudents = ({ history, match }) => {
       history.push("/");
     }
   }, [dispatch, history, facultyInfo, edit, O, Ap, A, Bp, B, C, P, F]);
-
   console.log("count", count);
 
-   const submitMarks = (id, internals, marks) => {
+  const submitMarks = (id, internals, marks) => {
     if (internals === "" || marks === "") {
       setMessage("");
       setMessage("Enter all the details");
