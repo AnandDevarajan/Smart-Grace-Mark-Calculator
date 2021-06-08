@@ -3,28 +3,28 @@ const chaiHttp = require("chai-http");
 const { expect } = chai;
 chai.use(chaiHttp);
 
-describe("3) Authentication Unit", () => {
-  //   describe("boundary condition", () => {
-  //     it("Student Login", (done) => {
-  //       chai
-  //         .request("http://127.0.0.1:5000")
-  //         .post("/student/login")
-  //         .send({ email: "anand001@gmail.com", password: "anand1ds23" })
-  //         .end((err, res) => {
-  //           if (err) done(err);
-  //           expect(res).to.have.status(400);
-  //           expect(res).to.be.an("object");
-  //           expect(res.body.message).to.equal("Invalid Email");
-  //           done();
-  //         });
-  //     });
-  //   });
-  describe("negative condition", () => {
-    it("login fails", (done) => {
+describe("Authentication Unit", () => {
+  describe("boundary condition", () => {
+    it("Invalid Email and Password", (done) => {
       chai
         .request("http://127.0.0.1:5000")
         .post("/student/login")
-        .send({ email: "anand001@gmail.com", password: "anand123" })
+        .send({ email: "", password: "" })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(400);
+          expect(res).to.be.an("object");
+          expect(res.body.message).to.be.an("String");
+          done();
+        });
+    });
+  });
+  describe("negative condition", () => {
+    it("Invalid Email", (done) => {
+      chai
+        .request("http://127.0.0.1:5000")
+        .post("/student/login")
+        .send({ email: "student@test123.com", password: "test123" })
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(400);
@@ -33,13 +33,26 @@ describe("3) Authentication Unit", () => {
           done();
         });
     });
-  });
-  describe("positive condition", () => {
-    it("login success", (done) => {
+    it("Invalid Password", (done) => {
       chai
         .request("http://127.0.0.1:5000")
         .post("/student/login")
-        .send({ email: "ananddevarajan01@gmail.com", password: "anand123" })
+        .send({ email: "student@test.com", password: "test1234" })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(400);
+          expect(res).to.be.an("object");
+          expect(res.body.message).to.equal("Invalid Password");
+          done();
+        });
+    });
+  });
+  describe("positive condition", () => {
+    it("Auth Success", (done) => {
+      chai
+        .request("http://127.0.0.1:5000")
+        .post("/student/login")
+        .send({ email: "student@test.com", password: "test123" })
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(200);

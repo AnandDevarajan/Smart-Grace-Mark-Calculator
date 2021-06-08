@@ -706,6 +706,7 @@ exports.calculateNewGrade = (req, res) => {
 exports.calculateCGPA = (req, res) => {
   const id = req.params.id;
   const { marks } = req.body;
+  console.log(marks);
   let cgpa = 0;
   let final_cgpa = 0;
   let denominator = 0;
@@ -736,7 +737,14 @@ exports.calculateCGPA = (req, res) => {
   if (cgpa <= 10 && cgpa > 0) {
     con.query(
       "UPDATE student SET cgpa =? ,final_cgpa=?,cgpa_status=?,final_status=? WHERE RollNum=?",
-      [cgpa, final_cgpa, "P", "P", id]
+      [cgpa, final_cgpa, "P", "P", id],
+      (err, cgpa) => {
+        if (cgpa) {
+          return res.json({
+            final_cgpa,
+          });
+        }
+      }
     );
   } else {
     return res.status(400).json({

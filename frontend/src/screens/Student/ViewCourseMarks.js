@@ -49,7 +49,7 @@ const ViewCourseMarks = ({ history, match }) => {
         .then(
           axios.spread(
             (response1, response2, response3, response4, response5) => {
-              console.log(response1);
+              console.log(response1.data.markList);
               setMarks(response1.data.markList);
               setGraceAccepted(response2.data.student.Requested);
               setCgpa(response2.data.student.cgpa);
