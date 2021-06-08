@@ -14,10 +14,10 @@ let unit = describe("Authentication Unit", () => {
           if (err) done(err);
           expect(res.status).toBe(400);
           expect(res.body.message).toEqual(jasmine.any(String));
-          console.log("1️⃣ ", unit.description, "\n");
+          console.log("▶ ", unit.description);
           console.log(condition1.description);
           done();
-          console.log("✔",spec1.result.description, "\n");
+          console.log("✔",spec1.result.description);
         });
     });
   });
@@ -46,7 +46,7 @@ let unit = describe("Authentication Unit", () => {
           expect(res.status).toBe(400);
           expect(res.body.message).toEqual("Invalid Password");
           done();
-          console.log("✔",spec3.result.description, "\n");
+          console.log("✔",spec3.result.description);
         });
     });
   });
