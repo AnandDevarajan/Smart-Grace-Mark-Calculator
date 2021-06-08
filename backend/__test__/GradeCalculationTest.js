@@ -1,13 +1,14 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const { expect } = chai;
+const BASE_URL = "http://127.0.0.1:5000";
 chai.use(chaiHttp);
 
-describe("2) Grade Calculation", () => {
+describe("Grade Calculation", () => {
   describe("boundary condition", () => {
     it("total = 89 => Grade = O", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
           id: "anand123",
@@ -35,7 +36,7 @@ describe("2) Grade Calculation", () => {
     });
     it("total = 17 => Grade = F", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
           id: "anand123",
@@ -65,7 +66,7 @@ describe("2) Grade Calculation", () => {
   describe("negative condition", () => {
     it("total = 102 => Grade = invalid", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
           id: "anand123",
@@ -93,7 +94,7 @@ describe("2) Grade Calculation", () => {
     });
     it("total = -32 => Grade = invalid", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
           id: "anand123",
@@ -123,7 +124,7 @@ describe("2) Grade Calculation", () => {
   describe("positive condition", () => {
     it("total = 71 => Grade = A", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
           id: "anand123",
@@ -151,7 +152,7 @@ describe("2) Grade Calculation", () => {
     });
     it("total = 38 => Grade = C", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
           id: "anand123",

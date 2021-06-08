@@ -390,13 +390,14 @@ exports.resetPublish = (req, res) => {
 
 exports.notifyFaculty = (req, res) => {
   const id = req.params.id;
+  console.log("facid", id);
   con.query(
     `SELECT EmailID from Faculty where FacultyID=?`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {
         return res.status(422).json({
-          message: "No Email Found",
+          message: "Invalid Email",
         });
       }
       let mailOptions = {
@@ -411,6 +412,9 @@ exports.notifyFaculty = (req, res) => {
           console.log(error);
         } else {
           console.log(`Email sent:${info.response}`);
+          res.json({
+            message: "Notification success",
+          });
         }
       });
     }

@@ -1,13 +1,14 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const { expect } = chai;
+const BASE_URL = "http://127.0.0.1:5000";
 chai.use(chaiHttp);
 
-describe("1) Course Marks Allocation", () => {
+describe("Course Marks Allocation", () => {
   describe("boundary condition", () => {
     it("marks = 0 and internals = 0", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
         .send({ id: "anand123", marks: "0", internals: "0" })
         .set(
@@ -24,7 +25,7 @@ describe("1) Course Marks Allocation", () => {
     });
     it("marks = 50 and internals = 50", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
         .send({ id: "anand123", marks: "50", internals: "50" })
         .set(
@@ -43,7 +44,7 @@ describe("1) Course Marks Allocation", () => {
   describe("negative condition", () => {
     it("marks = 20 and internals = 70", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
         .send({ id: "anand123", marks: "20", internals: "70" })
         .set(
@@ -60,7 +61,7 @@ describe("1) Course Marks Allocation", () => {
     });
     it("marks = -20 and internals = 40", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
         .send({ id: "anand123", marks: "-20", internals: "40" })
         .set(
@@ -79,7 +80,7 @@ describe("1) Course Marks Allocation", () => {
   describe("positive condition", () => {
     it("marks = 40 and internals = 30", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
         .send({ id: "anand123", marks: "40", internals: "30" })
         .set(
@@ -96,7 +97,7 @@ describe("1) Course Marks Allocation", () => {
     });
     it("marks = 27 and internals = 39", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
         .send({ id: "anand123", marks: "27", internals: "39" })
         .set(

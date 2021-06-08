@@ -1,13 +1,14 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const { expect } = chai;
+const BASE_URL = "http://127.0.0.1:5000";
 chai.use(chaiHttp);
 
 describe("Authentication Unit", () => {
   describe("boundary condition", () => {
     it("Invalid Email and Password", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .post("/student/login")
         .send({ email: "", password: "" })
         .end((err, res) => {
@@ -22,7 +23,7 @@ describe("Authentication Unit", () => {
   describe("negative condition", () => {
     it("Invalid Email", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .post("/student/login")
         .send({ email: "student@test123.com", password: "test123" })
         .end((err, res) => {
@@ -35,7 +36,7 @@ describe("Authentication Unit", () => {
     });
     it("Invalid Password", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .post("/student/login")
         .send({ email: "student@test.com", password: "test1234" })
         .end((err, res) => {
@@ -50,7 +51,7 @@ describe("Authentication Unit", () => {
   describe("positive condition", () => {
     it("Auth Success", (done) => {
       chai
-        .request("http://127.0.0.1:5000")
+        .request(BASE_URL)
         .post("/student/login")
         .send({ email: "student@test.com", password: "test123" })
         .end((err, res) => {

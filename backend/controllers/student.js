@@ -706,7 +706,6 @@ exports.calculateNewGrade = (req, res) => {
 exports.calculateCGPA = (req, res) => {
   const id = req.params.id;
   const { marks } = req.body;
-  console.log(marks);
   let cgpa = 0;
   let final_cgpa = 0;
   let denominator = 0;
@@ -730,9 +729,6 @@ exports.calculateCGPA = (req, res) => {
 
   final_cgpa = (numerator / denominator).toFixed(2);
   cgpa = (numerator1 / denominator).toFixed(2);
-
-  console.log(final_cgpa);
-  console.log(cgpa);
 
   if (cgpa <= 10 && cgpa > 0) {
     con.query(
