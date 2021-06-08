@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-init": "node ./node_modules/jasmine/bin/jasmine.js init",
-    "test": "node ./node_modules/mocha/bin/mocha spec --timeout 10000",
+    "test": "node ./node_modules/jasmine/bin/jasmine.js",
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
@@ -32,6 +32,8 @@
     "chai": "^4.3.4",
     "concurrently": "^6.0.0",
     "jasmine": "^3.7.0",
+    "jasmine-console-reporter": "^3.1.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "mocha": "^8.3.2",
     "nodemon": "^2.0.7",
     "should": "^13.2.3"

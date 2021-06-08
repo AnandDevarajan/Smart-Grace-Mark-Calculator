@@ -1,2 +1,4 @@
 
     // "test": "node ./node_modules/mocha/bin/mocha backend/__test__",
+    
+    "helpers/**/*.js"
