@@ -9,7 +9,7 @@ describe("Course Marks Allocation", () => {
       chai
         .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
-        .send({ id: "anand123", marks: "0", internals: "0" })
+        .send({ id: "test1", marks: "0", internals: "0" })
         .set(
           "Authorization",
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYyMzA3NTgzNiwiZXhwIjoxNjI1NjY3ODM2fQ.jnXur9XbfkjBSBUiJlilP1h5Pa4gcdNGTWeetQuv-_E"
@@ -26,7 +26,7 @@ describe("Course Marks Allocation", () => {
       chai
         .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
-        .send({ id: "anand123", marks: "50", internals: "50" })
+        .send({ id: "test1", marks: "50", internals: "50" })
         .set(
           "Authorization",
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYyMzA3NTgzNiwiZXhwIjoxNjI1NjY3ODM2fQ.jnXur9XbfkjBSBUiJlilP1h5Pa4gcdNGTWeetQuv-_E"
@@ -45,7 +45,7 @@ describe("Course Marks Allocation", () => {
       chai
         .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
-        .send({ id: "anand123", marks: "20", internals: "70" })
+        .send({ id: "test1", marks: "20", internals: "70" })
         .set(
           "Authorization",
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYyMzA3NTgzNiwiZXhwIjoxNjI1NjY3ODM2fQ.jnXur9XbfkjBSBUiJlilP1h5Pa4gcdNGTWeetQuv-_E"
@@ -62,7 +62,7 @@ describe("Course Marks Allocation", () => {
       chai
         .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
-        .send({ id: "anand123", marks: "-20", internals: "40" })
+        .send({ id: "test1", marks: "-20", internals: "40" })
         .set(
           "Authorization",
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYyMzA3NTgzNiwiZXhwIjoxNjI1NjY3ODM2fQ.jnXur9XbfkjBSBUiJlilP1h5Pa4gcdNGTWeetQuv-_E"
@@ -81,7 +81,7 @@ describe("Course Marks Allocation", () => {
       chai
         .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
-        .send({ id: "anand123", marks: "40", internals: "30" })
+        .send({ id: "test1", marks: "40", internals: "30" })
         .set(
           "Authorization",
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYyMzA3NTgzNiwiZXhwIjoxNjI1NjY3ODM2fQ.jnXur9XbfkjBSBUiJlilP1h5Pa4gcdNGTWeetQuv-_E"
@@ -98,7 +98,7 @@ describe("Course Marks Allocation", () => {
       chai
         .request(BASE_URL)
         .put("/course/mark/update/15CSE213")
-        .send({ id: "anand123", marks: "27", internals: "39" })
+        .send({ id: "test1", marks: "27", internals: "39" })
         .set(
           "Authorization",
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYyMzA3NTgzNiwiZXhwIjoxNjI1NjY3ODM2fQ.jnXur9XbfkjBSBUiJlilP1h5Pa4gcdNGTWeetQuv-_E"

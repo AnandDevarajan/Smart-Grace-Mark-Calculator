@@ -5,7 +5,7 @@ exports.createGraceMark = (req, res) => {
   const { description, mark } = req.body;
 
   con.query(
-    `INSERT INTO GRACEMARK (Description,GraceMark) VALUES (?,?)`,
+    `INSERT INTO gracemark (Description,GraceMark) VALUES (?,?)`,
     [description, mark],
     (err, result) => {
       if (err) {
@@ -15,7 +15,7 @@ exports.createGraceMark = (req, res) => {
       }
       if (result) {
         con.query(
-          `SELECT * FROM GRACEMARK WHERE Description='${description}'`,
+          `SELECT * FROM gracemark WHERE Description='${description}'`,
           (err, result) => {
             if (err) {
               return res.status(400).json({
@@ -33,7 +33,7 @@ exports.createGraceMark = (req, res) => {
 };
 
 exports.getAllGraceMarks = (req, res) => {
-  con.query(`SELECT * FROM GRACEMARK`, (err, result) => {
+  con.query(`SELECT * FROM gracemark`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No Gracemarks found",
@@ -48,7 +48,7 @@ exports.getAllGraceMarks = (req, res) => {
 exports.getGraceMarkDetails = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM GRACEMARK WHERE GraceMarkID=?`,
+    `SELECT * FROM gracemark WHERE GraceMarkID=?`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -66,7 +66,7 @@ exports.getGraceMarkDetails = (req, res) => {
 exports.updateGraceMarkDetails = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM GRACEMARK WHERE GraceMarkID=?;`,
+    `SELECT * FROM gracemark WHERE GraceMarkID=?;`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -78,7 +78,7 @@ exports.updateGraceMarkDetails = (req, res) => {
         result[0].Description = req.body.description || result[0].Description;
         result[0].GraceMark = req.body.marks || result[0].GraceMark;
         con.query(
-          `UPDATE GRACEMARK SET Description=?,GraceMark=? WHERE GraceMarkID=?;UPDATE STUDENT SET GraceDesc=?,GraceMark=?`,
+          `UPDATE gracemark SET Description=?,GraceMark=? WHERE GraceMarkID=?;UPDATE student SET GraceDesc=?,GraceMark=?`,
           [
             result[0].Description,
             result[0].GraceMark,
@@ -105,7 +105,7 @@ exports.updateGraceMarkDetails = (req, res) => {
 exports.deleteGraceMarkDetails = (req, res) => {
   const id = req.params.id;
   con.query(
-    `DELETE  FROM GRACEMARK WHERE GraceMarkID=?`,
+    `DELETE  FROM gracemark WHERE GraceMarkID=?`,
     [id],
     (err, result) => {
       if (err) {

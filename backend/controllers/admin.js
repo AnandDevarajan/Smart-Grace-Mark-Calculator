@@ -4,7 +4,6 @@ const { generateToken } = require("../utils/auth");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const { error } = require("console");
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
@@ -21,7 +20,7 @@ const transporter = nodemailer.createTransport({
 exports.authAdmin = (req, res) => {
   const { email, password } = req.body;
   con.query(
-    `SELECT * FROM ADMINISTRATOR WHERE EmailID=?`,
+    `SELECT * FROM administrator WHERE EmailID=?`,
     email,
     (err, result) => {
       if (result.length === 0 || err) {
@@ -59,7 +58,7 @@ exports.registerAdmin = (req, res) => {
     }
 
     con.query(
-      `INSERT INTO ADMINISTRATOR (Name,EmailID,PhoneNum,Address,DOB,Gender,Password) VALUES (?,?,?,?,?,?,?)`,
+      `INSERT INTO administrator (Name,EmailID,PhoneNum,Address,DOB,Gender,Password) VALUES (?,?,?,?,?,?,?)`,
       [name, email, phone, address, dob.substring(0, 10), gender, hash],
       (err, result) => {
         if (err) {
@@ -69,7 +68,7 @@ exports.registerAdmin = (req, res) => {
         }
         if (result) {
           con.query(
-            `SELECT * FROM ADMINISTRATOR  WHERE EmailID='${email}'`,
+            `SELECT * FROM administrator  WHERE EmailID='${email}'`,
             (err, result) => {
               if (result.length === 0 || err) {
                 return res.status(400).json({
@@ -112,7 +111,7 @@ exports.resetPassword = (req, res) => {
     }
     const token = buffer.toString("hex");
     con.query(
-      `SELECT * FROM ADMINISTRATOR WHERE EmailID=?`,
+      `SELECT * FROM administrator WHERE EmailID=?`,
       [email],
       (err, result) => {
         if (result.length === 0 || err) {
@@ -124,7 +123,7 @@ exports.resetPassword = (req, res) => {
           result[0].resettoken = token;
           result[0].expiresin = Date.now() + 3600000;
           con.query(
-            "UPDATE ADMINISTRATOR SET resettoken=?, expiresin=? WHERE EmailID=?",
+            "UPDATE administrator SET resettoken=?, expiresin=? WHERE EmailID=?",
             [result[0].resettoken, result[0].expiresin, email],
             (err, result) => {
               if (err) {
@@ -132,7 +131,7 @@ exports.resetPassword = (req, res) => {
               }
               if (result) {
                 con.query(
-                  `SELECT * FROM ADMINISTRATOR WHERE EmailID=?`,
+                  `SELECT * FROM administrator WHERE EmailID=?`,
                   [email],
                   (err, result) => {
                     if (err) {
@@ -176,7 +175,7 @@ exports.newPassword = (req, res) => {
   const { password, token } = req.body;
   console.log(token, password);
   con.query(
-    `SELECT * FROM ADMINISTRATOR WHERE resettoken=? AND expiresin>=?`,
+    `SELECT * FROM administrator WHERE resettoken=? AND expiresin>=?`,
     [token, Date.now()],
     (err, result) => {
       if (err || result.length === 0) {
@@ -189,7 +188,7 @@ exports.newPassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          "UPDATE ADMINISTRATOR SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
+          "UPDATE administrator SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
           [hash, "N/A", "N/A", token],
           (err, result) => {
             if (err) {
@@ -210,9 +209,9 @@ exports.newPassword = (req, res) => {
 };
 
 exports.publishResults = (req, res) => {
-  con.query(`SELECT * from Faculty WHERE completion="No"`, (err, result) => {
+  con.query(`SELECT * from faculty WHERE completion="No"`, (err, result) => {
     if (result.length === 0) {
-      con.query(`SELECT EmailID from STUDENT`, (err, result) => {
+      con.query(`SELECT EmailID from student`, (err, result) => {
         if (err || result.length === 0) {
           return res.status(422).json({
             message: "No Email Found",
@@ -221,7 +220,7 @@ exports.publishResults = (req, res) => {
         res.json({
           Emails: result,
         });
-        con.query(`UPDATE COURSE_MARK SET status='P'`, (error, field) => {
+        con.query(`UPDATE course_mark SET status='P'`, (error, field) => {
           if (err || field.length == 0) {
             return res.status(400).json({
               message: "Failed to update",
@@ -256,7 +255,7 @@ exports.publishResults = (req, res) => {
 exports.getAdmin = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM ADMINISTRATOR WHERE adminID=?`,
+    `SELECT * FROM administrator WHERE adminID=?`,
     [id],
     (err, result) => {
       if (result.length === 0 || err) {
@@ -274,7 +273,7 @@ exports.getAdmin = (req, res) => {
 exports.updateAdminProfile = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM ADMINISTRATOR WHERE adminID=?;`,
+    `SELECT * FROM administrator WHERE adminID=?;`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -288,7 +287,7 @@ exports.updateAdminProfile = (req, res) => {
         result[0].Address = req.body.address || result[0].Address;
 
         con.query(
-          `UPDATE ADMINISTRATOR SET PhoneNum=?,EmailID=?,Address=? WHERE adminID=?`,
+          `UPDATE administrator SET PhoneNum=?,EmailID=?,Address=? WHERE adminID=?`,
           [result[0].PhoneNum, result[0].EmailID, result[0].Address, id],
           (err, result) => {
             if (err || result.length === 0) {
@@ -310,7 +309,7 @@ exports.changePassword = (req, res) => {
   const id = req.params.id;
   const { password } = req.body;
   con.query(
-    `SELECT * FROM ADMINISTRATOR WHERE adminID=?;`,
+    `SELECT * FROM administrator WHERE adminID=?;`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -324,7 +323,7 @@ exports.changePassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          "UPDATE ADMINISTRATOR SET Password=? WHERE adminID=?",
+          "UPDATE administrator SET Password=? WHERE adminID=?",
           [hash, id],
           (err, result) => {
             if (err) {
@@ -346,7 +345,7 @@ exports.changePassword = (req, res) => {
 
 exports.adminDeleteAccount = (req, res) => {
   const id = req.params.id;
-  con.query(`DELETE FROM ADMINISTRATOR WHERE adminID=?;`, [id], (err, res) => {
+  con.query(`DELETE FROM administrator WHERE adminID=?;`, [id], (err, res) => {
     if (err) {
       console.log(err.sqlMessage);
     }
@@ -354,7 +353,7 @@ exports.adminDeleteAccount = (req, res) => {
 };
 
 exports.getStatus = (req, res) => {
-  con.query(`SELECT * from COURSE_MARK WHERE status='N/P'`, (error, result) => {
+  con.query(`SELECT * from course_mark WHERE status='N/P'`, (error, result) => {
     if (result.length === 0) {
       return res.json({
         status: "Published",
@@ -367,12 +366,12 @@ exports.getStatus = (req, res) => {
 };
 
 exports.resetPublish = (req, res) => {
-  con.query(`UPDATE COURSE_MARK set STATUS = 'N/P'`, (error, result) => {
+  con.query(`UPDATE course_mark set STATUS = 'N/P'`, (error, result) => {
     if (error) {
       console.log(error);
     } else {
       con.query(
-        `SELECT status from COURSE_MARK WHERE status='N/P'`,
+        `SELECT status from course_mark WHERE status='N/P'`,
         (error, result) => {
           if (result.length === 0) {
             return res.json({
@@ -392,7 +391,7 @@ exports.notifyFaculty = (req, res) => {
   const id = req.params.id;
   console.log("facid", id);
   con.query(
-    `SELECT EmailID from Faculty where FacultyID=?`,
+    `SELECT EmailID from faculty where FacultyID=?`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {

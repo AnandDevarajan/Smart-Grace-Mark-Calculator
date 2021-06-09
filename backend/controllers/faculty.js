@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 
 exports.authFaculty = (req, res) => {
   const { email, password } = req.body;
-  con.query(`SELECT * FROM FACULTY WHERE EmailID=?`, email, (err, result) => {
+  con.query(`SELECT * FROM faculty WHERE EmailID=?`, email, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "Invalid Email",
@@ -69,7 +69,7 @@ exports.registerFaculty = (req, res) => {
       console.log(err);
     }
     con.query(
-      `INSERT INTO FACULTY (Name,EmailID,PhoneNum,Address,DOB,Gender,Department,CourseID,ClassAdviser,Batch,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO faculty (Name,EmailID,PhoneNum,Address,DOB,Gender,Department,CourseID,ClassAdviser,Batch,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
       [
         name,
         email,
@@ -91,7 +91,7 @@ exports.registerFaculty = (req, res) => {
         }
         if (result) {
           con.query(
-            `SELECT * FROM FACULTY  WHERE EmailID='${email}'`,
+            `SELECT * FROM faculty  WHERE EmailID='${email}'`,
             (err, result) => {
               if (err) {
                 return res.status(400).json({
@@ -127,7 +127,7 @@ exports.registerFaculty = (req, res) => {
 };
 
 exports.getAllFaculties = (req, res) => {
-  con.query(`SELECT * FROM FACULTY`, (err, result) => {
+  con.query(`SELECT * FROM faculty`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No Faculty found",
@@ -147,7 +147,7 @@ exports.resetPassword = (req, res) => {
     }
     const token = buffer.toString("hex");
     con.query(
-      `SELECT * FROM FACULTY WHERE EmailID=?`,
+      `SELECT * FROM faculty WHERE EmailID=?`,
       [email],
       (err, result) => {
         if (result.length === 0 || err) {
@@ -159,7 +159,7 @@ exports.resetPassword = (req, res) => {
           result[0].resettoken = token;
           result[0].expiresin = Date.now() + 3600000;
           con.query(
-            "UPDATE FACULTY SET resettoken=?, expiresin=? WHERE EmailID=?",
+            "UPDATE faculty SET resettoken=?, expiresin=? WHERE EmailID=?",
             [result[0].resettoken, result[0].expiresin, email],
             (err, result) => {
               if (err) {
@@ -167,7 +167,7 @@ exports.resetPassword = (req, res) => {
               }
               if (result) {
                 con.query(
-                  `SELECT * FROM FACULTY WHERE EmailID=?`,
+                  `SELECT * FROM faculty WHERE EmailID=?`,
                   [email],
                   (err, result) => {
                     if (err) {
@@ -211,7 +211,7 @@ exports.newPassword = (req, res) => {
   const { password, token } = req.body;
   console.log(token, password);
   con.query(
-    `SELECT * FROM FACULTY WHERE resettoken=? AND expiresin>=?`,
+    `SELECT * FROM faculty WHERE resettoken=? AND expiresin>=?`,
     [token, Date.now()],
     (err, result) => {
       if (err || result.length === 0) {
@@ -224,7 +224,7 @@ exports.newPassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          "UPDATE fACULTY SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
+          "UPDATE faculty SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
           [hash, "N/A", "N/A", token],
           (err, result) => {
             if (err) {
@@ -246,7 +246,7 @@ exports.newPassword = (req, res) => {
 
 exports.getFaculty = (req, res) => {
   const id = req.params.id;
-  con.query(`SELECT * FROM Faculty WHERE FacultyID=?`, [id], (err, result) => {
+  con.query(`SELECT * FROM faculty WHERE FacultyID=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No faculty found",
@@ -260,7 +260,7 @@ exports.getFaculty = (req, res) => {
 
 exports.updateFacultyProfile = (req, res) => {
   const id = req.params.id;
-  con.query(`SELECT * FROM FACULTY WHERE FacultyID=?;`, [id], (err, result) => {
+  con.query(`SELECT * FROM faculty WHERE FacultyID=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
         message: "No faculty Found",
@@ -272,7 +272,7 @@ exports.updateFacultyProfile = (req, res) => {
       result[0].Address = req.body.address || result[0].Address;
 
       con.query(
-        `UPDATE FACULTY SET PhoneNum=?,EmailID=?,Address=? WHERE FacultyID=?`,
+        `UPDATE faculty SET PhoneNum=?,EmailID=?,Address=? WHERE FacultyID=?`,
         [result[0].PhoneNum, result[0].EmailID, result[0].Address, id],
         (err, result) => {
           if (err || result.length === 0) {
@@ -292,7 +292,7 @@ exports.updateFacultyProfile = (req, res) => {
 exports.changePassword = (req, res) => {
   const id = req.params.id;
   const { password } = req.body;
-  con.query(`SELECT * FROM Faculty WHERE FacultyID=?;`, [id], (err, result) => {
+  con.query(`SELECT * FROM faculty WHERE FacultyID=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
         message: "No faculty found",
@@ -304,7 +304,7 @@ exports.changePassword = (req, res) => {
         return console.log(err);
       }
       con.query(
-        "UPDATE FACULTY SET Password=? WHERE FacultyID=?",
+        "UPDATE faculty SET Password=? WHERE FacultyID=?",
         [hash, id],
         (err, result) => {
           if (err) {
@@ -325,7 +325,7 @@ exports.changePassword = (req, res) => {
 
 exports.facultyDeleteAccount = (req, res) => {
   const id = req.params.id;
-  con.query(`DELETE FROM Faculty WHERE FacultyID=?`, [id], (err, res) => {
+  con.query(`DELETE FROM faculty WHERE FacultyID=?`, [id], (err, res) => {
     if (err) {
       console.log(err.sqlMessage);
     }
@@ -335,7 +335,7 @@ exports.facultyDeleteAccount = (req, res) => {
 exports.facultyStatus = (req, res) => {
   const id = req.params.id;
 
-  con.query(`SELECT * from Faculty where FacultyID=? `, [id], (err, result) => {
+  con.query(`SELECT * from faculty where FacultyID=? `, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
         error: "No faculty found",
@@ -354,7 +354,7 @@ exports.facultyStatus = (req, res) => {
               (err, result) => {
                 if (result[0].fcount === 0) {
                   con.query(
-                    "UPDATE Faculty set status=? where FacultyID=?",
+                    "UPDATE faculty set status=? where FacultyID=?",
                     ["P", id],
                     (err, result) => {
                       if (err) {
@@ -379,7 +379,7 @@ exports.facultyStatus = (req, res) => {
           console.log(result[0].count);
           if (result[0].count === 0) {
             con.query(
-              "UPDATE Faculty set status=? where FacultyID=?",
+              "UPDATE faculty set status=? where FacultyID=?",
               ["P", id],
               (err, result) => {
                 if (err) {
@@ -400,7 +400,7 @@ exports.facultyStatus = (req, res) => {
 exports.updateComplete = (req, res) => {
   const id = req.params.id;
   con.query(
-    "UPDATE FACULTY SET completion=? WHERE FacultyID=?",
+    "UPDATE faculty SET completion=? WHERE FacultyID=?",
     ["Yes", id],
     (err, result) => {
       if (err) {
@@ -417,7 +417,7 @@ exports.updateComplete = (req, res) => {
 
 exports.getAllFacultyStatus = (req, res) => {
   con.query(
-    `SELECT count(FacultyID) as count FROM Faculty where completion !=?;`,
+    `SELECT count(FacultyID) as count FROM faculty where completion !=?;`,
     ["Yes"],
     (err, result) => {
       if (err) {

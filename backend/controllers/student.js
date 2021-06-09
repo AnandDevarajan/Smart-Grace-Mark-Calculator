@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 
 exports.authStudent = (req, res) => {
   const { email, password } = req.body;
-  con.query(`SELECT * FROM STUDENT WHERE EmailID=?`, email, (err, result) => {
+  con.query(`SELECT * FROM student WHERE EmailID=?`, email, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "Invalid Email",
@@ -67,7 +67,7 @@ exports.registerStudent = (req, res) => {
       console.log(err);
     }
     con.query(
-      `INSERT INTO STUDENT (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Batch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?);INSERT INTO COURSE_MARK (RollNum,CourseID) VALUES(?,'15CSE201'),(?,'15CSE213'),(?,'15CSE302'),(?,'15CSE312'),(?,'15CSE313');UPDATE FACULTY SET completion ="No";`,
+      `INSERT INTO student (RollNum,Name,EmailID,PhoneNum,Address,DOB,Gender,Branch,Batch,Degree,Password) VALUES (?,?,?,?,?,?,?,?,?,?,?);INSERT INTO course_mark (RollNum,CourseID) VALUES(?,'15CSE201'),(?,'15CSE213'),(?,'15CSE302'),(?,'15CSE312'),(?,'15CSE313');UPDATE faculty SET completion ="No";`,
       [
         rollno,
         name,
@@ -94,7 +94,7 @@ exports.registerStudent = (req, res) => {
         }
         if (result) {
           con.query(
-            `SELECT * FROM STUDENT WHERE RollNum='${rollno}'`,
+            `SELECT * FROM student WHERE RollNum='${rollno}'`,
             (err, result) => {
               if (err) {
                 return res.status(400).json({
@@ -137,7 +137,7 @@ exports.resetPassword = (req, res) => {
     }
     const token = buffer.toString("hex");
     con.query(
-      `SELECT * FROM STUDENT WHERE EmailID=?`,
+      `SELECT * FROM student WHERE EmailID=?`,
       [email],
       (err, result) => {
         if (result.length === 0 || err) {
@@ -149,7 +149,7 @@ exports.resetPassword = (req, res) => {
           result[0].resettoken = token;
           result[0].expiresin = Date.now() + 3600000;
           con.query(
-            "UPDATE STUDENT SET resettoken=?, expiresin=? WHERE EmailID=?",
+            "UPDATE student SET resettoken=?, expiresin=? WHERE EmailID=?",
             [result[0].resettoken, result[0].expiresin, email],
             (err, result) => {
               if (err) {
@@ -157,7 +157,7 @@ exports.resetPassword = (req, res) => {
               }
               if (result) {
                 con.query(
-                  `SELECT * FROM STUDENT WHERE EmailID=?`,
+                  `SELECT * FROM student WHERE EmailID=?`,
                   [email],
                   (err, result) => {
                     if (err) {
@@ -201,7 +201,7 @@ exports.newPassword = (req, res) => {
   const { password, token } = req.body;
   console.log(token, password);
   con.query(
-    `SELECT * FROM STUDENT WHERE resettoken=? AND expiresin>=?`,
+    `SELECT * FROM student WHERE resettoken=? AND expiresin>=?`,
     [token, Date.now()],
     (err, result) => {
       if (err || result.length === 0) {
@@ -214,7 +214,7 @@ exports.newPassword = (req, res) => {
           return console.log(err);
         }
         con.query(
-          "UPDATE STUDENT SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
+          "UPDATE student SET Password=?,resettoken=?,expiresin=? WHERE resettoken=?",
           [hash, "N/A", "N/A", token],
           (err, result) => {
             if (err) {
@@ -235,7 +235,7 @@ exports.newPassword = (req, res) => {
 };
 
 exports.getAllStudents = (req, res) => {
-  con.query(`SELECT * FROM STUDENT`, (err, result) => {
+  con.query(`SELECT * FROM student`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No students found",
@@ -249,7 +249,7 @@ exports.getAllStudents = (req, res) => {
 
 exports.getStudent = (req, res) => {
   const id = req.params.id;
-  con.query(`SELECT * FROM STUDENT WHERE RollNum=?`, [id], (err, result) => {
+  con.query(`SELECT * FROM student WHERE RollNum=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No students found",
@@ -277,7 +277,7 @@ exports.addRequest = (req, res) => {
           });
         }
         con.query(
-          `UPDATE STUDENT SET Requested=?, GraceDesc=?,GraceMark=? WHERE RollNum=?`,
+          `UPDATE student SET Requested=?, GraceDesc=?,GraceMark=? WHERE RollNum=?`,
           [Requested, request, result[0].GraceMark, id],
           (err, result) => {
             if (err || result.length === 0) {
@@ -287,7 +287,7 @@ exports.addRequest = (req, res) => {
             }
             if (result) {
               con.query(
-                `SELECT * FROM STUDENT WHERE RollNum='${id}'`,
+                `SELECT * FROM student WHERE RollNum='${id}'`,
                 (err, result) => {
                   if (err) {
                     return res.status(400).json({
@@ -316,7 +316,7 @@ exports.acceptRequest = (req, res) => {
   let id = req.params.id;
   let Requested = "accepted";
   con.query(
-    `SELECT Batch From STUDENT WHERE RollNum =?`,
+    `SELECT Batch From student WHERE RollNum =?`,
     [id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -325,7 +325,7 @@ exports.acceptRequest = (req, res) => {
         });
       }
       con.query(
-        `UPDATE STUDENT SET Requested=?,grace_status="N/P" WHERE RollNum=?;UPDATE FACULTY SET completion = ?,status="N/P" Where Batch =?;`,
+        `UPDATE student SET Requested=?,grace_status="N/P" WHERE RollNum=?;UPDATE faculty SET completion = ?,status="N/P" Where Batch =?;`,
         [Requested, id, "No", result[0].Batch],
         (err, result) => {
           if (err || result.length === 0) {
@@ -334,7 +334,7 @@ exports.acceptRequest = (req, res) => {
             });
           }
           if (result) {
-            con.query(`SELECT * FROM STUDENT`, (err, result) => {
+            con.query(`SELECT * FROM student`, (err, result) => {
               if (err || result.length === 0) {
                 return res.status(200).json({
                   message: "No students found",
@@ -355,7 +355,7 @@ exports.rejectRequest = (req, res) => {
   let id = req.params.id;
   let Requested = "rejected";
   con.query(
-    `UPDATE STUDENT SET Requested=? WHERE RollNum=?`,
+    `UPDATE student SET Requested=? WHERE RollNum=?`,
     [Requested, id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -364,7 +364,7 @@ exports.rejectRequest = (req, res) => {
         });
       }
       if (result) {
-        con.query(`SELECT * FROM STUDENT`, (err, result) => {
+        con.query(`SELECT * FROM student`, (err, result) => {
           if (err || result.length === 0) {
             return res.status(400).json({
               message: "No students found",
@@ -385,7 +385,7 @@ exports.cancelRequest = (req, res) => {
   let GraceDesc = "N/A";
   let GraceMark = "N/A";
   con.query(
-    `UPDATE STUDENT SET Requested=?,GraceDesc=?,GraceMark=? WHERE RollNum=?`,
+    `UPDATE student SET Requested=?,GraceDesc=?,GraceMark=? WHERE RollNum=?`,
     [Requested, GraceDesc, GraceMark, id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -402,7 +402,7 @@ exports.cancelRequest = (req, res) => {
 
 exports.batchStudents = (req, res) => {
   const id = req.params.id;
-  con.query(`SELECT * FROM STUDENT WHERE Batch=?`, [id], (err, result) => {
+  con.query(`SELECT * FROM student WHERE Batch=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No students found",
@@ -417,7 +417,7 @@ exports.batchStudents = (req, res) => {
 exports.courseStudents = (req, res) => {
   const id = req.params.id;
   console.log(id);
-  con.query(`SELECT * FROM STUDENT WHERE Branch=?`, [id], (err, result) => {
+  con.query(`SELECT * FROM student WHERE Branch=?`, [id], (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No students found",
@@ -450,7 +450,7 @@ exports.courseStudentsMarks = (req, res) => {
 
 exports.updateStudentProfile = (req, res) => {
   const id = req.params.id;
-  con.query(`SELECT * FROM STUDENT WHERE RollNum=?;`, [id], (err, result) => {
+  con.query(`SELECT * FROM student WHERE RollNum=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
         message: "No studentFound",
@@ -462,7 +462,7 @@ exports.updateStudentProfile = (req, res) => {
       result[0].Address = req.body.address || result[0].Address;
 
       con.query(
-        `UPDATE STUDENT SET PhoneNum=?,EmailID=?,Address=? WHERE RollNum=?`,
+        `UPDATE student SET PhoneNum=?,EmailID=?,Address=? WHERE RollNum=?`,
         [result[0].PhoneNum, result[0].EmailID, result[0].Address, id],
         (err, result) => {
           if (err || result.length === 0) {
@@ -482,7 +482,7 @@ exports.updateStudentProfile = (req, res) => {
 exports.changePassword = (req, res) => {
   const id = req.params.id;
   const { password } = req.body;
-  con.query(`SELECT * FROM STUDENT WHERE RollNum=?;`, [id], (err, result) => {
+  con.query(`SELECT * FROM student WHERE RollNum=?;`, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
         message: "No studentFound",
@@ -494,7 +494,7 @@ exports.changePassword = (req, res) => {
         return console.log(err);
       }
       con.query(
-        "UPDATE STUDENT SET Password=? WHERE RollNum=?",
+        "UPDATE student SET Password=? WHERE RollNum=?",
         [hash, id],
         (err, result) => {
           if (err) {
@@ -541,7 +541,7 @@ exports.getStudentGrade = (req, res) => {
 exports.deleteAccount = (req, res) => {
   const id = req.params.id;
   con.query(
-    `DELETE FROM STUDENT WHERE RollNum=?;DELETE FROM COURSE_MARK WHERE RollNum=?`,
+    `DELETE FROM student WHERE RollNum=?;DELETE FROM course_mark WHERE RollNum=?`,
     [id, id],
     (err, res) => {
       if (err) {
@@ -592,7 +592,7 @@ exports.calculateNewGrade = (req, res) => {
         let cid = info.CourseID;
         //Grade to P
         con.query(
-          `UPDATE COURSE_MARK SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET final_status="N/P" ,cgpa_status=?,grace_status=? WHERE RollNum=?`,
+          `UPDATE course_mark SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE student SET final_status="N/P" ,cgpa_status=?,grace_status=? WHERE RollNum=?`,
           [info.Total, "P", cid, id, "P", id, "N/P", "P", id],
           (err, result) => {
             if (err) {
@@ -674,7 +674,7 @@ exports.calculateNewGrade = (req, res) => {
         }
         //Update your Final Grade into data base both grade and marks reflected in database
         con.query(
-          `UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE STUDENT SET final_status="N/P", cgpa_status=?,grace_status=? WHERE RollNum=?`,
+          `UPDATE course_mark SET Total =? ,Final_Grade=? WHERE RollNum=? AND CourseID=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE student SET final_status="N/P", cgpa_status=?,grace_status=? WHERE RollNum=?`,
           [
             parseInt(info.Total) + parseInt(gm),
             FinalGrade,
@@ -751,7 +751,7 @@ exports.calculateCGPA = (req, res) => {
 
 exports.getCgpaCount = (req, res) => {
   con.query(
-    `SELECT count(RollNum) as count FROM STUDENT Where cgpa_status= ?`,
+    `SELECT count(RollNum) as count FROM student Where cgpa_status= ?`,
     ["N/P"],
     (err, result) => {
       if (err) {
@@ -773,7 +773,7 @@ exports.getCgpaCount = (req, res) => {
 
 exports.getGraceStatus = (req, res) => {
   con.query(
-    'SELECT count(c.RollNum) as count From course_Mark c  Inner Join student s on c.RollNum=s.RollNum Where s.Requested="accepted" and c.final_status="N/P"',
+    'SELECT count(c.RollNum) as count From course_mark c  Inner Join student s on c.RollNum=s.RollNum Where s.Requested="accepted" and c.final_status="N/P"',
     (err, result) => {
       if (err) {
         return res.status(400).json({
@@ -794,7 +794,7 @@ exports.getGraceStatus = (req, res) => {
 
 exports.getPendingCount = (req, res) => {
   con.query(
-    'SELECT count(RollNum) as count From Student Where Requested ="pending"',
+    'SELECT count(RollNum) as count From student Where Requested ="pending"',
     (err, result) => {
       if (err) {
         return res.status(400).json({

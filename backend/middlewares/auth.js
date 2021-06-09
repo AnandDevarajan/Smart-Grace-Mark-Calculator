@@ -9,7 +9,7 @@ exports.verifyStudent = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decoded);
       con.query(
-        `SELECT * FROM STUDENT WHERE RollNum = '${decoded.id}'`,
+        `SELECT * FROM student WHERE RollNum = '${decoded.id}'`,
         (err, result) => {
           if (result.length === 0 || err) {
             return res.status(400).json({
@@ -35,7 +35,7 @@ exports.verifyFaculty = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decoded);
       con.query(
-        `SELECT * FROM FACULTY WHERE FacultyID = '${decoded.id}'`,
+        `SELECT * FROM faculty WHERE FacultyID = '${decoded.id}'`,
         (err, result) => {
           if (result.length === 0 || err) {
             return res.status(400).json({
@@ -61,7 +61,7 @@ exports.verifyAdmin = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decoded.id);
       con.query(
-        `SELECT * FROM ADMINISTRATOR WHERE adminID = '${decoded.id}'`,
+        `SELECT * FROM administrator WHERE adminID = '${decoded.id}'`,
         (err, result) => {
           if (result.length === 0 || err) {
             return res.status(400).json({

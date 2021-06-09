@@ -2,7 +2,7 @@ const config = require("../config/db");
 const con = config.con;
 
 exports.getAllCourses = (req, res) => {
-  con.query(`SELECT * FROM COURSE`, (err, result) => {
+  con.query(`SELECT * FROM course`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No Courses found",
@@ -17,7 +17,7 @@ exports.getAllCourses = (req, res) => {
 exports.getAllDeptCourses = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM COURSE WHERE Department=? OR Department='ALL'`,
+    `SELECT * FROM course WHERE Department=? OR Department='ALL'`,
     [id],
     (err, result) => {
       if (result.length === 0 || err) {
@@ -36,7 +36,7 @@ exports.addCourseMarks = (req, res) => {
   let id = req.params.id;
   const { cid, total, internals, marks } = req.body;
   con.query(
-    `INSERT INTO COURSE_MARK (RollNum,CourseID,Internals,Marks,Total) VALUES (?,?,?,?,?)`,
+    `INSERT INTO course_mark (RollNum,CourseID,Internals,Marks,Total) VALUES (?,?,?,?,?)`,
     [id, cid, internals, marks, total],
     (err, result) => {
       if (err || result.length === 0) {
@@ -54,7 +54,7 @@ exports.addCourseMarks = (req, res) => {
 exports.getCourseMark = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM COURSE_MARK WHERE CourseID=?`,
+    `SELECT * FROM course_mark WHERE CourseID=?`,
     [id],
     (err, result) => {
       if (result.length === 0 || err) {
@@ -72,13 +72,11 @@ exports.getCourseMark = (req, res) => {
 exports.getCourseMarkOfStudent = (req, res) => {
   const id = req.params.id;
   con.query(
-    `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.final_status,c.Total,s.CourseName,s.credits,c.Grade,c.Final_Grade,s1.Requested from grace_marks.course_mark c inner join grace_marks.student s1 on c.RollNum LIKE ?  inner  join grace_marks.course s on s.CourseID = c.CourseID and c.RollNum LIKE ? group by c.CourseID`,
+    `select  c.RollNum,c.CourseID,c.Internals,c.Marks,c.final_status,c.Total,s.CourseName,s.credits,c.Grade,c.Final_Grade,s1.Requested from grace_marks.course_mark c Inner join student s1 on c.RollNum LIKE ?  inner  join course s on s.CourseID = c.CourseID and c.RollNum LIKE ? group by c.CourseID`,
     [id, id],
     (err, result) => {
       if (err) {
-        return res.status(400).json({
-          message: "No marks found",
-        });
+        console.log(err.sqlMessage);
       }
       return res.json({
         markList: result,
@@ -95,7 +93,7 @@ exports.getACourseMark = (req, res) => {
   console.log(rollno);
   console.log(courseID);
   con.query(
-    `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
+    `SELECT * FROM course_mark WHERE CourseID=? and RollNum=?`,
     [courseID, rollno],
     (err, result) => {
       if (result.length === 0 || err) {
@@ -119,7 +117,7 @@ exports.updateCourseMarkDetails = (req, res) => {
     });
   }
   con.query(
-    `SELECT * FROM COURSE_MARK WHERE CourseID=? and RollNum=?`,
+    `SELECT * FROM course_mark WHERE CourseID=? and RollNum=?`,
     [cid, id],
     (err, result) => {
       if (err || result.length === 0) {
@@ -133,7 +131,7 @@ exports.updateCourseMarkDetails = (req, res) => {
         result[0].Total =
           parseInt(result[0].Internals) + parseInt(result[0].Marks);
         con.query(
-          `UPDATE COURSE_MARK SET Internals=?,Marks=?,Total=?,Grade='N/P',status='N/P' WHERE CourseID=? AND RollNum=?;UPDATE GRADE_RANGE SET status ='N/P' WHERE CourseID=?`,
+          `UPDATE course_mark SET Internals=?,Marks=?,Total=?,Grade='N/P',status='N/P' WHERE CourseID=? AND RollNum=?;UPDATE grade_range SET status ='N/P' WHERE CourseID=?`,
           [result[0].Internals, result[0].Marks, result[0].Total, cid, id, cid],
           (err, result) => {
             if (err || result.length === 0) {
@@ -186,7 +184,7 @@ exports.getACourseReport = (req, res) => {
 };
 
 exports.getAllGradeRange = (req, res) => {
-  con.query(`SELECT * FROM GRADE_RANGE`, (err, result) => {
+  con.query(`SELECT * FROM grade_range`, (err, result) => {
     if (result.length === 0 || err) {
       return res.status(400).json({
         message: "No report found",
@@ -201,7 +199,7 @@ exports.getAllGradeRange = (req, res) => {
 exports.getGradeRange = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+    `SELECT * FROM grade_range WHERE CourseID=?`,
     [id],
     (err, result) => {
       if (result.length === 0 || err) {
@@ -219,7 +217,7 @@ exports.getGradeRange = (req, res) => {
 exports.getRangeDetails = (req, res) => {
   const id = req.params.id;
   con.query(
-    `SELECT * FROM GRACE_MARKS.RANGE WHERE CourseID=?`,
+    `SELECT * FROM grace_marks.range WHERE CourseID=?`,
     [id],
     (err, result) => {
       if (err) {
@@ -246,7 +244,7 @@ exports.updateGrade = (req, res) => {
     let grade = "O";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -264,7 +262,7 @@ exports.updateGrade = (req, res) => {
     let grade = "A+";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -283,7 +281,7 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -302,7 +300,7 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -320,7 +318,7 @@ exports.updateGrade = (req, res) => {
     let grade = "B";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -338,7 +336,7 @@ exports.updateGrade = (req, res) => {
     let grade = "C";
     console.log("Grade =", grade);
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -357,7 +355,7 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -376,7 +374,7 @@ exports.updateGrade = (req, res) => {
     console.log("Grade =", grade);
 
     con.query(
-      `UPDATE COURSE_MARK SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
+      `UPDATE course_mark SET Grade=?,Final_Grade=?,status=? WHERE CourseID=? AND RollNum=?`,
       [grade, grade, "P", cid, id],
       (err, result) => {
         if (err || result.length === 0) {
@@ -408,7 +406,7 @@ exports.editGradeRange = (req, res) => {
   let newP = P.substring(P.length - 2, P.length);
   let newF = F.substring(F.length - 2, F.length);
   con.query(
-    `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+    `SELECT * FROM grade_range WHERE CourseID=?`,
     [cid],
     (err, result) => {
       if (err || result.length === 0) {
@@ -426,7 +424,7 @@ exports.editGradeRange = (req, res) => {
         result[0].P = P || result[0].P;
         result[0].F = F || result[0].F;
         con.query(
-          `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?;UPDATE Grace_marks.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+          `UPDATE grade_range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?;UPDATE grace_marks.range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
           [
             result[0].O,
             result[0].Ap,
@@ -484,7 +482,7 @@ exports.updateGradeRange = (req, res) => {
   let F = `${RangeP - 1} - ${0} `;
 
   con.query(
-    `UPDATE GRADE_RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
+    `UPDATE grade_range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
     [O, Ap, A, Bp, B, C, P, F, "P", id],
     (err, result) => {
       if (err) {
@@ -493,14 +491,14 @@ exports.updateGradeRange = (req, res) => {
         });
       }
       con.query(
-        `UPDATE GRACE_MARKS.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+        `UPDATE grade_range.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
         [RangeO, RangeAp, RangeA, RangeBp, RangeB, RangeC, RangeP, 0, id],
         (err, result2) => {
           if (err) {
             console.log(err.sqlMessage);
           }
           con.query(
-            `SELECT * FROM GRADE_RANGE WHERE CourseID=?`,
+            `SELECT * FROM grade_range WHERE CourseID=?`,
             [id],
             (err, result2) => {
               if (result2.length === 0 || err) {
