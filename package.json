@@ -29,10 +29,15 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.7",
     "chai": "^4.3.4",
     "concurrently": "^6.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "ignore-styles": "^5.0.1",
     "jasmine": "^3.7.0",
     "jasmine-console-reporter": "^3.1.0",
+    "jasmine-enzyme": "^7.1.2",
     "jasmine-spec-reporter": "^7.0.0",
     "mocha": "^8.3.2",
     "nodemon": "^2.0.7",
