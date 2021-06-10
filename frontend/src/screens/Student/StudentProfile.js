@@ -70,7 +70,7 @@ const StudentProfile = ({ history }) => {
 
   const cancelRequest = (roll) => {
     axios.put(`/student/cancel/request/${roll}`).then((response) => {
-      window.location.pathname = "/student/profile";
+      window.location.pathname = "/";
     });
   };
 
