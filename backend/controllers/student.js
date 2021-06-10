@@ -573,6 +573,23 @@ exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
   console.log(id);
   const { grace, gm } = req.body;
+  console.log("grace", grace);
+  console.log("gm", gm);
+  if (gm === undefined) {
+    return res.status(400).json({
+      message: "No Grace Mark",
+    });
+  }
+
+  for (let _range of grace) {
+    console.log(_range.O);
+    if (_range.O === "") {
+      return res.status(400).json({
+        message: "Grade Ranges not set",
+      });
+    }
+  }
+
   let maxCredits = 0;
 
   // If the person has failed in any subject one or more
@@ -600,9 +617,21 @@ exports.calculateNewGrade = (req, res) => {
                 message: "Unable to Update",
               });
             }
-            return res.json({
-              message: "Total Marks Updated",
-            });
+            if (result) {
+              con.query(
+                "SELECT * from course_mark where CourseID=? and RollNum=?",
+                [cid, id],
+                (err, result) => {
+                  if (result) {
+                    return res.json({
+                      message: "Total Marks Updated",
+                      Total: info.Total,
+                      Grade: result[0].Final_Grade,
+                    });
+                  }
+                }
+              );
+            }
           }
         );
         break;
@@ -692,9 +721,21 @@ exports.calculateNewGrade = (req, res) => {
                 message: "Unable to update Grades",
               });
             }
-            return res.json({
-              message: "Grades updated",
-            });
+            if (result) {
+              con.query(
+                "SELECT * from course_mark where CourseID=? and RollNum=?",
+                [info.CourseID, id],
+                (err, result) => {
+                  if (result) {
+                    return res.json({
+                      message: "Total Marks Updated",
+                      Total: parseInt(info.Total) + parseInt(gm),
+                      Grade: result[0].Final_Grade,
+                    });
+                  }
+                }
+              );
+            }
           }
         );
         break;
