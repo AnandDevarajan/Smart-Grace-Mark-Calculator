@@ -70,7 +70,7 @@ function App() {
           <Route path="/admin/forgotpassword" component={AdminForgotPassword} />
           <Route path="/admin/reset/:token" component={AdminResetPassword} />
           <Route path="/admin/studentlist" component={AllStudentList} />
-          <Route path="/admin/faculties" component={AllFacultyList} />
+          <Route path="/admin/facultylist" component={AllFacultyList} />
           <Route path="/admin/course/report" component={CourseReport} />
           <Route path="/admin/addGraceMarkDetails" component={GraceMarkForm} />
           <Route path="/admin/gracemarklist" component={GracemarkList} />
