@@ -132,7 +132,7 @@ function App() {
             component={CourseMarkEdit}
           />
           <Route
-            path="/faculty/adviser/students/:id"
+            path="/faculty/adviser/student/:id"
             component={BatchStudents}
           />
           <Route
