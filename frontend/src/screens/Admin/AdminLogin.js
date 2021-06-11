@@ -15,7 +15,7 @@ const AdminLogin = ({  history }) => {
   const adminSignin = useSelector((state) => state.adminSignin);
   const { error, adminInfo } = adminSignin;
 
-  const redirect = "/admin/profile";
+  const redirect = "/admin/profile/dashboard";
   useEffect(() => {
     if (adminInfo) {
       history.push(redirect);

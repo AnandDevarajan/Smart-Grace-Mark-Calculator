@@ -66,7 +66,7 @@ function App() {
 
           <Route path="/admin/login" component={AdminLogin} />
           {/* <Route path="/admin/signup" component={AdminSignup} /> */}
-          <Route path="/admin/profile" component={AdminProfile} />
+          <Route path="/admin/profile/dashboard" component={AdminProfile} />
           <Route path="/admin/forgotpassword" component={AdminForgotPassword} />
           <Route path="/admin/reset/:token" component={AdminResetPassword} />
           <Route path="/admin/students" component={AllStudentList} />
@@ -115,7 +115,7 @@ function App() {
           />
           <Route path="/faculty/login" component={FacultyLogin} />
           {/* <Route path="/faculty/signup" component={FacultySignup} /> */}
-          <Route path="/faculty/profile" component={FacultyProfile} />
+          <Route path="/faculty/profile/dashboard" component={FacultyProfile} />
           <Route
             exact
             path="/faculty/edit/profile/:id"

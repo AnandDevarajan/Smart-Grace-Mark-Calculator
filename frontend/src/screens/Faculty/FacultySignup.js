@@ -32,7 +32,7 @@ const FacultySignup = ({ history }) => {
   const courseList = useSelector((state) => state.courseList);
   const { courses } = courseList;
 
-  const redirect = "/faculty/profile";
+  const redirect = "/faculty/profile/dashboard";
   useEffect(() => {
     if (facultyInfo) {
       history.push(redirect);

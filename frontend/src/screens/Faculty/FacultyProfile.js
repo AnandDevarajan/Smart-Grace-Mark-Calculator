@@ -67,7 +67,7 @@ const FacultyProfile = ({ history }) => {
   const markAsCompleted = (id) => {
     axios.put(`/faculty/complete/${id}`).then((response) => {
       if (response.data) {
-        window.location.pathname = `/`;
+        window.location.pathname = `/faculty/profile/dashboard`;
       }
     });
   };

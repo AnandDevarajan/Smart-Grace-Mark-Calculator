@@ -27,7 +27,7 @@ const AdminProfileEdit = ({ location, history, match }) => {
 
   const redirect = location.search
     ? location.search.split("=")[1]
-    : "/admin/profile";
+    : "/admin/profile/dashboard";
 
   useEffect(() => {
     if (successUpdate) {
@@ -65,7 +65,7 @@ const AdminProfileEdit = ({ location, history, match }) => {
 
   return (
     <>
-      <Link to="/admin/profile" className="goback">
+      <Link to="/admin/profile/dashboard" className="goback">
         <Button variant="light">
           <ArrowBackIcon /> Go Back
         </Button>

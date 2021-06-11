@@ -144,7 +144,7 @@ function Navbar() {
                     fontWeight: "bold",
                     backgroundColor: "#3f3f44",
                   }}
-                  to="/student/dashboard"
+                  to="/student/profile/dashboard"
                 >
                   <AccountCircleIcon />
                   <span className="text">Profile</span>
@@ -189,7 +189,7 @@ function Navbar() {
               </li>
               <li className="nav-text">
                 <NavLink
-                  to="/faculty/profile"
+                  to="/faculty/profile/dashboard"
                   activeStyle={{
                     color: "#2196f3",
                     fontWeight: "bold",
@@ -259,7 +259,7 @@ function Navbar() {
               </li>
               <li className="admin_nav-text">
                 <NavLink
-                  to="/admin/profile"
+                  to="/admin/profile/dashboard"
                   activeStyle={{
                     color: "#2196f3",
                     fontWeight: "bold",

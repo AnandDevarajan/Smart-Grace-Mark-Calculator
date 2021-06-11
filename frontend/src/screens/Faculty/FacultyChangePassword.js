@@ -26,7 +26,7 @@ const FacultyChangePassword = ({ history, match }) => {
       axios
         .put(`/faculty/changepassword/${id}`, { password })
         .then((response) => {
-          history.push("/faculty/profile");
+          history.push("/faculty/profile/dashboard");
         })
         .catch((err) => {
           console.log(err);

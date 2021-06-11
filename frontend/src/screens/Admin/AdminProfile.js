@@ -123,7 +123,7 @@ const AdminProfile = ({ history }) => {
     if (window.confirm("Do you want to delete this account ?")) {
       axios.delete(`/admin/delete/account/${id}`);
     } else {
-      return (window.location.pathname = "/admin/profile");
+      return (window.location.pathname = "/admin/profile/dashboard");
     }
     localStorage.removeItem("adminInfo");
     window.location.pathname = "/";

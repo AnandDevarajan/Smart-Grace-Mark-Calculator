@@ -32,7 +32,7 @@ const BatchStudents = ({ history, match }) => {
       className="ml-5 align-items-center alllist_div signup_card"
       style={{ backgroundColor: "white" }}
     >
-      <Link to="/faculty/profile" className="goback">
+      <Link to="/faculty/profile/dashboard" className="goback">
         <Button variant="light">
           <ArrowBackIcon /> Go Back
         </Button>

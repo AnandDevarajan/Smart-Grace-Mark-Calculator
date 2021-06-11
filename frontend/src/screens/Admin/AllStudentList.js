@@ -49,7 +49,7 @@ const AllStudentList = ({ history }) => {
       className="ml-5 align-items-center alllist_div"
       style={{ backgroundColor: "white" }}
     >
-      <Link to="/admin/profile" className="goback">
+      <Link to="/admin/profile/dashboard" className="goback">
         <Button variant="light" className="ml-5">
           <ArrowBackIcon /> Go Back
         </Button>

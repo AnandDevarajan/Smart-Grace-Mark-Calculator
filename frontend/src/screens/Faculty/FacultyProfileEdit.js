@@ -28,7 +28,7 @@ const FacultyProfileEdit = ({ location, history, match }) => {
 
   const redirect = location.search
     ? location.search.split("=")[1]
-    : "/faculty/profile";
+    : "/faculty/profile/dashboard";
 
   useEffect(() => {
     if (successUpdate) {
@@ -66,7 +66,7 @@ const FacultyProfileEdit = ({ location, history, match }) => {
 
   return (
     <>
-      <Link to="/faculty/profile" className="goback">
+      <Link to="/faculty/profile/dashboard" className="goback">
         <Button variant="light">
           <ArrowBackIcon /> Go Back
         </Button>

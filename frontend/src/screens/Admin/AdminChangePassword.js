@@ -26,7 +26,7 @@ const AdminChangePassword = ({ history, match }) => {
       axios
         .put(`/admin/changepassword/${id}`, { password })
         .then((response) => {
-          history.push("/admin/profile");
+          history.push("/admin/profile/dashboard");
         })
         .catch((err) => {
           console.log(err);

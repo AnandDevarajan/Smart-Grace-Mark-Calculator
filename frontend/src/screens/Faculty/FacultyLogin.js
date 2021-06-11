@@ -16,7 +16,7 @@ const FacultyLogin = ({ history }) => {
   const facultySignin = useSelector((state) => state.facultySignin);
   const { error, facultyInfo } = facultySignin;
 
-  const redirect = "/faculty/profile";
+  const redirect = "/faculty/profile/dashboard";
   useEffect(() => {
     if (facultyInfo) {
       history.push(redirect);
