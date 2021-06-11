@@ -40,7 +40,7 @@ const ViewGrade = ({ match, history }) => {
     <>
       {status === "Published" && (
         <div className="ml-5 align-items-center result-table result_card">
-          <Link to="/student/profile">
+          <Link to="/student/dashboard">
             <Button variant="light go-back">
               <ArrowBackIcon /> Go Back
             </Button>

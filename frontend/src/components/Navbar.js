@@ -144,7 +144,7 @@ function Navbar() {
                     fontWeight: "bold",
                     backgroundColor: "#3f3f44",
                   }}
-                  to="/student/profile"
+                  to="/student/dashboard"
                 >
                   <AccountCircleIcon />
                   <span className="text">Profile</span>

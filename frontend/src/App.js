@@ -88,7 +88,7 @@ function App() {
           />
           <Route path="/student/login" component={StudentLogin} />
           <Route path="/student/signup" component={StudentSignup} />
-          <Route path="/student/profile" component={StudentProfile} />
+          <Route path="/student/dashboard" component={StudentProfile} />
           <Route
             path="/student/forgotpassword"
             component={StudentForgotPassword}
