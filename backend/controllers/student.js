@@ -571,25 +571,22 @@ exports.getGraceInfo = (req, res) => {
 exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
   const { grace, gm } = req.body;
-  console.log("grace", grace);
-  console.log("gm", gm);
   if (gm === undefined) {
     return res.status(400).json({
       message: "No Grace Mark",
     });
   }
-
+  console.log("Entered the function");
+  console.log(gm);
   for (let _range of grace) {
-    console.log(_range.O);
     if (_range.O === "") {
       return res.status(400).json({
         message: "Grade Ranges not set",
       });
     }
   }
-
   let maxCredits = 0;
-  let graceMarkAdded = 0;
+  let GraseMarkUsed = 0;
   // If the person has failed in any subject one or more
   for (let info of grace) {
     if (
@@ -603,12 +600,12 @@ exports.calculateNewGrade = (req, res) => {
   if (maxCredits != 0) {
     for (let info of grace) {
       if (info.Total < info.P && info.credits == maxCredits) {
-        graceMarkAdded = 1;
+        GraseMarkUsed = 1;
         info.Total = parseInt(info.Total) + parseInt(gm);
         let cid = info.CourseID;
         //Grade to P
         con.query(
-          `UPDATE course_mark SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE student SET final_status="N/P" ,cgpa_status=?,grace_status=? WHERE RollNum=?`,
+          `UPDATE course_mark SET Total=?,Final_Grade=? WHERE CourseID=? AND RollNum=?;UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE student SET final_status="N/P",cgpa_status=?,grace_status=? WHERE RollNum=?`,
           [info.Total, "P", cid, id, "P", id, "N/P", "P", id],
           (err, result) => {
             if (err) {
@@ -616,27 +613,16 @@ exports.calculateNewGrade = (req, res) => {
                 message: "Unable to Update",
               });
             }
-            if (result) {
-              con.query(
-                "SELECT * from course_mark where CourseID=? and RollNum=?",
-                [cid, id],
-                (err, result) => {
-                  if (result) {
-                    return res.json({
-                      message: "Total Marks Updated",
-                      Total: info.Total,
-                      Grade: result[0].Final_Grade,
-                    });
-                  }
-                }
-              );
-            }
+            return res.json({
+              message: "Total Marks Updated",
+            });
           }
         );
         break;
       }
     }
   }
+
   //If the student has not failed
   else {
     let passMaxCredits = 0;
@@ -644,7 +630,18 @@ exports.calculateNewGrade = (req, res) => {
       let index = 0;
       let range = []; // minimum marks for each grade(in grade change)
       let gradeChange = []; // To handle A+ to O and A to A+
-      if (info.Grade != "O") {
+
+      if (info.Grade == "A+") {
+        console.log("Mark in A+", info.Total);
+        if (parseInt(info.Total) + parseInt(gm) >= parseInt(info.O)) {
+          passMaxCredits = Math.max(
+            passMaxCredits,
+            0.5 * parseInt(info.credits)
+          );
+          
+        }
+        
+      } else if (info.Grade != "O" && info.Grade != "A+") {
         range.push(parseInt(info.P));
         gradeChange.push(1);
         range.push(parseInt(info.C));
@@ -662,12 +659,20 @@ exports.calculateNewGrade = (req, res) => {
         while (range[index] < parseInt(info.Total)) {
           index++;
         }
+        console.log("Index after", index, range[index]);
         // Maximum Grade change for the available grace marks
-        if (parseInt(info.Total) + parseInt(gm) >= range[index]) {
+        console.log("Pass max", passMaxCredits);
+        if (parseInt(info.Total) + parseInt(gm) >= parseInt(range[index])) {
           passMaxCredits = Math.max(
             passMaxCredits,
             gradeChange[index] * parseInt(info.credits)
           );
+
+          console.log(
+            "change index",
+            gradeChange[index] * parseInt(info.credits)
+          );
+          console.log("Pass max after ", passMaxCredits);
         }
       }
     }
@@ -686,8 +691,8 @@ exports.calculateNewGrade = (req, res) => {
         info.Grade != "O" &&
         changeValue * parseInt(info.credits) == passMaxCredits
       ) {
-        graceMarkAdded = 1;
         // Before change to After Grade change
+        GraseMarkUsed = 1;
         if (info.Grade == "P") {
           FinalGrade = "C";
         } else if (info.Grade == "C") {
@@ -721,39 +726,19 @@ exports.calculateNewGrade = (req, res) => {
                 message: "Unable to update Grades",
               });
             }
-            if (result) {
-              con.query(
-                "SELECT * from course_mark where CourseID=? and RollNum=?",
-                [info.CourseID, id],
-                (err, result) => {
-                  if (result) {
-                    return res.json({
-                      message: "Total Marks Updated",
-                      Total: parseInt(info.Total) + parseInt(gm),
-                      Grade: result[0].Final_Grade,
-                    });
-                  }
-                }
-              );
-            }
+            return res.json({
+              message: "Grades updated",
+            });
           }
         );
         break;
       }
     }
-    if ((graceMarkAdded = 0)) {
-      con.query(
-        'UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE student SET final_status="N/P", cgpa_status=?,grace_status=? WHERE RollNum=?',
-        ["P", id, "N/P", "P", id],
-        (err, result) => {
-          if (result) {
-            return res.json({
-              message: "No Grade Change",
-            });
-          }
-        }
-      );
-    }
+  }
+  if (GraseMarkUsed == 0) {
+    return res.json({
+      message: "NO change",
+    });
   }
 };
 

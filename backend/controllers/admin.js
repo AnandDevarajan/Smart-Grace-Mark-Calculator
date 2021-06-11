@@ -233,7 +233,7 @@ exports.publishResults = (req, res) => {
           subject: "Results published",
           html: ` 
             <h3>Dear student , The results for current semester has been published .
-            Click on this <a href="http://localhost:3000/student/login/$">link</a> to view results</h3>`,
+            Click on this <a href="https://c8-sgmc.herokuapp.com/student/login/$">link</a> to view results</h3>`,
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {

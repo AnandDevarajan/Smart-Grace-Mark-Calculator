@@ -74,10 +74,8 @@ const ViewCourseMarks = ({ history, match }) => {
       .put(`/student/caluclate/new/grade/${rollnum}`, { grace, gm })
       .then((response) => {
         console.log(response);
-        if (response.data.message != "No Grade Change") {
+        if (response.data) {
           window.location.pathname = `/student/view/marklist/${str}`;
-        } else {
-          setMsg("No Grade Change");
         }
       });
   };
