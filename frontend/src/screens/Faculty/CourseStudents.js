@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import { courseStudentMark } from "../../actions/studentActions";
 import { updateCoursemark } from "../../actions/courseActions";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "../Home.css";
@@ -75,6 +75,7 @@ const CourseStudents = ({ history, match }) => {
       setMessage("Invalid details");
     } else {
       dispatch(updateCoursemark(id, cid, internals, marks));
+      history.push(`/faculty/students/${facultyInfo.result.Department}`);
     }
   };
   console.log("Students", students);
@@ -95,7 +96,9 @@ const CourseStudents = ({ history, match }) => {
       })
       .then((response) => {
         if (response.data) {
-          window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
+          <Redirect
+            to={`/faculty/students/${facultyInfo.result.Department}`}
+          />;
         }
       });
   };

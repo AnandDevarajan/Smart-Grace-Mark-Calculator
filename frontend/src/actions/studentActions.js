@@ -65,69 +65,71 @@ export const studentLogin = (email, password) => async (dispatch) => {
   }
 };
 
-export const studentRegister = (
-  name,
-  email,
-  password,
-  rollno,
-  dob,
-  branch,
-  batch,
-  degree,
-  gender,
-  phone,
-  address
-) => async (dispatch) => {
-  try {
-    dispatch({
-      type: STUDENT_REGISTER_REQUEST,
-    });
+export const studentRegister =
+  (
+    name,
+    email,
+    password,
+    rollno,
+    dob,
+    branch,
+    batch,
+    degree,
+    gender,
+    phone,
+    address
+  ) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: STUDENT_REGISTER_REQUEST,
+      });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    const { data } = await axios.post(
-      "/student",
-      {
-        name,
-        email,
-        password,
-        rollno,
-        dob,
-        branch,
-        batch,
-        degree,
-        gender,
-        phone,
-        address,
-      },
-      config
-    );
+      const { data } = await axios.post(
+        "/student",
+        {
+          name,
+          email,
+          password,
+          rollno,
+          dob,
+          branch,
+          batch,
+          degree,
+          gender,
+          phone,
+          address,
+        },
+        config
+      );
 
-    dispatch({
-      type: STUDENT_REGISTER_SUCCESS,
-      payload: data,
-    });
-    dispatch({
-      type: STUDENT_LOGIN_SUCCESS,
-      payload: data,
-    });
+      dispatch({
+        type: STUDENT_REGISTER_SUCCESS,
+        payload: data,
+      });
+      dispatch({
+        type: STUDENT_LOGIN_SUCCESS,
+        payload: data,
+      });
 
-    localStorage.setItem("studentInfo", JSON.stringify(data));
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: STUDENT_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      localStorage.setItem("studentInfo", JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: STUDENT_REGISTER_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const studentLogout = () => (dispatch) => {
   localStorage.removeItem("studentInfo");
@@ -192,40 +194,40 @@ export const getAStudent = (rollnum) => async (dispatch) => {
   }
 };
 
-export const listCourseStudents = (department) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: STUDENT_LIST_COURSE_REQUEST,
-    });
+// export const listCourseStudents = (department) => async (
+//   dispatch,
+//   getState
+// ) => {
+//   try {
+//     dispatch({
+//       type: STUDENT_LIST_COURSE_REQUEST,
+//     });
 
-    const {
-      facultySignin: { facultyInfo },
-    } = getState();
+//     const {
+//       facultySignin: { facultyInfo },
+//     } = getState();
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${facultyInfo.token}`,
-      },
-    };
-    const { data } = await axios.get(`/faculty/students/${department}`, config);
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${facultyInfo.token}`,
+//       },
+//     };
+//     const { data } = await axios.get(`/faculty/students/${department}`, config);
 
-    dispatch({
-      type: STUDENT_LIST_COURSE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: STUDENT_LIST_COURSE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+//     dispatch({
+//       type: STUDENT_LIST_COURSE_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: STUDENT_LIST_COURSE_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
 
 export const courseStudentMark = (cid) => async (dispatch, getState) => {
   try {
@@ -357,42 +359,40 @@ export const requestReject = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateStudentProfile = (id, email, phone, address) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: STUDENT_PROFILE_UPDATE_REQUEST,
-    });
+export const updateStudentProfile =
+  (id, email, phone, address) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: STUDENT_PROFILE_UPDATE_REQUEST,
+      });
 
-    const {
-      studentSignin: { studentInfo },
-    } = getState();
+      const {
+        studentSignin: { studentInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${studentInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${studentInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.put(
-      `/student/${id}`,
-      { email, phone, address },
-      config
-    );
+      const { data } = await axios.put(
+        `/student/${id}`,
+        { email, phone, address },
+        config
+      );
 
-    dispatch({
-      type: STUDENT_PROFILE_UPDATE_SUCCESS,
-    });
-  } catch (error) {
-    dispatch({
-      type: STUDENT_PROFILE_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      dispatch({
+        type: STUDENT_PROFILE_UPDATE_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: STUDENT_PROFILE_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

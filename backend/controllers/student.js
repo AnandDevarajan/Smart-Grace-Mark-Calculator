@@ -431,7 +431,6 @@ exports.courseStudents = (req, res) => {
 
 exports.courseStudentsMarks = (req, res) => {
   const id = req.params.id;
-  console.log(id);
   con.query(
     `select  s.RollNum,s.Name,s.Branch,s.Batch,c.Internals,c.Marks,c.Total,c.Grade from student s inner  join course_mark c on s.RollNum = c.RollNum and c.CourseID LIKE ?`,
     [id],
