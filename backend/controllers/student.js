@@ -615,6 +615,8 @@ exports.calculateNewGrade = (req, res) => {
             }
             return res.json({
               message: "Total Marks Updated",
+              Total: info.Total,
+              Grade: "P",
             });
           }
         );
@@ -638,9 +640,7 @@ exports.calculateNewGrade = (req, res) => {
             passMaxCredits,
             0.5 * parseInt(info.credits)
           );
-          
         }
-        
       } else if (info.Grade != "O" && info.Grade != "A+") {
         range.push(parseInt(info.P));
         gradeChange.push(1);
@@ -728,6 +728,8 @@ exports.calculateNewGrade = (req, res) => {
             }
             return res.json({
               message: "Grades updated",
+              Total: parseInt(info.Total) + parseInt(gm),
+              Grade: FinalGrade,
             });
           }
         );
@@ -737,7 +739,7 @@ exports.calculateNewGrade = (req, res) => {
   }
   if (GraseMarkUsed == 0) {
     return res.json({
-      message: "NO change",
+      message: "No Grade Change",
     });
   }
 };

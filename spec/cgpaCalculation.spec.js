@@ -8,7 +8,7 @@ describe("CGPA Calculation", () => {
     it("{F,4},{F,4},{F,1},{F,3},{F,2} => CGPA = 4.00", (done) => {
       chai
         .request(BASE_URL)
-        .put("/student/caluclate/cgpa/anand123")
+        .put("/student/caluclate/cgpa/STUDENTTEST12345")
         .send({
           marks: [
             { Final_Grade: "F", Grade: "F", credits: "4" },
@@ -29,7 +29,7 @@ describe("CGPA Calculation", () => {
     it("{O,4},{O,4},{O,1},{O,3},{O,2} => CGPA = 10.00", (done) => {
       chai
         .request(BASE_URL)
-        .put("/student/caluclate/cgpa/anand123")
+        .put("/student/caluclate/cgpa/STUDENTTEST12345")
         .send({
           marks: [
             { Final_Grade: "O", Grade: "O", credits: "4" },
@@ -52,7 +52,7 @@ describe("CGPA Calculation", () => {
     it("{B+,0},{B,0},{A+,0},{A,0},{O,0} => CGPA = Invalid", (done) => {
       chai
         .request(BASE_URL)
-        .put("/student/caluclate/cgpa/anand123")
+        .put("/student/caluclate/cgpa/STUDENTTEST12345")
         .send({
           marks: [
             { Final_Grade: "B++", Grade: "B", credits: "0" },
@@ -72,7 +72,7 @@ describe("CGPA Calculation", () => {
     it("{O,0},{O,0},{A+,0},{` `,0},{` `,0} => CGPA = Invalid", (done) => {
       chai
         .request(BASE_URL)
-        .put("/student/caluclate/cgpa/anand123")
+        .put("/student/caluclate/cgpa/STUDENTTEST12345")
         .send({
           marks: [
             { Final_Grade: "O", Grade: "O", credits: "4" },
@@ -94,7 +94,7 @@ describe("CGPA Calculation", () => {
     it("{B+,4},{B,4},{A+,1},{A,3},{O,2} => CGPA = 8.32", (done) => {
       chai
         .request(BASE_URL)
-        .put("/student/caluclate/cgpa/anand123")
+        .put("/student/caluclate/cgpa/STUDENTTEST12345")
         .send({
           marks: [
             { Final_Grade: "B+", Grade: "B", credits: "4" },
@@ -109,6 +109,27 @@ describe("CGPA Calculation", () => {
           expect(res.status).toBe(200);
           expect(res).toEqual(jasmine.any(Object));
           expect(res.body.final_cgpa).toEqual("8.32");
+          done();
+        });
+    });
+    it("{O,4},{O,4},{B+,1},{A+,3},{B+,2} => CGPA = 9.46", (done) => {
+      chai
+        .request(BASE_URL)
+        .put("/student/caluclate/cgpa/STUDENTTEST12345")
+        .send({
+          marks: [
+            { Final_Grade: "O", Grade: "O", credits: "4" },
+            { Final_Grade: "O", Grade: "O", credits: "4" },
+            { Final_Grade: "B+", Grade: "B+", credits: "1" },
+            { Final_Grade: "A+", Grade: "A+", credits: "3" },
+            { Final_Grade: "B+", Grade: "B+", credits: "2" },
+          ],
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res.status).toBe(200);
+          expect(res).toEqual(jasmine.any(Object));
+          expect(res.body.final_cgpa).toEqual("9.46");
           done();
         });
     });
