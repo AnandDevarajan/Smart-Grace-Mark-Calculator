@@ -21,6 +21,7 @@ const ViewCourseMarks = ({ history, match }) => {
   const [cgpaStatus, setCgpaStatus] = useState("");
   const [calcStatus, setCalcStatus] = useState("");
   const [gm, setGm] = useState("");
+  const [msg, setMsg] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -49,7 +50,7 @@ const ViewCourseMarks = ({ history, match }) => {
         .then(
           axios.spread(
             (response1, response2, response3, response4, response5) => {
-              console.log(response3);
+              console.log("rES", response5);
               setMarks(response1.data.markList);
               setGraceAccepted(response2.data.student.Requested);
               setCgpa(response2.data.student.cgpa);
@@ -72,8 +73,10 @@ const ViewCourseMarks = ({ history, match }) => {
     axios
       .put(`/student/caluclate/new/grade/${rollnum}`, { grace, gm })
       .then((response) => {
-        if (response.data) {
+        if (response.data.message != "No Grade Change") {
           window.location.pathname = `/student/view/marklist/${str}`;
+        } else {
+          setMsg("No Grade Change");
         }
       });
   };
@@ -127,6 +130,7 @@ const ViewCourseMarks = ({ history, match }) => {
               </Button>
             </Link>
           </Col>
+
           {graceAccepted === "accepted" &&
             finalStatus === "N/P" &&
             gradeCountStatus === "P" && (
@@ -139,6 +143,7 @@ const ViewCourseMarks = ({ history, match }) => {
         </Row>
       )}
       <div className="card ml-5 px-3 overflow my_card">
+        {msg != null && <Message variant="info">{msg}</Message>}
         <h1 className="py-3 text-center text-info">Mark List</h1>
         <Row>
           <Col>

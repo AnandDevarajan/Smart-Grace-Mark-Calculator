@@ -10,7 +10,7 @@ describe("Grade Calculation", () => {
         .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
-          id: "anand123",
+          id: "STUDENTTEST12345",
           total: "89",
           O: "82",
           Ap: "75",
@@ -38,7 +38,7 @@ describe("Grade Calculation", () => {
         .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
-          id: "anand123",
+          id: "STUDENTTEST12345",
           total: "17",
           O: "82",
           Ap: "75",
@@ -68,7 +68,7 @@ describe("Grade Calculation", () => {
         .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
-          id: "anand123",
+          id: "STUDENTTEST12345",
           total: "102",
           O: "82",
           Ap: "75",
@@ -96,7 +96,7 @@ describe("Grade Calculation", () => {
         .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
-          id: "anand123",
+          id: "STUDENTTEST12345",
           total: "-32",
           O: "82",
           Ap: "75",
@@ -126,7 +126,7 @@ describe("Grade Calculation", () => {
         .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
-          id: "anand123",
+          id: "STUDENTTEST12345",
           total: "71",
           O: "82",
           Ap: "75",
@@ -154,7 +154,7 @@ describe("Grade Calculation", () => {
         .request(BASE_URL)
         .put("/course/update/grade/15CSE213")
         .send({
-          id: "anand123",
+          id: "STUDENTTEST12345",
           total: "38",
           O: "82",
           Ap: "75",

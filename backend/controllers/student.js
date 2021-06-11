@@ -573,8 +573,6 @@ exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
   console.log(id);
   const { grace, gm } = req.body;
-  console.log("grace", grace);
-  console.log("gm", gm);
   if (gm === undefined) {
     return res.status(400).json({
       message: "No Grace Mark",
@@ -591,7 +589,7 @@ exports.calculateNewGrade = (req, res) => {
   }
 
   let maxCredits = 0;
-
+  let graceMarkAdded = 0;
   // If the person has failed in any subject one or more
   for (let info of grace) {
     if (
@@ -605,6 +603,7 @@ exports.calculateNewGrade = (req, res) => {
   if (maxCredits != 0) {
     for (let info of grace) {
       if (info.Total < info.P && info.credits == maxCredits) {
+        graceMarkAdded = 1;
         info.Total = parseInt(info.Total) + parseInt(gm);
         let cid = info.CourseID;
         //Grade to P
@@ -687,6 +686,7 @@ exports.calculateNewGrade = (req, res) => {
         info.Grade != "O" &&
         changeValue * parseInt(info.credits) == passMaxCredits
       ) {
+        graceMarkAdded = 1;
         // Before change to After Grade change
         if (info.Grade == "P") {
           FinalGrade = "C";
@@ -740,6 +740,19 @@ exports.calculateNewGrade = (req, res) => {
         );
         break;
       }
+    }
+    if ((graceMarkAdded = 0)) {
+      con.query(
+        'UPDATE course_mark SET final_status=? WHERE RollNum=?;UPDATE student SET final_status="N/P", cgpa_status=?,grace_status=? WHERE RollNum=?',
+        ["P", id, "N/P", "P", id],
+        (err, result) => {
+          if (result) {
+            return res.json({
+              message: "No Grade Change",
+            });
+          }
+        }
+      );
     }
   }
 };

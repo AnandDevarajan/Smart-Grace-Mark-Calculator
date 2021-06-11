@@ -92,6 +92,7 @@ describe("Grace Mark Addition", () => {
           done();
         });
     });
+
     it("15CSE302 => A+ => Total => 77", (done) => {
       chai
         .request(BASE_URL)
@@ -118,10 +119,10 @@ describe("Grace Mark Addition", () => {
               Bp: "57",
               C: "35",
               CourseID: "15CSE213",
-              Grade: "",
+              Grade: "P",
               O: "82",
               P: "26",
-              Total: "",
+              Total: "27",
               credits: "4",
             },
             {
@@ -168,7 +169,7 @@ describe("Grace Mark Addition", () => {
         })
         .set(
           "Authorization",
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjIzMzI0Njk1LCJleHAiOjE2MjU5MTY2OTV9.O2-ThpkBcBvCjJ82xfqGDxMrmNb65RCuTdzCG9QM1Yg"
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImlhdCI6MTYyMzM4OTMxMCwiZXhwIjoxNjI1OTgxMzEwfQ.oBSmozaBGyWyRocgpHKwhk9tckL94EC4mGYFVNRgOoU"
         )
         .end((err, res) => {
           if (err) done(err);
@@ -183,7 +184,7 @@ describe("Grace Mark Addition", () => {
     it("15CSE312 => B+ => Total => 54", (done) => {
       chai
         .request(BASE_URL)
-        .put("/student/caluclate/new/grade/STUDENTTEST12345")
+        .put("/student/caluclate/new/grade/test2")
         .send({
           grace: [
             {
@@ -283,7 +284,7 @@ describe("Grace Mark Addition", () => {
               P: "23",
               CourseID: "15CSE201",
               Grade: "P",
-              Total: "17",
+              Total: "24",
               credits: "4",
             },
             {
@@ -349,8 +350,7 @@ describe("Grace Mark Addition", () => {
           if (err) done(err);
           expect(res.status).toBe(200);
           expect(res).toEqual(jasmine.any(Object));
-          expect(res.body.Total).toEqual(21);
-          expect(res.body.Grade).toEqual("F");
+          expect(res.body.message).toEqual("No Grade Change");
         });
     });
   });

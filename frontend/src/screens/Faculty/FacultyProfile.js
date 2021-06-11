@@ -42,6 +42,7 @@ const FacultyProfile = ({ history }) => {
       ])
       .then(
         axios.spread((response1, response2) => {
+          console.log(response1);
           setName(response1.data.faculty.Name);
           setEmail(response1.data.faculty.EmailID);
           setDepartment(response1.data.faculty.Department);
