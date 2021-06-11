@@ -30,15 +30,15 @@ import {
   RANGE_DETAILS_REQUEST,
   RANGE_DETAILS_SUCCESS,
   RANGE_DETAILS_FAIL,
-} from '../constants/courseConstants';
-import axios from 'axios';
+} from "../constants/courseConstants";
+import axios from "axios";
 
 export const listCourses = () => async (dispatch) => {
   try {
     dispatch({
       type: COURSE_LIST_REQUEST,
     });
-    const { data } = await axios.get('/course');
+    const { data } = await axios.get("/course");
     dispatch({
       type: COURSE_LIST_SUCCESS,
       payload: data,
@@ -87,7 +87,7 @@ export const listCourseMarks = (cid) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${facultyInfo.token}`,
       },
     };
@@ -108,90 +108,89 @@ export const listCourseMarks = (cid) => async (dispatch, getState) => {
   }
 };
 
-export const addCourseMarks = (id, cid, internals, mark, total) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: COURSE_ADD_MARKS_REQUEST,
-    });
+export const addCourseMarks =
+  (id, cid, internals, mark, total) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: COURSE_ADD_MARKS_REQUEST,
+      });
 
-    const {
-      facultySignin: { facultyInfo },
-    } = getState();
+      const {
+        facultySignin: { facultyInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${facultyInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${facultyInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.put(
-      `/course/marks/${cid}`,
-      { id, internals, mark, total },
-      config
-    );
+      const { data } = await axios.put(
+        `/course/marks/${cid}`,
+        { id, internals, mark, total },
+        config
+      );
 
-    dispatch({
-      type: COURSE_ADD_MARKS_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: COURSE_ADD_MARKS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      dispatch({
+        type: COURSE_ADD_MARKS_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: COURSE_ADD_MARKS_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
-export const updateCoursemark = (id, cid, internals, marks) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: COURSE_MARK_UPDATE_REQUEST,
-    });
+export const updateCoursemark =
+  (id, cid, internals, marks) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: COURSE_MARK_UPDATE_REQUEST,
+      });
 
-    const {
-      facultySignin: { facultyInfo },
-    } = getState();
+      const {
+        facultySignin: { facultyInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${facultyInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${facultyInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.put(
-      `/course/mark/update/${cid}`,
-      { internals, marks, id },
-      config
-    );
+      const { data } = await axios.put(
+        `/course/mark/update/${cid}`,
+        { internals, marks, id },
+        config
+      );
 
-    dispatch({
-      type: COURSE_MARK_UPDATE_SUCCESS,
-    });
-    dispatch({
-      type: COURSE_MARK_DETAILS_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: COURSE_MARK_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      dispatch({
+        type: COURSE_MARK_UPDATE_SUCCESS,
+      });
+      dispatch({
+        type: COURSE_MARK_DETAILS_SUCCESS,
+        payload: data,
+      });
+      if (data) {
+        window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
+      }
+    } catch (error) {
+      dispatch({
+        type: COURSE_MARK_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const getCoursemarkDetails = (editID) => async (dispatch, getState) => {
   try {
@@ -238,7 +237,7 @@ export const updateGradeRange = (cid, max) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };

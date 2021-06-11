@@ -76,7 +76,6 @@ const CourseStudents = ({ history, match }) => {
       setMessage("Invalid details");
     } else {
       dispatch(updateCoursemark(id, cid, internals, marks));
-      window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
     }
   };
   console.log("Students", students);
@@ -281,7 +280,9 @@ const CourseStudents = ({ history, match }) => {
                   <td>
                     {/* &&
                     status === "P" */}
-                    {student.Grade === "N/P" && student.Total != "N/P" ? (
+                    {student.Grade === "N/P" &&
+                    student.Total != "N/P" &&
+                    status === "P" ? (
                       <td>
                         <DoneAllIcon
                           className="icon"

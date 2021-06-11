@@ -405,8 +405,9 @@ exports.editGradeRange = (req, res) => {
   let newC = C.substring(C.length - 2, C.length);
   let newP = P.substring(P.length - 2, P.length);
   let newF = F.substring(F.length - 2, F.length);
+  log("newO", newO);
   con.query(
-    `SELECT * FROM grade_range WHERE CourseID=?`,
+    `SELECT * FROM grace_marks.grade_range WHERE CourseID=?`,
     [cid],
     (err, result) => {
       if (err || result.length === 0) {
@@ -424,7 +425,7 @@ exports.editGradeRange = (req, res) => {
         result[0].P = P || result[0].P;
         result[0].F = F || result[0].F;
         con.query(
-          `UPDATE grade_range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?;UPDATE grace_marks.range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+          `UPDATE grace_marks.grade_range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?;UPDATE range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
           [
             result[0].O,
             result[0].Ap,
@@ -482,7 +483,7 @@ exports.updateGradeRange = (req, res) => {
   let F = `${RangeP - 1} - ${0} `;
 
   con.query(
-    `UPDATE grade_range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
+    `UPDATE grace_marks.grade_range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=?,status=? WHERE CourseID=?`,
     [O, Ap, A, Bp, B, C, P, F, "P", id],
     (err, result) => {
       if (err) {
@@ -491,14 +492,14 @@ exports.updateGradeRange = (req, res) => {
         });
       }
       con.query(
-        `UPDATE grade_range.RANGE SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
+        `UPDATE grace_marks.range SET O=?,Ap=?,A=?,Bp=?,B=?,C=?,P=?,F=? WHERE CourseID=?`,
         [RangeO, RangeAp, RangeA, RangeBp, RangeB, RangeC, RangeP, 0, id],
         (err, result2) => {
           if (err) {
             console.log(err.sqlMessage);
           }
           con.query(
-            `SELECT * FROM grade_range WHERE CourseID=?`,
+            `SELECT * FROM grace_marks.grade_range WHERE CourseID=?`,
             [id],
             (err, result2) => {
               if (result2.length === 0 || err) {
