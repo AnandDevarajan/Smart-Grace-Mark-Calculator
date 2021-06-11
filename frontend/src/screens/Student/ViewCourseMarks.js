@@ -73,6 +73,7 @@ const ViewCourseMarks = ({ history, match }) => {
     axios
       .put(`/student/caluclate/new/grade/${rollnum}`, { grace, gm })
       .then((response) => {
+        console.log(response);
         if (response.data.message != "No Grade Change") {
           window.location.pathname = `/student/view/marklist/${str}`;
         } else {

@@ -570,8 +570,9 @@ exports.getGraceInfo = (req, res) => {
 
 exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
-  console.log(id);
   const { grace, gm } = req.body;
+  console.log("grace", grace);
+  console.log("gm", gm);
   if (gm === undefined) {
     return res.status(400).json({
       message: "No Grace Mark",
