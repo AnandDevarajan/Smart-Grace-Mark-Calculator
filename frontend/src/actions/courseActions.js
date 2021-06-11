@@ -178,7 +178,9 @@ export const updateCoursemark =
         type: COURSE_MARK_DETAILS_SUCCESS,
         payload: data,
       });
+
       if (data) {
+        console.log("gdsasad", facultyInfo.result.Department);
         window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
       }
     } catch (error) {

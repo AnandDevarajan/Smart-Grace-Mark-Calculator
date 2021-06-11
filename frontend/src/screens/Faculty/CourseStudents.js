@@ -49,7 +49,6 @@ const CourseStudents = ({ history, match }) => {
         ])
         .then(
           axios.spread((response, response1) => {
-            console.log(response);
             setO(response.data.range[0].O);
             setAp(response.data.range[0].Ap);
             setA(response.data.range[0].A);
