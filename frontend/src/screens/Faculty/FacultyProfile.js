@@ -58,7 +58,7 @@ const FacultyProfile = ({ history }) => {
     if (window.confirm("Do you want to delete this account ?")) {
       axios.delete(`/faculty/delete/account/${id}`);
     } else {
-      return (window.location.pathname = "/faculty/profile");
+      return (window.location.pathname = "/");
     }
     localStorage.removeItem("facultyInfo");
     window.location.pathname = "/";
@@ -67,7 +67,7 @@ const FacultyProfile = ({ history }) => {
   const markAsCompleted = (id) => {
     axios.put(`/faculty/complete/${id}`).then((response) => {
       if (response.data) {
-        window.location.pathname = `/faculty/profile`;
+        window.location.pathname = `/`;
       }
     });
   };
