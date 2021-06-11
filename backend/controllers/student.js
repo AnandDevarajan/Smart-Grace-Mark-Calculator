@@ -171,8 +171,8 @@ exports.resetPassword = (req, res) => {
                         to: result[0].EmailID,
                         subject: "Reset Password",
                         html: `
-                        <p>You requested for password reset </p>
-                        <h3>Click on this <a href="http://localhost:3000/student/reset/${token}">link</a> to reset password</h3>
+                        <p>Your requested for password reset </p>
+                        <h3>Click on this <a href="https://c8-sgmc.herokuapp.com/student/reset/${token}">link</a> to reset password</h3>
                         `,
                       },
                       function (error, info) {

@@ -334,7 +334,6 @@ exports.facultyDeleteAccount = (req, res) => {
 
 exports.facultyStatus = (req, res) => {
   const id = req.params.id;
-
   con.query(`SELECT * from faculty where FacultyID=? `, [id], (err, result) => {
     if (err || result.length === 0) {
       return res.status(400).json({
@@ -343,13 +342,12 @@ exports.facultyStatus = (req, res) => {
     }
     if (result[0].ClassAdviser === "Yes") {
       con.query(
-        "SELECT count(Grade) as count FROM grace_marks.course_mark WHERE CourseID=? AND Grade=?",
+        "SELECT count(Grade) as count FROM course_mark WHERE CourseID=? AND Grade=?",
         [result[0].CourseID, "N/P"],
         (err, result) => {
-          console.log(result[0].count);
           if (result[0].count === 0) {
             con.query(
-              `SELECT count(c.final_status) as fcount from course_mark c  inner Join student s on s.RollNum=c.RollNum Where s.Requested="accepted" AND c.CourseID=? AND c.final_status=?`,
+              `SELECT count(c.Final_status) as fcount from course_mark c Inner Join student s on s.RollNum=c.RollNum Where s.Requested="accepted" AND c.CourseID=? AND c.Final_status=?`,
               [result[0].CourseID, "N/P"],
               (err, result) => {
                 if (result[0].fcount === 0) {
@@ -360,9 +358,6 @@ exports.facultyStatus = (req, res) => {
                       if (err) {
                         console.log(err.sqlMessage);
                       }
-                      return res.json({
-                        message: "Completion updated",
-                      });
                     }
                   );
                 }
@@ -373,7 +368,7 @@ exports.facultyStatus = (req, res) => {
       );
     } else if (result[0].ClassAdviser === "No") {
       con.query(
-        "SELECT count(Grade) as count FROM grace_marks.course_mark WHERE CourseID=? AND Grade=?",
+        "SELECT count(Grade) as count FROM course_mark WHERE CourseID=? AND Grade=?",
         [result[0].CourseID, "N/P"],
         (err, result) => {
           console.log(result[0].count);
@@ -385,15 +380,29 @@ exports.facultyStatus = (req, res) => {
                 if (err) {
                   console.log(err.sqlMessage);
                 }
-                return res.json({
-                  message: "Completion updated",
-                });
+                // return res.json({
+                //   message: "Completion updated",
+                // });
               }
             );
           }
         }
       );
     }
+    con.query(
+      `SELECT * FROM faculty WHERE FacultyID=?`,
+      [id],
+      (err, result) => {
+        if (result.length === 0 || err) {
+          return res.status(400).json({
+            message: "No faculty found",
+          });
+        }
+        return res.json({
+          faculty: result[0],
+        });
+      }
+    );
   });
 };
 

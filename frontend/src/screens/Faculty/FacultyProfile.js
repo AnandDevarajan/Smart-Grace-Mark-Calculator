@@ -37,12 +37,12 @@ const FacultyProfile = ({ history }) => {
 
     axios
       .all([
-        axios.get(`/faculty/${facultyInfo.result.FacultyID}`),
         axios.get(`/faculty/status/${facultyInfo.result.FacultyID}`),
+        // axios.get(`/faculty/${facultyInfo.result.FacultyID}`),
       ])
       .then(
         axios.spread((response1, response2) => {
-          console.log(response1);
+          console.log("here", response1);
           setName(response1.data.faculty.Name);
           setEmail(response1.data.faculty.EmailID);
           setDepartment(response1.data.faculty.Department);
@@ -71,7 +71,7 @@ const FacultyProfile = ({ history }) => {
       }
     });
   };
-
+  console.log("name", name);
   return (
     <div
       className="ml-5 mt-3 align-items-center alllist_div "
