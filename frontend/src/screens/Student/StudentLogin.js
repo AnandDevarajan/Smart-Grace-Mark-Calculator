@@ -15,7 +15,7 @@ const StudentLogin = ({  history }) => {
   const studentSignin = useSelector((state) => state.studentSignin);
   const { error, studentInfo } = studentSignin;
 
-  const redirect = "/student/profile";
+  const redirect = "/student/profile/dashboard";
   useEffect(() => {
     if (studentInfo) {
       history.push(redirect);

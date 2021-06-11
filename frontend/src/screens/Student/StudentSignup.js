@@ -29,7 +29,7 @@ const StudentSignup = ({ history }) => {
   const studentSignup = useSelector((state) => state.studentSignup);
   const { error, studentInfo } = studentSignup;
 
-  const redirect = "/student/profile";
+  const redirect = "/student/profile/dashboard";
   useEffect(() => {
     if (studentInfo) {
       history.push(redirect);
@@ -270,7 +270,6 @@ const StudentSignup = ({ history }) => {
       )}
     </>
   );
-
 };
 
 export default StudentSignup;

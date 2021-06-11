@@ -29,7 +29,7 @@ const RequestForm = ({ location, history }) => {
 
   useEffect(() => {
     if (success) {
-      history.push("/student/profile");
+      history.push("/student/profile/dashboard");
     } else {
       dispatch(listGracemarks());
       axios.get(`/student/${studentInfo.result.RollNum}`).then((response) => {
@@ -51,7 +51,7 @@ const RequestForm = ({ location, history }) => {
 
   return (
     <>
-      <Link to="/student/profile" className="goback">
+      <Link to="/student/profile/dashboard" className="goback">
         <Button variant="light">
           <ArrowBackIcon /> Go Back
         </Button>
@@ -60,7 +60,7 @@ const RequestForm = ({ location, history }) => {
         <FormContainer>
           <Message variant="warning">
             Already requested for grace Mark{" "}
-            <Link to="/student/profile"> Go to profile</Link>
+            <Link to="/student/profile/dashboard"> Go to profile</Link>
           </Message>
         </FormContainer>
       ) : (
