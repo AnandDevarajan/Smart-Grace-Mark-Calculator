@@ -122,7 +122,7 @@ const ViewCourseMarks = ({ history, match }) => {
         <Row>
           <Col>
             <Link
-              to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}
+              to={`/faculty/adviser/student/${facultyInfo.result.Batch}`}
               className="goback"
             >
               <Button variant="light">

@@ -204,7 +204,7 @@ function Navbar() {
               {facultyInfo.result.ClassAdviser === "Yes" && (
                 <li className="nav-text">
                   <NavLink
-                    to={`/faculty/adviser/students/${facultyInfo.result.Batch}`}
+                    to={`/faculty/adviser/student/${facultyInfo.result.Batch}`}
                     activeStyle={{
                       color: "#2196f3",
                       fontWeight: "bold",
