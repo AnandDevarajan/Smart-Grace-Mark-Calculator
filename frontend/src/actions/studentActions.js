@@ -194,40 +194,41 @@ export const getAStudent = (rollnum) => async (dispatch) => {
   }
 };
 
-// export const listCourseStudents = (department) => async (
-//   dispatch,
-//   getState
-// ) => {
-//   try {
-//     dispatch({
-//       type: STUDENT_LIST_COURSE_REQUEST,
-//     });
+export const listCourseStudents =
+  (department) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: STUDENT_LIST_COURSE_REQUEST,
+      });
 
-//     const {
-//       facultySignin: { facultyInfo },
-//     } = getState();
+      const {
+        facultySignin: { facultyInfo },
+      } = getState();
 
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${facultyInfo.token}`,
-//       },
-//     };
-//     const { data } = await axios.get(`/faculty/students/${department}`, config);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${facultyInfo.token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `/faculty/students/${department}`,
+        config
+      );
 
-//     dispatch({
-//       type: STUDENT_LIST_COURSE_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: STUDENT_LIST_COURSE_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
+      dispatch({
+        type: STUDENT_LIST_COURSE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: STUDENT_LIST_COURSE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const courseStudentMark = (cid) => async (dispatch, getState) => {
   try {

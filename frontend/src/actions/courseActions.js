@@ -171,7 +171,6 @@ export const updateCoursemark =
         config
       );
 
-      
       dispatch({
         type: COURSE_MARK_UPDATE_SUCCESS,
       });
@@ -180,10 +179,9 @@ export const updateCoursemark =
         payload: data,
       });
 
-      // if (data) {
-      //   console.log("gdsasad", facultyInfo.result.Department);
-      //   window.location.pathname = `/faculty/students/${facultyInfo.result.Department}`;
-      // }
+      if (data) {
+        window.location.pathname = `/faculty/student/${facultyInfo.result.Department}`;
+      }
     } catch (error) {
       dispatch({
         type: COURSE_MARK_UPDATE_FAIL,

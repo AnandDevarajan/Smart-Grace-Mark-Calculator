@@ -33,7 +33,7 @@ const CourseMarkEdit = ({ match, history }) => {
         type: COURSE_MARK_UPDATE_RESET,
       });
 
-      history.push(`/faculty/students/${facultyInfo.result.Department}`);
+      history.push(`/faculty/student/${facultyInfo.result.Department}`);
     } else {
       if (facultyInfo) {
         axios
@@ -68,7 +68,7 @@ const CourseMarkEdit = ({ match, history }) => {
   return (
     <>
       <Link
-        to={`/faculty/students/${facultyInfo.result.Department}`}
+        to={`/faculty/student/${facultyInfo.result.Department}`}
         className="btn btn-light my-3 goback"
       >
         Go Back

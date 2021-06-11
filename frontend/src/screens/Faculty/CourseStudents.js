@@ -75,7 +75,6 @@ const CourseStudents = ({ history, match }) => {
       setMessage("Invalid details");
     } else {
       dispatch(updateCoursemark(id, cid, internals, marks));
-      history.push(`/faculty/students/${facultyInfo.result.Department}`);
     }
   };
   console.log("Students", students);
@@ -96,9 +95,7 @@ const CourseStudents = ({ history, match }) => {
       })
       .then((response) => {
         if (response.data) {
-          <Redirect
-            to={`/faculty/students/${facultyInfo.result.Department}`}
-          />;
+          window.location.pathname = `/faculty/student/${facultyInfo.result.Department}`;
         }
       });
   };
