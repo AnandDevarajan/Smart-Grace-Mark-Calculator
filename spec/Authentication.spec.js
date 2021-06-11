@@ -35,7 +35,7 @@ describe("Authentication Unit", () => {
       chai
         .request(BASE_URL)
         .post("/student/login")
-        .send({ email: "test2@sgmc.com", password: "test1234" })
+        .send({ email: "student1@test.com", password: "test1234" })
         .end((err, res) => {
           if (err) done(err);
           expect(res.status).toBe(400);
