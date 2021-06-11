@@ -95,7 +95,7 @@ const ViewCourseMarks = ({ history, match }) => {
       {adminInfo ? (
         <Row>
           <Col>
-            <Link to="/admin/studentlist" className="goback">
+            <Link to="/admin/student/list" className="goback">
               <Button variant="light">
                 <ArrowBackIcon /> Go Back
               </Button>

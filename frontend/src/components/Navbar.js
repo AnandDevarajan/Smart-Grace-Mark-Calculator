@@ -277,7 +277,7 @@ function Navbar() {
                     fontWeight: "bold",
                     backgroundColor: "#3f3f44",
                   }}
-                  to="/admin/studentlist"
+                  to="/admin/student/list"
                 >
                   <PeopleIcon />
                   <span className="text">Students</span>
@@ -290,7 +290,7 @@ function Navbar() {
                     fontWeight: "bold",
                     backgroundColor: "#3f3f44",
                   }}
-                  to="/admin/facultylist"
+                  to="/admin/faculty/list"
                 >
                   <PeopleOutlineIcon />
                   <span className="text">Faculty</span>
