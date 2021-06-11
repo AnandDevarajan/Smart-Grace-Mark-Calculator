@@ -220,7 +220,7 @@ function Navbar() {
               )}
               <li className="nav-text">
                 <NavLink
-                  to={`/faculty/students/${facultyInfo.result.Department}`}
+                  to={`/faculty/student/${facultyInfo.result.Department}`}
                   activeStyle={{
                     color: "#2196f3",
                     fontWeight: "bold",

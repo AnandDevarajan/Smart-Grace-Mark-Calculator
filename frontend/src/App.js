@@ -126,7 +126,7 @@ function App() {
             path="/faculty/edit/profile/changepassword/:id"
             component={FacultyChangePassword}
           />
-          <Route path="/faculty/students/:id" component={CourseStudents} />
+          <Route path="/faculty/student/:id" component={CourseStudents} />
           <Route
             path="/faculty/course/mark/edit/:id"
             component={CourseMarkEdit}
