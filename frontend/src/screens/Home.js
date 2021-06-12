@@ -66,16 +66,18 @@ const Home = ({ history }) => {
             </Button>
           </Row>
           {/* <Row>
-            {user != "admin" && user != "faculty" && (
-              <Button
-                variant="success"
-                className="mt-3 admin_button ml-auto mr-auto"
-                style={{ width: "218px" }}
-                onClick={() => signUpHandler(user)}
-              >
-                Create an account
-              </Button>
-            )}
+            {user != "admin" ||
+              user != "faculty" &&
+              (user != "student" && (
+                <Button
+                  variant="success"
+                  className="mt-3 admin_button ml-auto mr-auto"
+                  style={{ width: "218px" }}
+                  onClick={() => signUpHandler(user)}
+                >
+                  Create an account
+                </Button>
+              ))} 
           </Row> */}
         </Form>
       </div>
