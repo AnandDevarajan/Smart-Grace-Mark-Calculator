@@ -6,10 +6,11 @@ config = {
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
+  port: 34176,
   multipleStatements: true,
 };
 
-// port: 34176,
+
 const con = mysql.createConnection(config);
 con.connect((err) => {
   if (err) throw err;
