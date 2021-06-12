@@ -586,7 +586,7 @@ exports.calculateNewGrade = (req, res) => {
     }
   }
   let maxCredits = 0;
-  let GraseMarkUsed = 0;
+  let GraceMarkUsed = 0;
   // If the person has failed in any subject one or more
   for (let info of grace) {
     if (
@@ -600,7 +600,7 @@ exports.calculateNewGrade = (req, res) => {
   if (maxCredits != 0) {
     for (let info of grace) {
       if (info.Total < info.P && info.credits == maxCredits) {
-        GraseMarkUsed = 1;
+        GraceMarkUsed = 1;
         info.Total = parseInt(info.Total) + parseInt(gm);
         let cid = info.CourseID;
         //Grade to P
@@ -692,7 +692,7 @@ exports.calculateNewGrade = (req, res) => {
         changeValue * parseInt(info.credits) == passMaxCredits
       ) {
         // Before change to After Grade change
-        GraseMarkUsed = 1;
+        GraceMarkUsed = 1;
         if (info.Grade == "P") {
           FinalGrade = "C";
         } else if (info.Grade == "C") {
@@ -737,7 +737,7 @@ exports.calculateNewGrade = (req, res) => {
       }
     }
   }
-  if (GraseMarkUsed == 0) {
+  if (GraceMarkUsed == 0) {
     return res.json({
       message: "No Grade Change",
     });
