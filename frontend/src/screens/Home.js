@@ -18,14 +18,14 @@ const Home = ({ history }) => {
     }
   };
 
-  const signUpHandler = (user) => {
-    if (user != "[select user]") {
-      history.push(`/${user}/signup`);
-    } else {
-      setMessage(null);
-      setMessage("select an user");
-    }
-  };
+  // const signUpHandler = (user) => {
+  //   if (user != "[select user]") {
+  //     history.push(`/${user}/signup`);
+  //   } else {
+  //     setMessage(null);
+  //     setMessage("select an user");
+  //   }
+  // };
 
   return (
     <FormContainer>
@@ -65,7 +65,7 @@ const Home = ({ history }) => {
               Sign In
             </Button>
           </Row>
-          <Row>
+          {/* <Row>
             {user != "admin" && user != "faculty" && (
               <Button
                 variant="success"
@@ -76,7 +76,7 @@ const Home = ({ history }) => {
                 Create an account
               </Button>
             )}
-          </Row>
+          </Row> */}
         </Form>
       </div>
     </FormContainer>

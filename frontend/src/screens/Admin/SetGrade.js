@@ -417,7 +417,7 @@ const SetGrade = ({ match }) => {
       )}
       {facultyInfo && status === "N/P" && (
         <div>
-          <Link to={`/faculty/students/CSE`} className="goback">
+          <Link to={`/faculty/student/CSE`} className="goback">
             <Button variant="light">
               <ArrowBackIcon /> Go Back
             </Button>

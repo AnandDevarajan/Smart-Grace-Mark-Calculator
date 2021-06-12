@@ -22,7 +22,7 @@ const {
 } = require("../controllers/student");
 const { verifyStudent } = require("../middlewares/auth");
 
-router.post("/", registerStudent);
+// router.post("/", registerStudent);
 router.post("/login", authStudent);
 router.get("/cgpa/count", getCgpaCount);
 router.get("/grace/status", getGraceStatus);
