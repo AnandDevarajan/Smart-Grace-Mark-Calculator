@@ -5,7 +5,6 @@
 
 Algorithm used to add grace mark and calculate new grade.
 ```
-//
 exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
   const { grace, gm } = req.body;
@@ -14,8 +13,6 @@ exports.calculateNewGrade = (req, res) => {
       message: "No Grace Mark",
     });
   }
-  console.log("Entered the function");
-  console.log(gm);
   for (let _range of grace) {
     if (_range.O === "") {
       return res.status(400).json({
@@ -70,9 +67,7 @@ exports.calculateNewGrade = (req, res) => {
       let index = 0;
       let range = []; // minimum marks for each grade(in grade change)
       let gradeChange = []; // To handle A+ to O and A to A+
-
       if (info.Grade == "A+") {
-        console.log("Mark in A+", info.Total);
         if (parseInt(info.Total) + parseInt(gm) >= parseInt(info.O)) {
           passMaxCredits = Math.max(
             passMaxCredits,
@@ -97,9 +92,7 @@ exports.calculateNewGrade = (req, res) => {
         while (range[index] < parseInt(info.Total)) {
           index++;
         }
-        console.log("Index after", index, range[index]);
         // Maximum Grade change for the available grace marks
-        console.log("Pass max", passMaxCredits);
         if (parseInt(info.Total) + parseInt(gm) >= parseInt(range[index])) {
           passMaxCredits = Math.max(
             passMaxCredits,
@@ -110,7 +103,6 @@ exports.calculateNewGrade = (req, res) => {
             "change index",
             gradeChange[index] * parseInt(info.credits)
           );
-          console.log("Pass max after ", passMaxCredits);
         }
       }
     }
