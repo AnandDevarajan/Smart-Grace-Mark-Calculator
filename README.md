@@ -4,7 +4,8 @@
 
 
 Algorithm used to add grace mark and calculate new grade.
-
+```
+//
 exports.calculateNewGrade = (req, res) => {
   const id = req.params.id;
   const { grace, gm } = req.body;
@@ -180,3 +181,4 @@ exports.calculateNewGrade = (req, res) => {
     });
   }
 };
+```
