@@ -41,7 +41,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cross-env NODE_ENV=test jasmine",
+    "test": "react-scripts test", 
+    
+    
     "eject": "react-scripts eject",
     "test-init": "node ./node_modules/jasmine/bin/jasmine.js init"
   },
