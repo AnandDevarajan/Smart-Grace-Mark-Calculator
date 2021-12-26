@@ -9,39 +9,39 @@
 
 ### Faculty Mark Allocation Page
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1fsn7oR-w-ok1wTZkC7tn581OIzHejNC3)
+![Student Profile Page](/resetdb/Faculty_Coursemark_allocation.png)
 
 ### Student List for class Advisor
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1Nwi6Lj8V0Z1fqk97iUWQcpyb7iS7-4ll)
+![Student Profile Page](/resetdb/Class_Advisor.png)
 
 ### Grade change after Grace Mark
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1opNpOo8Zq3ZUmf05s2t5LCU1Ht63uu3D)
+![Student Profile Page](/resetdb/After_adding_gracemark.png)
 
 ### Admin Profile Page
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1a9rATB0N1rrtG9wFoYLtXSxCKQU4b4gw)
+![Student Profile Page](/resetdb/Admin_profile.png)
 
 ### Faculy List
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1oHmF-xQd392-6r-Bf5D4mS-VAF-4Gyol)
+![Student Profile Page](/resetdb/Faculty_list.png)
 
 ### Course Report
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1sAd92y4Yr2fgG82BG_mIctayc3o2N2ra)
+![Student Profile Page](/resetdb/Course_Report.png)
 
 ### Grade Range
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1jSxa1GGN4LbggVm69tOHuhgHczzjG8MA)
+![Student Profile Page](/resetdb/Grade_Range.png)
 
 ### Gracemark List
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1v2WC-mp4bNTKXpuamNCw4S3oSMvnsG49)
+![Student Profile Page](/resetdb/Gracemark_list.png)
 
 ### Final Result page for students
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1I6xZ5NR7mUX-7xk4MZcTnB93suH5yxSe)
+![Student Profile Page](/resetdb/Result_page.png)
 
 
 
