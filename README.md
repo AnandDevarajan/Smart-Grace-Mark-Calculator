@@ -6,6 +6,45 @@
 ### Student Profile Page
 
 ![Student Profile Page](https://drive.google.com/uc?export=view&id=1SWGSDnqykk8_KKW6fIjf1OHwJlb03i17)
+
+### Faculty Mark Allocation Page
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1fsn7oR-w-ok1wTZkC7tn581OIzHejNC3)
+
+### Student List for class Advisor
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1Nwi6Lj8V0Z1fqk97iUWQcpyb7iS7-4ll)
+
+### Grade change after Grace Mark
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1opNpOo8Zq3ZUmf05s2t5LCU1Ht63uu3D)
+
+### Admin Profile Page
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1a9rATB0N1rrtG9wFoYLtXSxCKQU4b4gw)
+
+### Faculy List
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1oHmF-xQd392-6r-Bf5D4mS-VAF-4Gyol)
+
+### Course Report
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1sAd92y4Yr2fgG82BG_mIctayc3o2N2ra/)
+
+### Grade Range
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1jSxa1GGN4LbggVm69tOHuhgHczzjG8MA)
+
+### Gracemark List
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1v2WC-mp4bNTKXpuamNCw4S3oSMvnsG49)
+
+### Final Result page for students
+
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1I6xZ5NR7mUX-7xk4MZcTnB93suH5yxSe)
+
+
+
 ## Algorithm used to add grace mark and calculate new grade.
 ```
 exports.calculateNewGrade = (req, res) => {
