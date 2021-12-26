@@ -3,6 +3,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AnandDevarajan_Smart-Grace-Mark-Calculator&metric=alert_status)](https://sonarcloud.io/dashboard?id=AnandDevarajan_Smart-Grace-Mark-Calculator) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=AnandDevarajan_Smart-Grace-Mark-Calculator&metric=bugs)](https://sonarcloud.io/dashboard?id=AnandDevarajan_Smart-Grace-Mark-Calculator) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=AnandDevarajan_Smart-Grace-Mark-Calculator&metric=security_rating)](https://sonarcloud.io/dashboard?id=AnandDevarajan_Smart-Grace-Mark-Calculator) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=AnandDevarajan_Smart-Grace-Mark-Calculator&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=AnandDevarajan_Smart-Grace-Mark-Calculator)[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=AnandDevarajan_Smart-Grace-Mark-Calculator&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=AnandDevarajan_Smart-Grace-Mark-Calculator) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=AnandDevarajan_Smart-Grace-Mark-Calculator&metric=ncloc)](https://sonarcloud.io/dashboard?id=AnandDevarajan_Smart-Grace-Mark-Calculator)
 
 
+### Student Profile Page
 ![Student Profile Page](https://drive.google.com/uc?export=view&id=1SWGSDnqykk8_KKW6fIjf1OHwJlb03i17)
 ## Algorithm used to add grace mark and calculate new grade.
 ```
