@@ -5,7 +5,7 @@
 
 ### Student Profile Page
 
-![Student Profile Page](/reserdb/Student_profile.png)
+![Student Profile Page](/resetdb/Student_profile.png)
 
 ### Faculty Mark Allocation Page
 
