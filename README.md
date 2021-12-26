@@ -5,7 +5,7 @@
 
 ### Student Profile Page
 
-![Student Profile Page](https://drive.google.com/uc?export=view&id=1SWGSDnqykk8_KKW6fIjf1OHwJlb03i17)
+![Student Profile Page](/reserdb/Student_profile.png)
 
 ### Faculty Mark Allocation Page
 
