@@ -4,6 +4,7 @@
 
 
 ### Student Profile Page
+
 ![Student Profile Page](https://drive.google.com/uc?export=view&id=1SWGSDnqykk8_KKW6fIjf1OHwJlb03i17)
 ## Algorithm used to add grace mark and calculate new grade.
 ```
