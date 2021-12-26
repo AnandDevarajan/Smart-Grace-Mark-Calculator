@@ -29,7 +29,7 @@
 
 ### Course Report
 
-![Student Profile Page](/resetdb/Course_Report.png)
+![Student Profile Page](/resetdb/course_Report.png)
 
 ### Grade Range
 
