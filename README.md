@@ -29,7 +29,7 @@
 
 ### Course Report
 
-![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1sAd92y4Yr2fgG82BG_mIctayc3o2N2ra/)
+![Faculty Mark Page](https://drive.google.com/uc?export=view&id=1sAd92y4Yr2fgG82BG_mIctayc3o2N2ra)
 
 ### Grade Range
 
